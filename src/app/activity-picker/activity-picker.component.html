@@ -1,0 +1,9 @@
+<div class="form-group">
+  <div class="input-group">
+    <input id="typeahead-focus" type="text" class="form-control mr-sm-2" [ngbTypeahead]="search" (focus)="focus$.next($event.target.value)"
+      (click)="click$.next($event.target.value)" #instance="ngbTypeahead" placeholder="What are you doing?">
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary" type="button">Start!</button>
+    </div>
+  </div>
+</div>

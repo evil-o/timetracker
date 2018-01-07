@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Time Tracker</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">This week
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">All weeks</a>
+      </li>
+      <!--li class="nav-item dropdown" ngbDropdown>
+          <a ngbDropdownToggle class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Add...
+          </a>
+          <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Activity</a>
+            <a class="dropdown-item" href="#">Label</a>
+          </div>
+        </li-->
+    </ul>
+    <app-activity-picker class="form-inline my-2 mx-2" [activities$]="activities$"></app-activity-picker>
+    <div class="form-inline my-2 mx-2">
+      <input class="form-control mr-sm-2" type="text" placeholder="label" aria-label="New label">
+      <button class="btn btn-outline-success my-2">Add</button>
+    </div>
+    <div class="form-inline my-2 mx-2">
+      <input class="form-control mr-sm-2" type="text" placeholder="activity type" aria-label="New activity">
+      <button class="btn btn-outline-success my-2" (click)="createActivity('test')">Add</button>
+    </div>
+  </div>
+</nav>
