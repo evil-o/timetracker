@@ -1,2 +1,2 @@
-<input id="typeahead-focus" type="text" class="form-control mr-sm-2" [ngbTypeahead]="search" (focus)="focus$.next($event.target.value)"
-  (click)="click$.next($event.target.value)" #instance="ngbTypeahead" [placeholder]="placeholder">
+<input #in id="typeahead-focus" type="text" class="form-control mr-sm-2" [ngbTypeahead]="search" (focus)="focus$.next($event.target.value)"
+  (click)="click$.next($event.target.value)" #instance="ngbTypeahead" [placeholder]="placeholder" (keyup)="name = in.value">

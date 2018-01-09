@@ -9,11 +9,16 @@ import { ActivityPickerComponent } from './activity-picker/activity-picker.compo
 import { CurrentWeekComponent } from './pages/current-week/current-week.component';
 
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
+import { environment } from '../environments/environment';
 
 import { activityTypesReducer } from './redux/reducers/activityTypes';
 import { TodayComponent } from './pages/today/today.component';
 
 import { appRoutes } from './app.routes';
+import { ActivityLogEffects } from './redux/effects/activityLogEffects';
 
 @NgModule({
   declarations: [
@@ -27,10 +32,13 @@ import { appRoutes } from './app.routes';
     BrowserModule,
     NgbModule.forRoot(),
     StoreModule.forRoot({ activityTypes: activityTypesReducer }),
-    RouterModule.forRoot(
-      appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
-    )
+    !environment.production ?
+      StoreDevtoolsModule.instrument({
+        maxAge: 25 // Retains last 25 states
+      })
+      : [],
+    EffectsModule.forRoot([ActivityLogEffects]),
+    RouterModule.forRoot(appRoutes),
   ],
   providers: [],
   bootstrap: [AppComponent]

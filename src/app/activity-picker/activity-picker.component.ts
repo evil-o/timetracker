@@ -23,9 +23,11 @@ export class ActivityPickerComponent implements OnInit, OnDestroy {
   public activities$: Observable<IActivityType[]>;
 
   @Input()
-  public placeholder = "What are you doing?";
+  public placeholder = 'What are you doing?';
 
   public activityNames: string[];
+
+  public name = '';
 
   private subscription: Subscription;
 

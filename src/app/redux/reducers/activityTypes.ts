@@ -5,6 +5,7 @@ import { ActivityTypes, IActivityTypes } from '../states/activityTypes';
 import { CreateActivityTypeAction } from '../actions/createActivityType';
 
 export const CREATE = 'CREATE';
+export const FETCH_OR_CREATE_ID_AND_LOG_TIME = 'FETCH_OR_CREATE_ID_AND_LOG_TIME';
 
 export function activityTypesReducer(state: IActivityTypes = new ActivityTypes(), action: Action) {
   switch (action.type) {
@@ -13,6 +14,9 @@ export function activityTypesReducer(state: IActivityTypes = new ActivityTypes()
       const newState = Object.assign({}, state);
       newState.activities.push({name: createAction.name, id: 'test'});
       return newState;
+
+    case FETCH_OR_CREATE_ID_AND_LOG_TIME:
+      return state;
 
     default:
       return state;
