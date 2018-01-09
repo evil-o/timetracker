@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col">
+    <h1>Today</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <app-activity-picker [activities$]="activities$" placeholder="What did you do today?"></app-activity-picker>
+  </div>
+  <div class="col-sm-3">
+    <input id="duration" type="text" class="form-control mr-sm-2" placeholder="for how many hours?">
+  </div>
+  <div class="col-sm-3">
+    <button class="btn btn-primary">Add</button>
+  </div>
+</div>

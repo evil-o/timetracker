@@ -10,6 +10,12 @@ import { Observable } from 'rxjs/Observable';
 })
 export class NavbarComponent implements OnInit {
 
+  public entries = [
+    { label: 'Today', link: 'today' },
+    { label: 'This week', link: 'weeks/current' },
+    { label: 'All weeks', link: 'weeks' },
+  ];
+
   @Input()
   public activities$: Observable<IActivityType[]>;
 
