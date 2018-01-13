@@ -7,7 +7,7 @@ import { ApplicationState } from './redux/states/applicationState';
 import { Store } from '@ngrx/store';
 import { IActivityTypes } from './redux/states/activityTypes';
 import { IActivityType } from './models/interfaces';
-import { CreateActivityTypeAction } from './redux/actions/createActivityType';
+import { CreateActivityTypeAction } from './redux/actions/activityTypesActions';
 
 @Component({
   selector: 'app-root',

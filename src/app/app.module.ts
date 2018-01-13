@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ActivityPickerComponent } from './activity-picker/activity-picker.component';
@@ -19,6 +21,8 @@ import { TodayComponent } from './pages/today/today.component';
 
 import { appRoutes } from './app.routes';
 import { ActivityLogEffects } from './redux/effects/activityLogEffects';
+import { reducers } from './redux/reducers/index';
+import { effects } from './redux/effects/index';
 
 @NgModule({
   declarations: [
@@ -30,14 +34,15 @@ import { ActivityLogEffects } from './redux/effects/activityLogEffects';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     NgbModule.forRoot(),
-    StoreModule.forRoot({ activityTypes: activityTypesReducer }),
+    StoreModule.forRoot(reducers),
     !environment.production ?
       StoreDevtoolsModule.instrument({
         maxAge: 25 // Retains last 25 states
       })
       : [],
-    EffectsModule.forRoot([ActivityLogEffects]),
+    EffectsModule.forRoot(effects),
     RouterModule.forRoot(appRoutes),
   ],
   providers: [],

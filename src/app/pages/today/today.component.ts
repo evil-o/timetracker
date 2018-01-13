@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { ApplicationState } from '../../redux/states/applicationState';
 import { IActivityTypes } from '../../redux/states/activityTypes';
 import { IActivityType } from '../../models/interfaces';
-import { FetchOrCreateIdAndLogTimeAction } from '../../redux/actions/fetchOrCreateIdAndLogTime';
+import { FetchOrCreateIdAndLogTimeAction } from '../../redux/actions/activityLogActions';
 
 @Component({
   selector: 'app-today',
@@ -31,6 +31,7 @@ export class TodayComponent implements OnInit {
       // TODO show error
       return;
     }
+    console.log(`Dispatching: ${activityName}, ${hours}`);
     this.store.dispatch(new FetchOrCreateIdAndLogTimeAction(activityName, hours));
   }
 
