@@ -23,6 +23,7 @@ import { appRoutes } from './app.routes';
 import { ActivityLogEffects } from './redux/effects/activityLogEffects';
 import { reducers } from './redux/reducers/index';
 import { effects } from './redux/effects/index';
+import { ActvityLogListComponent } from './components/actvity-log-list/actvity-log-list.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { effects } from './redux/effects/index';
     NavbarComponent,
     ActivityPickerComponent,
     CurrentWeekComponent,
-    TodayComponent
+    TodayComponent,
+    ActvityLogListComponent
   ],
   imports: [
     BrowserModule,

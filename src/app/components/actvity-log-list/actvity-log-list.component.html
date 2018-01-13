@@ -1,0 +1,5 @@
+<ul>
+  <li *ngFor="let group of (groups$ | async)">
+    {{group.id}}: {{group.cumulativeHours}}
+  </li>
+</ul>
