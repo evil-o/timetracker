@@ -27,6 +27,7 @@ import { metaReducers } from './redux/metaReducers';
 import { ActvityLogListComponent } from './components/actvity-log-list/actvity-log-list.component';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { GroupActivityLogEntriesByIdPipe } from './pipes/group-activity-log-entries-by-id.pipe';
+import { WeekComponent } from './pages/week/week.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { GroupActivityLogEntriesByIdPipe } from './pipes/group-activity-log-entr
     CurrentWeekComponent,
     TodayComponent,
     ActvityLogListComponent,
-    GroupActivityLogEntriesByIdPipe
+    GroupActivityLogEntriesByIdPipe,
+    WeekComponent
   ],
   imports: [
     BrowserModule,
