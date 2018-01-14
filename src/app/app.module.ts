@@ -8,7 +8,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ActivityPickerComponent } from './activity-picker/activity-picker.component';
-import { CurrentWeekComponent } from './pages/current-week/current-week.component';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -34,7 +33,6 @@ import { WeekComponent } from './pages/week/week.component';
     AppComponent,
     NavbarComponent,
     ActivityPickerComponent,
-    CurrentWeekComponent,
     TodayComponent,
     ActvityLogListComponent,
     GroupActivityLogEntriesByIdPipe,
