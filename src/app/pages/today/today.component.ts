@@ -32,13 +32,13 @@ export class TodayComponent implements OnInit {
     this.activities$ = this.activityTypes$.map(types => types.activities);
   }
 
-  logHours(activityName: string, hours: number) {
-    hours = Number(hours);
-    if (Number.isNaN(hours)) {
+  logHours(activityName: string, hours: string) {
+    const numHours = Number(hours.replace(',', '.')); // ',' -> '.' fixes locale problems for now
+    if (Number.isNaN(numHours)) {
       // TODO show error
       return;
     }
-    this.store.dispatch(new FetchOrCreateIdAndLogTimeAction(activityName, hours));
+    this.store.dispatch(new FetchOrCreateIdAndLogTimeAction(activityName, numHours));
   }
 
 }
