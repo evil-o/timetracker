@@ -1,4 +1,4 @@
-<accordion>
+<accordion *ngIf="entries.length > 0">
   <accordion-group *ngFor="let group of entries | groupActivityLogEntriesById" class="container-fluid">
     <div accordion-heading class="clearfix">
       {{ActivityTypes.byId(activityTypes, group.id).name}}
@@ -11,3 +11,12 @@
     </div>
   </accordion-group>
 </accordion>
+<div id="accordion" role="tablist" *ngIf="entries.length <= 0">
+  <div class="container-fluid panel">
+    <div class="card">
+      <div class="card-header" role="tab" id="headingOne">
+        No entries.
+      </div>
+    </div>
+  </div>
+</div>
