@@ -23,6 +23,7 @@ import { appRoutes } from './app.routes';
 import { ActivityLogEffects } from './redux/effects/activityLogEffects';
 import { reducers } from './redux/reducers/index';
 import { effects } from './redux/effects/index';
+import { metaReducers } from './redux/metaReducers';
 import { ActvityLogListComponent } from './components/actvity-log-list/actvity-log-list.component';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 
@@ -40,7 +41,7 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
     FormsModule,
     AccordionModule.forRoot(),
     NgbModule.forRoot(),
-    StoreModule.forRoot(reducers),
+    StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ?
       StoreDevtoolsModule.instrument({
         maxAge: 25 // Retains last 25 states
