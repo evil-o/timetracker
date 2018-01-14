@@ -25,7 +25,6 @@ export class TodayComponent implements OnInit {
   constructor(private store: Store<ApplicationState>) {
     this.activityTypes$ = this.store.select(fromStore.activityTypes);
     this.activityLogEntries$ = this.store.select(fromStore.activityLogEntries);
-    this.activityLogEntries$.subscribe((values) => 'new log entries received: ' + JSON.stringify(values, null, 2));
   }
 
   ngOnInit() {
