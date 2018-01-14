@@ -37,7 +37,6 @@ export class TodayComponent implements OnInit {
       // TODO show error
       return;
     }
-    console.log(`Dispatching: ${activityName}, ${hours}`);
     this.store.dispatch(new FetchOrCreateIdAndLogTimeAction(activityName, hours));
   }
 

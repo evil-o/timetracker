@@ -22,7 +22,6 @@ export class ActivityLogEffects {
   .map(([action, state]) => {
     const found = state.activityTypes.activities.find((activity) => activity.name === action.name);
     if (found) {
-      console.log('Dispatching LogTime: ' + found.id + ', ' + action.hoursToLog);
       return new LogTimeAction(found.id, action.hoursToLog);
     } else {
       // TODO autocreate new activity
