@@ -4,10 +4,12 @@ import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
+import { IActivityTypes, ActivityTypes } from '../../redux/states/activityTypes';
 
 interface IGroupEntry {
   id: string;
   cumulativeHours: number;
+  entries: IActivityLogEntry[];
 }
 
 @Component({
@@ -17,8 +19,13 @@ interface IGroupEntry {
 })
 export class ActvityLogListComponent implements OnInit, OnDestroy {
 
+  public ActivityTypes = ActivityTypes;
+
   @Input()
   public entries$: Observable<IActivityLogEntry[]>;
+
+  @Input()
+  public activityTypes: IActivityTypes;
 
   public groups$ = new Subject<IGroupEntry[]>();
 
@@ -47,12 +54,12 @@ export class ActvityLogListComponent implements OnInit, OnDestroy {
       const group = grouped.find((e) => e.id === id);
       if (group) {
         group.cumulativeHours += entry.hours;
+        group.entries.push(entry);
       } else {
-        grouped.push({id, cumulativeHours: entry.hours});
+        grouped.push({id, entries: [entry], cumulativeHours: entry.hours});
       }
     }
 
     return grouped;
   }
-
 }

@@ -18,7 +18,7 @@ import * as fromStore from '../../redux/selectors';
   styleUrls: ['./today.component.css']
 })
 export class TodayComponent implements OnInit {
-  private activityTypes$: Observable<IActivityTypes>;
+  public activityTypes$: Observable<IActivityTypes>;
   public activities$: Observable<IActivityType[]>;
   public activityLogEntries$: Observable<IActivityLogEntry[]>;
 

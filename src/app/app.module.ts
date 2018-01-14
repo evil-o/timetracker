@@ -24,6 +24,7 @@ import { ActivityLogEffects } from './redux/effects/activityLogEffects';
 import { reducers } from './redux/reducers/index';
 import { effects } from './redux/effects/index';
 import { ActvityLogListComponent } from './components/actvity-log-list/actvity-log-list.component';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ActvityLogListComponent } from './components/actvity-log-list/actvity-l
   imports: [
     BrowserModule,
     FormsModule,
+    AccordionModule.forRoot(),
     NgbModule.forRoot(),
     StoreModule.forRoot(reducers),
     !environment.production ?

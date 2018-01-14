@@ -14,8 +14,8 @@
     <button class="btn btn-primary" (click)="logHours(activityToLog.name, hoursToLog.value)">Log</button>
   </div>
 </div>
-<div class="row">
-  <div class="col">
-    <app-actvity-log-list [entries$]="activityLogEntries$"></app-actvity-log-list>
+<div class="row mt-5">
+  <div class="col-sm-9">
+    <app-actvity-log-list [entries$]="activityLogEntries$" [activityTypes]="activityTypes$ | async"></app-actvity-log-list>
   </div>
 </div>
