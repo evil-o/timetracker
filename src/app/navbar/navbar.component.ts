@@ -12,8 +12,7 @@ export class NavbarComponent implements OnInit {
 
   public entries = [
     { label: 'Today', link: 'today' },
-    { label: 'This week', link: 'week/current' },
-    { label: 'All weeks', link: 'week' },
+    { label: 'Week', link: 'week' },
   ];
 
   @Input()

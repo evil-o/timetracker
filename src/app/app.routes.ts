@@ -9,7 +9,11 @@ export const appRoutes: Routes = [
     component: TodayComponent,
   },
   {
-    path: 'week/current',
+    path: 'week/:year/:week',
+    component: WeekComponent,
+  },
+  {
+    path: 'week',
     component: WeekComponent,
   }
 ];
