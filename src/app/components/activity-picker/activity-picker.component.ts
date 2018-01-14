@@ -2,14 +2,14 @@ import { Component, Input, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/merge';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
-import { IActivityType } from '../models/interfaces';
-import { Subscription } from 'rxjs/Subscription';
+import { IActivityType } from '../../models/interfaces';
 
 @Component({
   selector: 'app-activity-picker',
