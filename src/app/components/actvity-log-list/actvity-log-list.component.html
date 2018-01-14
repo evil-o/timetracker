@@ -1,5 +1,5 @@
 <accordion>
-  <accordion-group *ngFor="let group of (groups$ | async)" class="container-fluid">
+  <accordion-group *ngFor="let group of entries | groupActivityLogEntriesById" class="container-fluid">
     <div accordion-heading class="clearfix">
       {{ActivityTypes.byId(activityTypes, group.id).name}}
       <span class="badge badge-secondary float-right pull-right">{{group.cumulativeHours}} h</span>
