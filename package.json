@@ -30,6 +30,7 @@
     "ngrx-store-localstorage": "^0.3.0",
     "ngx-bootstrap": "2.0.0-rc.0",
     "rxjs": "5.5.2",
+    "uuid": "^3.1.0",
     "zone.js": "0.8.14"
   },
   "devDependencies": {
