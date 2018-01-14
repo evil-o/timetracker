@@ -1,3 +1,42 @@
-<p>
-  week works!
-</p>
+<nav aria-label="Week navigation">
+  <ul class="pagination justify-content-center">
+    <li class="page-item disabled">
+      <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Previous</span>
+      </a>
+    </li>
+    <li class="page-item disabled">
+      <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&lsaquo;</span>
+        <span class="sr-only">Previous</span>
+      </a>
+    </li>
+    <li class="page-item disabled">
+      <a class="page-link" href="#">{{year}}, Week {{week}}</a>
+    </li>
+    <li class="page-item disabled">
+      <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&rsaquo;</span>
+        <span class="sr-only">Next</span>
+      </a>
+    </li>
+    <li class="page-item disabled">
+      <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+        <span class="sr-only">Next</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<div *ngFor="let day of days">
+  <div class="row">
+    <div class="col">
+      <h4>{{day.name}}</h4>
+    </div>
+  </div>
+  <div class="row">
+    <app-actvity-log-list class="col-lg-6" [entries]="day.entries$ | async" [activityTypes]="activityTypes$ | async"></app-actvity-log-list>
+  </div>
+</div>
