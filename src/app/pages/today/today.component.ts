@@ -22,9 +22,18 @@ export class TodayComponent implements OnInit {
   public activities$: Observable<IActivityType[]>;
   public activityLogEntries$: Observable<IActivityLogEntry[]>;
 
+  private today = new Date();
+
   constructor(private store: Store<ApplicationState>) {
     this.activityTypes$ = this.store.select(fromStore.activityTypes);
-    this.activityLogEntries$ = this.store.select(fromStore.activityLogEntries);
+    this.activityLogEntries$ = this.store.select(fromStore.activityLogEntries)
+      .map((entries) =>
+        entries.filter((entry) =>
+          entry.year === this.today.getFullYear()
+          && entry.month === this.today.getMonth()
+          && entry.day === this.today.getDate()
+        )
+      );
   }
 
   ngOnInit() {
