@@ -14,26 +14,11 @@ import { ApplicationState } from '../states/applicationState';
 import { INCREMENTAL_MIGRATION, IncrementalMigrationAction, IncrementalMigrationSuccessAction } from '../actions/storageVersionActions';
 
 @Injectable()
-export class ActivityLogEffects {
-  // Listen for the 'LOGIN' action
-  @Effect() newActivityTypeLogged$: Observable<Action> = this.actions$
-  .ofType(FETCH_OR_CREATE_ID_AND_LOG_TIME)
-  .map(action => action as FetchOrCreateIdAndLogTimeAction)
-  .withLatestFrom(this.store$)
-  .map(([action, state]) => {
-    const found = state.activityTypes.activities.find((activity) => activity.name === action.name);
-    if (found) {
-      return new LogTimeAction(found.id, action.hoursToLog);
-    } else {
-      // TODO autocreate new activity
-      console.log('Activity not found: ' + action.name);
-      console.log('Known actiities: ' + JSON.stringify(state.activityTypes.activities, null, 2));
-    }
-  });
+export class ActivityTypesEffects {
 
   @Effect() incrementalMigrationComplete$: Observable<Action> = this.actions$
   .ofType(INCREMENTAL_MIGRATION)
-  .map(() => new IncrementalMigrationSuccessAction('ActivityLogState'));
+  .map(() => new IncrementalMigrationSuccessAction('ActivityTypesState'));
 
   constructor(
     private actions$: Actions,

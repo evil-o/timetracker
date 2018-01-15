@@ -3,7 +3,9 @@ import { Action } from '@ngrx/store';
 import { CREATE } from '../reducers/activityTypes';
 
 export class CreateActivityTypeAction implements Action {
-  constructor(public name: string, public type = CREATE) { }
+  public readonly type = CREATE;
+
+  constructor(public name: string) { }
 }
 
 export type ActivityTypesActions =
