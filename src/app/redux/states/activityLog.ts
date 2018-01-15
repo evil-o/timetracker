@@ -1,4 +1,8 @@
+import * as uuid from 'uuid';
+
 export interface IActivityLogEntry {
+  id: string;
+
   actvitiyId: string;
 
   hours: number;
@@ -15,6 +19,8 @@ export interface IActivityLog {
 }
 
 export class ActivityLogEntry implements IActivityLogEntry {
+  public id: string;
+
   public actvitiyId: string;
 
   public hours: number;
@@ -28,6 +34,7 @@ export class ActivityLogEntry implements IActivityLogEntry {
   public static createForToday(activityId: string, hours: number) {
     const now = new Date();
     return {
+      id: uuid(),
       day: now.getDate(),
       month: now.getMonth(),
       year: now.getFullYear(),

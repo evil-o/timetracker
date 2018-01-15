@@ -1,5 +1,7 @@
 import { Action } from '@ngrx/store';
 
+import * as uuid from 'uuid';
+
 import { IActivityType } from '../../models/interfaces';
 import { CreateActivityTypeAction } from '../actions/activityTypesActions';
 
@@ -16,11 +18,17 @@ export function activityLogReducer(state: IActivityLog = new ActivityLog, action
       };
 
     case INCREMENTAL_MIGRATION:
-      switch (action.currentVersion) {
-        default:
-          console.log('Unknown or unhandled version ("' + action.currentVersion + '") in incremental update of activity log.');
-          return state;
+      const newState = { ...state };
+
+      // check that all log entries have an id
+      if (action.currentVersion < 5) {
+        for (const entry of newState.entries) {
+          if (!entry.id) {
+            entry.id = uuid();
+          }
+        }
       }
+      return newState;
 
     default:
       return state;
