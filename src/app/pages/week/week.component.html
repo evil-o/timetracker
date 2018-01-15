@@ -13,9 +13,9 @@
       </a>
     </li>
     <li class="page-item disabled">
-        <a class="page-link" href="#" aria-label="Next week">
-          {{year}}, Week {{week}}
-        </a>
+      <a class="page-link" href="#" aria-label="Next week">
+        {{year}}, Week {{week}}
+      </a>
     </li>
     <li class="page-item">
       <a class="page-link" [routerLink]="['/week', this.nextWeekYear, this.nextWeek]" aria-label="Next week">
@@ -32,13 +32,27 @@
   </ul>
 </nav>
 
-<div *ngFor="let day of days">
-  <div class="row mt-3">
-    <div class="col">
-      <h4>{{day.name}}</h4>
+<tabset>
+  <tab heading='Weekly tally'>
+    Not yet implemented.
+  </tab>
+  <tab heading='Daily details'>
+    <div class="row mt-2" *ngFor="let day of days">
+      <div class="card col">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-1 text-right">
+              <span class="text-sm text-muted">{{day.date.getMonth() + 1}}/{{day.date.getDate()}}</span>
+            </div>
+            <div class="col-sm-2 pl-0">
+              <h5 class="card-title">
+                {{day.name}}
+              </h5>
+            </div>
+          </div>
+          <app-actvity-log-list class="mt-2" [entries]="day.entries$ | async" [activityTypes]="activityTypes$ | async"></app-actvity-log-list>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <app-actvity-log-list class="col-lg-6" [entries]="day.entries$ | async" [activityTypes]="activityTypes$ | async"></app-actvity-log-list>
-  </div>
-</div>
+  </tab>
+</tabset>

@@ -15,6 +15,8 @@ import * as currentWeekNumber from 'current-week-number';
 interface DayDeclaration {
   dayOfTheWeek: number;
 
+  date: Date;
+
   name: string;
 
   entries$: Observable<IActivityLogEntry[]>;
@@ -81,11 +83,18 @@ export class WeekComponent implements OnInit {
     const weekdayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
     this.days = [];
+
+    // calculate the start date of the week
+    const startOfWeek = new Date(this.year, 0, 1 + 7 * (this.week - 1));
+    // - 1: javascript week starts on sunday
+    startOfWeek.setDate(startOfWeek.getDate() - ((startOfWeek.getDay() + 6) % 7));
+
     weekdayNames.forEach((weekdayName, index) => {
       const dayOfTheWeek = index;
       this.days.push({
         name: weekdayName,
         dayOfTheWeek,
+        date: new Date(startOfWeek.getFullYear(), startOfWeek.getMonth(), startOfWeek.getDate() + index),
         entries$: this.activityLogEntries$.map((entries) => entries.filter((entry) => {
           const date = new Date(entry.year, entry.month, entry.day);
           if (entry.year !== this.year || currentWeekNumber(date) !== this.week) {
