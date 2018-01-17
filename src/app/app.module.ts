@@ -29,6 +29,9 @@ import { metaReducers } from './redux/metaReducers';
 import { ActvityLogListComponent } from './components/actvity-log-list/actvity-log-list.component';
 import { GroupActivityLogEntriesByIdPipe } from './pipes/group-activity-log-entries-by-id.pipe';
 import { WeekComponent } from './pages/week/week.component';
+import { TallyComponent } from './components/tally/tally.component';
+import { LogEntryTallyPipe } from './pipes/log-entry-tally.pipe';
+import { ActivityTypeIdToNamePipe } from './pipes/activity-type-id-to-name.pipe';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,10 @@ import { WeekComponent } from './pages/week/week.component';
     TodayComponent,
     ActvityLogListComponent,
     GroupActivityLogEntriesByIdPipe,
-    WeekComponent
+    WeekComponent,
+    TallyComponent,
+    LogEntryTallyPipe,
+    ActivityTypeIdToNamePipe
   ],
   imports: [
     BrowserModule,

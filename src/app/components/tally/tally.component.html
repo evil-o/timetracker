@@ -1,0 +1,3 @@
+<div *ngFor="let tally of entries | logEntryTally">
+  {{tally.activityId | activityTypeIdToName: activityTypes}}: {{tally.hoursTotal}}h
+</div>

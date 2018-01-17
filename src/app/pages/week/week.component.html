@@ -34,7 +34,9 @@
 
 <tabset>
   <tab heading='Weekly tally'>
-    Not yet implemented.
+    <div class="row mt-2">
+      <app-tally [entries]="filteredLogEntries$ | async" [activityTypes]="activityTypes$ | async"></app-tally>
+    </div>
   </tab>
   <tab heading='Daily details'>
     <div class="row mt-2" *ngFor="let day of days">

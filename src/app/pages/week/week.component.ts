@@ -32,6 +32,9 @@ export class WeekComponent implements OnInit {
   public activityLogEntries$: Observable<IActivityLogEntry[]>;
   public activityTypes$: Observable<IActivityTypes>;
 
+  // log entries, filtered to only contain the ones that are in this week
+  public filteredLogEntries$: Observable<IActivityLogEntry[]>;
+
   public nextWeekYear: number;
   public nextWeek: number;
 
@@ -46,7 +49,14 @@ export class WeekComponent implements OnInit {
   constructor(private store: Store<ApplicationState>, public activatedRoute: ActivatedRoute) {
     this.activityTypes$ = this.store.select(fromStore.activityTypes);
     this.activityLogEntries$ = this.store.select(fromStore.activityLogEntries);
-   }
+
+    this.filteredLogEntries$ = this.activityLogEntries$.map((entries) => {
+      return entries.filter((entry) => {
+        const date = new Date(entry.year, entry.month, entry.day);
+        return entry.year === this.year && currentWeekNumber(date) === this.week;
+      });
+    });
+  }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((parameters) => {
@@ -95,11 +105,8 @@ export class WeekComponent implements OnInit {
         name: weekdayName,
         dayOfTheWeek,
         date: new Date(startOfWeek.getFullYear(), startOfWeek.getMonth(), startOfWeek.getDate() + index),
-        entries$: this.activityLogEntries$.map((entries) => entries.filter((entry) => {
+        entries$: this.filteredLogEntries$.map((entries) => entries.filter((entry) => {
           const date = new Date(entry.year, entry.month, entry.day);
-          if (entry.year !== this.year || currentWeekNumber(date) !== this.week) {
-            return false;
-          }
           return date.getUTCDay() === dayOfTheWeek;
         }))
       });
