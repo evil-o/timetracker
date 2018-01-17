@@ -35,7 +35,11 @@
 <tabset>
   <tab heading='Weekly tally'>
     <div class="row mt-2">
-      <app-tally [entries]="filteredLogEntries$ | async" [activityTypes]="activityTypes$ | async"></app-tally>
+      <div class="card col">
+        <div class="card-body">
+          <app-tally [entries]="filteredLogEntries$ | async" [activityTypes]="activityTypes$ | async"></app-tally>
+        </div>
+      </div>
     </div>
   </tab>
   <tab heading='Daily details'>

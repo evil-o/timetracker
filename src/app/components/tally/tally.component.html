@@ -1,3 +1,2 @@
-<div *ngFor="let tally of entries | logEntryTally">
-  {{tally.activityId | activityTypeIdToName: activityTypes}}: {{tally.hoursTotal}}h
-</div>
+<app-activity-log-entry *ngFor="let tally of entries | logEntryTally" [activityTypes]="activityTypes" [group]="tally"></app-activity-log-entry>
+<app-no-activity-log-entry-present *ngIf="entries.length <= 0"></app-no-activity-log-entry-present>

@@ -5,9 +5,15 @@ import { IActivityTypes, ActivityTypes } from '../redux/states/activityTypes';
   name: 'activityTypeIdToName'
 })
 export class ActivityTypeIdToNamePipe implements PipeTransform {
+  public ActivityTypes = ActivityTypes;
 
   transform(activityId: string, activityTypes: IActivityTypes): string {
-    return ActivityTypes.byId(activityTypes, activityId).name;
+    const type = activityTypes.activities.find((activity) => activity.id === activityId);
+    if (type) {
+      return type.name;
+    } else {
+      return `Unknown (id: ${activityId})`;
+    }
   }
 
 }

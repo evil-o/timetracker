@@ -50,12 +50,14 @@ export class WeekComponent implements OnInit {
     this.activityTypes$ = this.store.select(fromStore.activityTypes);
     this.activityLogEntries$ = this.store.select(fromStore.activityLogEntries);
 
-    this.filteredLogEntries$ = this.activityLogEntries$.map((entries) => {
-      return entries.filter((entry) => {
-        const date = new Date(entry.year, entry.month, entry.day);
-        return entry.year === this.year && currentWeekNumber(date) === this.week;
+    this.filteredLogEntries$ = this.activatedRoute.params
+      .withLatestFrom(this.activityLogEntries$)
+      .map(([params, entries]) => {
+        return entries.filter((entry) => {
+          const date = new Date(entry.year, entry.month, entry.day);
+          return entry.year === this.year && currentWeekNumber(date) === this.week;
+        });
       });
-    });
   }
 
   ngOnInit() {

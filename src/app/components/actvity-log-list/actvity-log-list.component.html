@@ -1,22 +1,4 @@
 <accordion *ngIf="entries.length > 0">
-  <accordion-group *ngFor="let group of entries | groupActivityLogEntriesById" class="container-fluid my-1">
-    <div accordion-heading class="clearfix">
-      {{group.id | activityTypeIdToName: activityTypes}}
-      <span class="badge badge-secondary float-right pull-right">{{group.cumulativeHours}} h</span>
-    </div>
-    <div class="row" *ngFor="let entry of group.entries">
-      <div class="col">
-        {{entry.hours}}
-      </div>
-    </div>
-  </accordion-group>
+  <app-activity-log-entry *ngFor="let group of entries | groupActivityLogEntriesById" [activityTypes]="activityTypes" [group]="group"></app-activity-log-entry>
 </accordion>
-<div id="accordion" role="tablist" *ngIf="entries.length <= 0">
-  <div class="container-fluid panel">
-    <div class="card">
-      <div class="card-header" role="tab" id="headingOne">
-        No entries.
-      </div>
-    </div>
-  </div>
-</div>
+<app-no-activity-log-entry-present *ngIf="entries.length <= 0"></app-no-activity-log-entry-present>

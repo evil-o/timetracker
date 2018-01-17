@@ -32,6 +32,8 @@ import { WeekComponent } from './pages/week/week.component';
 import { TallyComponent } from './components/tally/tally.component';
 import { LogEntryTallyPipe } from './pipes/log-entry-tally.pipe';
 import { ActivityTypeIdToNamePipe } from './pipes/activity-type-id-to-name.pipe';
+import { ActivityLogEntryComponent } from './components/activity-log-entry/activity-log-entry.component';
+import { NoActivityLogEntryPresentComponent } from './components/no-activity-log-entry-present/no-activity-log-entry-present.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { ActivityTypeIdToNamePipe } from './pipes/activity-type-id-to-name.pipe'
     WeekComponent,
     TallyComponent,
     LogEntryTallyPipe,
-    ActivityTypeIdToNamePipe
+    ActivityTypeIdToNamePipe,
+    ActivityLogEntryComponent,
+    NoActivityLogEntryPresentComponent
   ],
   imports: [
     BrowserModule,
