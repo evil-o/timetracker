@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { IGroupEntry } from '../../pipes/group-activity-log-entries-by-id.pipe';
 import { IActivityTypes } from '../../redux/states/activityTypes';
 import { AccordionComponent } from 'ngx-bootstrap';
@@ -17,9 +17,11 @@ export class ActivityLogEntryComponent implements OnInit {
   @Input()
   public activityTypes: IActivityTypes;
 
+  @Output()
+  public changeEntryDescription = new EventEmitter<{entryId: string, newDescription: string}>();
+
   constructor() { }
 
   ngOnInit() {
   }
-
 }

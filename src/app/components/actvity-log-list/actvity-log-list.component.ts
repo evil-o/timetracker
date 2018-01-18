@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { IActivityLogEntry } from '../../redux/states/activityLog';
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -26,6 +26,9 @@ export class ActvityLogListComponent implements OnInit {
 
   @Input()
   public activityTypes: IActivityTypes;
+
+  @Output()
+  public changeEntryDescription = new EventEmitter<{entryId: string, newDescription: string}>();
 
   constructor() { }
 

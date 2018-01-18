@@ -1,2 +1,2 @@
-<app-activity-log-entry *ngFor="let tally of entries | logEntryTally" [activityTypes]="activityTypes" [group]="tally"></app-activity-log-entry>
+<app-activity-log-entry *ngFor="let tally of entries | logEntryTally" [activityTypes]="activityTypes" [group]="tally" (changeEntryDescription)="changeEntryDescription($event)"></app-activity-log-entry>
 <app-no-activity-log-entry-present *ngIf="entries.length <= 0"></app-no-activity-log-entry-present>

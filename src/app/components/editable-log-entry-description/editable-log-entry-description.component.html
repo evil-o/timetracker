@@ -1,14 +1,21 @@
-<div *ngIf="!editing" (dblclick)="setEditing(true)" class="noselect">
-  <div *ngIf="!entry.description" class="text text-muted text-italic">
-    (No description. Double-click to set.)
+<form class="inline-form">
+  <div *ngIf="!editing" (dblclick)="setEditing(true)" class="noselect">
+    <div *ngIf="!entry.description" class="text text-muted text-italic">
+      (No description. Double-click to set.)
+    </div>
+    <div *ngIf="entry.description">
+      {{entry.description}}
+    </div>
   </div>
-  <div *ngIf="entry.description">
-    {{entry.description}}
-  </div>
-</div>
-<form class="input-group" [class.invisible]="!editing">
-  <input type="text" #descriptionInput class="form-control" placeholder="Enter a description">
-  <div class="input-group-append">
-    <button class="btn btn-outline-secondary" type="button">Button</button>
+  <div *ngIf="editing" class="input-group">
+    <input type="text" #descriptionInput class="form-control" placeholder="Enter a description" [value]="entry.description || ''">
+    <div class="input-group-append">
+      <button class="btn btn-outline-primary" type="button" (click)="emitChangeDescription(descriptionInput.value); setEditing(false);">
+        set
+      </button>
+      <button class="btn btn-outline-secondary" type="button" (click)="setEditing(false)">
+        cancel
+      </button>
+    </div>
   </div>
 </form>

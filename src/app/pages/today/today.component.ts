@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { ApplicationState } from '../../redux/states/applicationState';
 import { IActivityTypes } from '../../redux/states/activityTypes';
 import { IActivityType } from '../../models/interfaces';
-import { FetchOrCreateIdAndLogTimeAction } from '../../redux/actions/activityLogActions';
+import { FetchOrCreateIdAndLogTimeAction, SetDescriptionAction } from '../../redux/actions/activityLogActions';
 import { IActivityLogEntry } from '../../redux/states/activityLog';
 
 import * as fromStore from '../../redux/selectors';
@@ -38,6 +38,10 @@ export class TodayComponent implements OnInit {
 
   ngOnInit() {
     this.activities$ = this.activityTypes$.map(types => types.activities);
+  }
+
+  changeEntryDescription(params: {entryId: string, newDescription: string}) {
+    this.store.dispatch(new SetDescriptionAction(params.entryId, params.newDescription));
   }
 
   logHours(activityName: string, hours: string) {

@@ -11,6 +11,7 @@ import * as fromStore from '../../redux/selectors';
 import { IActivityTypes } from '../../redux/states/activityTypes';
 
 import * as currentWeekNumber from 'current-week-number';
+import { SetDescriptionAction } from '../../redux/actions/activityLogActions';
 
 interface DayDeclaration {
   dayOfTheWeek: number;
@@ -75,6 +76,10 @@ export class WeekComponent implements OnInit {
 
       this.updatePreviousAndNextWeek();
     });
+  }
+
+  changeEntryDescription(params: {entryId: string, newDescription: string}) {
+    this.store.dispatch(new SetDescriptionAction(params.entryId, params.newDescription));
   }
 
   updatePreviousAndNextWeek() {

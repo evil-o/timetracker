@@ -3,6 +3,8 @@ import * as uuid from 'uuid';
 export interface IActivityLogEntry {
   id: string;
 
+  description: string;
+
   actvitiyId: string;
 
   hours: number;
