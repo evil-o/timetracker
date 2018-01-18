@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -34,6 +34,7 @@ import { LogEntryTallyPipe } from './pipes/log-entry-tally.pipe';
 import { ActivityTypeIdToNamePipe } from './pipes/activity-type-id-to-name.pipe';
 import { ActivityLogEntryComponent } from './components/activity-log-entry/activity-log-entry.component';
 import { NoActivityLogEntryPresentComponent } from './components/no-activity-log-entry-present/no-activity-log-entry-present.component';
+import { EditableLogEntryDescriptionComponent } from './components/editable-log-entry-description/editable-log-entry-description.component';
 
 @NgModule({
   declarations: [
@@ -48,14 +49,15 @@ import { NoActivityLogEntryPresentComponent } from './components/no-activity-log
     LogEntryTallyPipe,
     ActivityTypeIdToNamePipe,
     ActivityLogEntryComponent,
-    NoActivityLogEntryPresentComponent
+    NoActivityLogEntryPresentComponent,
+    EditableLogEntryDescriptionComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AccordionModule.forRoot(),
     TabsModule.forRoot(),
-    NgbModule.forRoot(),
+    TypeaheadModule.forRoot(),
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ?
       StoreDevtoolsModule.instrument({

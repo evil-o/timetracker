@@ -1,1 +1,9 @@
-@import "~bootstrap/dist/css/bootstrap.css"
+@import "../node_modules/bootstrap/dist/css/bootstrap.css";
+
+.noselect
+{
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

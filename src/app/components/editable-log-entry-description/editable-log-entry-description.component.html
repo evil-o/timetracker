@@ -1,0 +1,14 @@
+<div *ngIf="!editing" (dblclick)="setEditing(true)" class="noselect">
+  <div *ngIf="!entry.description" class="text text-muted text-italic">
+    (No description. Double-click to set.)
+  </div>
+  <div *ngIf="entry.description">
+    {{entry.description}}
+  </div>
+</div>
+<form class="input-group" [class.invisible]="!editing">
+  <input type="text" #descriptionInput class="form-control" placeholder="Enter a description">
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="button">Button</button>
+  </div>
+</form>

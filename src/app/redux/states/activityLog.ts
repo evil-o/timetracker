@@ -21,6 +21,8 @@ export interface IActivityLog {
 export class ActivityLogEntry implements IActivityLogEntry {
   public id: string;
 
+  public description: string;
+
   public actvitiyId: string;
 
   public hours: number;
