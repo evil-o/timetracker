@@ -32,7 +32,7 @@ export function activityLogReducer(state: IActivityLog = new ActivityLog, action
     }
 
     case SET_DESCRIPTION: {
-      const entries = [...state.entries];
+      const entries = state.entries.splice(0);
       const entry = entries.find((e) => e.id === action.entryId);
       if (entry) {
         entry.description = action.description;
@@ -44,7 +44,7 @@ export function activityLogReducer(state: IActivityLog = new ActivityLog, action
     }
 
     case SET_HOURS: {
-      const entries = [...state.entries];
+      const entries = state.entries.splice(0);
       const entry = entries.find((e) => e.id === action.entryId);
       if (entry) {
         entry.hours = action.hours;
