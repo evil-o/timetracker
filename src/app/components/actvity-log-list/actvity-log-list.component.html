@@ -1,4 +1,4 @@
-<accordion *ngIf="entries.length > 0">
-  <app-activity-log-entry *ngFor="let group of entries | groupActivityLogEntriesById" [activityTypes]="activityTypes" [group]="group"></app-activity-log-entry>
+<accordion *ngIf="groups && groups.length > 0">
+  <app-activity-log-entry *ngFor="let group of groups" [activityTypes]="activityTypes" [group]="group"></app-activity-log-entry>
 </accordion>
-<app-no-activity-log-entry-present *ngIf="entries.length <= 0"></app-no-activity-log-entry-present>
+<app-no-activity-log-entry-present *ngIf="!groups || groups.length <= 0"></app-no-activity-log-entry-present>

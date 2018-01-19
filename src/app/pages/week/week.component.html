@@ -1,36 +1,40 @@
 <nav aria-label="Week navigation">
   <ul class="pagination justify-content-center">
     <li class="page-item">
-      <a class="page-link" [routerLink]="['/week', this.year - 1, this.week]" aria-label="Previous year">
+      <a class="page-link" [routerLink]="['/week', this.week.year - 1, this.week.week]" aria-label="Previous year">
         <span aria-hidden="true">&laquo;</span>
         <span class="sr-only">Previous year</span>
       </a>
     </li>
     <li class="page-item">
-      <a class="page-link" [routerLink]="['/week', this.previousWeekYear, this.previousWeek]" aria-label="Previous week">
+      <a class="page-link" [routerLink]="['/week', this.previousWeek.year, this.previousWeek.week]" aria-label="Previous week">
         <span aria-hidden="true">&lsaquo;</span>
         <span class="sr-only">Previous week</span>
       </a>
     </li>
     <li class="page-item disabled">
       <a class="page-link" href="#" aria-label="Next week">
-        {{year}}, Week {{week}}
+        {{week.year}}, Week {{week.week}}
       </a>
     </li>
     <li class="page-item">
-      <a class="page-link" [routerLink]="['/week', this.nextWeekYear, this.nextWeek]" aria-label="Next week">
+      <a class="page-link" [routerLink]="['/week', this.nextWeek.year, this.nextWeek.week]" aria-label="Next week">
         <span aria-hidden="true">&rsaquo;</span>
         <span class="sr-only">Next week</span>
       </a>
     </li>
     <li class="page-item">
-      <a class="page-link" [routerLink]="['/week', this.year + 1, this.week]" aria-label="Next year">
+      <a class="page-link" [routerLink]="['/week', this.week.year + 1, this.week.week]" aria-label="Next year">
         <span aria-hidden="true">&raquo;</span>
         <span class="sr-only">Next year</span>
       </a>
     </li>
   </ul>
 </nav>
+
+<!--div>
+  Filtered: {{(filteredLogEntries$ | async)?.length || '-'}} / {{(activityLogEntries$ | async)?.length || '-'}}
+</div-->
 
 <tabset>
   <tab heading='Weekly tally'>
@@ -43,7 +47,7 @@
     </div>
   </tab>
   <tab heading='Daily details'>
-    <div class="row mt-2" *ngFor="let day of days">
+    <div class="row mt-2" *ngFor="let day of (days$ | async)">
       <div class="card col">
         <div class="card-body">
           <div class="row">
@@ -56,7 +60,7 @@
               </h5>
             </div>
           </div>
-          <app-actvity-log-list class="mt-2" [entries]="day.entries$ | async" [activityTypes]="activityTypes$ | async"></app-actvity-log-list>
+          <app-actvity-log-list class="mt-2" [groups]="day.entries | groupActivityLogEntriesById" [activityTypes]="activityTypes$ | async"></app-actvity-log-list>
         </div>
       </div>
     </div>

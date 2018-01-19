@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { IActivityLogEntry } from '../redux/states/activityLog';
+import { Observable } from 'rxjs/Observable';
 
 export interface IGroupEntry {
   activityId: string;
@@ -22,11 +23,10 @@ export class GroupActivityLogEntriesByIdPipe implements PipeTransform {
         group.cumulativeHours += entry.hours;
         group.entries.push(entry);
       } else {
-        grouped.push({activityId: id, entries: [entry], cumulativeHours: entry.hours});
+        grouped.push({ activityId: id, entries: [entry], cumulativeHours: entry.hours });
       }
     }
 
     return grouped;
   }
-
 }

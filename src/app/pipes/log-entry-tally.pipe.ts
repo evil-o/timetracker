@@ -8,6 +8,10 @@ import { IGroupEntry } from './group-activity-log-entries-by-id.pipe';
 export class LogEntryTallyPipe implements PipeTransform {
 
   transform(entries: IActivityLogEntry[]): IGroupEntry[] {
+    if (!entries) {
+      return [];
+    }
+
     const tallies: IGroupEntry[] = [];
     for (const entry of entries) {
       let tally = tallies.find((t) => t.activityId === entry.actvitiyId);

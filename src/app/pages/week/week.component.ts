@@ -3,7 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 
+import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/zip';
 
 import { ApplicationState } from '../../redux/states/applicationState';
 import { IActivityLogEntry } from '../../redux/states/activityLog';
@@ -13,20 +15,25 @@ import { IActivityTypes } from '../../redux/states/activityTypes';
 import * as currentWeekNumber from 'current-week-number';
 import { SetDescriptionAction } from '../../redux/actions/activityLogActions';
 
-interface DayDeclaration {
+interface IDayEntry {
   dayOfTheWeek: number;
 
   date: Date;
 
   name: string;
 
-  entries$: Observable<IActivityLogEntry[]>;
+  entries: IActivityLogEntry[];
+}
+
+interface IWeekDate {
+  year: number;
+  week: number;
 }
 
 @Component({
   selector: 'app-week',
   templateUrl: './week.component.html',
-  styleUrls: ['./week.component.css']
+  styleUrls: ['./week.component.css'],
 })
 export class WeekComponent implements OnInit {
 
@@ -36,87 +43,109 @@ export class WeekComponent implements OnInit {
   // log entries, filtered to only contain the ones that are in this week
   public filteredLogEntries$: Observable<IActivityLogEntry[]>;
 
-  public nextWeekYear: number;
-  public nextWeek: number;
+  public nextWeek$: Observable<IWeekDate>;
+  public nextWeek: IWeekDate;
 
-  public year: number;
-  public week: number;
+  public week$: Observable<IWeekDate>;
+  public week: IWeekDate;
 
-  public previousWeekYear: number;
-  public previousWeek: number;
+  public previousWeek$: Observable<IWeekDate>;
+  public previousWeek: IWeekDate;
 
-  days: DayDeclaration[] = [];
+  public days$: Observable<IDayEntry[]>;
 
-  constructor(private store: Store<ApplicationState>, public activatedRoute: ActivatedRoute) {
+  constructor(
+    private store: Store<ApplicationState>,
+    public activatedRoute: ActivatedRoute,
+  ) {
+
+    this.week$ = this.activatedRoute.params.map((parameters) => {
+      let year = Number(parameters['year']);
+      let week = Number(parameters['week']);
+      if (Number.isNaN(year) || Number.isNaN(week)) {
+        const today = new Date();
+        year = today.getFullYear();
+        week = currentWeekNumber(today);
+      }
+      return { year, week };
+    });
+
+    this.week$.subscribe((week) => this.week = week);
+
     this.activityTypes$ = this.store.select(fromStore.activityTypes);
     this.activityLogEntries$ = this.store.select(fromStore.activityLogEntries);
 
-    this.filteredLogEntries$ = this.activatedRoute.params
+    this.previousWeek$ = this.week$
+      .map((week) => {
+        let previousWeek = week.week - 1;
+        let previousWeekYear = week.year;
+        if (previousWeek < 1) {
+          previousWeek = 52;
+          previousWeekYear -= 1;
+        }
+
+        return { year: previousWeekYear, week: previousWeek };
+      });
+
+    this.previousWeek$.subscribe((value) => {
+      this.previousWeek = value;
+    });
+
+    this.nextWeek$ = this.week$
+      .map((week) => {
+        let nextWeek = week.week + 1;
+        let nextWeekYear = week.year;
+        if (nextWeek > 52) {
+          nextWeek = 1;
+          nextWeekYear += 1;
+        }
+
+        return { year: nextWeekYear, week: nextWeek };
+      });
+
+    this.nextWeek$.subscribe((value) => {
+      this.nextWeek = value;
+    });
+
+    this.filteredLogEntries$ = this.week$
       .withLatestFrom(this.activityLogEntries$)
-      .map(([params, entries]) => {
+      .map(([week, entries]) => {
         return entries.filter((entry) => {
           const date = new Date(entry.year, entry.month, entry.day);
-          return entry.year === this.year && currentWeekNumber(date) === this.week;
+          return entry.year === week.year && currentWeekNumber(date) === week.week;
         });
       });
-  }
 
-  ngOnInit() {
-    this.activatedRoute.params.subscribe((parameters) => {
-      const year = Number(parameters['year']);
-      const week = Number(parameters['week']);
-      if (!Number.isNaN(year) && !Number.isNaN(week)) {
-        this.year = year;
-        this.week = week;
-      } else {
-        const today = new Date();
-        this.year = today.getFullYear();
-        this.week = currentWeekNumber(today);
-      }
+    this.days$ = this.filteredLogEntries$
+      .map((entries) => {
+        const days: IDayEntry[] = [];
+        const weekdayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-      this.updatePreviousAndNextWeek();
-    });
-  }
+        // calculate the start date of the week
+        const startOfWeek = new Date(this.week.year, 0, 1 + 7 * (this.week.week - 1));
+        // - 1: javascript week starts on sunday
+        startOfWeek.setDate(startOfWeek.getDate() - ((startOfWeek.getDay() + 6) % 7));
 
-  changeEntryDescription(params: {entryId: string, newDescription: string}) {
-    this.store.dispatch(new SetDescriptionAction(params.entryId, params.newDescription));
-  }
+        weekdayNames.forEach((weekdayName, index) => {
+          const dayOfTheWeek = index;
+          days.push({
+            name: weekdayName,
+            dayOfTheWeek,
+            date: new Date(startOfWeek.getFullYear(), startOfWeek.getMonth(), startOfWeek.getDate() + index),
+            entries: entries.filter((entry) => {
+              const date = new Date(entry.year, entry.month, entry.day);
+              return date.getUTCDay() === dayOfTheWeek;
+            })
+          });
+        });
 
-  updatePreviousAndNextWeek() {
-    this.previousWeek = this.week - 1;
-    this.previousWeekYear = this.year;
-
-    this.nextWeek = this.week + 1;
-    this.nextWeekYear = this.year;
-
-    if (this.previousWeek < 1) {
-      this.previousWeek = 52;
-      this.previousWeekYear -= 1;
-    } else if (this.nextWeek > 52) {
-      this.nextWeek = 1;
-      this.nextWeekYear += 1;
-    }
-
-    const weekdayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-
-    this.days = [];
-
-    // calculate the start date of the week
-    const startOfWeek = new Date(this.year, 0, 1 + 7 * (this.week - 1));
-    // - 1: javascript week starts on sunday
-    startOfWeek.setDate(startOfWeek.getDate() - ((startOfWeek.getDay() + 6) % 7));
-
-    weekdayNames.forEach((weekdayName, index) => {
-      const dayOfTheWeek = index;
-      this.days.push({
-        name: weekdayName,
-        dayOfTheWeek,
-        date: new Date(startOfWeek.getFullYear(), startOfWeek.getMonth(), startOfWeek.getDate() + index),
-        entries$: this.filteredLogEntries$.map((entries) => entries.filter((entry) => {
-          const date = new Date(entry.year, entry.month, entry.day);
-          return date.getUTCDay() === dayOfTheWeek;
-        }))
+        return days;
       });
-    });
+  }
+
+  ngOnInit() { }
+
+  changeEntryDescription(params: { entryId: string, newDescription: string }) {
+    this.store.dispatch(new SetDescriptionAction(params.entryId, params.newDescription));
   }
 }

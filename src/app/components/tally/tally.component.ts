@@ -13,7 +13,7 @@ import { SetDescriptionAction } from '../../redux/actions/activityLogActions';
 export class TallyComponent implements OnInit {
 
   @Input()
-  public entries: IActivityLogEntry[];
+  public entries: IActivityLogEntry[] = [];
 
   @Input()
   public activityTypes: IActivityTypes;

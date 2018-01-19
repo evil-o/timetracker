@@ -33,7 +33,10 @@ export class EditableLogEntryHoursComponent implements OnInit {
   }
 
   public emitChangeHours(newHoursStr: string) {
-    const newHours = Number(newHoursStr);
+    const newHours = Number(newHoursStr.replace(',', '.'));
+    if (Number.isNaN(newHours)) {
+      return;
+    }
     this.changeEntryHours.emit({
       entryId: this.entry.id,
       newHours,

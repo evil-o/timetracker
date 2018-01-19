@@ -22,7 +22,7 @@ export class ActvityLogListComponent implements OnInit {
   public ActivityTypes = ActivityTypes;
 
   @Input()
-  public entries: IActivityLogEntry[];
+  public groups: IGroupEntry[];
 
   @Input()
   public activityTypes: IActivityTypes;

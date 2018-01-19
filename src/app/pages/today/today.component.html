@@ -16,6 +16,6 @@
 </div>
 <div class="row mt-5">
   <div class="col-sm-9">
-    <app-actvity-log-list (changeEntryDescription)="changeEntryDescription($event)" [entries]="activityLogEntries$ | async" [activityTypes]="activityTypes$ | async"></app-actvity-log-list>
+    <app-actvity-log-list (changeEntryDescription)="changeEntryDescription($event)" [groups]="activityLogEntries$ | async | groupActivityLogEntriesById" [activityTypes]="activityTypes$ | async"></app-actvity-log-list>
   </div>
 </div>
