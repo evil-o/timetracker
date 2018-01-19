@@ -27,9 +27,6 @@ export class ActvityLogListComponent implements OnInit {
   @Input()
   public activityTypes: IActivityTypes;
 
-  @Output()
-  public changeEntryDescription = new EventEmitter<{entryId: string, newDescription: string}>();
-
   constructor() { }
 
   ngOnInit() { }

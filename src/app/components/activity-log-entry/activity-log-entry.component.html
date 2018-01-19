@@ -4,11 +4,11 @@
     <span class="badge badge-secondary float-right pull-right">{{group.cumulativeHours}} h</span>
   </div>
   <div class="row" *ngFor="let entry of group.entries">
-    <div class="col-10">
-      <app-editable-log-entry-description [entry]="entry" (changeEntryDescription)="changeEntryDescription.emit($event)"></app-editable-log-entry-description>
+    <div class="col-8">
+      <app-editable-log-entry-description [entry]="entry" (changeEntryDescription)="changeEntryDescription($event)"></app-editable-log-entry-description>
     </div>
-    <div class="col-2">
-      {{entry.hours}}
+    <div class="col-4">
+      <app-editable-log-entry-hours [entry]="entry" (changeEntryHours)="changeEntryHours($event)"></app-editable-log-entry-hours>
     </div>
   </div>
 </accordion-group>

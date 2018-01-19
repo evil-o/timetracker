@@ -20,11 +20,5 @@ export class TallyComponent implements OnInit {
 
   constructor(private store: Store<ApplicationState>) { }
 
-  ngOnInit() {
-  }
-
-  changeEntryDescription(params: {entryId: string, newDescription: string}) {
-    this.store.dispatch(new SetDescriptionAction(params.entryId, params.newDescription));
-  }
-
+  ngOnInit() { }
 }

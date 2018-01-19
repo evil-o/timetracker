@@ -1,0 +1,21 @@
+<form class="inline-form">
+  <div *ngIf="!editing" (dblclick)="setEditing(true)" class="input-group noselect">
+    <div *ngIf="!entry.hours" class="text text-muted text-italic">
+      &mdash;
+    </div>
+    <div *ngIf="entry.hours">
+      {{entry.hours}}
+    </div>
+  </div>
+  <div *ngIf="editing" class="input-group">
+    <input type="text" #hoursInput class="form-control" placeholder="#hours" [value]="entry.hours || ''">
+    <div class="input-group-append">
+      <button class="btn btn-outline-primary" type="button" (click)="emitChangeHours(hoursInput.value); setEditing(false);">
+        set
+      </button>
+      <button class="btn btn-outline-secondary" type="button" (click)="setEditing(false)">
+        cancel
+      </button>
+    </div>
+  </div>
+</form>

@@ -37,7 +37,7 @@
     <div class="row mt-2">
       <div class="card col">
         <div class="card-body">
-          <app-tally (changeEntryDescription)="changeEntryDescription($event)" [entries]="filteredLogEntries$ | async" [activityTypes]="activityTypes$ | async"></app-tally>
+          <app-tally [entries]="filteredLogEntries$ | async" [activityTypes]="activityTypes$ | async"></app-tally>
         </div>
       </div>
     </div>
@@ -56,7 +56,7 @@
               </h5>
             </div>
           </div>
-          <app-actvity-log-list (changeEntryDescription)="changeEntryDescription($event)" class="mt-2" [entries]="day.entries$ | async" [activityTypes]="activityTypes$ | async"></app-actvity-log-list>
+          <app-actvity-log-list class="mt-2" [entries]="day.entries$ | async" [activityTypes]="activityTypes$ | async"></app-actvity-log-list>
         </div>
       </div>
     </div>

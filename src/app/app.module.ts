@@ -35,6 +35,7 @@ import { ActivityTypeIdToNamePipe } from './pipes/activity-type-id-to-name.pipe'
 import { ActivityLogEntryComponent } from './components/activity-log-entry/activity-log-entry.component';
 import { NoActivityLogEntryPresentComponent } from './components/no-activity-log-entry-present/no-activity-log-entry-present.component';
 import { EditableLogEntryDescriptionComponent } from './components/editable-log-entry-description/editable-log-entry-description.component';
+import { EditableLogEntryHoursComponent } from './components/editable-log-entry-hours/editable-log-entry-hours.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { EditableLogEntryDescriptionComponent } from './components/editable-log-
     ActivityTypeIdToNamePipe,
     ActivityLogEntryComponent,
     NoActivityLogEntryPresentComponent,
-    EditableLogEntryDescriptionComponent
+    EditableLogEntryDescriptionComponent,
+    EditableLogEntryHoursComponent
   ],
   imports: [
     BrowserModule,
