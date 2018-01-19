@@ -144,8 +144,4 @@ export class WeekComponent implements OnInit {
   }
 
   ngOnInit() { }
-
-  changeEntryDescription(params: { entryId: string, newDescription: string }) {
-    this.store.dispatch(new SetDescriptionAction(params.entryId, params.newDescription));
-  }
 }
