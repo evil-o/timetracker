@@ -78,7 +78,6 @@ export class WeekComponent implements OnInit {
 
     this.activityTypes$ = this.store.select(fromStore.activityTypes);
     this.activityLogEntries$ = this.store.select(fromStore.activityLogEntries);
-    this.activityLogEntries$.subscribe(() => console.log('new log entry state!'));
 
     this.previousWeek$ = this.week$
       .map((week) => {
@@ -114,14 +113,12 @@ export class WeekComponent implements OnInit {
 
     this.filteredLogEntries$ =
       Observable.combineLatest(this.week$, this.activityLogEntries$)
-        .do(() => console.log('combined!'))
         .map(([week, entries]) => {
           return entries.filter((entry) => {
             const date = new Date(entry.year, entry.month, entry.day);
             return entry.year === week.year && currentWeekNumber(date) === week.week;
           });
         });
-    this.filteredLogEntries$.subscribe(() => console.log('new filtered log entry state!'));
 
     this.days$ = this.filteredLogEntries$
       .map((entries) => {
@@ -148,7 +145,6 @@ export class WeekComponent implements OnInit {
 
         return days;
       });
-    this.days$.subscribe(() => console.log('new days!'));
   }
 
   ngOnInit() { }
