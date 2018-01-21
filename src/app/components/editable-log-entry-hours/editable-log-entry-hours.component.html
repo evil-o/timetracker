@@ -11,10 +11,10 @@
     <input type="text" #hoursInput class="form-control" placeholder="#hours" [value]="entry.hours || ''">
     <div class="input-group-append">
       <button class="btn btn-outline-primary" type="button" (click)="emitChangeHours(hoursInput.value); setEditing(false);">
-        set
+        <i class="fa fa-check"></i>
       </button>
       <button class="btn btn-outline-secondary" type="button" (click)="setEditing(false)">
-        cancel
+        <i class="fa fa-ban"></i>
       </button>
     </div>
   </div>
