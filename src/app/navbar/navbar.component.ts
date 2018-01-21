@@ -2,6 +2,10 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { IActivityType } from '../models/interfaces';
 import { Observable } from 'rxjs/Observable';
+import { ApplicationState } from '../redux/states/applicationState';
+import { Store } from '@ngrx/store';
+import { ExportStorageAction } from '../redux/actions/storageVersionActions';
+
 
 @Component({
   selector: 'app-navbar',
@@ -21,13 +25,18 @@ export class NavbarComponent implements OnInit {
   @Output()
   public createActivityEvent = new EventEmitter<string>();
 
-  constructor() { }
+  constructor(private store: Store<ApplicationState>) { }
 
   ngOnInit() {
   }
 
   public createActivity(name: string) {
     this.createActivityEvent.emit(name);
+  }
+
+  downloadStorage() {
+    const dlAnchorElem = document.getElementById('downloadElement');
+    this.store.dispatch(new ExportStorageAction(dlAnchorElem));
   }
 
 }

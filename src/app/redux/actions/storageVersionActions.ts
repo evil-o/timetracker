@@ -8,6 +8,8 @@ export const INCREMENTAL_MIGRATION = 'INCREMENTAL_MIGRATION';
 export const INCREMENTAL_MIGRATION_SUCCESS = 'INCREMENTAL_MIGRATION_SUCCESS';
 export const STORAGE_VERSION_MIGRATED = 'STORAGE_VERSION_MIGRATED';
 export const STORAGE_UPGRADE_FINISHED = 'STORAGE_UPGRADE_FINISHED';
+export const EXPORT_STORAGE = 'EXPORT_STORAGE';
+export const EXPORT_STORAGE_SUCCESS = 'EXPORT_STORAGE_SUCCESS';
 
 export class CheckStorageVersionAction implements Action {
   public readonly type = CHECK_STORAGE_VERSION;
@@ -51,9 +53,22 @@ export class StorageUpgradeFinishedAction implements Action {
   constructor() { }
 }
 
+export class ExportStorageAction implements Action {
+  public readonly type = EXPORT_STORAGE;
+
+  constructor(public blindDownloadAnchor: HTMLElement) { }
+}
+
+export class ExportStorageSuccessAction implements Action {
+  public readonly type = EXPORT_STORAGE_SUCCESS;
+
+  constructor() { }
+}
 
 export type StorageVersionAction =
   | CheckStorageVersionAction
+  | ExportStorageAction
+  | ExportStorageSuccessAction
   | PreMigrationBackupAction
   | PrepareIncrementalMigrationAction
   | IncrementalMigrationAction

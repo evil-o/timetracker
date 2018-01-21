@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
@@ -58,6 +59,7 @@ import { EditableLogEntryHoursComponent } from './components/editable-log-entry-
     BrowserModule,
     FormsModule,
     AccordionModule.forRoot(),
+    BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     TypeaheadModule.forRoot(),
     StoreModule.forRoot(reducers, { metaReducers }),

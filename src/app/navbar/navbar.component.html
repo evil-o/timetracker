@@ -8,21 +8,12 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item" routerLinkActive="active" *ngFor="let entry of entries">
-          <a class="nav-link" [routerLink]="entry.link">
-              <i class="far fa-{{entry.icon}}"></i>
-              {{entry.label}}
-              <span class="sr-only">(current)</span>
-          </a>
+        <a class="nav-link" [routerLink]="entry.link">
+          <i class="far fa-{{entry.icon}}"></i>
+          {{entry.label}}
+          <span class="sr-only">(current)</span>
+        </a>
       </li>
-      <!--li class="nav-item dropdown" ngbDropdown>
-          <a ngbDropdownToggle class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Add...
-          </a>
-          <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Activity</a>
-            <a class="dropdown-item" href="#">Label</a>
-          </div>
-        </li-->
     </ul>
     <!--app-activity-picker class="form-inline my-2 mx-2" [activities$]="activities$"></app-activity-picker-->
     <!--div class="form-inline my-2 mx-2">
@@ -32,6 +23,15 @@
     <div class="form-inline my-2 mx-2">
       <input class="form-control mr-sm-2" type="text" #newActivityName placeholder="activity type" aria-label="New activity">
       <button class="btn btn-outline-success my-2" (click)="createActivity(newActivityName.value)">Add</button>
+    </div>
+    <div class="nav-item dropdown" dropdown>
+      <a dropdownToggle href="javascript:void(0);" class="nav-link">
+        <i class="fa fa-cog"></i>
+      </a>
+      <a id="downloadElement" style="display:none"></a>
+      <ul *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu">
+        <li role="menuitem" class="dropdown-item"><a class="dropdown-item" href="javascript:void(0);" (click)="downloadStorage()">Download data</a></li>
+      </ul>
     </div>
   </div>
 </nav>

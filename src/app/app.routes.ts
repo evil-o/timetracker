@@ -5,6 +5,11 @@ import { WeekComponent } from './pages/week/week.component';
 
 export const appRoutes: Routes = [
   {
+    path: '',
+    redirectTo: 'today',
+    pathMatch: 'full',
+  },
+  {
     path: 'today',
     component: TodayComponent,
   },

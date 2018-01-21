@@ -21,10 +21,15 @@ import {
   INCREMENTAL_MIGRATION_SUCCESS,
   IncrementalMigrationSuccessAction,
   StorageUpgradeFinishedAction,
-  STORAGE_VERSION_MIGRATED
+  STORAGE_VERSION_MIGRATED,
+  EXPORT_STORAGE,
+  ExportStorageAction,
+  ExportStorageSuccessAction
 } from '../actions/storageVersionActions';
 import { ApplicationState } from '../states/applicationState';
 import { StorageVersion } from '../states/storageVersion';
+
+import { rehydratedStorageKeys } from '../../redux/metaReducers';
 
 @Injectable()
 export class StorageVersionEffects {
@@ -64,6 +69,37 @@ export class StorageVersionEffects {
     .filter(([action, state]) => state.storageVersion.pendingIncrementalBackups.length <= 0)
     .map(([action, state]) => {
       return new StorageVersionMigratedAction(state.storageVersion.version + 1 || 1);
+    });
+
+  @Effect() exportStorage$: Observable<Action> = this.actions$
+    .ofType(EXPORT_STORAGE)
+    .map(action => action as ExportStorageAction)
+    .withLatestFrom(this.store$)
+    .map(([action, state]) => {
+      const pad = (n: number, width = 2, fill = '0') => {
+        let n_str = `${n}`;
+        if (n_str.length < width) {
+          n_str = fill.repeat(width - n_str.length) + n_str;
+        }
+        return n_str;
+      };
+
+      const now = new Date();
+      const downloadName = `TimeTracker-Export-${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`
+        + `--${pad(now.getHours())}.${pad(now.getMinutes())}.${pad(now.getSeconds())}`;
+      const exportObject = {};
+      for (const key of rehydratedStorageKeys) {
+        if (key in state) {
+          exportObject[key] = state[key];
+        }
+      }
+
+      const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(exportObject));
+      const a = action.blindDownloadAnchor;
+      a.setAttribute('href', dataStr);
+      a.setAttribute('download', downloadName + '.json');
+      a.click();
+      return new ExportStorageSuccessAction();
     });
 
   constructor(
