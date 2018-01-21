@@ -4,7 +4,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
+// TODO: this should be the line, but combineLatest does not work with it
+// import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Rx';
+import 'rxjs/add/operator/combinelatest';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/zip';
 
@@ -109,16 +112,15 @@ export class WeekComponent implements OnInit {
       this.nextWeek = value;
     });
 
-    this.filteredLogEntries$ = this.week$
-      .do((week) => console.log('new week: ' + week.week))
-      .withLatestFrom(this.activityLogEntries$)
-      .do(() => console.log('combined!'))
-      .map(([week, entries]) => {
-        return entries.filter((entry) => {
-          const date = new Date(entry.year, entry.month, entry.day);
-          return entry.year === week.year && currentWeekNumber(date) === week.week;
+    this.filteredLogEntries$ =
+      Observable.combineLatest(this.week$, this.activityLogEntries$)
+        .do(() => console.log('combined!'))
+        .map(([week, entries]) => {
+          return entries.filter((entry) => {
+            const date = new Date(entry.year, entry.month, entry.day);
+            return entry.year === week.year && currentWeekNumber(date) === week.week;
+          });
         });
-      });
     this.filteredLogEntries$.subscribe(() => console.log('new filtered log entry state!'));
 
     this.days$ = this.filteredLogEntries$
