@@ -11,8 +11,8 @@ import { Observable } from 'rxjs/Observable';
 export class NavbarComponent implements OnInit {
 
   public entries = [
-    { label: 'Today', link: 'today' },
-    { label: 'Week', link: 'week' },
+    { label: 'Today', link: 'today', icon: 'calendar' },
+    { label: 'Week', link: 'week', icon: 'calendar-alt' },
   ];
 
   @Input()

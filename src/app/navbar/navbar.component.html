@@ -8,7 +8,9 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item" routerLinkActive="active" *ngFor="let entry of entries">
-          <a class="nav-link" [routerLink]="entry.link">{{entry.label}}
+          <a class="nav-link" [routerLink]="entry.link">
+              <i class="far fa-{{entry.icon}}"></i>
+              {{entry.label}}
               <span class="sr-only">(current)</span>
           </a>
       </li>
@@ -22,11 +24,11 @@
           </div>
         </li-->
     </ul>
-    <app-activity-picker class="form-inline my-2 mx-2" [activities$]="activities$"></app-activity-picker>
-    <div class="form-inline my-2 mx-2">
+    <!--app-activity-picker class="form-inline my-2 mx-2" [activities$]="activities$"></app-activity-picker-->
+    <!--div class="form-inline my-2 mx-2">
       <input class="form-control mr-sm-2" type="text" placeholder="label" aria-label="New label">
       <button class="btn btn-outline-success my-2">Add</button>
-    </div>
+    </div-->
     <div class="form-inline my-2 mx-2">
       <input class="form-control mr-sm-2" type="text" #newActivityName placeholder="activity type" aria-label="New activity">
       <button class="btn btn-outline-success my-2" (click)="createActivity(newActivityName.value)">Add</button>
