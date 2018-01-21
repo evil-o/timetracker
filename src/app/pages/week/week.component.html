@@ -1,3 +1,19 @@
+<ng-template #printPreview>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Print preview...</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body" [innerHTML]="printPreviewContents" style="max-height: 500pt; overflow-y: scroll;"></div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" (click)="savePrint()">Save</button>
+    <button class="btn btn-secondary" (click)="modalRef.hide()">Cancel</button>
+  </div>
+</ng-template>
+
+<a id="printDownload" style="display:none"></a>
+
 <nav aria-label="Week navigation">
   <ul class="pagination justify-content-center">
     <li class="page-item">
@@ -39,7 +55,12 @@
 <tabset>
   <tab heading='Weekly tally'>
     <div class="row mt-2">
-      <div class="card col">
+      <div class="card w-100">
+        <div class="card-header text-right">
+          <a class="nav-item" (click)="openLargeModal(printPreview)">
+            <i class="fa fa-print"></i>
+          </a>
+        </div>
         <div class="card-body">
           <app-tally [entries]="filteredLogEntries$ | async" [activityTypes]="activityTypes$ | async"></app-tally>
         </div>

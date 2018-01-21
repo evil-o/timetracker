@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Store } from '@ngrx/store';
@@ -11,13 +11,18 @@ import 'rxjs/add/operator/combinelatest';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/zip';
 
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+
 import { ApplicationState } from '../../redux/states/applicationState';
 import { IActivityLogEntry } from '../../redux/states/activityLog';
 import * as fromStore from '../../redux/selectors';
 import { IActivityTypes } from '../../redux/states/activityTypes';
 
+
 import * as currentWeekNumber from 'current-week-number';
 import { SetDescriptionAction } from '../../redux/actions/activityLogActions';
+import { IGroupEntry } from '../../pipes/group-activity-log-entries-by-id.pipe';
 
 interface IDayEntry {
   dayOfTheWeek: number;
@@ -58,9 +63,14 @@ export class WeekComponent implements OnInit {
 
   public days$: Observable<IDayEntry[]>;
 
+  public modalRef: BsModalRef;
+
+  public printPreviewContents: string;
+
   constructor(
     private store: Store<ApplicationState>,
     public activatedRoute: ActivatedRoute,
+    private modalService: BsModalService,
   ) {
 
     this.week$ = this.activatedRoute.params.map((parameters) => {
@@ -145,7 +155,117 @@ export class WeekComponent implements OnInit {
 
         return days;
       });
+
+      this.days$.withLatestFrom(this.activityTypes$).subscribe(([days, types]) => {
+        this.refreshPrintPreviewContents(days, types);
+      });
   }
 
   ngOnInit() { }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
+
+  openLargeModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(
+      template,
+      {
+        class: 'modal-lg'
+      });
+  }
+
+  refreshPrintPreviewContents(days: IDayEntry[], types: IActivityTypes) {
+    // this.printPreviewContents
+    const root = document.createElement('div');
+    const h = root.appendChild(document.createElement('h1'));
+    h.innerText = `Week ${this.week.week} / ${this.week.year}`;
+
+    const table = root.appendChild(document.createElement('table'));
+    table.border = '1pt';
+
+    const thead = table.createTHead();
+    const headingRow = thead.appendChild(document.createElement('tr'));
+    const headingActivity = thead.appendChild(document.createElement('th'));
+    headingActivity.innerText = 'Activity';
+    const headingHours = thead.appendChild(document.createElement('th'));
+    headingHours.innerText = 'Hours';
+
+    const activityName = (id: string) => types.activities.find((t) => t.id === id).name;
+
+    const tbody = table.createTBody();
+    for (const day of days) {
+      const dayRow = tbody.appendChild(document.createElement('tr'));
+      const dayHeading = tbody.appendChild(document.createElement('th'));
+      dayHeading.colSpan = 2;
+      dayHeading.innerText = `${day.name}, ${day.date.getMonth() + 1} / ${day.date.getDate()}`;
+      dayHeading.bgColor = '#D0D0D0';
+
+      if (day.entries.length <= 0) {
+        const emptyRow = tbody.appendChild(document.createElement('tr'));
+        const emptyCell = tbody.appendChild(document.createElement('td'));
+        emptyCell.colSpan = 2;
+        emptyCell.innerHTML = `<i>No entries.</i>`;
+        continue;
+      }
+
+      const byId: IGroupEntry[] = [];
+      for (const entry of day.entries) {
+        const id = entry.actvitiyId;
+        const idEntry = byId.find((item) => item.activityId === id);
+        if (idEntry) {
+          idEntry.cumulativeHours += entry.hours;
+          idEntry.entries.push(entry);
+        } else {
+          byId.push({
+            activityId: id,
+            cumulativeHours: entry.hours,
+            entries: [entry],
+          });
+        }
+      }
+
+      for (const group of byId) {
+        const groupRow = tbody.appendChild(document.createElement('tr'));
+        const activityHeader = tbody.appendChild(document.createElement('th'));
+        activityHeader.innerText = activityName(group.activityId);
+        const hoursHeader = tbody.appendChild(document.createElement('th'));
+        hoursHeader.innerHTML = `&sum; ${group.cumulativeHours} h`;
+
+        for (const subentry of group.entries) {
+          const entryRow = tbody.appendChild(document.createElement('tr'));
+          const activityCell = tbody.appendChild(document.createElement('td'));
+          activityCell.innerHTML = subentry.description || '&mdash;';
+          const hoursCell = tbody.appendChild(document.createElement('td'));
+          hoursCell.innerText = `${subentry.hours} h`;
+        }
+      }
+    }
+
+    this.printPreviewContents = root.innerHTML;
+  }
+
+  savePrint() {
+    const a = document.getElementById('printDownload');
+    // TODO pad is copied from storageVersion effects, put this somewhere and reuse it
+    const pad = (n: number, width = 2, fill = '0') => {
+      let n_str = `${n}`;
+      if (n_str.length < width) {
+        n_str = fill.repeat(width - n_str.length) + n_str;
+      }
+      return n_str;
+    };
+
+    const now = new Date();
+    const downloadName = `Timesheet-${this.week.year}-${pad(this.week.week)}`;
+
+    const html = `<!DOCTYPE html><html><head><title>Timesheet</title><meta charset="utf-8"><body>${this.printPreviewContents}</body><html>`;
+
+    const dataStr = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
+    a.setAttribute('href', dataStr);
+    a.setAttribute('download', downloadName + '.html');
+    a.click();
+
+    this.modalRef.hide();
+  }
 }
