@@ -12,6 +12,7 @@ import { of } from 'rxjs/observable/of';
 import { LogTimeAction, FETCH_OR_CREATE_ID_AND_LOG_TIME, FetchOrCreateIdAndLogTimeAction } from '../actions/activityLogActions';
 import { ApplicationState } from '../states/applicationState';
 import { INCREMENTAL_MIGRATION, IncrementalMigrationAction, IncrementalMigrationSuccessAction } from '../actions/storageVersionActions';
+import { CreateActivityTypeAndLogTimeAction } from '../actions/activityTypesActions';
 
 @Injectable()
 export class ActivityLogEffects {
@@ -25,9 +26,7 @@ export class ActivityLogEffects {
     if (found) {
       return new LogTimeAction(found.id, action.hoursToLog, action.date);
     } else {
-      // TODO autocreate new activity
-      console.log('Activity not found: ' + action.name);
-      console.log('Known actiities: ' + JSON.stringify(state.activityTypes.activities, null, 2));
+      return new CreateActivityTypeAndLogTimeAction(action.name, action.hoursToLog, action.date);
     }
   });
 

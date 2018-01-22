@@ -12,16 +12,21 @@ import { of } from 'rxjs/observable/of';
 import { LogTimeAction, FETCH_OR_CREATE_ID_AND_LOG_TIME, FetchOrCreateIdAndLogTimeAction } from '../actions/activityLogActions';
 import { ApplicationState } from '../states/applicationState';
 import { INCREMENTAL_MIGRATION, IncrementalMigrationAction, IncrementalMigrationSuccessAction } from '../actions/storageVersionActions';
+import { CREATE_ACTIVITY_TYPE_AND_LOG_TIME, CreateActivityTypeAndLogTimeAction } from '../actions/activityTypesActions';
 
 @Injectable()
 export class ActivityTypesEffects {
 
   @Effect() incrementalMigrationComplete$: Observable<Action> = this.actions$
-  .ofType(INCREMENTAL_MIGRATION)
-  .map(() => new IncrementalMigrationSuccessAction('ActivityTypesState'));
+    .ofType(INCREMENTAL_MIGRATION)
+    .map(() => new IncrementalMigrationSuccessAction('ActivityTypesState'));
+
+  @Effect() createAndLogTime$: Observable<Action> = this.actions$
+    .ofType(CREATE_ACTIVITY_TYPE_AND_LOG_TIME)
+    .map((action: CreateActivityTypeAndLogTimeAction) => new FetchOrCreateIdAndLogTimeAction(action.name, action.hours, action.date));
 
   constructor(
     private actions$: Actions,
     private store$: Store<ApplicationState>
-  ) {}
+  ) { }
 }
