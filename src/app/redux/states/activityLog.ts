@@ -35,13 +35,12 @@ export class ActivityLogEntry implements IActivityLogEntry {
 
   public year: number;
 
-  public static createForToday(activityId: string, hours: number) {
-    const now = new Date();
+  public static createForDay(activityId: string, hours: number, date: Date) {
     return {
       id: uuid(),
-      day: now.getDate(),
-      month: now.getMonth(),
-      year: now.getFullYear(),
+      day: date.getDate(),
+      month: date.getMonth(),
+      year: date.getFullYear(),
       hours: hours,
       actvitiyId: activityId,
     };

@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="col">
+    <h1 [class.d-none]="pickingDate">
+      <a (click)="startDatePicking()">
+        <i class="far fa-calendar"></i>
+      </a>
+      {{date$.value.toLocaleDateString()}}
+    </h1>
+    <h1 [class.d-none]="!pickingDate" class="form-inline">
+      <a>
+        <i class="far fa-calendar"></i>
+      </a>
+      <input #datePickerInput #datePicker="bsDatepicker" class="form-control border-0" placeholder="Pick a date" bsDatepicker [bsValue]="date$.value"
+        (blur)="endDatePicking()" [bsConfig]="{containerClass: 'theme-default'}" (onHidden)="endDatePicking()">
+    </h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <app-activity-picker #activityToLog [activities$]="activities$" placeholder="What did you do today?"></app-activity-picker>
+  </div>
+  <div class="col-sm-3">
+    <input id="duration" #hoursToLog type="text" class="form-control mr-sm-2" placeholder="for how many hours?">
+  </div>
+  <div class="col-sm-3">
+    <button class="btn btn-primary" (click)="logHours(activityToLog.name, hoursToLog.value)">Log</button>
+  </div>
+</div>
+<div class="row mt-5">
+  <div class="col-sm-9">
+    <app-actvity-log-list (changeEntryDescription)="changeEntryDescription($event)" [groups]="activityLogEntries$ | async | groupActivityLogEntriesById"
+      [activityTypes]="activityTypes$ | async"></app-actvity-log-list>
+  </div>
+</div>

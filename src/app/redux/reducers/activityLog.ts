@@ -14,7 +14,7 @@ export function activityLogReducer(state: IActivityLog = new ActivityLog, action
     case LOG_TIME:
       return {
         ...state,
-        entries: [...state.entries, ActivityLogEntry.createForToday(action.id, action.hoursToLog)],
+        entries: [...state.entries, ActivityLogEntry.createForDay(action.id, action.hoursToLog, action.date)],
       };
 
     case INCREMENTAL_MIGRATION: {

@@ -8,13 +8,13 @@ export const SET_HOURS = 'SET_HOURS';
 export class FetchOrCreateIdAndLogTimeAction implements Action {
   public readonly type = FETCH_OR_CREATE_ID_AND_LOG_TIME;
 
-  constructor(public name: string, public hoursToLog: number) { }
+  constructor(public name: string, public hoursToLog: number, public date: Date) { }
 }
 
 export class LogTimeAction implements Action {
   public readonly type = LOG_TIME;
 
-  constructor(public id: string, public hoursToLog: number) { }
+  constructor(public id: string, public hoursToLog: number, public date: Date) { }
 }
 
 export class SetDescriptionAction implements Action {

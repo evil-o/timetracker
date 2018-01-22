@@ -23,7 +23,7 @@ export class ActivityLogEffects {
   .map(([action, state]) => {
     const found = state.activityTypes.activities.find((activity) => activity.name === action.name);
     if (found) {
-      return new LogTimeAction(found.id, action.hoursToLog);
+      return new LogTimeAction(found.id, action.hoursToLog, action.date);
     } else {
       // TODO autocreate new activity
       console.log('Activity not found: ' + action.name);

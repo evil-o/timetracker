@@ -7,6 +7,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -21,7 +22,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 
 import { activityTypesReducer } from './redux/reducers/activityTypes';
-import { TodayComponent } from './pages/today/today.component';
+import { DayComponent } from './pages/day/day.component';
 
 import { appRoutes } from './app.routes';
 import { ActivityLogEffects } from './redux/effects/activityLogEffects';
@@ -44,7 +45,7 @@ import { EditableLogEntryHoursComponent } from './components/editable-log-entry-
     AppComponent,
     NavbarComponent,
     ActivityPickerComponent,
-    TodayComponent,
+    DayComponent,
     ActvityLogListComponent,
     GroupActivityLogEntriesByIdPipe,
     WeekComponent,
@@ -61,6 +62,7 @@ import { EditableLogEntryHoursComponent } from './components/editable-log-entry-
     FormsModule,
     AccordionModule.forRoot(),
     BsDropdownModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     ModalModule.forRoot(),
     TabsModule.forRoot(),
     TypeaheadModule.forRoot(),
