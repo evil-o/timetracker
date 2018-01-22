@@ -39,6 +39,7 @@ import { ActivityLogEntryComponent } from './components/activity-log-entry/activ
 import { NoActivityLogEntryPresentComponent } from './components/no-activity-log-entry-present/no-activity-log-entry-present.component';
 import { EditableLogEntryDescriptionComponent } from './components/editable-log-entry-description/editable-log-entry-description.component';
 import { EditableLogEntryHoursComponent } from './components/editable-log-entry-hours/editable-log-entry-hours.component';
+import { WelcomeComponent } from './pages/welcome/welcome.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { EditableLogEntryHoursComponent } from './components/editable-log-entry-
     ActivityLogEntryComponent,
     NoActivityLogEntryPresentComponent,
     EditableLogEntryDescriptionComponent,
-    EditableLogEntryHoursComponent
+    EditableLogEntryHoursComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,

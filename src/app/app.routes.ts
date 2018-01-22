@@ -2,12 +2,12 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { DayComponent } from './pages/day/day.component';
 import { WeekComponent } from './pages/week/week.component';
+import { WelcomeComponent } from './pages/welcome/welcome.component';
 
 export const appRoutes: Routes = [
   {
     path: '',
-    redirectTo: 'today',
-    pathMatch: 'full',
+    component: WelcomeComponent,
   },
   {
     path: 'today',
