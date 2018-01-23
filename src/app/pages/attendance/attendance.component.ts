@@ -47,10 +47,10 @@ export class AttendanceComponent implements OnInit {
   }
 
   constructor(public store: Store<ApplicationState>) {
-    this.timeValues$.subscribe(values => {
+    Observable.combineLatest(this.timeValues$, this.date$)
+    .subscribe(([values, date]) => {
       const start = this.valueToTime(values.start);
       const end = this.valueToTime(values.end);
-      const date = new Date();
       if (start) {
         this.store.dispatch(new SetStartTimeAction(date, start));
       }
