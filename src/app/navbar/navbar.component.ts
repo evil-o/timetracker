@@ -17,6 +17,7 @@ export class NavbarComponent implements OnInit {
   public entries = [
     { label: 'Today', link: 'today', icon: 'calendar' },
     { label: 'Week', link: 'week', icon: 'calendar-alt' },
+    { label: 'Attendance', link: 'attendance', icon: 'clock' },
   ];
 
   @Input()

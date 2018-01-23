@@ -42,6 +42,7 @@ import { EditableLogEntryHoursComponent } from './components/editable-log-entry-
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { HourBadgeComponent } from './components/hour-badge/hour-badge.component';
 import { TimeBadgeComponent } from './components/time-badge/time-badge.component';
+import { AttendanceComponent } from './pages/attendance/attendance.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { TimeBadgeComponent } from './components/time-badge/time-badge.component
     EditableLogEntryHoursComponent,
     WelcomeComponent,
     HourBadgeComponent,
-    TimeBadgeComponent
+    TimeBadgeComponent,
+    AttendanceComponent
   ],
   imports: [
     BrowserModule,

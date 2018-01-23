@@ -1,0 +1,36 @@
+<div class="row mb-5">
+  <div class="col">
+    <h1 [class.d-none]="pickingDate">
+      <a (click)="startDatePicking()">
+        <i class="far fa-calendar"></i>
+      </a>
+      {{date$.value.toLocaleDateString()}}
+    </h1>
+    <h1 [class.d-none]="!pickingDate" class="form-inline">
+      <a>
+        <i class="far fa-calendar"></i>
+      </a>
+      <input #datePickerInput #datePicker="bsDatepicker" class="form-control border-0" placeholder="Pick a date" bsDatepicker [bsValue]="date$.value"
+        (blur)="endDatePicking()" [bsConfig]="{containerClass: 'theme-default'}" (onHidden)="endDatePicking()">
+    </h1>
+  </div>
+</div>
+
+<form>
+  <div class="form-row">
+    <div class="form-group col-4">
+      <label for="dayStart">Start</label>
+      <input type="time" class="form-control" id="dayStart" (change)="setButton.disabled = false">
+    </div>
+    <div class="form-group col-4">
+      <label for="dayEnd">End</label>
+      <input type="time" class="form-control" id="dayEnd" (change)="setButton.disabled = false">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-8">
+      <button #setButton type="submit" class="btn btn-primary mb-2" [disabled]="true">
+        <i class="fa fa-check"></i> set</button>
+    </div>
+  </div>
+</form>
