@@ -56,7 +56,7 @@ export class DayComponent implements OnInit {
       this.store.dispatch(new FetchOrCreateIdAndLogTimeAction(log.activityName, log.hours, date));
     });
 
-    this.totalHours$ = this.activityLogEntries$.map(entries => entries.map(e => e.hours).reduce((total, current) => total + current));
+    this.totalHours$ = this.activityLogEntries$.map(entries => entries.map(e => e.hours).reduce((total, current) => total + current, 0));
 
     this.startTime$ = Observable.timer(0, 5)
       .withLatestFrom(this.totalHours$)
