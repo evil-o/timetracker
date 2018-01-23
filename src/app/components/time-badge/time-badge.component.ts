@@ -8,7 +8,11 @@ import { Component, Input, OnInit } from '@angular/core';
 export class TimeBadgeComponent implements OnInit {
 
   @Input() set date(value: Date) {
-    this.dateDisplayString = `${value.getHours()}:${this.zeroFill(2, value.getMinutes())}`;
+    if (value) {
+      this.dateDisplayString = `${value.getHours()}:${this.zeroFill(2, value.getMinutes())}`;
+    } else {
+      this.dateDisplayString = '-';
+    }
   }
 
   public dateDisplayString: string;
