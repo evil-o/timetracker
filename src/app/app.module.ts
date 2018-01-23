@@ -40,6 +40,8 @@ import { NoActivityLogEntryPresentComponent } from './components/no-activity-log
 import { EditableLogEntryDescriptionComponent } from './components/editable-log-entry-description/editable-log-entry-description.component';
 import { EditableLogEntryHoursComponent } from './components/editable-log-entry-hours/editable-log-entry-hours.component';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
+import { HourBadgeComponent } from './components/hour-badge/hour-badge.component';
+import { TimeBadgeComponent } from './components/time-badge/time-badge.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,9 @@ import { WelcomeComponent } from './pages/welcome/welcome.component';
     NoActivityLogEntryPresentComponent,
     EditableLogEntryDescriptionComponent,
     EditableLogEntryHoursComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    HourBadgeComponent,
+    TimeBadgeComponent
   ],
   imports: [
     BrowserModule,

@@ -27,6 +27,22 @@
   </div>
 </div>
 <div class="row mt-5">
+  <div class="col-sm-1">
+    Total:
+  </div>
+  <div class="col-sm-2">
+    <app-hour-badge [hours]="totalHours$ | async"></app-hour-badge>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-1">
+    Began:
+  </div>
+  <div class="col-sm-2">
+    <app-time-badge [date]="startTime$ | async"></app-time-badge>
+  </div>
+</div>
+<div class="row mt-2">
   <div class="col-sm-9">
     <app-actvity-log-list (changeEntryDescription)="changeEntryDescription($event)" [groups]="activityLogEntries$ | async | groupActivityLogEntriesById"
       [activityTypes]="activityTypes$ | async"></app-actvity-log-list>

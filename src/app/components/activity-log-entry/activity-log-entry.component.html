@@ -1,7 +1,7 @@
 <accordion-group class="container-fluid my-1">
   <div accordion-heading class="clearfix">
     {{group.activityId | activityTypeIdToName: activityTypes}}
-    <span class="badge badge-secondary float-right pull-right">{{group.cumulativeHours}} h</span>
+    <app-hour-badge [hours]="group.cumulativeHours" class="float-right pull-right"></app-hour-badge>
   </div>
   <div class="row" *ngFor="let entry of group.entries">
     <div class="col-8">

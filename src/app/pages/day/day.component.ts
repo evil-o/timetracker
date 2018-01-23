@@ -24,6 +24,9 @@ export class DayComponent implements OnInit {
   public activities$: Observable<IActivityType[]>;
   public activityLogEntries$: Observable<IActivityLogEntry[]>;
 
+  public totalHours$: Observable<number>;
+  public startTime$: Observable<Date>;
+
   public date$ = new BehaviorSubject<Date>(new Date());
 
   public pickingDate = false;
@@ -52,6 +55,19 @@ export class DayComponent implements OnInit {
     this.hourLog$.withLatestFrom(this.date$).subscribe(([log, date]) => {
       this.store.dispatch(new FetchOrCreateIdAndLogTimeAction(log.activityName, log.hours, date));
     });
+
+    this.totalHours$ = this.activityLogEntries$.map(entries => entries.map(e => e.hours).reduce((total, current) => total + current));
+
+    this.startTime$ = Observable.timer(0, 5)
+      .withLatestFrom(this.totalHours$)
+      .map(([timer, hoursFraction]) => {
+        const start = new Date();
+        const hours = Math.floor(hoursFraction);
+        const minutes = (hoursFraction - hours) * 60.0;
+        start.setHours(start.getHours() - hoursFraction);
+        start.setMinutes(start.getMinutes() - minutes);
+        return start;
+      });
   }
 
   ngOnInit() {
@@ -82,5 +98,4 @@ export class DayComponent implements OnInit {
     this.pickingDate = false;
     this.date$.next(date);
   }
-
 }
