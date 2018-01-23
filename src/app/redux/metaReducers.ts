@@ -5,6 +5,7 @@ import { localStorageSync } from 'ngrx-store-localstorage';
 export const rehydratedStorageKeys = [
   'activityTypes',
   'activityLog',
+  'attendanceState',
   'storageVersion',
 ];
 
