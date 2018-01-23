@@ -5,7 +5,7 @@ import { AccordionComponent } from 'ngx-bootstrap';
 import { ApplicationState } from '../../redux/states/applicationState';
 
 import { Store } from '@ngrx/store';
-import { SetDescriptionAction, SetHoursAction } from '../../redux/actions/activityLogActions';
+import { SetDescriptionAction, SetHoursAction, DeleteEntryAction } from '../../redux/actions/activityLogActions';
 
 @Component({
   selector: 'app-activity-log-entry',
@@ -21,6 +21,8 @@ export class ActivityLogEntryComponent implements OnInit {
   @Input()
   public activityTypes: IActivityTypes;
 
+  public confirmDelete?: string;
+
   constructor(public store: Store<ApplicationState>) { }
 
   public changeEntryDescription(params: {entryId: string, newDescription: string}) {
@@ -32,5 +34,14 @@ export class ActivityLogEntryComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  public deleteEntry(id: string) {
+    if (this.confirmDelete === id) {
+      this.confirmDelete = undefined;
+      this.store.dispatch(new DeleteEntryAction(id));
+    } else {
+      console.log(`Did not delete entry ${id} because it was not confirmed.`);
+    }
   }
 }

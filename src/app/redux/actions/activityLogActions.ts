@@ -4,6 +4,7 @@ export const FETCH_OR_CREATE_ID_AND_LOG_TIME = 'FETCH_OR_CREATE_ID_AND_LOG_TIME'
 export const LOG_TIME = 'LOG_TIME';
 export const SET_DESCRIPTION = 'SET_DESCRIPTION';
 export const SET_HOURS = 'SET_HOURS';
+export const DELETE_ENTRY = 'DELETE_ENTRY';
 
 export class FetchOrCreateIdAndLogTimeAction implements Action {
   public readonly type = FETCH_OR_CREATE_ID_AND_LOG_TIME;
@@ -29,9 +30,16 @@ export class SetHoursAction implements Action {
   constructor(public entryId: string, public hours: number) { }
 }
 
+export class DeleteEntryAction implements Action {
+  public readonly type = DELETE_ENTRY;
+
+  constructor(public entryId: string) { }
+}
+
 export type ActivityLogAction =
   | FetchOrCreateIdAndLogTimeAction
   | LogTimeAction
   | SetDescriptionAction
   | SetHoursAction
+  | DeleteEntryAction
   ;

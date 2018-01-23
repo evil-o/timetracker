@@ -3,12 +3,23 @@
     {{group.activityId | activityTypeIdToName: activityTypes}}
     <app-hour-badge [hours]="group.cumulativeHours" class="float-right pull-right"></app-hour-badge>
   </div>
-  <div class="row" *ngFor="let entry of group.entries">
+  <div class="row my-1" *ngFor="let entry of group.entries">
     <div class="col-8">
       <app-editable-log-entry-description [entry]="entry" (changeEntryDescription)="changeEntryDescription($event)"></app-editable-log-entry-description>
     </div>
-    <div class="col-4">
+    <div class="col-2">
       <app-editable-log-entry-hours [entry]="entry" (changeEntryHours)="changeEntryHours($event)"></app-editable-log-entry-hours>
+    </div>
+    <div class="col-2">
+      <button [class.d-none]="confirmDelete === entry.id" class="btn btn-danger" (click)="confirmDelete = entry.id">
+        <i class="far fa-trash-alt"></i>
+      </button>
+      <button [class.d-none]="confirmDelete !== entry.id" class="btn btn-success" (click)="confirmDelete = undefined">
+        <i class="fa fa-times"></i>
+      </button>
+      <button [class.invisible]="confirmDelete !== entry.id" class="btn btn-danger" (click)="deleteEntry(entry.id)">
+        <i class="fa fa-check"></i>
+      </button>
     </div>
   </div>
 </accordion-group>
