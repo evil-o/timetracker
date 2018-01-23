@@ -86,4 +86,14 @@
       </div>
     </div>
   </tab>
+  <tab heading='Attendance'>
+      <div class="row mt-2" *ngFor="let attendance of (attendances$ | async)">
+        <div class="col">
+          {{attendance.date.getMonth() + 1}} / {{attendance.date.getDate()}}:
+          {{attendance.start? attendance.start.getHours() + ':' + attendance.start.getMinutes() : '-'}}
+          to
+          {{attendance.end? attendance.end.getHours() + ':' + attendance.end.getMinutes() : '-'}}
+        </div>
+      </div>
+  </tab>
 </tabset>

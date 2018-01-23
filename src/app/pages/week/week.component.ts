@@ -23,6 +23,7 @@ import { IActivityTypes } from '../../redux/states/activityTypes';
 import * as currentWeekNumber from 'current-week-number';
 import { SetDescriptionAction } from '../../redux/actions/activityLogActions';
 import { IGroupEntry } from '../../pipes/group-activity-log-entries-by-id.pipe';
+import { IAttendanceEntry } from '../../redux/states/attendanceState';
 
 interface IDayEntry {
   dayOfTheWeek: number;
@@ -66,6 +67,8 @@ export class WeekComponent implements OnInit {
   public modalRef: BsModalRef;
 
   public printPreviewContents: string;
+
+  public attendances$: Observable<IAttendanceEntry[]>;
 
   constructor(
     private store: Store<ApplicationState>,
@@ -156,9 +159,18 @@ export class WeekComponent implements OnInit {
         return days;
       });
 
-      this.days$.withLatestFrom(this.activityTypes$).subscribe(([days, types]) => {
-        this.refreshPrintPreviewContents(days, types);
-      });
+    this.days$.withLatestFrom(this.activityTypes$).subscribe(([days, types]) => {
+      this.refreshPrintPreviewContents(days, types);
+    });
+
+    this.attendances$ = Observable.combineLatest(
+      this.store.select(fromStore.attendanceEntries),
+      this.week$,
+    )
+      .map(([entries, week]) => entries.filter(e => {
+        const entryWeek = currentWeekNumber(e.date);
+        return e.date.getFullYear() === week.year && entryWeek === week.week;
+      }));
   }
 
   ngOnInit() { }
