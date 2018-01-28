@@ -23,6 +23,7 @@ import { IActivityTypes } from '../../redux/states/activityTypes';
 import * as currentWeekNumber from 'current-week-number';
 import { SetDescriptionAction } from '../../redux/actions/activityLogActions';
 import { IGroupEntry } from '../../pipes/group-activity-log-entries-by-id.pipe';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 interface IDayEntry {
   dayOfTheWeek: number;
@@ -31,7 +32,7 @@ interface IDayEntry {
 
   name: string;
 
-  entries: IActivityLogEntry[];
+  entries$: BehaviorSubject<IActivityLogEntry[]>;
 }
 
 interface IWeekDate {
@@ -142,14 +143,16 @@ export class WeekComponent implements OnInit {
 
         weekdayNames.forEach((weekdayName, index) => {
           const dayOfTheWeek = index;
+          const filteredEntries = entries.filter((entry) => {
+            const date = new Date(entry.year, entry.month, entry.day);
+            return date.getUTCDay() === dayOfTheWeek;
+          });
+
           days.push({
             name: weekdayName,
             dayOfTheWeek,
             date: new Date(startOfWeek.getFullYear(), startOfWeek.getMonth(), startOfWeek.getDate() + index),
-            entries: entries.filter((entry) => {
-              const date = new Date(entry.year, entry.month, entry.day);
-              return date.getUTCDay() === dayOfTheWeek;
-            })
+            entries$: new BehaviorSubject(filteredEntries),
           });
         });
 
@@ -201,7 +204,7 @@ export class WeekComponent implements OnInit {
       dayHeading.innerText = `${day.name}, ${day.date.getMonth() + 1} / ${day.date.getDate()}`;
       dayHeading.bgColor = '#D0D0D0';
 
-      if (day.entries.length <= 0) {
+      if (day.entries$.value.length <= 0) {
         const emptyRow = tbody.appendChild(document.createElement('tr'));
         const emptyCell = tbody.appendChild(document.createElement('td'));
         emptyCell.colSpan = 2;
@@ -210,7 +213,7 @@ export class WeekComponent implements OnInit {
       }
 
       const byId: IGroupEntry[] = [];
-      for (const entry of day.entries) {
+      for (const entry of day.entries$.value) {
         const id = entry.actvitiyId;
         const idEntry = byId.find((item) => item.activityId === id);
         if (idEntry) {

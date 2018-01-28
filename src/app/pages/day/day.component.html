@@ -42,9 +42,10 @@
     <app-time-badge #startTimeDisplay [date]="startTime$ | async"></app-time-badge>
   </div>
 </div>
+
 <div class="row mt-2">
   <div class="col-sm-9">
-    <app-actvity-log-list (changeEntryDescription)="changeEntryDescription($event)" [groups]="activityLogEntries$ | async | groupActivityLogEntriesById"
-      [activityTypes]="activityTypes$ | async"></app-actvity-log-list>
+    <app-actvity-log-list (changeEntryDescription)="changeEntryDescription($event)" [groups$]="activityLogEntries$ | groupActivityLogEntriesById"
+      [activityTypes$]="activityTypes$"></app-actvity-log-list>
   </div>
 </div>
