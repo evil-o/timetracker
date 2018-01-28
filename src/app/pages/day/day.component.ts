@@ -13,6 +13,8 @@ import { IActivityLogEntry } from '../../redux/states/activityLog';
 import * as fromStore from '../../redux/selectors';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subject } from 'rxjs/Subject';
+import { TimeBadgeComponent } from '../../components/time-badge/time-badge.component';
+import { HourBadgeComponent } from '../../components/hour-badge/hour-badge.component';
 
 @Component({
   selector: 'app-day',
@@ -34,6 +36,12 @@ export class DayComponent implements OnInit {
   private datePickerInput: ElementRef;
   @ViewChild('datePicker')
   private datePicker: ElementRef;
+
+  @ViewChild('totalHoursDisplay')
+  public totalHoursDisplay: HourBadgeComponent;
+
+  @ViewChild('startTimeDisplay')
+  public startTimeDisplay: TimeBadgeComponent;
 
   public hourLog$ = new Subject<{ hours: number, activityName: string }>();
 
@@ -64,7 +72,7 @@ export class DayComponent implements OnInit {
         const start = new Date();
         const hours = Math.floor(hoursFraction);
         const minutes = (hoursFraction - hours) * 60.0;
-        start.setHours(start.getHours() - hoursFraction);
+        start.setHours(start.getHours() - hours);
         start.setMinutes(start.getMinutes() - minutes);
         return start;
       });
