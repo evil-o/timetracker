@@ -13,20 +13,22 @@ export interface IGroupEntry {
 })
 export class GroupActivityLogEntriesByIdPipe implements PipeTransform {
 
-  transform(entries: IActivityLogEntry[]): IGroupEntry[] {
-    const grouped: IGroupEntry[] = [];
+  transform(entries$: Observable<IActivityLogEntry[]>): Observable<IGroupEntry[]> {
+    return entries$.map(entries => {
+      const grouped: IGroupEntry[] = [];
 
-    for (const entry of entries) {
-      const id = entry.actvitiyId;
-      const group = grouped.find((e) => e.activityId === id);
-      if (group) {
-        group.cumulativeHours += entry.hours;
-        group.entries.push(entry);
-      } else {
-        grouped.push({ activityId: id, entries: [entry], cumulativeHours: entry.hours });
+      for (const entry of entries) {
+        const id = entry.actvitiyId;
+        const group = grouped.find((e) => e.activityId === id);
+        if (group) {
+          group.cumulativeHours += entry.hours;
+          group.entries.push(entry);
+        } else {
+          grouped.push({ activityId: id, entries: [entry], cumulativeHours: entry.hours });
+        }
       }
-    }
 
-    return grouped;
+      return grouped;
+    });
   }
 }

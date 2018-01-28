@@ -81,7 +81,7 @@
               </h5>
             </div>
           </div>
-          <app-actvity-log-list class="mt-2" [groups]="day.entries | groupActivityLogEntriesById" [activityTypes]="activityTypes$ | async"></app-actvity-log-list>
+          <app-actvity-log-list class="mt-2" [groups$]="day.entries$ | groupActivityLogEntriesById" [activityTypes$]="activityTypes$"></app-actvity-log-list>
         </div>
       </div>
     </div>

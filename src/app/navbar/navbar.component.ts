@@ -20,9 +20,6 @@ export class NavbarComponent implements OnInit {
     { label: 'Attendance', link: 'attendance', icon: 'clock' },
   ];
 
-  @Input()
-  public activities$: Observable<IActivityType[]>;
-
   @Output()
   public createActivityEvent = new EventEmitter<string>();
 

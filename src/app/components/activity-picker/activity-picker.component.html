@@ -1,4 +1,6 @@
-<input [(ngModel)]="name"
+<input #textInput
+       [(ngModel)]="name"
        [typeahead]="activityNames"
        [placeholder]="placeholder"
+       (keyup.enter)="confirm.emit()"
        class="form-control">

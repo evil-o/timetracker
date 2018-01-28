@@ -17,13 +17,13 @@
 </div>
 <div class="row">
   <div class="col-sm-6">
-    <app-activity-picker #activityToLog [activities$]="activities$" placeholder="What did you do today?"></app-activity-picker>
+    <app-activity-picker #activityToLog (confirm)="refocusOnEnter()" [activities$]="activities$" placeholder="What did you do today?"></app-activity-picker>
   </div>
   <div class="col-sm-3">
-    <input id="duration" #hoursToLog type="text" class="form-control mr-sm-2" placeholder="for how many hours?">
+    <input id="duration" #hoursToLog (keyup.enter)="refocusOnEnter()" type="text" class="form-control mr-sm-2" placeholder="for how many hours?">
   </div>
   <div class="col-sm-3">
-    <button class="btn btn-primary" (click)="logHours(activityToLog.name, hoursToLog.value)">Log</button>
+    <button class="btn btn-primary" #logHoursButton (click)="logHours(activityToLog.name, hoursToLog.value)">Log</button>
   </div>
 </div>
 <div class="row mt-5">
@@ -31,7 +31,7 @@
     Total:
   </div>
   <div class="col-sm-2">
-    <app-hour-badge [hours]="totalHours$ | async"></app-hour-badge>
+    <app-hour-badge #totalHoursDisplay [hours]="totalHours$ | async"></app-hour-badge>
   </div>
 </div>
 <div class="row">
@@ -39,12 +39,13 @@
     Began:
   </div>
   <div class="col-sm-2">
-    <app-time-badge [date]="startTime$ | async"></app-time-badge>
+    <app-time-badge #startTimeDisplay [date]="startTime$ | async"></app-time-badge>
   </div>
 </div>
+
 <div class="row mt-2">
   <div class="col-sm-9">
-    <app-actvity-log-list (changeEntryDescription)="changeEntryDescription($event)" [groups]="activityLogEntries$ | async | groupActivityLogEntriesById"
-      [activityTypes]="activityTypes$ | async"></app-actvity-log-list>
+    <app-actvity-log-list (changeEntryDescription)="changeEntryDescription($event)" [groups$]="activityLogEntries$ | groupActivityLogEntriesById"
+      [activityTypes$]="activityTypes$"></app-actvity-log-list>
   </div>
 </div>
