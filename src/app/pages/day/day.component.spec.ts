@@ -30,7 +30,7 @@ import { ApplicationState } from '../../redux/states/applicationState';
 import { Store } from '@ngrx/store';
 import { LogTimeAction } from '../../redux/actions/activityLogActions';
 
-fdescribe('DayComponent', () => {
+describe('DayComponent', () => {
   let component: DayComponent;
   let fixture: ComponentFixture<DayComponent>;
 
