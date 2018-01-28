@@ -19,9 +19,6 @@ export class NavbarComponent implements OnInit {
     { label: 'Week', link: 'week', icon: 'calendar-alt' },
   ];
 
-  @Input()
-  public activities$: Observable<IActivityType[]>;
-
   @Output()
   public createActivityEvent = new EventEmitter<string>();
 

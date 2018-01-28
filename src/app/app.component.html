@@ -1,6 +1,6 @@
 <ng-template [ngIf]="storageUpdateComplete$ | async">
 
-  <app-navbar [activities$]="activities$" (createActivityEvent)="createActivityType($event)"></app-navbar>
+  <app-navbar (createActivityEvent)="createActivityType($event)"></app-navbar>
 
   <div class="container mt-5">
     <router-outlet></router-outlet>

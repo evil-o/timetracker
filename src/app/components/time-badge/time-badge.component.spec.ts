@@ -1,25 +1,37 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TimeBadgeComponent } from './time-badge.component';
+import { By } from '@angular/platform-browser';
 
-describe('TimeBadgeComponent', () => {
+import { TimeBadgeComponent } from './time-badge.component';
+import { DebugElement } from '@angular/core/src/debug/debug_node';
+
+fdescribe('TimeBadgeComponent', () => {
   let component: TimeBadgeComponent;
   let fixture: ComponentFixture<TimeBadgeComponent>;
 
+  let displaySpanDebug: DebugElement;
+  let displaySpan: HTMLSpanElement;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TimeBadgeComponent ]
+      declarations: [TimeBadgeComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TimeBadgeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
+    displaySpanDebug = fixture.debugElement.query(By.css('span'));
+    displaySpan = displaySpanDebug.nativeElement;
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should properly show times', () => {
   });
 });

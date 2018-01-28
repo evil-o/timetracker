@@ -17,7 +17,7 @@ interface IGroupEntry {
   templateUrl: './actvity-log-list.component.html',
   styleUrls: ['./actvity-log-list.component.css']
 })
-export class ActvityLogListComponent implements OnInit {
+export class ActivityLogListComponent implements OnInit {
 
   public ActivityTypes = ActivityTypes;
 

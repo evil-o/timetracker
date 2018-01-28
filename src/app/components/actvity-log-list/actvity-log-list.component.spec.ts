@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ActvityLogListComponent } from './actvity-log-list.component';
+import { ActivityLogListComponent } from './actvity-log-list.component';
 
 describe('ActvityLogListComponent', () => {
-  let component: ActvityLogListComponent;
-  let fixture: ComponentFixture<ActvityLogListComponent>;
+  let component: ActivityLogListComponent;
+  let fixture: ComponentFixture<ActivityLogListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ActvityLogListComponent ]
+      declarations: [ ActivityLogListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ActvityLogListComponent);
+    fixture = TestBed.createComponent(ActivityLogListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
