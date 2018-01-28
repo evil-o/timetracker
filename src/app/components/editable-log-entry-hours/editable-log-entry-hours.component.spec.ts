@@ -1,25 +1,47 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, ViewChild } from '@angular/core';
 
 import { EditableLogEntryHoursComponent } from './editable-log-entry-hours.component';
 
+@Component({
+  selector: `app-test-host-component`,
+  template: `<app-editable-log-entry-hours></app-editable-log-entry-hours>`
+})
+class TestHostComponent {
+  @ViewChild(EditableLogEntryHoursComponent)
+  public component: EditableLogEntryHoursComponent;
+}
+
 describe('EditableLogEntryHoursComponent', () => {
-  let component: EditableLogEntryHoursComponent;
-  let fixture: ComponentFixture<EditableLogEntryHoursComponent>;
+  let host: TestHostComponent;
+  let fixture: ComponentFixture<TestHostComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditableLogEntryHoursComponent ]
+      declarations: [
+        EditableLogEntryHoursComponent,
+        TestHostComponent,
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EditableLogEntryHoursComponent);
-    component = fixture.componentInstance;
+    fixture = TestBed.createComponent(TestHostComponent);
+    host = fixture.componentInstance;
+    host.component.entry = {
+      actvitiyId: 'testActivity',
+      day: 13,
+      month: 0,
+      year: 2018,
+      description: 'test description',
+      hours: 6,
+      id: 'testId',
+    };
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(host).toBeTruthy();
   });
 });

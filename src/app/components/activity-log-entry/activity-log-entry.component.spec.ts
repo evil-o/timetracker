@@ -5,8 +5,8 @@ import { ActivityTypeIdToNamePipe } from '../../pipes/activity-type-id-to-name.p
 import { HourBadgeComponent } from '../hour-badge/hour-badge.component';
 import { EditableLogEntryDescriptionComponent } from '../editable-log-entry-description/editable-log-entry-description.component';
 import { EditableLogEntryHoursComponent } from '../editable-log-entry-hours/editable-log-entry-hours.component';
-import { AccordionModule } from 'ngx-bootstrap/accordion/accordion.module';
-import { StoreModule } from '@ngrx/store/src/store_module';
+import { AccordionModule } from 'ngx-bootstrap';
+import { StoreModule } from '@ngrx/store';
 import { reducers } from '../../redux/reducers/index';
 import { metaReducers } from '../../redux/metaReducers';
 
@@ -24,7 +24,7 @@ describe('ActivityLogEntryComponent', () => {
         EditableLogEntryHoursComponent,
       ],
       imports: [
-        AccordionModule,
+        AccordionModule.forRoot(),
         StoreModule.forRoot(reducers, { metaReducers }),
       ]
     })

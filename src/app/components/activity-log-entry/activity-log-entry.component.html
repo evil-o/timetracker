@@ -1,4 +1,4 @@
-<accordion-group class="container-fluid my-1">
+<accordion-group class="container-fluid my-1" *ngIf="group">
   <div accordion-heading class="clearfix">
     {{group.activityId | activityTypeIdToName: activityTypes}}
     <app-hour-badge [hours]="group.cumulativeHours" class="float-right pull-right"></app-hour-badge>
@@ -22,4 +22,9 @@
       </button>
     </div>
   </div>
+</accordion-group>
+<accordion-group class="container-fluid my-1" *ngIf="!group">
+    <div accordion-heading class="clearfix">
+      No entires.
+    </div>
 </accordion-group>

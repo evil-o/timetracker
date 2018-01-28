@@ -24,11 +24,12 @@ import { environment } from '../environments/environment';
 import { activityTypesReducer } from './redux/reducers/activityTypes';
 import { DayComponent } from './pages/day/day.component';
 
-import { appRoutes } from './app.routes';
-import { ActivityLogEffects } from './redux/effects/activityLogEffects';
 import { reducers } from './redux/reducers/index';
 import { effects } from './redux/effects/index';
 import { metaReducers } from './redux/metaReducers';
+
+import { ActivityLogEffects } from './redux/effects/activityLogEffects';
+import { appRoutes } from './app.routes';
 import { ActivityLogListComponent } from './components/actvity-log-list/actvity-log-list.component';
 import { GroupActivityLogEntriesByIdPipe } from './pipes/group-activity-log-entries-by-id.pipe';
 import { WeekComponent } from './pages/week/week.component';
