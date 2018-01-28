@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, EventEmitter, ElementRef, Input, Output, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
@@ -24,6 +24,12 @@ export class ActivityPickerComponent implements OnInit, OnDestroy {
   @Input()
   public placeholder = 'What are you doing?';
 
+  @Output()
+  public confirm = new EventEmitter<void>();
+
+  @ViewChild('textInput')
+  private textInput: ElementRef;
+
   public activityNames: string[];
 
   public name = '';
@@ -38,5 +44,9 @@ export class ActivityPickerComponent implements OnInit, OnDestroy {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+  }
+
+  focus() {
+    this.textInput.nativeElement.focus();
   }
 }

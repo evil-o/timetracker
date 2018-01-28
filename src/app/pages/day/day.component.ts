@@ -15,6 +15,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subject } from 'rxjs/Subject';
 import { TimeBadgeComponent } from '../../components/time-badge/time-badge.component';
 import { HourBadgeComponent } from '../../components/hour-badge/hour-badge.component';
+import { ActivityPickerComponent } from '../../components/activity-picker/activity-picker.component';
 
 @Component({
   selector: 'app-day',
@@ -43,6 +44,15 @@ export class DayComponent implements OnInit {
   @ViewChild('startTimeDisplay')
   public startTimeDisplay: TimeBadgeComponent;
 
+  @ViewChild('activityToLog')
+  public activityToLog: ActivityPickerComponent;
+
+  @ViewChild('hoursToLog')
+  public hoursToLog: ElementRef;
+
+  @ViewChild('logHoursButton')
+  public logHoursButton: ElementRef;
+
   public hourLog$ = new Subject<{ hours: number, activityName: string }>();
 
   constructor(private store: Store<ApplicationState>) {
@@ -62,6 +72,7 @@ export class DayComponent implements OnInit {
 
     this.hourLog$.withLatestFrom(this.date$).subscribe(([log, date]) => {
       this.store.dispatch(new FetchOrCreateIdAndLogTimeAction(log.activityName, log.hours, date));
+      this.hoursToLog.nativeElement.value = '';
     });
 
     this.totalHours$ = this.activityLogEntries$.map(entries => entries.map(e => e.hours).reduce((total, current) => total + current, 0));
@@ -80,6 +91,19 @@ export class DayComponent implements OnInit {
 
   ngOnInit() {
     this.activities$ = this.activityTypes$.map(types => types.activities);
+  }
+
+  refocusOnEnter() {
+    const activity = this.activityToLog.name.trim();
+    const hours = this.hoursToLog.nativeElement.value.trim();
+    if (activity && hours) {
+      this.logHoursButton.nativeElement.click();
+      this.hoursToLog.nativeElement.focus();
+    } else if (activity) {
+      this.hoursToLog.nativeElement.focus();
+    } else if (hours) {
+      this.activityToLog.focus();
+    }
   }
 
   changeEntryDescription(params: { entryId: string, newDescription: string }) {
