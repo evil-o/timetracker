@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IActivityType } from '../../models/interfaces';
+import { ApplicationState } from '../../redux/states/applicationState';
+import { Store } from '@ngrx/store';
+import { SetActivityTypeIsNonWorkingAction } from '../../redux/actions/activityTypesActions';
 
 @Component({
   selector: 'app-activity-type-list',
@@ -10,9 +13,12 @@ export class ActivityTypeListComponent implements OnInit {
 
   @Input() types: IActivityType[];
 
-  constructor() { }
+  constructor(private store: Store<ApplicationState>) { }
 
   ngOnInit() {
   }
 
+  setNonWorking(id: string, value: boolean) {
+    this.store.dispatch(new SetActivityTypeIsNonWorkingAction(id, value));
+  }
 }

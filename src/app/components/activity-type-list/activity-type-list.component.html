@@ -1,12 +1,20 @@
 <table class="table">
-    <thead>
-      <tr>
-        <th>Activity</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let activity of types">
-        <td>{{activity.name}}</td>
-      </tr>
-    </tbody>
-  </table>
+  <thead>
+    <tr>
+      <th>Activity</th>
+      <th>Non-working?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let activity of types">
+      <td>{{activity.name}}</td>
+      <td>
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" #cb class="custom-control-input" id="nonWorking-{{activity.id}}" (click)="setNonWorking(activity.id, cb.checked)"
+            [checked]="activity.isNonWorking">
+          <label class="custom-control-label" for="nonWorking-{{activity.id}}">&nbsp;</label>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
