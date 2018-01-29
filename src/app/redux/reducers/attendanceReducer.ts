@@ -16,7 +16,7 @@ export function attendanceStateReducer(state: IAttendanceState = new AttendanceS
   switch (action.type) {
     case SET_START_TIME:
     case SET_END_TIME: {
-      const newState = { ...state };
+      const newState = { ...state, entries: [...state.entries] };
 
       let entry = findEntry(action.date, newState.entries);
       if (!entry) {
