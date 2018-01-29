@@ -87,17 +87,36 @@
     </div>
   </tab>
   <tab heading='Attendance'>
-      <div class="row mt-2" *ngFor="let attendance of (attendances$ | async)">
-        <div class="col">
-          {{attendance.date.getMonth() + 1}} / {{attendance.date.getDate()}}:
-          {{attendance.start? attendance.start.getHours() + ':' + attendance.start.getMinutes() : '-'}}
-          to
-          {{attendance.end? attendance.end.getHours() + ':' + attendance.end.getMinutes() : '-'}}
-          =
-          {{attendance.hours !== undefined? attendance.hours : "-"}}
-          (non-working: {{attendance.nonWorkingHours !== undefined? attendance.nonWorkingHours : "-"}};
-           overtime: {{attendance.overtime !== undefined? attendance.overtime : "-"}})
-        </div>
+    <div class="row mt-2">
+      <div class="col">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Start time</th>
+              <th>End time</th>
+              <th>Hours total</th>
+              <th>Non-working hours</th>
+              <th>Overtime</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let attendance of (attendances$ | async)">
+              <th scope="row">{{attendance.date.getDate()}}. {{attendance.date.getMonth() + 1}}.</th>
+              <td>{{attendance.start? attendance.start.getHours() + ':' + attendance.start.getMinutes() : '-'}}</td>
+              <td>{{attendance.end? attendance.end.getHours() + ':' + attendance.end.getMinutes() : '-'}}</td>
+              <td>{{attendance.hours !== undefined? attendance.hours : "-"}}</td>
+              <td>{{attendance.nonWorkingHours !== undefined? attendance.nonWorkingHours : "-"}}</td>
+              <td>
+                <span *ngIf="attendance.overtime === undefined">-</span>
+                <span *ngIf="attendance.overtime > 0" class="badge badge-success">+{{attendance.overtime}}</span>
+                <span *ngIf="attendance.overtime === 0" class="badge badge-default">{{attendance.overtime}}</span>
+                <span *ngIf="attendance.overtime < 0" class="badge badge-danger">{{attendance.overtime}}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+    </div>
   </tab>
 </tabset>
