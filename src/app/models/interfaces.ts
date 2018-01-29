@@ -2,6 +2,8 @@ export interface IActivityType {
   name: string;
 
   id: string;
+
+  isNonWorking: boolean;
 }
 
 export interface IEntry {

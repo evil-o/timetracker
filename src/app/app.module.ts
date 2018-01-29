@@ -46,6 +46,8 @@ import { TimeBadgeComponent } from './components/time-badge/time-badge.component
 import { AttendanceComponent } from './pages/attendance/attendance.component';
 import { OvertimeBadgeComponent } from './components/overtime-badge/overtime-badge.component';
 import { PrecisionPipe } from './pipes/precision.pipe';
+import { ActivitiesComponent } from './pages/activities/activities.component';
+import { ActivityTypeListComponent } from './components/activity-type-list/activity-type-list.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +70,9 @@ import { PrecisionPipe } from './pipes/precision.pipe';
     TimeBadgeComponent,
     AttendanceComponent,
     OvertimeBadgeComponent,
-    PrecisionPipe
+    PrecisionPipe,
+    ActivitiesComponent,
+    ActivityTypeListComponent,
   ],
   imports: [
     BrowserModule,

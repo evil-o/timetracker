@@ -4,6 +4,7 @@ import { DayComponent } from './pages/day/day.component';
 import { WeekComponent } from './pages/week/week.component';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { AttendanceComponent } from './pages/attendance/attendance.component';
+import { ActivitiesComponent } from './pages/activities/activities.component';
 
 export const appRoutes: Routes = [
   {
@@ -25,5 +26,9 @@ export const appRoutes: Routes = [
   {
     path: 'attendance',
     component: AttendanceComponent,
+  },
+  {
+    path: 'activities',
+    component: ActivitiesComponent,
   },
 ];
