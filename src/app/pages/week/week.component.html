@@ -93,6 +93,10 @@
           {{attendance.start? attendance.start.getHours() + ':' + attendance.start.getMinutes() : '-'}}
           to
           {{attendance.end? attendance.end.getHours() + ':' + attendance.end.getMinutes() : '-'}}
+          =
+          {{attendance.hours !== undefined? attendance.hours : "-"}}
+          (non-working: {{attendance.nonWorkingHours !== undefined? attendance.nonWorkingHours : "-"}};
+           overtime: {{attendance.overtime !== undefined? attendance.overtime : "-"}})
         </div>
       </div>
   </tab>

@@ -25,6 +25,7 @@ import { SetDescriptionAction } from '../../redux/actions/activityLogActions';
 import { IGroupEntry } from '../../pipes/group-activity-log-entries-by-id.pipe';
 import { IAttendanceEntry } from '../../redux/states/attendanceState';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { IAttendanceWithTimes } from '../../redux/selectors';
 
 interface IDayEntry {
   dayOfTheWeek: number;
@@ -69,7 +70,7 @@ export class WeekComponent implements OnInit {
 
   public printPreviewContents: string;
 
-  public attendances$: Observable<IAttendanceEntry[]>;
+  public attendances$: Observable<IAttendanceWithTimes[]>;
 
   constructor(
     private store: Store<ApplicationState>,
@@ -167,7 +168,7 @@ export class WeekComponent implements OnInit {
     });
 
     this.attendances$ = Observable.combineLatest(
-      this.store.select(fromStore.attendanceEntries),
+      this.store.select(fromStore.attendanceEntriesWithOvertime),
       this.week$,
     )
       .map(([entries, week]) => entries.filter(e => {
