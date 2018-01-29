@@ -44,6 +44,8 @@ import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { HourBadgeComponent } from './components/hour-badge/hour-badge.component';
 import { TimeBadgeComponent } from './components/time-badge/time-badge.component';
 import { AttendanceComponent } from './pages/attendance/attendance.component';
+import { OvertimeBadgeComponent } from './components/overtime-badge/overtime-badge.component';
+import { PrecisionPipe } from './pipes/precision.pipe';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,9 @@ import { AttendanceComponent } from './pages/attendance/attendance.component';
     WelcomeComponent,
     HourBadgeComponent,
     TimeBadgeComponent,
-    AttendanceComponent
+    AttendanceComponent,
+    OvertimeBadgeComponent,
+    PrecisionPipe
   ],
   imports: [
     BrowserModule,

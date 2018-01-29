@@ -107,12 +107,7 @@
               <td>{{attendance.end? attendance.end.getHours() + ':' + attendance.end.getMinutes() : '-'}}</td>
               <td>{{attendance.hours !== undefined? attendance.hours : "-"}}</td>
               <td>{{attendance.nonWorkingHours !== undefined? attendance.nonWorkingHours : "-"}}</td>
-              <td>
-                <span *ngIf="attendance.overtime === undefined">-</span>
-                <span *ngIf="attendance.overtime > 0" class="badge badge-success">+{{attendance.overtime}}</span>
-                <span *ngIf="attendance.overtime === 0" class="badge badge-default">{{attendance.overtime}}</span>
-                <span *ngIf="attendance.overtime < 0" class="badge badge-danger">{{attendance.overtime}}</span>
-              </td>
+              <td><app-overtime-badge [hours]="attendance.overtime"></app-overtime-badge></td>
             </tr>
           </tbody>
         </table>

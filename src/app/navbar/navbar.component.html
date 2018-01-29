@@ -24,6 +24,9 @@
       <input class="form-control mr-sm-2" type="text" #newActivityName placeholder="activity type" aria-label="New activity">
       <button class="btn btn-outline-success my-2" (click)="createActivity(newActivityName.value)">Add</button>
     </div-->
+    <div class="nav-item" dropdown>
+      <app-overtime-badge [hours]="overallAttendanceSum$ | async"></app-overtime-badge>
+    </div>
     <div class="nav-item dropdown" dropdown>
       <a dropdownToggle href="javascript:void(0);" class="nav-link">
         <i class="fa fa-cog"></i>
