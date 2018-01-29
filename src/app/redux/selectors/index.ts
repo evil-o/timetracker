@@ -48,8 +48,7 @@ export const attendanceEntriesWithOvertime = createSelector(
   (attendances, entries, types) => {
     const nonWorkingIds: string[] = [];
     for (const type of types.activities) {
-      // TODO add a non-working flag instead.
-      if (type.name === 'Pause') {
+      if (type.isNonWorking) {
         nonWorkingIds.push(type.id);
       }
     }
