@@ -3,6 +3,9 @@ import { Action } from '@ngrx/store';
 export const SET_START_TIME = 'SET_START_TIME';
 export const SET_END_TIME = 'SET_END_TIME';
 export const DELETE_ENTRY = 'DELETE_ENTRY';
+export const CREATE_CORRECTION = 'ADD_CORRECTION';
+export const UPDATE_CORRECTION = 'UPDATE_CORRECTION';
+export const DELETE_CORRECTION = 'DELETE_CORRECTION';
 
 export class SetStartTimeAction implements Action {
   public readonly type = SET_START_TIME;
@@ -25,8 +28,41 @@ export class DeleteEntryAction implements Action {
   constructor(public date: Date) { }
 }
 
+export class CreateCorrectionAction implements Action {
+  public readonly type = CREATE_CORRECTION;
+
+  constructor(public year: number, public month: number, public day: number) { }
+}
+
+export class UpdateCorrectionAction implements Action {
+  public readonly type = UPDATE_CORRECTION;
+
+  constructor(
+    public year: number,
+    public month: number,
+    public day: number,
+    public id: string,
+    public newHours: number,
+    public newDescription: string,
+  ) { }
+}
+
+export class DeleteCorrectionAction implements Action {
+  public readonly type = DELETE_CORRECTION;
+
+  constructor(
+    public year: number,
+    public month: number,
+    public day: number,
+    public id: string,
+  ) { }
+}
+
 export type AttendanceAction =
   | SetStartTimeAction
   | SetEndTimeAction
   | DeleteEntryAction
+  | CreateCorrectionAction
+  | UpdateCorrectionAction
+  | DeleteCorrectionAction
   ;

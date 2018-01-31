@@ -17,6 +17,9 @@
 </div>
 
 <form>
+  <div class="form-row my-3">
+    <h3>Attendance times today</h3>
+  </div>
   <div class="form-row">
     <div class="form-group col-4">
       <label for="dayStart">Start</label>
@@ -32,5 +35,27 @@
       <button #setButton type="submit" class="btn btn-primary mb-2" [disabled]="true" (click)="timeValues$.next({start: dayStart.value, end: dayEnd.value})">
         <i class="fa fa-check"></i> set</button>
     </div>
+  </div>
+  <div class="form-row my-3">
+    <h3>Extra bookings</h3>
+  </div>
+  <div class="form-row" *ngFor="let correction of (corrections$ | async)">
+    <div class="form-group col-5">
+      <input type="text" #desc class="form-control" placeholder="Enter correction description here" [value]="correction.description">
+    </div>
+    <div class="form-group col-3">
+      <input type="text" #hours class="form-control" placeholder="Enter +/- hours here" [value]="correction.hours">
+    </div>
+    <div class="form-group col-4">
+      <button class="btn btn-secondary" (click)="correctionsToUpdate$.next({id: correction.id, description: desc.value, hours: hours.value})">
+        <i class="fa fa-check"></i>
+      </button>
+      <button class="btn btn-danger" (click)="correctionsToDelete$.next(correction)">
+        <i class="fa fa-trash"></i>
+      </button>
+    </div>
+  </div>
+  <div class="form-row mt-2">
+    <button class="btn btn-primary" (click)="correctionCreation$.next()">Add</button>
   </div>
 </form>

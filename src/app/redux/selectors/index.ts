@@ -60,13 +60,13 @@ export const attendanceEntriesWithOvertime = createSelector(
 
     for (const attendance of attendances) {
 
-      let hours: number, nonWorkingHours: number, overtime: number;
+      let hours = 0, nonWorkingHours = 0, overtime = 0;
       if (attendance.start && attendance.end) {
         // calculate break time / non working hours
         const y = attendance.date.getFullYear();
         const m = attendance.date.getMonth();
         const d = attendance.date.getDate();
-        nonWorkingHours = 0;
+
         if (y in entries && m in entries[y] && d in entries[y][m]) {
           for (const e of entries[y][m][d]) {
             const entry = e as IActivityLogEntry;
@@ -78,15 +78,24 @@ export const attendanceEntriesWithOvertime = createSelector(
 
         // calculate working hours etc.
         const milliseconds = attendance.end.getTime() - attendance.start.getTime();
-        hours = (((milliseconds / 1000) / 60) / 60);
-
-        overtime = hours - nonWorkingHours - dailyHours;
-
-        // round appropriately
-        const precision = 100;
-        hours = Math.round(hours * precision) / precision;
-        overtime = Math.round(overtime * precision) / precision;
+        hours += (((milliseconds / 1000) / 60) / 60);
       }
+
+      let correctionSum = 0;
+      if (attendance.corrections) {
+        for (const correction of attendance.corrections) {
+          if (correction.hours) {
+            correctionSum += Number(correction.hours);
+          }
+        }
+      }
+
+      overtime = hours - nonWorkingHours - dailyHours + correctionSum;
+
+      // round appropriately
+      const precision = 100;
+      hours = Math.round(hours * precision) / precision;
+      overtime = Math.round(overtime * precision) / precision;
 
       attendancesWithTime.push({
         ...attendance,
