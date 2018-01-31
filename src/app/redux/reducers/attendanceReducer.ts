@@ -85,7 +85,7 @@ export function attendanceStateReducer(state: IAttendanceState = new AttendanceS
         return state;
       }
 
-      correction.hours = action.newHours;
+      correction.hours = Number(action.newHours);
       correction.description = action.newDescription;
 
       return newState;
