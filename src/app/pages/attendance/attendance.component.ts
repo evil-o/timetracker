@@ -1,9 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subject } from 'rxjs/Subject';
-import { AttendanceState, IAttendanceEntry, AttendanceEntry } from '../../redux/states/attendanceState';
+import { AttendanceState, IAttendanceEntry, AttendanceEntry, IAttendanceCorrection } from '../../redux/states/attendanceState';
 import { Store } from '@ngrx/store';
-import { SetStartTimeAction, SetEndTimeAction } from '../../redux/actions/attendanceActions';
+import { SetStartTimeAction, SetEndTimeAction, CreateCorrectionAction, DeleteCorrectionAction, UpdateCorrectionAction } from '../../redux/actions/attendanceActions';
 import { Observable } from 'rxjs/Observable';
 
 import * as get from '../../redux/selectors';
@@ -27,6 +27,14 @@ export class AttendanceComponent implements OnInit {
 
   private entry$: Observable<IAttendanceEntry | null>;
 
+  public corrections$: Observable<IAttendanceCorrection[]>;
+
+  public correctionCreation$ = new Subject<void>();
+
+  public correctionsToUpdate$ = new Subject<IAttendanceCorrection>();
+
+  public correctionsToDelete$ = new Subject<IAttendanceCorrection>();
+
   // TODO these and start/endDatePicking are copies from DayComponent; introduce common header component
   public pickingDate = false;
   @ViewChild('datePickerInput')
@@ -48,23 +56,42 @@ export class AttendanceComponent implements OnInit {
 
   constructor(public store: Store<ApplicationState>) {
     Observable.combineLatest(this.timeValues$, this.date$)
-    .subscribe(([values, date]) => {
-      const start = this.valueToTime(values.start);
-      const end = this.valueToTime(values.end);
-      if (start) {
-        this.store.dispatch(new SetStartTimeAction(date, start));
-      }
-      if (end) {
-        this.store.dispatch(new SetEndTimeAction(date, end));
-      }
-    });
+      .subscribe(([values, date]) => {
+        const start = this.valueToTime(values.start);
+        const end = this.valueToTime(values.end);
+        if (start) {
+          this.store.dispatch(new SetStartTimeAction(date, start));
+        }
+        if (end) {
+          this.store.dispatch(new SetEndTimeAction(date, end));
+        }
+      });
 
     this.entries$ = this.store.select(get.attendanceEntries);
     this.entry$ = Observable.combineLatest(this.entries$, this.date$)
       .map(([v, date]) => v.find(e => AttendanceEntry.equalsDate(e, date)));
 
+    this.corrections$ = this.entry$.map(e => e.corrections || []);
+
     this.start$ = this.entry$.map(e => e ? AttendanceComponent.toTimeValue(e.start) : '');
     this.end$ = this.entry$.map(e => e ? AttendanceComponent.toTimeValue(e.end) : '');
+
+    Observable.combineLatest(this.date$, this.correctionCreation$)
+      .subscribe(([date]) => {
+        this.store.dispatch(new CreateCorrectionAction(date.getFullYear(), date.getMonth(), date.getDate()));
+      });
+
+    Observable.combineLatest(this.date$, this.correctionsToUpdate$)
+      .subscribe(([date, update]) => {
+        this.store.dispatch(
+          new UpdateCorrectionAction(date.getFullYear(), date.getMonth(), date.getDate(), update.id, update.hours, update.description)
+        );
+      });
+
+    Observable.combineLatest(this.date$, this.correctionsToDelete$)
+      .subscribe(([date, toDelete]) => {
+        this.store.dispatch(new DeleteCorrectionAction(date.getFullYear(), date.getMonth(), date.getDate(), toDelete.id));
+      });
   }
 
   ngOnInit() {
