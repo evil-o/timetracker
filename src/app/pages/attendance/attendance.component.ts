@@ -55,7 +55,7 @@ export class AttendanceComponent implements OnInit {
   }
 
   constructor(public store: Store<ApplicationState>) {
-    Observable.combineLatest(this.timeValues$, this.date$)
+    this.timeValues$.withLatestFrom(this.date$)
       .subscribe(([values, date]) => {
         const start = this.valueToTime(values.start);
         const end = this.valueToTime(values.end);
@@ -71,26 +71,32 @@ export class AttendanceComponent implements OnInit {
     this.entry$ = Observable.combineLatest(this.entries$, this.date$)
       .map(([v, date]) => v.find(e => AttendanceEntry.equalsDate(e, date)));
 
-    this.corrections$ = this.entry$.map(e => e.corrections || []);
+    this.corrections$ = this.entry$.map(e => (e ? e.corrections : undefined) || []);
 
-    this.start$ = this.entry$.map(e => e ? AttendanceComponent.toTimeValue(e.start) : '');
-    this.end$ = this.entry$.map(e => e ? AttendanceComponent.toTimeValue(e.end) : '');
+    this.start$ = this.entry$.map(e => e && e.start ? AttendanceComponent.toTimeValue(e.start) : '');
+    this.end$ = this.entry$.map(e => e && e.end ? AttendanceComponent.toTimeValue(e.end) : '');
 
-    Observable.combineLatest(this.date$, this.correctionCreation$)
-      .subscribe(([date]) => {
-        this.store.dispatch(new CreateCorrectionAction(date.getFullYear(), date.getMonth(), date.getDate()));
+    this.correctionCreation$.withLatestFrom(this.date$)
+      .subscribe(([unused, date]) => {
+        if (date) {
+          this.store.dispatch(new CreateCorrectionAction(date.getFullYear(), date.getMonth(), date.getDate()));
+        }
       });
 
-    Observable.combineLatest(this.date$, this.correctionsToUpdate$)
-      .subscribe(([date, update]) => {
-        this.store.dispatch(
-          new UpdateCorrectionAction(date.getFullYear(), date.getMonth(), date.getDate(), update.id, update.hours, update.description)
-        );
+    this.correctionsToUpdate$.withLatestFrom(this.date$)
+      .subscribe(([update, date]) => {
+        if (date) {
+          this.store.dispatch(
+            new UpdateCorrectionAction(date.getFullYear(), date.getMonth(), date.getDate(), update.id, update.hours, update.description)
+          );
+        }
       });
 
-    Observable.combineLatest(this.date$, this.correctionsToDelete$)
-      .subscribe(([date, toDelete]) => {
-        this.store.dispatch(new DeleteCorrectionAction(date.getFullYear(), date.getMonth(), date.getDate(), toDelete.id));
+    this.correctionsToDelete$.withLatestFrom(this.date$)
+      .subscribe(([toDelete, date]) => {
+        if (date) {
+          this.store.dispatch(new DeleteCorrectionAction(date.getFullYear(), date.getMonth(), date.getDate(), toDelete.id));
+        }
       });
   }
 
