@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OvertimeBadgeComponent } from './overtime-badge.component';
+import { PrecisionPipe } from '../../pipes/precision.pipe';
 
 describe('OvertimeBadgeComponent', () => {
   let component: OvertimeBadgeComponent;
@@ -8,9 +9,12 @@ describe('OvertimeBadgeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OvertimeBadgeComponent ]
+      declarations: [
+        OvertimeBadgeComponent,
+        PrecisionPipe,
+      ],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

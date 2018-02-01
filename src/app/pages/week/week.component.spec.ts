@@ -34,6 +34,11 @@ import { WelcomeComponent } from '../welcome/welcome.component';
 import { DayComponent } from '../day/day.component';
 import { ActivityPickerComponent } from '../../components/activity-picker/activity-picker.component';
 import { TimeBadgeComponent } from '../../components/time-badge/time-badge.component';
+import { AttendanceComponent } from '../attendance/attendance.component';
+import { ActivitiesComponent } from '../activities/activities.component';
+import { ActivityTypeListComponent } from '../../components/activity-type-list/activity-type-list.component';
+import { OvertimeBadgeComponent } from '../../components/overtime-badge/overtime-badge.component';
+import { PrecisionPipe } from '../../pipes/precision.pipe';
 
 describe('WeekComponent', () => {
   let component: WeekComponent;
@@ -42,10 +47,13 @@ describe('WeekComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
+        ActivitiesComponent,
         ActivityLogEntryComponent,
         ActivityLogListComponent,
         ActivityPickerComponent,
         ActivityTypeIdToNamePipe,
+        ActivityTypeListComponent,
+        AttendanceComponent,
         DayComponent,
         EditableLogEntryDescriptionComponent,
         EditableLogEntryHoursComponent,
@@ -53,6 +61,8 @@ describe('WeekComponent', () => {
         HourBadgeComponent,
         LogEntryTallyPipe,
         NoActivityLogEntryPresentComponent,
+        OvertimeBadgeComponent,
+        PrecisionPipe,
         TallyComponent,
         TimeBadgeComponent,
         WeekComponent,
@@ -63,7 +73,7 @@ describe('WeekComponent', () => {
         BsDatepickerModule.forRoot(),
         FormsModule,
         RouterModule.forRoot(appRoutes),
-        StoreModule.forRoot(reducers, { metaReducers }),
+        StoreModule.forRoot(reducers),
         TabsModule.forRoot(),
         TypeaheadModule.forRoot(),
       ],

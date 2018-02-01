@@ -8,6 +8,10 @@ import { EditableLogEntryDescriptionComponent } from '../editable-log-entry-desc
 import { EditableLogEntryHoursComponent } from '../editable-log-entry-hours/editable-log-entry-hours.component';
 import { AccordionModule } from 'ngx-bootstrap';
 import { NoActivityLogEntryPresentComponent } from '../no-activity-log-entry-present/no-activity-log-entry-present.component';
+import { Observable } from 'rxjs/Observable';
+import { IActivityTypes } from '../../redux/states/activityTypes';
+import { Subject } from 'rxjs/Subject';
+import { IGroupEntry } from '../../pipes/group-activity-log-entries-by-id.pipe';
 
 describe('ActvityLogListComponent', () => {
   let component: ActivityLogListComponent;
@@ -34,6 +38,8 @@ describe('ActvityLogListComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ActivityLogListComponent);
     component = fixture.componentInstance;
+    component.activityTypes$ = new Subject<IActivityTypes>();
+    component.groups$ = new Subject<IGroupEntry[]>();
     fixture.detectChanges();
   });
 

@@ -27,15 +27,23 @@ import { TabsModule } from 'ngx-bootstrap';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './redux/reducers/index';
 import { metaReducers } from './redux/metaReducers';
+import { AttendanceComponent } from './pages/attendance/attendance.component';
+import { ActivitiesComponent } from './pages/activities/activities.component';
+import { ActivityTypeListComponent } from './components/activity-type-list/activity-type-list.component';
+import { OvertimeBadgeComponent } from './components/overtime-badge/overtime-badge.component';
+import { PrecisionPipe } from './pipes/precision.pipe';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
+        ActivitiesComponent,
         ActivityTypeIdToNamePipe,
         ActivityLogEntryComponent,
         ActivityLogListComponent,
         ActivityPickerComponent,
+        ActivityTypeListComponent,
+        AttendanceComponent,
         AppComponent,
         DayComponent,
         EditableLogEntryDescriptionComponent,
@@ -45,6 +53,8 @@ describe('AppComponent', () => {
         LogEntryTallyPipe,
         NavbarComponent,
         NoActivityLogEntryPresentComponent,
+        OvertimeBadgeComponent,
+        PrecisionPipe,
         TallyComponent,
         TimeBadgeComponent,
         WeekComponent,

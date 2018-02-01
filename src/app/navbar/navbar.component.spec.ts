@@ -35,6 +35,11 @@ import { EditableLogEntryHoursComponent } from '../components/editable-log-entry
 import { NoActivityLogEntryPresentComponent } from '../components/no-activity-log-entry-present/no-activity-log-entry-present.component';
 import { TallyComponent } from '../components/tally/tally.component';
 import { LogEntryTallyPipe } from '../pipes/log-entry-tally.pipe';
+import { AttendanceComponent } from '../pages/attendance/attendance.component';
+import { ActivitiesComponent } from '../pages/activities/activities.component';
+import { ActivityTypeListComponent } from '../components/activity-type-list/activity-type-list.component';
+import { OvertimeBadgeComponent } from '../components/overtime-badge/overtime-badge.component';
+import { PrecisionPipe } from '../pipes/precision.pipe';
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
@@ -43,10 +48,13 @@ describe('NavbarComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
+        ActivitiesComponent,
+        ActivityTypeListComponent,
         ActivityLogEntryComponent,
         ActivityLogListComponent,
         ActivityPickerComponent,
         ActivityTypeIdToNamePipe,
+        AttendanceComponent,
         DayComponent,
         EditableLogEntryDescriptionComponent,
         EditableLogEntryHoursComponent,
@@ -55,6 +63,8 @@ describe('NavbarComponent', () => {
         LogEntryTallyPipe,
         NavbarComponent,
         NoActivityLogEntryPresentComponent,
+        OvertimeBadgeComponent,
+        PrecisionPipe,
         TallyComponent,
         TimeBadgeComponent,
         WeekComponent,
