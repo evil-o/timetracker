@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 
 export const SET_START_TIME = 'SET_START_TIME';
 export const SET_END_TIME = 'SET_END_TIME';
-export const DELETE_ENTRY = 'DELETE_ENTRY';
+export const DELETE_ATTENDANCE_ENTRY = 'DELETE_ATTENDANCE_ENTRY';
 export const CREATE_CORRECTION = 'ADD_CORRECTION';
 export const UPDATE_CORRECTION = 'UPDATE_CORRECTION';
 export const DELETE_CORRECTION = 'DELETE_CORRECTION';
@@ -22,7 +22,7 @@ export class SetEndTimeAction implements Action {
 }
 
 export class DeleteEntryAction implements Action {
-  public readonly type = DELETE_ENTRY;
+  public readonly type = DELETE_ATTENDANCE_ENTRY;
 
   // date identifies the netry; only year, month and day (date) are used
   constructor(public date: Date) { }

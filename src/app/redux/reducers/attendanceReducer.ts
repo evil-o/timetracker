@@ -2,9 +2,16 @@ import { Action } from '@ngrx/store';
 
 import * as uuid from 'uuid';
 
-import { AttendanceAction, SET_START_TIME, SET_END_TIME, CREATE_CORRECTION, UPDATE_CORRECTION, DELETE_CORRECTION } from '../actions/attendanceActions';
+import {
+  AttendanceAction,
+  SET_START_TIME,
+  SET_END_TIME,
+  CREATE_CORRECTION,
+  UPDATE_CORRECTION,
+  DELETE_CORRECTION,
+  DELETE_ATTENDANCE_ENTRY
+} from '../actions/attendanceActions';
 import { IAttendanceState, AttendanceState, IAttendanceEntry, AttendanceEntry } from '../states/attendanceState';
-import { DELETE_ENTRY } from '../actions/activityLogActions';
 
 function findEntry(forDate: Date, entries: IAttendanceEntry[]): IAttendanceEntry | undefined {
   return entries.find(e => AttendanceEntry.equalsDate(e, forDate));
@@ -34,7 +41,7 @@ export function attendanceStateReducer(state: IAttendanceState = new AttendanceS
       return newState;
     }
 
-    case DELETE_ENTRY: {
+    case DELETE_ATTENDANCE_ENTRY: {
       const newState = { ...state };
       const idx = findEntryIndex(action.date, newState.entries);
       if (idx >= 0) {
