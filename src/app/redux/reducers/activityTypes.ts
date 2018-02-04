@@ -8,10 +8,24 @@ import {
   CreateActivityTypeAction,
   CREATE_ACTIVITY_TYPE_AND_LOG_TIME,
   CREATE,
-  SET_ACTIVITY_TYPE_IS_NON_WORKING
+  SET_ACTIVITY_TYPE_IS_NON_WORKING,
+  SET_ACTIVITY_TYPE_IS_COLOR_ID
 } from '../actions/activityTypesActions';
 import * as uuid from 'uuid';
 import { IncrementalMigrationAction, INCREMENTAL_MIGRATION } from '../actions/storageVersionActions';
+
+function getStateAndEntryForEditing(state: IActivityTypes, activityTypeId: string): [IActivityTypes, IActivityType] {
+  const newState = {
+    ...state,
+    activities: state.activities.map(v => ({ ...v })),
+  };
+
+  const entry = newState.activities.find(e => e.id === activityTypeId);
+  if (!entry) {
+    console.log(`Activity type ${activityTypeId} not found.`);
+  }
+  return [newState, entry];
+}
 
 export function activityTypesReducer(
   state: IActivityTypes = new ActivityTypes(), action: ActivityTypesActions | IncrementalMigrationAction
@@ -25,16 +39,24 @@ export function activityTypesReducer(
       };
 
     case SET_ACTIVITY_TYPE_IS_NON_WORKING: {
-      const newState = {
-        ...state,
-        activities: state.activities.map(v => ({ ...v })),
-      };
-
-      const entry = newState.activities.find(e => e.id === action.id);
+      const [newState, entry] = getStateAndEntryForEditing(state, action.id);
       if (entry) {
         entry.isNonWorking = action.isNonWorking;
-      } else {
-        console.log(`Activity type ${action.id} not found.`);
+      }
+
+      return newState;
+    }
+
+    case SET_ACTIVITY_TYPE_IS_COLOR_ID: {
+      const [newState, entry] = getStateAndEntryForEditing(state, action.activityTypeId);
+      if (entry) {
+        if (action.colorId) {
+          entry.colorId = action.colorId;
+        } else {
+          if (entry.colorId) {
+            delete entry.colorId;
+          }
+        }
       }
 
       return newState;

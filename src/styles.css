@@ -8,3 +8,29 @@
   -ms-user-select: none;
   user-select: none;
 }
+
+.activity-blue
+{
+  background-color: #6060FF;
+}
+
+.activity-yellow
+{
+  background-color: #FFE040;
+}
+
+.activity-green
+{
+  background-color: #60FF60;
+}
+
+.activity-red
+{
+  background-color: #FF6060;
+}
+
+.activity-grey
+{
+  background-color: #B0B0B0;
+}
+

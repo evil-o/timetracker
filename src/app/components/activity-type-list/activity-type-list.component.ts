@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { IActivityType } from '../../models/interfaces';
 import { ApplicationState } from '../../redux/states/applicationState';
 import { Store } from '@ngrx/store';
-import { SetActivityTypeIsNonWorkingAction } from '../../redux/actions/activityTypesActions';
+import { SetActivityTypeIsNonWorkingAction, SetActivityTypeColorIdAction } from '../../redux/actions/activityTypesActions';
 
 @Component({
   selector: 'app-activity-type-list',
@@ -20,5 +20,9 @@ export class ActivityTypeListComponent implements OnInit {
 
   setNonWorking(id: string, value: boolean) {
     this.store.dispatch(new SetActivityTypeIsNonWorkingAction(id, value));
+  }
+
+  setColor(activityId: string, colorId?: string) {
+    this.store.dispatch(new SetActivityTypeColorIdAction(activityId, colorId));
   }
 }
