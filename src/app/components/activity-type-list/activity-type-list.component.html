@@ -17,7 +17,7 @@
         </div>
       </td>
       <td>
-        <app-activity-color-picker></app-activity-color-picker>
+        <app-activity-color-picker [activityType]="activity" (colorPicked)="setColor(activity.id, $event.colorId)"></app-activity-color-picker>
       </td>
     </tr>
   </tbody>

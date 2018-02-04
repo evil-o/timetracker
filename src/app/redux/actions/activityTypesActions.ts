@@ -3,6 +3,7 @@ import { Action } from '@ngrx/store';
 export const CREATE = 'CREATE_ACTIVITY_TYPE_AND_LOG_TIME';
 export const CREATE_ACTIVITY_TYPE_AND_LOG_TIME = 'CREATE_ACTIVITY_TYPE_AND_LOG_TIME';
 export const SET_ACTIVITY_TYPE_IS_NON_WORKING = 'SET_ACTIVITY_TYPE_IS_NON_WORKING';
+export const SET_ACTIVITY_TYPE_IS_COLOR_ID = 'SET_ACTIVITY_TYPE_IS_COLOR_ID';
 
 export class CreateActivityTypeAction implements Action {
   public readonly type = CREATE;
@@ -22,8 +23,15 @@ export class SetActivityTypeIsNonWorkingAction implements Action {
   constructor(public id: string, public isNonWorking: boolean) { }
 }
 
+export class SetActivityTypeColorIdAction implements Action {
+  public readonly type = SET_ACTIVITY_TYPE_IS_COLOR_ID;
+
+  constructor(public activityTypeId: string, public colorId?: string) { }
+}
+
 export type ActivityTypesActions =
   | CreateActivityTypeAction
   | CreateActivityTypeAndLogTimeAction
   | SetActivityTypeIsNonWorkingAction
+  | SetActivityTypeColorIdAction
   ;
