@@ -9,7 +9,7 @@ import { activityColors } from '../../models/activityColors';
 })
 export class ActivityColorPickerComponent implements OnInit {
 
-  public colors: IActivityTypeColor[] = [{ id: undefined, bootstrapClass: undefined }, ...activityColors];
+  public colors: IActivityTypeColor[] = [{ id: undefined, styleClass: undefined }, ...activityColors];
 
   private _activityType: IActivityType;
   @Input() public set activityType(value: IActivityType) {

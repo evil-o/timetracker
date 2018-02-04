@@ -1,7 +1,7 @@
 export interface IActivityTypeColor {
   id: string;
 
-  bootstrapClass: string;
+  styleClass: string;
 }
 
 export interface IActivityType {

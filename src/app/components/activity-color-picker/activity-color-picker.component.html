@@ -1,13 +1,13 @@
 <div class="btn-group" dropdown>
   <button dropdownToggle type="button" class="btn btn-secondary dropdown-toggle">
-    <span class="dropdown-item" href="#" [class]="'colorbox bg-' + (currentColor?.bootstrapClass || 'white')"></span>
+    <span class="dropdown-item" href="#" [class]="'colorbox ' + (currentColor?.styleClass || 'bg-white')"></span>
     <span>{{currentColor?.id || 'none'}}</span>
     <span class="caret"></span>
   </button>
   <ul *dropdownMenu class="dropdown-menu" role="menu">
     <li role="menuitem" *ngFor="let color of colors">
       <a class="dropdown-item" href="javascript:void(0);" (click)="colorPicked.emit({colorId: color.id})">
-        <span [class]="'colorbox bg-' + (color?.bootstrapClass || 'white')"></span>
+        <span [class]="'colorbox ' + (color?.styleClass || 'bg-white')"></span>
         {{color?.id || 'none'}}
       </a>
     </li>

@@ -3,26 +3,26 @@ import { IActivityTypeColor } from './interfaces';
 export const activityColors: IActivityTypeColor[] = [
   {
     id: 'blue',
-    bootstrapClass: 'primary',
+    styleClass: 'bg-primary',
   },
   {
     id: 'yellow',
-    bootstrapClass: 'warning',
+    styleClass: 'bg-warning',
   },
   {
     id: 'red',
-    bootstrapClass: 'danger',
+    styleClass: 'bg-danger',
   },
   {
     id: 'green',
-    bootstrapClass: 'success',
+    styleClass: 'bg-success',
   },
   {
     id: 'grey',
-    bootstrapClass: 'secondary',
+    styleClass: 'bg-secondary',
   },
   {
     id: 'light blue',
-    bootstrapClass: 'info',
+    styleClass: 'bg-info',
   },
 ];
