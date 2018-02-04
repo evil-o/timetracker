@@ -1,9 +1,17 @@
+export interface IActivityTypeColor {
+  id: string;
+
+  bootstrapClass: string;
+}
+
 export interface IActivityType {
   name: string;
 
   id: string;
 
   isNonWorking: boolean;
+
+  colorId?: string;
 }
 
 export interface IEntry {

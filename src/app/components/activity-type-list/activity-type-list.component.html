@@ -3,6 +3,7 @@
     <tr>
       <th>Activity</th>
       <th>Non-working?</th>
+      <th>Color</th>
     </tr>
   </thead>
   <tbody>
@@ -14,6 +15,9 @@
             [checked]="activity.isNonWorking">
           <label class="custom-control-label" for="nonWorking-{{activity.id}}">&nbsp;</label>
         </div>
+      </td>
+      <td>
+        <app-activity-color-picker></app-activity-color-picker>
       </td>
     </tr>
   </tbody>

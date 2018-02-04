@@ -48,6 +48,7 @@ import { OvertimeBadgeComponent } from './components/overtime-badge/overtime-bad
 import { PrecisionPipe } from './pipes/precision.pipe';
 import { ActivitiesComponent } from './pages/activities/activities.component';
 import { ActivityTypeListComponent } from './components/activity-type-list/activity-type-list.component';
+import { ActivityColorPickerComponent } from './components/activity-color-picker/activity-color-picker.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { ActivityTypeListComponent } from './components/activity-type-list/activ
     PrecisionPipe,
     ActivitiesComponent,
     ActivityTypeListComponent,
+    ActivityColorPickerComponent,
   ],
   imports: [
     BrowserModule,

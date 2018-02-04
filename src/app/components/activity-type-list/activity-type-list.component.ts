@@ -21,4 +21,7 @@ export class ActivityTypeListComponent implements OnInit {
   setNonWorking(id: string, value: boolean) {
     this.store.dispatch(new SetActivityTypeIsNonWorkingAction(id, value));
   }
+
+  setColor(activityId: string, colorId: string) {
+  }
 }
