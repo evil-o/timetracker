@@ -4,6 +4,7 @@ import { ActivitiesComponent } from './activities.component';
 import { ActivityTypeListComponent } from '../../components/activity-type-list/activity-type-list.component';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from '../../redux/reducers';
+import { ActivityColorPickerComponent } from '../../components/activity-color-picker/activity-color-picker.component';
 
 describe('ActivitiesComponent', () => {
   let component: ActivitiesComponent;
@@ -12,6 +13,7 @@ describe('ActivitiesComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
+        ActivityColorPickerComponent,
         ActivitiesComponent,
         ActivityTypeListComponent,
       ],

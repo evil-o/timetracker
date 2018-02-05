@@ -40,6 +40,8 @@ import { ActivitiesComponent } from '../pages/activities/activities.component';
 import { ActivityTypeListComponent } from '../components/activity-type-list/activity-type-list.component';
 import { OvertimeBadgeComponent } from '../components/overtime-badge/overtime-badge.component';
 import { PrecisionPipe } from '../pipes/precision.pipe';
+import { ActivityColorPickerComponent } from '../components/activity-color-picker/activity-color-picker.component';
+import { PadNumberPipe } from '../pipes/pad-number.pipe';
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
@@ -49,6 +51,7 @@ describe('NavbarComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         ActivitiesComponent,
+        ActivityColorPickerComponent,
         ActivityTypeListComponent,
         ActivityLogEntryComponent,
         ActivityLogListComponent,
@@ -64,6 +67,7 @@ describe('NavbarComponent', () => {
         NavbarComponent,
         NoActivityLogEntryPresentComponent,
         OvertimeBadgeComponent,
+        PadNumberPipe,
         PrecisionPipe,
         TallyComponent,
         TimeBadgeComponent,
