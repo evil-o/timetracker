@@ -103,8 +103,8 @@
           <tbody>
             <tr *ngFor="let attendance of (attendances$ | async)">
               <th scope="row">{{attendance.date.getDate()}}. {{attendance.date.getMonth() + 1}}.</th>
-              <td>{{attendance.start? attendance.start.getHours() + ':' + attendance.start.getMinutes() : '-'}}</td>
-              <td>{{attendance.end? attendance.end.getHours() + ':' + attendance.end.getMinutes() : '-'}}</td>
+              <td>{{attendance.start? attendance.start.getHours() + ':' + (attendance.start.getMinutes() | padNumber) : '-'}}</td>
+              <td>{{attendance.end? attendance.end.getHours() + ':' + (attendance.end.getMinutes() | padNumber) : '-'}}</td>
               <td>{{attendance.hours !== undefined? attendance.hours : "-"}}</td>
               <td>{{attendance.nonWorkingHours !== undefined? attendance.nonWorkingHours : "-"}}</td>
               <td><app-overtime-badge [hours]="attendance.overtime"></app-overtime-badge></td>
