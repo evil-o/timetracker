@@ -36,7 +36,7 @@ export class Gulpfile {
 
   @Task()
   copy() {
-    return gulp.src(['./dist/*'])
+    return gulp.src(['./dist/**/*'])
     .pipe(gulp.dest(Gulpfile.outputBase));
   }
 
