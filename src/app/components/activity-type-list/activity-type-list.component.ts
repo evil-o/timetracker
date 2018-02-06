@@ -11,7 +11,16 @@ import { SetActivityTypeIsNonWorkingAction, SetActivityTypeColorIdAction } from 
 })
 export class ActivityTypeListComponent implements OnInit {
 
-  @Input() types: IActivityType[];
+  _types: IActivityType[];
+  @Input() set types(value: IActivityType[]) {
+    this._types = value;
+    this.sortedTypes = this.types.sort((a, b) => a.name.localeCompare(b.name));
+  }
+  get types(): IActivityType[] {
+    return this._types;
+  }
+
+  sortedTypes: IActivityType[];
 
   constructor(private store: Store<ApplicationState>) { }
 
