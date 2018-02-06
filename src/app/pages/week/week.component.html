@@ -89,7 +89,7 @@
   <tab heading='Attendance'>
     <div class="row mt-2">
       <div class="col">
-        <table class="table">
+        <table class="table table-striped">
           <thead>
             <tr>
               <th>Date</th>
@@ -110,6 +110,14 @@
               <td><app-overtime-badge [hours]="attendance.overtime"></app-overtime-badge></td>
             </tr>
           </tbody>
+          <tfoot>
+            <tr>
+              <th scope="row" colspan="3">Sum totals</th>
+              <td>{{(attendanceStats$ | async).totalHours}}</td>
+              <td>{{(attendanceStats$ | async).totalNonWorkingHours}}</td>
+              <td><app-overtime-badge [hours]="(attendanceStats$ | async).totalOvertime"></app-overtime-badge></td>
+            </tr>
+          </tfoot>
         </table>
       </div>
     </div>

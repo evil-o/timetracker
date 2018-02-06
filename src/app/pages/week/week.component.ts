@@ -42,6 +42,14 @@ interface IWeekDate {
   week: number;
 }
 
+interface IWeekAttendanceStats {
+  totalHours: number;
+
+  totalNonWorkingHours: number;
+
+  totalOvertime: number;
+}
+
 @Component({
   selector: 'app-week',
   templateUrl: './week.component.html',
@@ -71,6 +79,8 @@ export class WeekComponent implements OnInit {
   public printPreviewContents: string;
 
   public attendances$: Observable<IAttendanceWithTimes[]>;
+
+  public attendanceStats$: Observable<IWeekAttendanceStats>;
 
   constructor(
     private store: Store<ApplicationState>,
@@ -170,11 +180,24 @@ export class WeekComponent implements OnInit {
     this.attendances$ = Observable.combineLatest(
       this.store.select(fromStore.attendanceEntriesWithOvertime),
       this.week$,
-    )
-      .map(([entries, week]) => entries.filter(e => {
-        const entryWeek = currentWeekNumber(e.date);
-        return e.date.getFullYear() === week.year && entryWeek === week.week;
-      }));
+    ).map(([entries, week]) => entries.filter(e => {
+      const entryWeek = currentWeekNumber(e.date);
+      return e.date.getFullYear() === week.year && entryWeek === week.week;
+    }));
+
+    this.attendanceStats$ = this.attendances$.map((attendances) => {
+      let totalHours = 0;
+      let totalNonWorkingHours = 0;
+      let totalOvertime = 0;
+
+      for (const attendance of attendances) {
+        totalHours += attendance.hours;
+        totalNonWorkingHours += attendance.nonWorkingHours;
+        totalOvertime += attendance.overtime;
+      }
+
+      return { totalHours, totalNonWorkingHours, totalOvertime };
+    });
   }
 
   ngOnInit() { }
