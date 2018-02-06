@@ -7,6 +7,7 @@ export const rehydratedStorageKeys = [
   'activityLog',
   'attendanceState',
   'storageVersion',
+  'configuration',
 ];
 
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {

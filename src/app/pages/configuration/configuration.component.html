@@ -1,0 +1,15 @@
+<form>
+  <div class="row">
+    <div class="col">
+      Working hours per week:
+    </div>
+    <div class="col">
+      <input type="text" #wwh class="form-control" [value]="workingHoursPerWeek$ | async" (blur)="inputWorkingHoursPerWeek = wwh.value">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <button (click)="applyValues()" class="btn btn-primary">Apply</button>
+    </div>
+  </div>
+</form>

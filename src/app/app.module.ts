@@ -50,6 +50,7 @@ import { ActivitiesComponent } from './pages/activities/activities.component';
 import { ActivityTypeListComponent } from './components/activity-type-list/activity-type-list.component';
 import { ActivityColorPickerComponent } from './components/activity-color-picker/activity-color-picker.component';
 import { PadNumberPipe } from './pipes/pad-number.pipe';
+import { ConfigurationComponent } from './pages/configuration/configuration.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { PadNumberPipe } from './pipes/pad-number.pipe';
     ActivityTypeListComponent,
     ActivityColorPickerComponent,
     PadNumberPipe,
+    ConfigurationComponent,
   ],
   imports: [
     BrowserModule,

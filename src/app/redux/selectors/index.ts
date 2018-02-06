@@ -32,6 +32,9 @@ export const storageVersion = (state: ApplicationState) => state.storageVersion;
 export const attendanceState = (state: ApplicationState) => state.attendanceState;
 export const attendanceEntries = createSelector(attendanceState, (state) => state.entries);
 
+export const configurationState = (state: ApplicationState) => state.configuration;
+export const weeklyWorkingHours = createSelector(configurationState, (state) => state.workingHoursPerWeek);
+
 
 export interface IAttendanceWithTimes extends IAttendanceEntry {
   hours?: number;
@@ -45,7 +48,8 @@ export const attendanceEntriesWithOvertime = createSelector(
   attendanceEntries,
   activityLogEntriesByDay,
   activityTypes,
-  (attendances, entries, types) => {
+  configurationState,
+  (attendances, entries, types, configuration) => {
     const nonWorkingIds: string[] = [];
     for (const type of types.activities) {
       if (type.isNonWorking) {
@@ -54,8 +58,7 @@ export const attendanceEntriesWithOvertime = createSelector(
     }
 
     const attendancesWithTime: IAttendanceWithTimes[] = [];
-    // TODO make configurable
-    const weeklyHours = 40.0;
+    const weeklyHours = configuration.workingHoursPerWeek;
     const dailyHours = weeklyHours / 5.0;
 
     for (const attendance of attendances) {

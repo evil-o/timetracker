@@ -5,6 +5,7 @@ import { WeekComponent } from './pages/week/week.component';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { AttendanceComponent } from './pages/attendance/attendance.component';
 import { ActivitiesComponent } from './pages/activities/activities.component';
+import { ConfigurationComponent } from './pages/configuration/configuration.component';
 
 export const appRoutes: Routes = [
   {
@@ -30,5 +31,9 @@ export const appRoutes: Routes = [
   {
     path: 'activities',
     component: ActivitiesComponent,
+  },
+  {
+    path: 'configuration',
+    component: ConfigurationComponent,
   },
 ];
