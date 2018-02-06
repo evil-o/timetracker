@@ -11,26 +11,26 @@
 
 .activity-blue
 {
-  background-color: #6060FF;
+  background-color: rgb(163, 186, 202);
 }
 
 .activity-yellow
 {
-  background-color: #FFE040;
+  background-color: rgb(251, 234, 201);
 }
 
 .activity-green
 {
-  background-color: #60FF60;
+  background-color: rgb(220, 255, 220);
 }
 
 .activity-red
 {
-  background-color: #FF6060;
+  background-color: rgb(240, 204, 204);
 }
 
 .activity-grey
 {
-  background-color: #B0B0B0;
+  background-color: rgb(170, 170, 170);
 }
 
