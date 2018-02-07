@@ -42,6 +42,7 @@ import { OvertimeBadgeComponent } from '../components/overtime-badge/overtime-ba
 import { PrecisionPipe } from '../pipes/precision.pipe';
 import { ActivityColorPickerComponent } from '../components/activity-color-picker/activity-color-picker.component';
 import { PadNumberPipe } from '../pipes/pad-number.pipe';
+import { ConfigurationComponent } from '../pages/configuration/configuration.component';
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
@@ -58,6 +59,7 @@ describe('NavbarComponent', () => {
         ActivityPickerComponent,
         ActivityTypeIdToNamePipe,
         AttendanceComponent,
+        ConfigurationComponent,
         DayComponent,
         EditableLogEntryDescriptionComponent,
         EditableLogEntryHoursComponent,

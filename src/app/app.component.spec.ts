@@ -34,6 +34,7 @@ import { OvertimeBadgeComponent } from './components/overtime-badge/overtime-bad
 import { PrecisionPipe } from './pipes/precision.pipe';
 import { ActivityColorPickerComponent } from './components/activity-color-picker/activity-color-picker.component';
 import { PadNumberPipe } from './pipes/pad-number.pipe';
+import { ConfigurationComponent } from './pages/configuration/configuration.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -48,6 +49,7 @@ describe('AppComponent', () => {
         ActivityTypeListComponent,
         AttendanceComponent,
         AppComponent,
+        ConfigurationComponent,
         DayComponent,
         EditableLogEntryDescriptionComponent,
         EditableLogEntryHoursComponent,
