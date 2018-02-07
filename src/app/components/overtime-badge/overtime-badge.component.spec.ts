@@ -5,7 +5,7 @@ import { PrecisionPipe } from '../../pipes/precision.pipe';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-fdescribe('OvertimeBadgeComponent', () => {
+describe('OvertimeBadgeComponent', () => {
   let component: OvertimeBadgeComponent;
   let fixture: ComponentFixture<OvertimeBadgeComponent>;
   let span: DebugElement;
