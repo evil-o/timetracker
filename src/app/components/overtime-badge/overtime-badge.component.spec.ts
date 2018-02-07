@@ -75,7 +75,7 @@ describe('OvertimeBadgeComponent', () => {
     span = fixture.debugElement.query(By.css('.badge'));
     expect(span).toBeTruthy();
 
-    span = fixture.debugElement.query(By.css('.badge-default'));
+    span = fixture.debugElement.query(By.css('.badge-secondary'));
     expect(span).toBeTruthy();
 
     expect(span.nativeElement.innerText).toContain('0');
