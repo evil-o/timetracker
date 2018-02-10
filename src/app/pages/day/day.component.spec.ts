@@ -29,6 +29,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ApplicationState } from '../../redux/states/applicationState';
 import { Store } from '@ngrx/store';
 import { LogTimeAction } from '../../redux/actions/activityLogActions';
+import { DayAttendanceComponent } from '../../components/day-attendance/day-attendance.component';
 
 describe('DayComponent', () => {
   let component: DayComponent;
@@ -65,6 +66,7 @@ describe('DayComponent', () => {
         ActivityTypeIdToNamePipe,
         ActivityPickerComponent,
         DayComponent,
+        DayAttendanceComponent,
         EditableLogEntryDescriptionComponent,
         EditableLogEntryHoursComponent,
         GroupActivityLogEntriesByIdPipe,

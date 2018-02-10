@@ -15,15 +15,23 @@
     </h1>
   </div>
 </div>
+
+<app-day-attendance class="my-3" [date$]="date$"></app-day-attendance>
+
+<div class="row mb-3 mt-5">
+  <div class="col">
+    <h3>Activities</h3>
+  </div>
+</div>
 <div class="row">
-  <div class="col-sm-6">
+  <div class="col-sm-8">
     <app-activity-picker #activityToLog (confirm)="refocusOnEnter()" [activities$]="activities$" placeholder="What did you do today?"></app-activity-picker>
   </div>
   <div class="col-sm-3">
     <input id="duration" #hoursToLog (keyup.enter)="refocusOnEnter()" type="text" class="form-control mr-sm-2" placeholder="for how many hours?">
   </div>
-  <div class="col-sm-3">
-    <button class="btn btn-primary" #logHoursButton (click)="logHours(activityToLog.name, hoursToLog.value)">Log</button>
+  <div class="col">
+    <button class="btn btn-primary float-right" #logHoursButton (click)="logHours(activityToLog.name, hoursToLog.value)">Log</button>
   </div>
 </div>
 <div class="row mt-5">
@@ -44,7 +52,7 @@
 </div>
 
 <div class="row mt-2">
-  <div class="col-sm-9">
+  <div class="col-sm-12">
     <app-actvity-log-list (changeEntryDescription)="changeEntryDescription($event)" [groups$]="activityLogEntries$ | groupActivityLogEntriesById"
       [activityTypes$]="activityTypes$"></app-actvity-log-list>
   </div>
