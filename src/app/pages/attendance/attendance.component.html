@@ -21,17 +21,21 @@
     <h3>Attendance times today</h3>
   </div>
   <div class="form-row">
-    <div class="form-group col-4">
+    <div class="col-4">
       <label for="dayStart">Start</label>
-      <input type="time" class="form-control" id="dayStart" #dayStart (change)="setButton.disabled = false" [value]="start$ | async">
     </div>
-    <div class="form-group col-4">
+    <div class="col-4">
       <label for="dayEnd">End</label>
-      <input type="time" class="form-control" id="dayEnd" #dayEnd (change)="setButton.disabled = false" [value]="end$ | async">
     </div>
   </div>
   <div class="form-row">
-    <div class="form-group col-8">
+    <div class="col-4">
+      <input type="time" class="form-control" [class.is-valid]="(timeValues$ | async) && (start$ | async) === dayStart.value" id="dayStart" #dayStart (change)="setButton.disabled = false" [value]="start$ | async">
+    </div>
+    <div class="col-4">
+      <input type="time" class="form-control" [class.is-valid]="(timeValues$ | async) && (end$ | async) === dayEnd.value" id="dayEnd" #dayEnd (change)="setButton.disabled = false" [value]="end$ | async">
+    </div>
+    <div class="col-2">
       <button #setButton type="submit" class="btn btn-primary mb-2" [disabled]="true" (click)="timeValues$.next({start: dayStart.value, end: dayEnd.value})">
         <i class="fa fa-check"></i> set</button>
     </div>
