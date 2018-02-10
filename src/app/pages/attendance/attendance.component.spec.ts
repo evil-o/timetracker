@@ -4,6 +4,7 @@ import { AttendanceComponent } from './attendance.component';
 import { BsDatepickerModule } from 'ngx-bootstrap';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from '../../redux/reducers';
+import { DayAttendanceComponent } from '../../components/day-attendance/day-attendance.component';
 
 describe('AttendanceComponent', () => {
   let component: AttendanceComponent;
@@ -12,7 +13,8 @@ describe('AttendanceComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AttendanceComponent
+        AttendanceComponent,
+        DayAttendanceComponent,
       ],
       imports: [
         BsDatepickerModule.forRoot(),
