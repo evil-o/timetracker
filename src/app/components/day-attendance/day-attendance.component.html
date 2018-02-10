@@ -1,24 +1,5 @@
-<div class="row mb-5">
-  <div class="col">
-    <h1 [class.d-none]="pickingDate">
-      <a (click)="startDatePicking()">
-        <i class="far fa-calendar"></i>
-      </a>
-      {{date$.value.toLocaleDateString()}}
-    </h1>
-    <h1 [class.d-none]="!pickingDate" class="form-inline">
-      <a>
-        <i class="far fa-calendar"></i>
-      </a>
-      <input #datePickerInput #datePicker="bsDatepicker" class="form-control border-0" placeholder="Pick a date" bsDatepicker [bsValue]="date$.value"
-        (blur)="endDatePicking()" [bsConfig]="{containerClass: 'theme-default'}" (onHidden)="endDatePicking()">
-    </h1>
-  </div>
-</div>
 
-<app-day-attendance [date$]="date$"></app-day-attendance>
-
-<!--form>
+<form>
   <div class="form-row my-3">
     <h3>Attendance times today</h3>
   </div>
@@ -32,10 +13,12 @@
   </div>
   <div class="form-row">
     <div class="col-4">
-      <input type="time" class="form-control" [class.is-valid]="(timeValues$ | async) && (start$ | async) === dayStart.value" id="dayStart" #dayStart (change)="setButton.disabled = false" [value]="start$ | async">
+      <!--input type="time" class="form-control" [class.is-valid]="(timeValues$ | async) && (start$ | async) === dayStart.value" id="dayStart" #dayStart (change)="setButton.disabled = false" [value]="start$ | async"-->
+      <input type="time" class="form-control" [class.is-valid]="this.startValid$ | async" id="dayStart" #dayStart (change)="setButton.disabled = false; timeInputsChaged$.next()" [value]="start$ | async">
     </div>
     <div class="col-4">
-      <input type="time" class="form-control" [class.is-valid]="(timeValues$ | async) && (end$ | async) === dayEnd.value" id="dayEnd" #dayEnd (change)="setButton.disabled = false" [value]="end$ | async">
+      <!--input type="time" class="form-control" [class.is-valid]="(timeValues$ | async) && (end$ | async) === dayEnd.value" id="dayEnd" #dayEnd (change)="setButton.disabled = false" [value]="end$ | async"-->
+      <input type="time" class="form-control" [class.is-valid]="this.endValid$ | async" id="dayEnd" #dayEnd (change)="setButton.disabled = false; timeInputsChaged$.next()" [value]="end$ | async">
     </div>
     <div class="col-2">
       <button #setButton type="submit" class="btn btn-primary mb-2" [disabled]="true" (click)="timeValues$.next({start: dayStart.value, end: dayEnd.value})">
@@ -64,4 +47,4 @@
   <div class="form-row mt-2">
     <button class="btn btn-primary" (click)="correctionCreation$.next()">Add</button>
   </div>
-</form-->
+</form>

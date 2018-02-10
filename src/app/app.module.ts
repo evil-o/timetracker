@@ -51,6 +51,7 @@ import { ActivityTypeListComponent } from './components/activity-type-list/activ
 import { ActivityColorPickerComponent } from './components/activity-color-picker/activity-color-picker.component';
 import { PadNumberPipe } from './pipes/pad-number.pipe';
 import { ConfigurationComponent } from './pages/configuration/configuration.component';
+import { DayAttendanceComponent } from './components/day-attendance/day-attendance.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { ConfigurationComponent } from './pages/configuration/configuration.comp
     ActivityColorPickerComponent,
     PadNumberPipe,
     ConfigurationComponent,
+    DayAttendanceComponent,
   ],
   imports: [
     BrowserModule,
