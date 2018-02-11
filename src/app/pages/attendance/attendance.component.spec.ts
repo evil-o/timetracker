@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AttendanceComponent } from './attendance.component';
-import { BsDatepickerModule } from 'ngx-bootstrap';
+import { BsDatepickerModule, AccordionModule } from 'ngx-bootstrap';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from '../../redux/reducers';
 import { DayAttendanceComponent } from '../../components/day-attendance/day-attendance.component';
@@ -17,6 +17,7 @@ describe('AttendanceComponent', () => {
         DayAttendanceComponent,
       ],
       imports: [
+        AccordionModule.forRoot(),
         BsDatepickerModule.forRoot(),
         StoreModule.forRoot(reducers),
       ],

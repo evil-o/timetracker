@@ -4,6 +4,7 @@ import { DayAttendanceComponent } from './day-attendance.component';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from '../../redux/reducers';
 import { Subject } from 'rxjs/Subject';
+import { AccordionModule } from 'ngx-bootstrap';
 
 describe('DayAttendanceComponent', () => {
   let component: DayAttendanceComponent;
@@ -15,6 +16,7 @@ describe('DayAttendanceComponent', () => {
         DayAttendanceComponent,
       ],
       imports: [
+        AccordionModule.forRoot(),
         StoreModule.forRoot(reducers),
       ],
     })
