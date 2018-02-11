@@ -23,7 +23,9 @@ export class ActivityTypesEffects {
 
   @Effect() createAndLogTime$: Observable<Action> = this.actions$
     .ofType(CREATE_ACTIVITY_TYPE_AND_LOG_TIME)
-    .map((action: CreateActivityTypeAndLogTimeAction) => new FetchOrCreateIdAndLogTimeAction(action.name, action.hours, action.date));
+    .map((action: CreateActivityTypeAndLogTimeAction) =>
+      new FetchOrCreateIdAndLogTimeAction(action.name, action.hours, action.date, action.description)
+    );
 
   constructor(
     private actions$: Actions,

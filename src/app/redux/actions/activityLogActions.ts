@@ -9,13 +9,13 @@ export const DELETE_ENTRY = 'DELETE_ENTRY';
 export class FetchOrCreateIdAndLogTimeAction implements Action {
   public readonly type = FETCH_OR_CREATE_ID_AND_LOG_TIME;
 
-  constructor(public name: string, public hoursToLog: number, public date: Date) { }
+  constructor(public name: string, public hoursToLog: number, public date: Date, public description?: string) { }
 }
 
 export class LogTimeAction implements Action {
   public readonly type = LOG_TIME;
 
-  constructor(public id: string, public hoursToLog: number, public date: Date) { }
+  constructor(public id: string, public hoursToLog: number, public date: Date, public description?: string) { }
 }
 
 export class SetDescriptionAction implements Action {

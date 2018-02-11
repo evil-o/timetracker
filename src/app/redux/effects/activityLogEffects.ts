@@ -18,24 +18,24 @@ import { CreateActivityTypeAndLogTimeAction } from '../actions/activityTypesActi
 export class ActivityLogEffects {
   // Listen for the 'LOGIN' action
   @Effect() newActivityTypeLogged$: Observable<Action> = this.actions$
-  .ofType(FETCH_OR_CREATE_ID_AND_LOG_TIME)
-  .map(action => action as FetchOrCreateIdAndLogTimeAction)
-  .withLatestFrom(this.store$)
-  .map(([action, state]) => {
-    const found = state.activityTypes.activities.find((activity) => activity.name === action.name);
-    if (found) {
-      return new LogTimeAction(found.id, action.hoursToLog, action.date);
-    } else {
-      return new CreateActivityTypeAndLogTimeAction(action.name, action.hoursToLog, action.date);
-    }
-  });
+    .ofType(FETCH_OR_CREATE_ID_AND_LOG_TIME)
+    .map(action => action as FetchOrCreateIdAndLogTimeAction)
+    .withLatestFrom(this.store$)
+    .map(([action, state]) => {
+      const found = state.activityTypes.activities.find((activity) => activity.name === action.name);
+      if (found) {
+        return new LogTimeAction(found.id, action.hoursToLog, action.date, action.description);
+      } else {
+        return new CreateActivityTypeAndLogTimeAction(action.name, action.hoursToLog, action.date, action.description);
+      }
+    });
 
   @Effect() incrementalMigrationComplete$: Observable<Action> = this.actions$
-  .ofType(INCREMENTAL_MIGRATION)
-  .map(() => new IncrementalMigrationSuccessAction('ActivityLogState'));
+    .ofType(INCREMENTAL_MIGRATION)
+    .map(() => new IncrementalMigrationSuccessAction('ActivityLogState'));
 
   constructor(
     private actions$: Actions,
     private store$: Store<ApplicationState>
-  ) {}
+  ) { }
 }

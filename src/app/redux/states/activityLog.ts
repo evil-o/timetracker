@@ -35,7 +35,12 @@ export class ActivityLogEntry implements IActivityLogEntry {
 
   public year: number;
 
-  public static createForDay(activityId: string, hours: number, date: Date) {
+  public static createForDay(activityId: string, hours: number, date: Date, description?: string) {
+    // normalize empty string, null, ... to undefined
+    if (!description) {
+      description = undefined;
+    }
+
     return {
       id: uuid(),
       day: date.getDate(),
@@ -43,6 +48,7 @@ export class ActivityLogEntry implements IActivityLogEntry {
       year: date.getFullYear(),
       hours: hours,
       actvitiyId: activityId,
+      description: description,
     };
   }
 }

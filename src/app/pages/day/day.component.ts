@@ -53,7 +53,7 @@ export class DayComponent implements OnInit {
   @ViewChild('logHoursButton')
   public logHoursButton: ElementRef;
 
-  public hourLog$ = new Subject<{ hours: number, activityName: string }>();
+  public hourLog$ = new Subject<{ hours: number, activityName: string, description?: string }>();
 
   constructor(private store: Store<ApplicationState>) {
     this.activityTypes$ = this.store.select(fromStore.activityTypes);
@@ -71,7 +71,7 @@ export class DayComponent implements OnInit {
         );
 
     this.hourLog$.withLatestFrom(this.date$).subscribe(([log, date]) => {
-      this.store.dispatch(new FetchOrCreateIdAndLogTimeAction(log.activityName, log.hours, date));
+      this.store.dispatch(new FetchOrCreateIdAndLogTimeAction(log.activityName, log.hours, date, log.description));
       this.hoursToLog.nativeElement.value = '';
     });
 
@@ -110,13 +110,13 @@ export class DayComponent implements OnInit {
     this.store.dispatch(new SetDescriptionAction(params.entryId, params.newDescription));
   }
 
-  logHours(activityName: string, hours: string) {
+  logHours(activityName: string, hours: string, description?: string) {
     const numHours = Number(hours.replace(',', '.')); // ',' -> '.' fixes locale problems for now
     if (Number.isNaN(numHours)) {
       // TODO show error
       return;
     }
-    this.hourLog$.next({ hours: numHours, activityName });
+    this.hourLog$.next({ hours: numHours, activityName, description });
   }
 
   startDatePicking() {

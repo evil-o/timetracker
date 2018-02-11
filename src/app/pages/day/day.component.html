@@ -30,8 +30,13 @@
   <div class="col-sm-3">
     <input id="duration" #hoursToLog (keyup.enter)="refocusOnEnter()" type="text" class="form-control mr-sm-2" placeholder="for how many hours?">
   </div>
-  <div class="col">
-    <button class="btn btn-primary float-right" #logHoursButton (click)="logHours(activityToLog.name, hoursToLog.value)">Log</button>
+</div>
+<div class="row mt-2">
+  <div class="col-sm-8">
+    <input #descriptionToLog (keyup.enter)="refocusOnEnter()" type="text" class="form-control mr-sm-2" placeholder="Put an (optional) description here">
+  </div>
+  <div class="col-sm-3">
+    <button class="btn btn-primary float-right" #logHoursButton (click)="logHours(activityToLog.name, hoursToLog.value, descriptionToLog.value)">Log</button>
   </div>
 </div>
 <div class="row mt-5">
