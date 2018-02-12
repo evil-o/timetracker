@@ -50,6 +50,9 @@ export class DayComponent implements OnInit {
   @ViewChild('hoursToLog')
   public hoursToLog: ElementRef;
 
+  @ViewChild('descriptionToLog')
+  public logDescription: ElementRef;
+
   @ViewChild('logHoursButton')
   public logHoursButton: ElementRef;
 
@@ -73,6 +76,7 @@ export class DayComponent implements OnInit {
     this.hourLog$.withLatestFrom(this.date$).subscribe(([log, date]) => {
       this.store.dispatch(new FetchOrCreateIdAndLogTimeAction(log.activityName, log.hours, date, log.description));
       this.hoursToLog.nativeElement.value = '';
+      this.logDescription.nativeElement.value = '';
     });
 
     this.totalHours$ = this.activityLogEntries$.map(entries => entries.map(e => e.hours).reduce((total, current) => total + current, 0));
