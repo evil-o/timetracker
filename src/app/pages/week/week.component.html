@@ -53,7 +53,7 @@
 </div-->
 
 <tabset>
-  <tab heading='Weekly tally'>
+  <tab heading='Weekly tally' [active]="selectedTab === 'tally'" (select)="selectedTab = 'tally'">
     <div class="row mt-2">
       <div class="card w-100">
         <div class="card-header text-right">
@@ -68,7 +68,7 @@
       </div>
     </div>
   </tab>
-  <tab heading='Daily details'>
+  <tab heading='Daily details' [active]="selectedTab === 'daily'" (select)="selectedTab = 'daily'">
     <div class="row mt-2" *ngFor="let day of (days$ | async)">
       <div class="card col">
         <div class="card-body">
@@ -87,7 +87,7 @@
       </div>
     </div>
   </tab>
-  <tab heading='Attendance'>
+  <tab heading='Attendance' [active]="selectedTab === 'attendance'" (select)="selectedTab = 'attendance'">
     <div class="row mt-2">
       <div class="col">
         <table class="table table-striped">

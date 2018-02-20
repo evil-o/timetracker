@@ -84,6 +84,8 @@ export class WeekComponent implements OnInit {
 
   public attendanceStats$: Observable<IWeekAttendanceStats>;
 
+  public selectedTab: 'tally' | 'daily' | 'attendance' = 'tally';
+
   constructor(
     private store: Store<ApplicationState>,
     public activatedRoute: ActivatedRoute,
