@@ -57,6 +57,7 @@
     <div class="row mt-2">
       <div class="card w-100">
         <div class="card-header text-right">
+          <app-hour-badge class="mr-2" [hours]="loggedSum$ | async"></app-hour-badge>
           <a class="nav-item" (click)="openLargeModal(printPreview)">
             <i class="fa fa-print"></i>
           </a>

@@ -74,6 +74,8 @@ export class WeekComponent implements OnInit {
 
   public days$: Observable<IDayEntry[]>;
 
+  public loggedSum$: Observable<number>;
+
   public modalRef: BsModalRef;
 
   public printPreviewContents: string;
@@ -172,6 +174,8 @@ export class WeekComponent implements OnInit {
 
         return days;
       });
+
+    this.loggedSum$ = this.filteredLogEntries$.map(v => v.map(d => d.hours)).map(v => v.reduce((prev, curr) => prev + curr, 0));
 
     this.days$.withLatestFrom(this.activityTypes$).subscribe(([days, types]) => {
       this.refreshPrintPreviewContents(days, types);
