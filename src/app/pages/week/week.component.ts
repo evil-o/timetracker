@@ -19,6 +19,7 @@ import { IActivityLogEntry } from '../../redux/states/activityLog';
 import * as fromStore from '../../redux/selectors';
 import { IActivityTypes } from '../../redux/states/activityTypes';
 
+import { HtmlTableGenerator, Row, Cell, HeaderCell } from '../../models/htmlTableGenerator';
 
 import * as currentWeekNumber from 'current-week-number';
 import { SetDescriptionAction } from '../../redux/actions/activityLogActions';
@@ -221,36 +222,21 @@ export class WeekComponent implements OnInit {
   }
 
   refreshPrintPreviewContents(days: IDayEntry[], types: IActivityTypes) {
-    // this.printPreviewContents
     const root = document.createElement('div');
     const h = root.appendChild(document.createElement('h1'));
     h.innerText = `Week ${this.week.week} / ${this.week.year}`;
 
-    const table = root.appendChild(document.createElement('table'));
+    const table = new HtmlTableGenerator();
     table.border = '1pt';
-
-    const thead = table.createTHead();
-    const headingRow = thead.appendChild(document.createElement('tr'));
-    const headingActivity = thead.appendChild(document.createElement('th'));
-    headingActivity.innerText = 'Activity';
-    const headingHours = thead.appendChild(document.createElement('th'));
-    headingHours.innerText = 'Hours';
+    table.header.appendHeadingRow('Activity', 'Hours');
 
     const activityName = (id: string) => types.activities.find((t) => t.id === id).name;
-
-    const tbody = table.createTBody();
     for (const day of days) {
-      const dayRow = tbody.appendChild(document.createElement('tr'));
-      const dayHeading = tbody.appendChild(document.createElement('th'));
-      dayHeading.colSpan = 2;
-      dayHeading.innerText = `${day.name}, ${day.date.getMonth() + 1} / ${day.date.getDate()}`;
-      dayHeading.bgColor = '#D0D0D0';
+      const hs1 = table.body.appendHeadingSpan(`${day.name}, ${day.date.getMonth() + 1} / ${day.date.getDate()}`, 2);
+      hs1.bgColor = '#D0D0D0';
 
       if (day.entries$.value.length <= 0) {
-        const emptyRow = tbody.appendChild(document.createElement('tr'));
-        const emptyCell = tbody.appendChild(document.createElement('td'));
-        emptyCell.colSpan = 2;
-        emptyCell.innerHTML = `<i>No entries.</i>`;
+        table.body.appendSpan(`<i>No entries.</i>`, 2);
         continue;
       }
 
@@ -271,21 +257,15 @@ export class WeekComponent implements OnInit {
       }
 
       for (const group of byId) {
-        const groupRow = tbody.appendChild(document.createElement('tr'));
-        const activityHeader = tbody.appendChild(document.createElement('th'));
-        activityHeader.innerText = activityName(group.activityId);
-        const hoursHeader = tbody.appendChild(document.createElement('th'));
-        hoursHeader.innerHTML = `&sum; ${group.cumulativeHours} h`;
+        table.body.appendHeadingRow(activityName(group.activityId), `&sum; ${group.cumulativeHours} h`);
 
         for (const subentry of group.entries) {
-          const entryRow = tbody.appendChild(document.createElement('tr'));
-          const activityCell = tbody.appendChild(document.createElement('td'));
-          activityCell.innerHTML = subentry.description || '&mdash;';
-          const hoursCell = tbody.appendChild(document.createElement('td'));
-          hoursCell.innerText = `${subentry.hours} h`;
+          table.body.appendRow(subentry.description || '&mdash;', `${subentry.hours} h`);
         }
       }
     }
+
+    table.appendTo(root);
 
     this.printPreviewContents = root.innerHTML;
   }
