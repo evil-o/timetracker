@@ -114,9 +114,9 @@
           <tfoot>
             <tr>
               <th scope="row" colspan="3">Sum totals</th>
-              <td>{{(attendanceStats$ | async).totalHours}}</td>
-              <td>{{(attendanceStats$ | async).totalNonWorkingHours}}</td>
-              <td><app-overtime-badge [hours]="(attendanceStats$ | async).totalOvertime"></app-overtime-badge></td>
+              <td><b>{{(attendanceStats$ | async).totalHours}}</b></td>
+              <td><b>{{(attendanceStats$ | async).totalNonWorkingHours}}</b></td>
+              <td><b><app-overtime-badge [hours]="(attendanceStats$ | async).totalOvertime"></app-overtime-badge></b></td>
             </tr>
           </tfoot>
         </table>
