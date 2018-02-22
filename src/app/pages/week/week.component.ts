@@ -27,6 +27,8 @@ import { IGroupEntry } from '../../pipes/group-activity-log-entries-by-id.pipe';
 import { IAttendanceEntry } from '../../redux/states/attendanceState';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { IAttendanceWithTimes } from '../../redux/selectors';
+import { attendanceStateReducer } from '../../redux/reducers/attendanceReducer';
+import { PadNumberPipe } from '../../pipes/pad-number.pipe';
 
 interface IDayEntry {
   dayOfTheWeek: number;
@@ -85,7 +87,13 @@ export class WeekComponent implements OnInit {
 
   public attendanceStats$: Observable<IWeekAttendanceStats>;
 
+  private attendances: IAttendanceWithTimes[] = [];
+  private attendanceStats: IWeekAttendanceStats;
+
   public selectedTab: 'tally' | 'daily' | 'attendance' = 'tally';
+
+  public overallAttendanceSum$: Observable<number>;
+  private overallAttendanceSum?: number;
 
   constructor(
     private store: Store<ApplicationState>,
@@ -184,6 +192,11 @@ export class WeekComponent implements OnInit {
       this.refreshPrintPreviewContents(days, types);
     });
 
+    this.overallAttendanceSum$ = this.store.select(fromStore.attendanceEntriesWithOvertime).map((attendances) =>
+      attendances.map(attendance => attendance.overtime).reduce((prev, cur) => prev + cur, 0)
+    );
+    this.overallAttendanceSum$.subscribe((sum) => this.overallAttendanceSum = sum);
+
     this.attendances$ = Observable.combineLatest(
       this.store.select(fromStore.attendanceEntriesWithOvertime),
       this.week$,
@@ -205,6 +218,14 @@ export class WeekComponent implements OnInit {
 
       return { totalHours, totalNonWorkingHours, totalOvertime };
     });
+
+    Observable.combineLatest(this.attendances$, this.attendanceStats$, this.days$)
+      .withLatestFrom(this.activityTypes$)
+      .subscribe(([[attendances, stats, days], types]) => {
+        this.attendances = attendances;
+        this.attendanceStats = stats;
+        this.refreshPrintPreviewContents(days, types);
+      });
   }
 
   ngOnInit() { }
@@ -226,17 +247,23 @@ export class WeekComponent implements OnInit {
     const h = root.appendChild(document.createElement('h1'));
     h.innerText = `Week ${this.week.week} / ${this.week.year}`;
 
-    const table = new HtmlTableGenerator();
-    table.border = '1pt';
-    table.header.appendHeadingRow('Activity', 'Hours');
+    //
+    // Activity time sheet
+    //
+    const activityHeading = root.appendChild(document.createElement('h2'));
+    activityHeading.innerText = `Activities`;
+
+    const activityTable = new HtmlTableGenerator();
+    activityTable.border = '1pt';
+    activityTable.header.appendHeadingRow('Activity', 'Hours');
 
     const activityName = (id: string) => types.activities.find((t) => t.id === id).name;
     for (const day of days) {
-      const hs1 = table.body.appendHeadingSpan(`${day.name}, ${day.date.getMonth() + 1} / ${day.date.getDate()}`, 2);
+      const hs1 = activityTable.body.appendHeadingSpan(`${day.name}, ${day.date.getMonth() + 1} / ${day.date.getDate()}`, 2);
       hs1.bgColor = '#D0D0D0';
 
       if (day.entries$.value.length <= 0) {
-        table.body.appendSpan(`<i>No entries.</i>`, 2);
+        activityTable.body.appendSpan(`<i>No entries.</i>`, 2);
         continue;
       }
 
@@ -257,17 +284,72 @@ export class WeekComponent implements OnInit {
       }
 
       for (const group of byId) {
-        table.body.appendHeadingRow(activityName(group.activityId), `&sum; ${group.cumulativeHours} h`);
+        activityTable.body.appendHeadingRow(activityName(group.activityId), `&sum; ${group.cumulativeHours} h`);
 
         for (const subentry of group.entries) {
-          table.body.appendRow(subentry.description || '&mdash;', `${subentry.hours} h`);
+          activityTable.body.appendRow(subentry.description || '&mdash;', `${subentry.hours} h`);
         }
       }
     }
 
-    table.appendTo(root);
+    activityTable.appendTo(root);
+
+    //
+    // Attendance sheet
+    //
+    const attendanceHeading = root.appendChild(document.createElement('h2'));
+    attendanceHeading.innerText = `Attendance`;
+
+    const attendanceTable = new HtmlTableGenerator();
+    attendanceTable.border = '1pt';
+    attendanceTable.header.appendHeadingRow('Day', 'Start', 'End', 'Non-working hours', 'Overtime');
+
+    const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const pmHours = (hours: number) => `${hours > 0 ? '+' : ''}${hours} h`;
+    for (const attendance of this.attendances) {
+      const day = `${dayNames[attendance.date.getDay()]}`;
+      const startTime = this.attendanceStartTimeStr(attendance);
+      const endTime = this.attendanceEndTimeStr(attendance);
+      const nonWorking = this.attendanceNonWorkingStr(attendance);
+      const overtime = `${pmHours(attendance.overtime)}`;
+      attendanceTable.body.appendRow(day, startTime, endTime, nonWorking, overtime);
+    }
+
+    if (this.attendanceStats) {
+      attendanceTable.body.appendRow(
+        { contents: 'Totals', colSpan: 3 },
+        this.attendanceStats.totalNonWorkingHours.toString(),
+        pmHours(this.attendanceStats.totalOvertime),
+      );
+    }
+
+    if (this.overallAttendanceSum) {
+      attendanceTable.body.appendRow(
+        { contents: 'Overall overtime', colSpan: 4 },
+        pmHours(this.overallAttendanceSum),
+      );
+    }
+
+    attendanceTable.appendTo(root);
 
     this.printPreviewContents = root.innerHTML;
+  }
+
+  private attendanceTimeStr(hours?: Date) {
+    const padNumber = new PadNumberPipe();
+    return hours ? hours.getHours() + ':' + padNumber.transform(hours.getMinutes()) : '-';
+  }
+
+  attendanceStartTimeStr(attendance: IAttendanceEntry) {
+    return this.attendanceTimeStr(attendance.start);
+  }
+
+  attendanceEndTimeStr(attendance: IAttendanceEntry) {
+    return this.attendanceTimeStr(attendance.end);
+  }
+
+  attendanceNonWorkingStr(attendance: IAttendanceWithTimes): string {
+    return attendance.nonWorkingHours !== undefined ? attendance.nonWorkingHours.toString() : '-';
   }
 
   savePrint() {

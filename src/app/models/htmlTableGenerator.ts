@@ -1,4 +1,14 @@
-export class Cell {
+export interface ICell {
+  rowSpan?: number;
+
+  colSpan?: number;
+
+  bgColor?: string;
+
+  contents: string;
+}
+
+export class Cell implements ICell {
   public rowSpan?: number;
 
   public colSpan?: number;
@@ -8,6 +18,13 @@ export class Cell {
   public contents: string;
 
   protected elementType = 'td';
+
+  public copyFrom(origin: ICell) {
+    this.rowSpan = origin.rowSpan;
+    this.colSpan = origin.colSpan;
+    this.bgColor = origin.bgColor;
+    this.contents = origin.contents;
+  }
 
   public appendTo(element: HTMLElement) {
     const td = element.appendChild(document.createElement(this.elementType)) as HTMLTableDataCellElement;
@@ -44,21 +61,26 @@ export class Row {
 export class RowCollection {
   public rows: Row[] = [];
 
-  private appendContents(contents: string[], constructor: any) {
+  private appendContents(contents: (string | ICell)[], constructor: any) {
     const row = new Row();
-    for (const content of contents) {
+    for (const c of contents) {
+
       const cell = constructor();
-      cell.contents = content;
+      if (typeof(c) === 'string') {
+        cell.contents = c;
+      } else {
+        cell.copyFrom(c as ICell);
+      }
       row.cells.push(cell);
     }
     this.rows.push(row);
   }
 
-  public appendHeadingRow(...contents: string[]) {
+  public appendHeadingRow(...contents: (string | ICell)[]) {
     this.appendContents(contents, () => new HeaderCell());
   }
 
-  public appendRow(...contents: string[]) {
+  public appendRow(...contents: (string | ICell)[]) {
     this.appendContents(contents, () => new Cell());
   }
 
