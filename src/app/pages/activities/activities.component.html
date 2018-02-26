@@ -1,1 +1,21 @@
-<app-activity-type-list [types]="activities$ | async"></app-activity-type-list>
+<ng-template #mergeActivitiesDialog>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Modal</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="hideModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>You are about to move all activites from:</p>
+    <div>{{mergeSource? mergeSource.name : 'not set'}}</div>
+    <p>into the following activity:</p>
+    <div><app-activity-picker [activities$]="activities$" #moveTarget placeholder="select an move target"></app-activity-picker></div>
+    <p>Afterwards, {{mergeSource? mergeSource.name : 'not set'}} will be deleted.</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-danger" [disabled]="!mergeSource || !moveTarget.name" (click)="confirmMerge$.next({sourceName: mergeSource.name, targetName: moveTarget.name})">Merge and delete source</button>
+    <button class="btn btn-default" (click)="hideModal()">Cancel</button>
+  </div>
+</ng-template>
+
+<app-activity-type-list [types]="activities$ | async" (mergeRequest)="openMergeDialog(mergeActivitiesDialog, $event)"></app-activity-type-list>
