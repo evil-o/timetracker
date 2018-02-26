@@ -13,6 +13,7 @@ import {
 } from '../actions/activityTypesActions';
 import * as uuid from 'uuid';
 import { IncrementalMigrationAction, INCREMENTAL_MIGRATION } from '../actions/storageVersionActions';
+import { MergeActivitiesAction, MERGE_ACTIVITIES } from '../actions/activityLogActions';
 
 function getStateAndEntryForEditing(state: IActivityTypes, activityTypeId: string): [IActivityTypes, IActivityType] {
   const newState = {
@@ -28,7 +29,7 @@ function getStateAndEntryForEditing(state: IActivityTypes, activityTypeId: strin
 }
 
 export function activityTypesReducer(
-  state: IActivityTypes = new ActivityTypes(), action: ActivityTypesActions | IncrementalMigrationAction
+  state: IActivityTypes = new ActivityTypes(), action: ActivityTypesActions | IncrementalMigrationAction | MergeActivitiesAction
 ) {
   switch (action.type) {
     case CREATE:
@@ -59,6 +60,17 @@ export function activityTypesReducer(
         }
       }
 
+      return newState;
+    }
+
+    case MERGE_ACTIVITIES: {
+      const idx = state.activities.findIndex(v => v.id === action.sourceActvityId);
+      if (idx < 0) {
+        return state;
+      }
+
+      const newState = { activities: [...state.activities], ...state };
+      newState.activities.splice(idx, 1);
       return newState;
     }
 
