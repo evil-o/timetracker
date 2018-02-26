@@ -24,11 +24,12 @@ import { HtmlTableGenerator, Row, Cell, HeaderCell } from '../../models/htmlTabl
 import * as currentWeekNumber from 'current-week-number';
 import { SetDescriptionAction } from '../../redux/actions/activityLogActions';
 import { IGroupEntry } from '../../pipes/group-activity-log-entries-by-id.pipe';
-import { IAttendanceEntry } from '../../redux/states/attendanceState';
+import { IAttendanceEntry, IAttendanceCorrection } from '../../redux/states/attendanceState';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { IAttendanceWithTimes } from '../../redux/selectors';
 import { attendanceStateReducer } from '../../redux/reducers/attendanceReducer';
 import { PadNumberPipe } from '../../pipes/pad-number.pipe';
+import { core } from '@angular/compiler';
 
 interface IDayEntry {
   dayOfTheWeek: number;
@@ -84,6 +85,7 @@ export class WeekComponent implements OnInit {
   public printPreviewContents: string;
 
   public attendances$: Observable<IAttendanceWithTimes[]>;
+  public attendanceCorrections$: Observable<IAttendanceCorrection[]>;
 
   public attendanceStats$: Observable<IWeekAttendanceStats>;
 
@@ -188,10 +190,6 @@ export class WeekComponent implements OnInit {
 
     this.loggedSum$ = this.filteredLogEntries$.map(v => v.map(d => d.hours)).map(v => v.reduce((prev, curr) => prev + curr, 0));
 
-    this.days$.withLatestFrom(this.activityTypes$).subscribe(([days, types]) => {
-      this.refreshPrintPreviewContents(days, types);
-    });
-
     this.overallAttendanceSum$ = this.store.select(fromStore.attendanceEntriesWithOvertime).map((attendances) =>
       attendances.map(attendance => attendance.overtime).reduce((prev, cur) => prev + cur, 0)
     );
@@ -204,6 +202,10 @@ export class WeekComponent implements OnInit {
       const entryWeek = currentWeekNumber(e.date);
       return e.date.getFullYear() === week.year && entryWeek === week.week;
     }));
+
+    this.attendanceCorrections$ = this.attendances$.map(attendances => {
+      return attendances.map(v => v.corrections).reduce((prev, curr) => prev.concat(curr), []);
+    });
 
     this.attendanceStats$ = this.attendances$.map((attendances) => {
       let totalHours = 0;
@@ -219,12 +221,12 @@ export class WeekComponent implements OnInit {
       return { totalHours, totalNonWorkingHours, totalOvertime };
     });
 
-    Observable.combineLatest(this.attendances$, this.attendanceStats$, this.days$)
+    Observable.combineLatest(this.attendances$, this.attendanceStats$, this.days$, this.attendanceCorrections$)
       .withLatestFrom(this.activityTypes$)
-      .subscribe(([[attendances, stats, days], types]) => {
+      .subscribe(([[attendances, stats, days, corrections], types]) => {
         this.attendances = attendances;
         this.attendanceStats = stats;
-        this.refreshPrintPreviewContents(days, types);
+        this.refreshPrintPreviewContents(days, types, corrections);
       });
   }
 
@@ -242,7 +244,7 @@ export class WeekComponent implements OnInit {
       });
   }
 
-  refreshPrintPreviewContents(days: IDayEntry[], types: IActivityTypes) {
+  refreshPrintPreviewContents(days: IDayEntry[], types: IActivityTypes, corrections: IAttendanceCorrection[]) {
     const root = document.createElement('div');
     const h = root.appendChild(document.createElement('h1'));
     h.innerText = `Week ${this.week.week} / ${this.week.year}`;
@@ -312,21 +314,34 @@ export class WeekComponent implements OnInit {
       const endTime = this.attendanceEndTimeStr(attendance);
       const nonWorking = this.attendanceNonWorkingStr(attendance);
       const overtime = `${pmHours(attendance.overtime)}`;
-      attendanceTable.body.appendRow(day, startTime, endTime, nonWorking, overtime);
+      attendanceTable.body.appendRow(day, startTime, endTime, nonWorking, { contents: overtime, align: 'right' });
     }
 
     if (this.attendanceStats) {
       attendanceTable.body.appendRow(
         { contents: 'Totals', colSpan: 3 },
         this.attendanceStats.totalNonWorkingHours.toString(),
-        pmHours(this.attendanceStats.totalOvertime),
+        { contents: pmHours(this.attendanceStats.totalOvertime), align: 'right' },
       );
+    }
+
+    if (corrections && corrections.length > 0) {
+      attendanceTable.body.appendHeadingSpan('Extra bookings:', 5);
+      for (const correction of corrections) {
+        const row = attendanceTable.body.createRow();
+        const d = row.appendCell();
+        d.colSpan = 4;
+        d.contents = correction.description;
+        const t = row.appendCell();
+        t.align = 'right';
+        t.contents = pmHours(correction.hours);
+      }
     }
 
     if (this.overallAttendanceSum) {
       attendanceTable.body.appendRow(
         { contents: 'Overall overtime', colSpan: 4 },
-        pmHours(this.overallAttendanceSum),
+        { contents: pmHours(this.overallAttendanceSum), align: 'right' },
       );
     }
 
