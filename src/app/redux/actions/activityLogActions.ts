@@ -5,6 +5,7 @@ export const LOG_TIME = 'LOG_TIME';
 export const SET_DESCRIPTION = 'SET_DESCRIPTION';
 export const SET_HOURS = 'SET_HOURS';
 export const DELETE_ENTRY = 'DELETE_ENTRY';
+export const MERGE_ACTIVITIES = 'MERGE_ENTRIES';
 
 export class FetchOrCreateIdAndLogTimeAction implements Action {
   public readonly type = FETCH_OR_CREATE_ID_AND_LOG_TIME;
@@ -36,10 +37,17 @@ export class DeleteEntryAction implements Action {
   constructor(public entryId: string) { }
 }
 
+export class MergeActivitiesAction implements Action {
+  public readonly type = MERGE_ACTIVITIES;
+
+  constructor(public sourceActvityId: string, public targetActivityId: string) { }
+}
+
 export type ActivityLogAction =
   | FetchOrCreateIdAndLogTimeAction
   | LogTimeAction
   | SetDescriptionAction
   | SetHoursAction
   | DeleteEntryAction
+  | MergeActivitiesAction
   ;
