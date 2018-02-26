@@ -5,7 +5,7 @@ import { IActivityType } from '../../models/interfaces';
 
 describe('the activity types reducer', () => {
 
-  fit('should remove merged activity types', () => {
+  it('should remove merged activity types', () => {
     const a1: IActivityType = {
       id: 'activity1',
       name: 'activity2',

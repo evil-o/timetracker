@@ -4,7 +4,7 @@ import { MergeActivitiesAction } from '../actions/activityLogActions';
 
 describe('the activity log reducer', () => {
 
-  fit('should properly merge all entries belonging to an activity id', () => {
+  it('should properly merge all entries belonging to an activity id', () => {
     const initialState: IActivityLog = {
       entries: [
         {
