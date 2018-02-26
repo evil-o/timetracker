@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IActivityType } from '../../models/interfaces';
 import { ApplicationState } from '../../redux/states/applicationState';
 import { Store } from '@ngrx/store';
@@ -10,6 +10,8 @@ import { SetActivityTypeIsNonWorkingAction, SetActivityTypeColorIdAction } from 
   styleUrls: ['./activity-type-list.component.css']
 })
 export class ActivityTypeListComponent implements OnInit {
+
+  @Output() public mergeRequest = new EventEmitter<IActivityType>();
 
   _types: IActivityType[];
   @Input() set types(value: IActivityType[]) {
