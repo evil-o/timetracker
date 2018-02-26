@@ -6,6 +6,8 @@ export interface ICell {
   bgColor?: string;
 
   contents: string;
+
+  align?: 'left' | 'right';
 }
 
 export class Cell implements ICell {
@@ -14,6 +16,8 @@ export class Cell implements ICell {
   public colSpan?: number;
 
   public bgColor?: string;
+
+  public align?: 'left' | 'right';
 
   public contents: string;
 
@@ -24,6 +28,7 @@ export class Cell implements ICell {
     this.colSpan = origin.colSpan;
     this.bgColor = origin.bgColor;
     this.contents = origin.contents;
+    this.align = origin.align;
   }
 
   public appendTo(element: HTMLElement) {
@@ -34,6 +39,9 @@ export class Cell implements ICell {
     }
     if (this.bgColor) {
       td.bgColor = this.bgColor;
+    }
+    if (this.align) {
+      td.align = this.align;
     }
   }
 }
