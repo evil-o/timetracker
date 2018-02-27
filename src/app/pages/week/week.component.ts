@@ -204,7 +204,7 @@ export class WeekComponent implements OnInit {
     }));
 
     this.attendanceCorrections$ = this.attendances$.map(attendances => {
-      return attendances.map(v => v.corrections).reduce((prev, curr) => prev.concat(curr), []);
+      return attendances.map(v => v.corrections).reduce((prev, curr) => curr ? prev.concat(curr) : prev, []);
     });
 
     this.attendanceStats$ = this.attendances$.map((attendances) => {
