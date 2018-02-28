@@ -34,6 +34,7 @@ export const attendanceEntries = createSelector(attendanceState, (state) => stat
 
 export const configurationState = (state: ApplicationState) => state.configuration;
 export const weeklyWorkingHours = createSelector(configurationState, (state) => state.workingHoursPerWeek);
+export const weeklyWorkingDays = createSelector(configurationState, (state) => state.workingDaysPerWeek);
 
 
 export interface IAttendanceWithTimes extends IAttendanceEntry {
@@ -58,8 +59,8 @@ export const attendanceEntriesWithOvertime = createSelector(
     }
 
     const attendancesWithTime: IAttendanceWithTimes[] = [];
-    const weeklyHours = configuration.workingHoursPerWeek;
-    const dailyHours = weeklyHours / configuration.workingDaysPerWeek;
+    const weeklyHours = configuration.workingHoursPerWeek || 40;
+    const dailyHours = weeklyHours / (configuration.workingDaysPerWeek || 5);
 
     for (const attendance of attendances) {
 

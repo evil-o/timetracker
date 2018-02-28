@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { IConfigurationState } from '../../redux/states/configuration';
 import { ApplicationState } from '../../redux/states/applicationState';
 import { Store } from '@ngrx/store';
-import { SetWeeklyWorkHoursAction } from '../../redux/actions/configurationActions';
+import { SetWeeklyWorkHoursAction, SetWeeklyWorkDaysAction } from '../../redux/actions/configurationActions';
 
 @Component({
   selector: 'app-configuration',
@@ -16,16 +16,26 @@ export class ConfigurationComponent implements OnInit {
 
   public workingHoursPerWeek$: Observable<number>;
 
+  public workingDaysPerWeek$: Observable<number>;
+
   public inputWorkingHoursPerWeek: number;
+
+  public inputWorkingDaysPerWeek: number;
 
   constructor(public store: Store<ApplicationState>) { }
 
   ngOnInit() {
     this.workingHoursPerWeek$ = this.store.select(fromStore.weeklyWorkingHours);
+    this.workingDaysPerWeek$ = this.store.select(fromStore.weeklyWorkingDays);
   }
 
   public applyValues() {
-    this.store.dispatch(new SetWeeklyWorkHoursAction(this.inputWorkingHoursPerWeek));
+    if (this.inputWorkingHoursPerWeek) {
+      this.store.dispatch(new SetWeeklyWorkHoursAction(this.inputWorkingHoursPerWeek));
+    }
+    if (this.inputWorkingDaysPerWeek) {
+      this.store.dispatch(new SetWeeklyWorkDaysAction(this.inputWorkingDaysPerWeek));
+    }
   }
 
 }
