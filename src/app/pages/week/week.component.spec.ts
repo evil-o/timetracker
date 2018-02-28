@@ -66,8 +66,6 @@ describe('WeekComponent', () => {
     store.dispatch(new SetEndTimeAction(date, valueToTime(end)));
   }
 
-  const a1 = 'test activity 1';
-
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
@@ -136,6 +134,7 @@ describe('WeekComponent', () => {
       weekDates.push(date);
     }
 
+    const a1 = 'test activity 1';
     store.dispatch(new FetchOrCreateIdAndLogTimeAction(a1, 4, weekDates[0]));
     store.dispatch(new FetchOrCreateIdAndLogTimeAction(a1, 3, weekDates[1]));
     store.dispatch(new SetWeeklyWorkHoursAction(16));
