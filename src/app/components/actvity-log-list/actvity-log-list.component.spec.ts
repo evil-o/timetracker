@@ -38,8 +38,8 @@ describe('ActvityLogListComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ActivityLogListComponent);
     component = fixture.componentInstance;
-    component.activityTypes$ = new Subject<IActivityTypes>();
-    component.groups$ = new Subject<IGroupEntry[]>();
+    component.activityTypes$ = Observable.of({ activities: [] });
+    component.groups$ = Observable.of([]);
     fixture.detectChanges();
   });
 

@@ -11,7 +11,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap';
 import { TabsModule } from 'ngx-bootstrap';
 import { TypeaheadModule } from 'ngx-bootstrap';
 
-import { StoreModule } from '@ngrx/store';
+import { StoreModule, Store } from '@ngrx/store';
 
 import { reducers } from '../redux/reducers/index';
 import { effects } from '../redux/effects/index';
@@ -44,10 +44,20 @@ import { ActivityColorPickerComponent } from '../components/activity-color-picke
 import { PadNumberPipe } from '../pipes/pad-number.pipe';
 import { ConfigurationComponent } from '../pages/configuration/configuration.component';
 import { DayAttendanceComponent } from '../components/day-attendance/day-attendance.component';
+import { ApplicationState } from '../redux/states/applicationState';
+import { SetStartTimeAction, SetEndTimeAction } from '../redux/actions/attendanceActions';
+import { valueToTime } from '../helpers';
+import { SetWeeklyWorkHoursAction, SetWeeklyWorkDaysAction } from '../redux/actions/configurationActions';
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
   let fixture: ComponentFixture<NavbarComponent>;
+  let store: Store<ApplicationState>;
+
+  function setAttendance(start: string, end: string, date: Date) {
+    store.dispatch(new SetStartTimeAction(date, valueToTime(start)));
+    store.dispatch(new SetEndTimeAction(date, valueToTime(end)));
+  }
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -82,7 +92,7 @@ describe('NavbarComponent', () => {
         AccordionModule.forRoot(),
         BsDatepickerModule.forRoot(),
         FormsModule,
-        StoreModule.forRoot(reducers, { metaReducers }),
+        StoreModule.forRoot(reducers),
         TabsModule.forRoot(),
         TypeaheadModule.forRoot(),
         RouterModule.forRoot(appRoutes),
@@ -97,10 +107,44 @@ describe('NavbarComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(NavbarComponent);
     component = fixture.componentInstance;
+    store = TestBed.get(Store);
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should correctly display overall overtime for 40h work week', () => {
+    store.dispatch(new SetWeeklyWorkHoursAction(40));
+
+    // -4
+    setAttendance('8:30', '12:30', new Date(2018, 0, 1));
+    // +2
+    setAttendance('8:30', '18:30', new Date(2018, 0, 2));
+    // +4
+    setAttendance('8:30', '20:30', new Date(2018, 0, 3));
+    // +3
+    setAttendance('8:30', '19:30', new Date(2018, 0, 4));
+    // 0
+    setAttendance('8:30', '16:30', new Date(2018, 0, 5));
+
+    component.overallAttendanceSum$.subscribe(sum => {
+      expect(sum).toBe(5);
+    });
+  });
+
+  it('should correctly display overall overtime for 16h work week', () => {
+    store.dispatch(new SetWeeklyWorkHoursAction(16));
+    store.dispatch(new SetWeeklyWorkDaysAction(2));
+
+    // -4
+    setAttendance('8:30', '12:30', new Date(2018, 0, 1));
+    // +2
+    setAttendance('8:30', '18:30', new Date(2018, 0, 2));
+
+    component.overallAttendanceSum$.subscribe(sum => {
+      expect(sum).toBe(-2);
+    });
   });
 });

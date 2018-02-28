@@ -190,9 +190,7 @@ export class WeekComponent implements OnInit {
 
     this.loggedSum$ = this.filteredLogEntries$.map(v => v.map(d => d.hours)).map(v => v.reduce((prev, curr) => prev + curr, 0));
 
-    this.overallAttendanceSum$ = this.store.select(fromStore.attendanceEntriesWithOvertime).map((attendances) =>
-      attendances.map(attendance => attendance.overtime).reduce((prev, cur) => prev + cur, 0)
-    );
+    this.overallAttendanceSum$ = this.store.select(fromStore.overtimeSum);
     this.overallAttendanceSum$.subscribe((sum) => this.overallAttendanceSum = sum);
 
     this.attendances$ = Observable.combineLatest(

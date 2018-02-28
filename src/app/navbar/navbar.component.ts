@@ -33,9 +33,7 @@ export class NavbarComponent implements OnInit {
   constructor(private store: Store<ApplicationState>) {
     this.attendances$ = this.store.select(fromStore.attendanceEntriesWithOvertime);
 
-    this.overallAttendanceSum$ = this.attendances$.map((attendances) =>
-      attendances.map(attendance => attendance.overtime).reduce((prev, cur) => prev + cur, 0)
-    );
+    this.overallAttendanceSum$ = this.store.select(fromStore.overtimeSum);
   }
 
   ngOnInit() {
