@@ -52,7 +52,7 @@ import { CreateActivityTypeAction } from '../../redux/actions/activityTypesActio
 import { LogTimeAction, FetchOrCreateIdAndLogTimeAction } from '../../redux/actions/activityLogActions';
 import { EffectsModule } from '@ngrx/effects';
 import { effects } from '../../redux/effects';
-import { SetWeeklyWorkHoursAction } from '../../redux/actions/configurationActions';
+import { SetWeeklyWorkHoursAction, SetWeeklyWorkDaysAction } from '../../redux/actions/configurationActions';
 import { SetStartTimeAction, SetEndTimeAction } from '../../redux/actions/attendanceActions';
 import { valueToTime } from '../../helpers';
 
@@ -138,6 +138,8 @@ describe('WeekComponent', () => {
     store.dispatch(new FetchOrCreateIdAndLogTimeAction(a1, 4, weekDates[0]));
     store.dispatch(new FetchOrCreateIdAndLogTimeAction(a1, 3, weekDates[1]));
     store.dispatch(new SetWeeklyWorkHoursAction(16));
+    store.dispatch(new SetWeeklyWorkDaysAction(2));
+
     // 4 hours on day 1
     setAttendance('8:30', '12:30', weekDates[0]);
     // 3 hours on day 2

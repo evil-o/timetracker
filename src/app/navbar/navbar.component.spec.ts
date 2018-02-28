@@ -47,7 +47,7 @@ import { DayAttendanceComponent } from '../components/day-attendance/day-attenda
 import { ApplicationState } from '../redux/states/applicationState';
 import { SetStartTimeAction, SetEndTimeAction } from '../redux/actions/attendanceActions';
 import { valueToTime } from '../helpers';
-import { SetWeeklyWorkHoursAction } from '../redux/actions/configurationActions';
+import { SetWeeklyWorkHoursAction, SetWeeklyWorkDaysAction } from '../redux/actions/configurationActions';
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
@@ -136,6 +136,7 @@ describe('NavbarComponent', () => {
 
   it('should correctly display overall overtime for 16h work week', () => {
     store.dispatch(new SetWeeklyWorkHoursAction(16));
+    store.dispatch(new SetWeeklyWorkDaysAction(2));
 
     // -4
     setAttendance('8:30', '12:30', new Date(2018, 0, 1));

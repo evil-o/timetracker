@@ -59,7 +59,7 @@ export const attendanceEntriesWithOvertime = createSelector(
 
     const attendancesWithTime: IAttendanceWithTimes[] = [];
     const weeklyHours = configuration.workingHoursPerWeek;
-    const dailyHours = weeklyHours / 5.0;
+    const dailyHours = weeklyHours / configuration.workingDaysPerWeek;
 
     for (const attendance of attendances) {
 
