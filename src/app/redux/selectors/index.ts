@@ -109,3 +109,7 @@ export const attendanceEntriesWithOvertime = createSelector(
     }
     return attendancesWithTime;
   });
+
+export const overtimeSum = createSelector(attendanceEntriesWithOvertime, (times) => {
+  return times.map(t => t.overtime).reduce((previous, current) => previous + current, 0);
+});
