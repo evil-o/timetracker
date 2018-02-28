@@ -66,7 +66,7 @@ export class ActivityLogEntryComponent implements OnInit {
   private updateCustomClass() {
     if (this.group && this.activityTypes) {
       const type = this.activityTypes.activities.find(t => t.id === this.group.activityId);
-      if (type.colorId) {
+      if (type && type.colorId) {
         const color = this.colors.find(c => c.id === type.colorId);
         this.customColorClass = color.styleClass;
       } else {

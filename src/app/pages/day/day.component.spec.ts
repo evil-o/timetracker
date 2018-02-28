@@ -30,6 +30,7 @@ import { ApplicationState } from '../../redux/states/applicationState';
 import { Store } from '@ngrx/store';
 import { LogTimeAction } from '../../redux/actions/activityLogActions';
 import { DayAttendanceComponent } from '../../components/day-attendance/day-attendance.component';
+import { ActivityColorPickerComponent } from '../../components/activity-color-picker/activity-color-picker.component';
 
 describe('DayComponent', () => {
   let component: DayComponent;
@@ -61,6 +62,7 @@ describe('DayComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
+        ActivityColorPickerComponent,
         ActivityLogEntryComponent,
         ActivityLogListComponent,
         ActivityTypeIdToNamePipe,
@@ -112,12 +114,13 @@ describe('DayComponent', () => {
   it('should properly display the start time', fakeAsync(() => {
     const n = new Date();
 
+    tick();
+
     component.startTime$.subscribe((value) => {
       expect(value.getHours()).toBe(n.getHours() - 6);
-      expect(value.getMinutes()).toBe(Math.floor(n.getMinutes() - 15));
+      expect(value.getMinutes()).toBe(Math.floor(n.getMinutes() + 60 - 15));
     });
 
-    tick();
 
     discardPeriodicTasks();
   }));
