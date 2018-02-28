@@ -162,5 +162,9 @@ describe('WeekComponent', () => {
         expect(attendance.overtime).toBe(expected);
       }
     });
+
+    component.overallAttendanceSum$.subscribe(overtimeSum => {
+      expect(overtimeSum).toBe(-9);
+    });
   }));
 });
