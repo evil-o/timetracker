@@ -48,6 +48,7 @@ import { ApplicationState } from '../redux/states/applicationState';
 import { SetStartTimeAction, SetEndTimeAction } from '../redux/actions/attendanceActions';
 import { valueToTime } from '../helpers';
 import { SetWeeklyWorkHoursAction, SetWeeklyWorkDaysAction } from '../redux/actions/configurationActions';
+import { FormatHoursPipe } from '../pipes/format-hours.pipe';
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
@@ -75,6 +76,7 @@ describe('NavbarComponent', () => {
         DayAttendanceComponent,
         EditableLogEntryDescriptionComponent,
         EditableLogEntryHoursComponent,
+        FormatHoursPipe,
         GroupActivityLogEntriesByIdPipe,
         HourBadgeComponent,
         LogEntryTallyPipe,

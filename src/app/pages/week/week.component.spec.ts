@@ -55,6 +55,7 @@ import { effects } from '../../redux/effects';
 import { SetWeeklyWorkHoursAction, SetWeeklyWorkDaysAction } from '../../redux/actions/configurationActions';
 import { SetStartTimeAction, SetEndTimeAction } from '../../redux/actions/attendanceActions';
 import { valueToTime } from '../../helpers';
+import { FormatHoursPipe } from '../../pipes/format-hours.pipe';
 
 describe('WeekComponent', () => {
   let component: WeekComponent;
@@ -82,6 +83,7 @@ describe('WeekComponent', () => {
         DayAttendanceComponent,
         EditableLogEntryDescriptionComponent,
         EditableLogEntryHoursComponent,
+        FormatHoursPipe,
         GroupActivityLogEntriesByIdPipe,
         HourBadgeComponent,
         LogEntryTallyPipe,

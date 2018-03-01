@@ -4,6 +4,7 @@ import { OvertimeBadgeComponent } from './overtime-badge.component';
 import { PrecisionPipe } from '../../pipes/precision.pipe';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
+import { FormatHoursPipe } from '../../pipes/format-hours.pipe';
 
 describe('OvertimeBadgeComponent', () => {
   let component: OvertimeBadgeComponent;
@@ -13,6 +14,7 @@ describe('OvertimeBadgeComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
+        FormatHoursPipe,
         OvertimeBadgeComponent,
         PrecisionPipe,
       ],

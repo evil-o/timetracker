@@ -104,7 +104,7 @@
               <th>End time</th>
               <th>Hours total</th>
               <th>Non-working hours</th>
-              <th>Overtime</th>
+              <th class="text-right">Overtime</th>
             </tr>
           </thead>
           <tbody>
@@ -112,10 +112,10 @@
               <th scope="row">{{attendance.date.getDate()}}. {{attendance.date.getMonth() + 1}}.</th>
               <td>{{attendanceStartTimeStr(attendance)}}</td>
               <td>{{attendanceEndTimeStr(attendance)}}</td>
-              <td>{{attendance.hours !== undefined? attendance.hours : "-"}}</td>
+              <td>{{attendance.hours | formatHours: '{h}h {m}m'}}</td>
               <td>{{attendanceNonWorkingStr(attendance)}}</td>
-              <td>
-                <app-overtime-badge [hours]="attendance.overtime"></app-overtime-badge>
+              <td class="text-right">
+                <app-overtime-badge class="mr-1" [hours]="attendance.overtime"></app-overtime-badge>
               </td>
             </tr>
           </tbody>
@@ -128,9 +128,9 @@
               <td>
                 <b>{{(attendanceStats$ | async).totalNonWorkingHours}}</b>
               </td>
-              <td>
+              <td class="text-right">
                 <b>
-                  <app-overtime-badge [hours]="(attendanceStats$ | async).totalOvertime"></app-overtime-badge>
+                  <app-overtime-badge class="mr-1" [hours]="(attendanceStats$ | async).totalOvertime"></app-overtime-badge>
                 </b>
               </td>
             </tr>

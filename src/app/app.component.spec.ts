@@ -36,6 +36,7 @@ import { ActivityColorPickerComponent } from './components/activity-color-picker
 import { PadNumberPipe } from './pipes/pad-number.pipe';
 import { ConfigurationComponent } from './pages/configuration/configuration.component';
 import { DayAttendanceComponent } from './components/day-attendance/day-attendance.component';
+import { FormatHoursPipe } from './pipes/format-hours.pipe';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -55,6 +56,7 @@ describe('AppComponent', () => {
         DayAttendanceComponent,
         EditableLogEntryDescriptionComponent,
         EditableLogEntryHoursComponent,
+        FormatHoursPipe,
         GroupActivityLogEntriesByIdPipe,
         HourBadgeComponent,
         LogEntryTallyPipe,
