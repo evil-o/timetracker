@@ -106,4 +106,10 @@ export class DayAttendanceComponent implements OnInit {
     this.endValid$ = Observable.combineLatest(this.end$, this.timeValues$, this.timeInputsChaged$)
       .map(([end, timeValues]) => this.endInput.nativeElement.value === end);
   }
+
+  public setTimeToNowPlusMinutes(element: HTMLInputElement, minutesDelta: number) {
+    const date = new Date();
+    date.setMinutes(date.getMinutes() + minutesDelta);
+    element.value = dateToTimeInputValue(date);
+  }
 }
