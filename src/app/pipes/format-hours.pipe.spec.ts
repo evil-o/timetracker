@@ -16,6 +16,8 @@ describe('FormatHoursPipe', () => {
       { h: 2.5, f: '{h}:{m}', r: '2:30' },
       { h: undefined, f: '{h}:{m}', r: '-' },
       { h: 0, f: '{h}:{m}', r: '0:00' },
+      { h: -1.25, f: '{h}:{m}', r: '-1:15' },
+      { h: -0.75, f: '{h}:{m}', r: '-0:45' },
     ];
 
     for (const expectation of expectations) {
