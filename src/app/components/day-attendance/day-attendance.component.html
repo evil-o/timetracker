@@ -10,24 +10,24 @@
       <label for="dayEnd">End</label>
     </div>
   </div>
-  <div class="form-row">
+  <div class="form-row mb-2">
     <div class="col-4">
       <input type="time" class="form-control" [class.is-valid]="this.startValid$ | async" id="dayStart" #dayStart (change)="setButton.disabled = false; timeInputsChaged$.next()"
         [value]="start$ | async">
+      <button type="submit" class="btn btn-default my-2" (click)="setTimeToNowPlusMinutes(dayStart, -2); setButton.disabled = false; timeInputsChaged$.next()">
+        <i class="fa fa-sign-in-alt"></i> 2 min ago
+      </button>
     </div>
     <div class="col-4">
       <input type="time" class="form-control" [class.is-valid]="this.endValid$ | async" id="dayEnd" #dayEnd (change)="setButton.disabled = false; timeInputsChaged$.next()"
         [value]="end$ | async">
+      <button type="submit" class="btn btn-default my-2" (click)="setTimeToNowPlusMinutes(dayEnd, +2); setButton.disabled = false; timeInputsChaged$.next()">
+        <i class="fa fa-sign-out-alt"></i> in 2 min
+      </button>
     </div>
     <div class="col-4">
       <button #setButton type="submit" class="btn btn-primary mb-2" [disabled]="true" (click)="timeValues$.next({start: dayStart.value, end: dayEnd.value})">
         <i class="fa fa-check"></i> set
-      </button>
-      <button type="submit" class="btn btn-primary mb-2" (click)="setTimeToNowPlusMinutes(dayStart, -2); setButton.disabled = false; timeInputsChaged$.next()">
-        <i class="fa fa-sign-in-alt"></i> 2 min ago
-      </button>
-      <button type="submit" class="btn btn-primary mb-2" (click)="setTimeToNowPlusMinutes(dayEnd, +2); setButton.disabled = false; timeInputsChaged$.next()">
-        <i class="fa fa-sign-out-alt"></i> in 2 min
       </button>
     </div>
   </div>
