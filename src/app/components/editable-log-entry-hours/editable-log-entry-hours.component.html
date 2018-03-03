@@ -4,7 +4,7 @@
       &mdash;
     </div>
     <div *ngIf="entry.hours">
-      {{entry.hours}}
+      {{entry.hours | formatHours}}
     </div>
   </div>
   <div *ngIf="editing" class="input-group">

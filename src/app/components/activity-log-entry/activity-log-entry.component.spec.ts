@@ -9,6 +9,7 @@ import { AccordionModule } from 'ngx-bootstrap';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from '../../redux/reducers/index';
 import { metaReducers } from '../../redux/metaReducers';
+import { FormatHoursPipe } from '../../pipes/format-hours.pipe';
 
 describe('ActivityLogEntryComponent', () => {
   let component: ActivityLogEntryComponent;
@@ -19,6 +20,7 @@ describe('ActivityLogEntryComponent', () => {
       declarations: [
         ActivityLogEntryComponent,
         ActivityTypeIdToNamePipe,
+        FormatHoursPipe,
         HourBadgeComponent,
         EditableLogEntryDescriptionComponent,
         EditableLogEntryHoursComponent,

@@ -13,6 +13,7 @@ import { StoreModule } from '@ngrx/store';
 
 import { reducers } from '../../redux/reducers/index';
 import { metaReducers } from '../../redux/metaReducers';
+import { FormatHoursPipe } from '../../pipes/format-hours.pipe';
 
 describe('TallyComponent', () => {
   let component: TallyComponent;
@@ -25,6 +26,7 @@ describe('TallyComponent', () => {
         ActivityTypeIdToNamePipe,
         EditableLogEntryDescriptionComponent,
         EditableLogEntryHoursComponent,
+        FormatHoursPipe,
         HourBadgeComponent,
         TallyComponent,
         LogEntryTallyPipe,

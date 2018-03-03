@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
 
 import { EditableLogEntryHoursComponent } from './editable-log-entry-hours.component';
+import { FormatHoursPipe } from '../../pipes/format-hours.pipe';
 
 @Component({
   selector: `app-test-host-component`,
@@ -20,6 +21,7 @@ describe('EditableLogEntryHoursComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         EditableLogEntryHoursComponent,
+        FormatHoursPipe,
         TestHostComponent,
       ]
     })

@@ -31,6 +31,7 @@ import { Store } from '@ngrx/store';
 import { LogTimeAction } from '../../redux/actions/activityLogActions';
 import { DayAttendanceComponent } from '../../components/day-attendance/day-attendance.component';
 import { ActivityColorPickerComponent } from '../../components/activity-color-picker/activity-color-picker.component';
+import { FormatHoursPipe } from '../../pipes/format-hours.pipe';
 
 describe('DayComponent', () => {
   let component: DayComponent;
@@ -71,6 +72,7 @@ describe('DayComponent', () => {
         DayAttendanceComponent,
         EditableLogEntryDescriptionComponent,
         EditableLogEntryHoursComponent,
+        FormatHoursPipe,
         GroupActivityLogEntriesByIdPipe,
         HourBadgeComponent,
         NoActivityLogEntryPresentComponent,

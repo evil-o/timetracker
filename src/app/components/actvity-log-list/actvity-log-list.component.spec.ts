@@ -12,6 +12,7 @@ import { Observable } from 'rxjs/Observable';
 import { IActivityTypes } from '../../redux/states/activityTypes';
 import { Subject } from 'rxjs/Subject';
 import { IGroupEntry } from '../../pipes/group-activity-log-entries-by-id.pipe';
+import { FormatHoursPipe } from '../../pipes/format-hours.pipe';
 
 describe('ActvityLogListComponent', () => {
   let component: ActivityLogListComponent;
@@ -23,6 +24,7 @@ describe('ActvityLogListComponent', () => {
         ActivityLogEntryComponent,
         ActivityLogListComponent,
         ActivityTypeIdToNamePipe,
+        FormatHoursPipe,
         HourBadgeComponent,
         EditableLogEntryDescriptionComponent,
         EditableLogEntryHoursComponent,

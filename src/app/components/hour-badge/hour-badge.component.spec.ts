@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HourBadgeComponent } from './hour-badge.component';
+import { FormatHoursPipe } from '../../pipes/format-hours.pipe';
 
 describe('HourBadgeComponent', () => {
   let component: HourBadgeComponent;
@@ -8,7 +9,10 @@ describe('HourBadgeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HourBadgeComponent ]
+      declarations: [
+        FormatHoursPipe,
+        HourBadgeComponent,
+      ]
     })
     .compileComponents();
   }));
