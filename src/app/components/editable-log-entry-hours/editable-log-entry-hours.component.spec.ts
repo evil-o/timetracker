@@ -1,8 +1,9 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, ViewChild } from '@angular/core';
+import { async, ComponentFixture, TestBed, fakeAsync, discardPeriodicTasks, tick } from '@angular/core/testing';
+import { Component, ViewChild, DebugElement } from '@angular/core';
 
 import { EditableLogEntryHoursComponent } from './editable-log-entry-hours.component';
 import { FormatHoursPipe } from '../../pipes/format-hours.pipe';
+import { By } from '@angular/platform-browser';
 
 @Component({
   selector: `app-test-host-component`,
@@ -40,10 +41,47 @@ describe('EditableLogEntryHoursComponent', () => {
       hours: 6,
       id: 'testId',
     };
+
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(host).toBeTruthy();
   });
+
+  it('should send hours for "," decimal separator', fakeAsync(() => {
+    host.component.setEditing(true);
+    fixture.detectChanges();
+
+    host.component.changeEntryHours.subscribe(v => {
+      expect(v.newHours).toBe(1.25);
+    });
+
+    host.component.emitChangeHours('1,25');
+    tick();
+  }));
+
+  it('should send hours for "." decimal separator', fakeAsync(() => {
+    host.component.setEditing(true);
+    fixture.detectChanges();
+
+    host.component.changeEntryHours.subscribe(v => {
+      expect(v.newHours).toBe(1.25);
+    });
+
+    host.component.emitChangeHours('1.25');
+    tick();
+  }));
+
+  it('should send hours for strings starting with "."', fakeAsync(() => {
+    host.component.setEditing(true);
+    fixture.detectChanges();
+
+    host.component.changeEntryHours.subscribe(v => {
+      expect(v.newHours).toBe(0.25);
+    });
+
+    host.component.emitChangeHours('.25');
+    tick();
+  }));
 });

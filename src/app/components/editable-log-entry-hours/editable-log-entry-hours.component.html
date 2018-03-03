@@ -8,12 +8,12 @@
     </div>
   </div>
   <div *ngIf="editing" class="input-group">
-    <input type="text" #hoursInput class="form-control" placeholder="#hours" [value]="entry.hours || ''">
+    <input type="text" #hoursInput id="hoursInput" class="form-control" placeholder="#hours" [value]="entry.hours || ''">
     <div class="input-group-append">
       <button class="btn btn-outline-primary" type="button" (click)="emitChangeHours(hoursInput.value); setEditing(false);">
         <i class="fa fa-check"></i>
       </button>
-      <button class="btn btn-outline-secondary" type="button" (click)="setEditing(false)">
+      <button class="btn btn-outline-secondary" id="submitButton" type="button" (click)="setEditing(false)">
         <i class="fa fa-ban"></i>
       </button>
     </div>
