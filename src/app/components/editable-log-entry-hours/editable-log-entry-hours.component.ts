@@ -16,7 +16,7 @@ export class EditableLogEntryHoursComponent implements OnInit {
   public changeEntryHours = new EventEmitter<{ entryId: string, newHours: number }>();
 
   @ViewChild('hoursInput')
-  public descriptionInput: ElementRef;
+  public hoursInput: ElementRef;
 
   public editing = false;
 
@@ -29,8 +29,21 @@ export class EditableLogEntryHoursComponent implements OnInit {
     this.editing = editing;
 
     if (this.editing) {
-      setTimeout(() => this.descriptionInput.nativeElement.focus(), 0);
+      setTimeout(() => {
+        this.hoursInput.nativeElement.focus();
+        this.hoursInput.nativeElement.select();
+      },
+        0);
     }
+  }
+
+  public submit() {
+    this.emitChangeHours(this.hoursInput.nativeElement.value);
+    this.setEditing(false);
+  }
+
+  public cancel() {
+    this.setEditing(false);
   }
 
   public emitChangeHours(newHoursStr: string) {
