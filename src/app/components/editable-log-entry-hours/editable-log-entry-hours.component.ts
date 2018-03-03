@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, Output, OnInit, ViewChild } from '@angular/core';
 import { ActivityLogEntry } from '../../redux/states/activityLog';
+import { stringToDuration } from '../../helpers';
 
 @Component({
   selector: 'app-editable-log-entry-hours',
@@ -12,7 +13,7 @@ export class EditableLogEntryHoursComponent implements OnInit {
   public entry: ActivityLogEntry;
 
   @Output()
-  public changeEntryHours = new EventEmitter<{entryId: string, newHours: number}>();
+  public changeEntryHours = new EventEmitter<{ entryId: string, newHours: number }>();
 
   @ViewChild('hoursInput')
   public descriptionInput: ElementRef;
@@ -33,13 +34,13 @@ export class EditableLogEntryHoursComponent implements OnInit {
   }
 
   public emitChangeHours(newHoursStr: string) {
-    const newHours = Number(newHoursStr.replace(',', '.'));
-    if (Number.isNaN(newHours)) {
-      return;
+    const hoursNumber = stringToDuration(newHoursStr);
+
+    if (hoursNumber) {
+      this.changeEntryHours.emit({
+        entryId: this.entry.id,
+        newHours: hoursNumber,
+      });
     }
-    this.changeEntryHours.emit({
-      entryId: this.entry.id,
-      newHours,
-    });
   }
 }

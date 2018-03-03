@@ -16,6 +16,7 @@ import { Subject } from 'rxjs/Subject';
 import { TimeBadgeComponent } from '../../components/time-badge/time-badge.component';
 import { HourBadgeComponent } from '../../components/hour-badge/hour-badge.component';
 import { ActivityPickerComponent } from '../../components/activity-picker/activity-picker.component';
+import { stringToDuration } from '../../helpers';
 
 @Component({
   selector: 'app-day',
@@ -115,7 +116,7 @@ export class DayComponent implements OnInit {
   }
 
   logHours(activityName: string, hours: string, description?: string) {
-    const numHours = Number(hours.replace(',', '.')); // ',' -> '.' fixes locale problems for now
+    const numHours = stringToDuration(hours);
     if (Number.isNaN(numHours)) {
       // TODO show error
       return;

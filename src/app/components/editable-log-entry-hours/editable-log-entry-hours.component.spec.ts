@@ -14,7 +14,7 @@ class TestHostComponent {
   public component: EditableLogEntryHoursComponent;
 }
 
-describe('EditableLogEntryHoursComponent', () => {
+fdescribe('EditableLogEntryHoursComponent', () => {
   let host: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
 
@@ -49,39 +49,95 @@ describe('EditableLogEntryHoursComponent', () => {
     expect(host).toBeTruthy();
   });
 
+  it('should reject invalid strings', fakeAsync(() => {
+    host.component.setEditing(true);
+    fixture.detectChanges();
+
+    spyOn(host.component.changeEntryHours, 'emit');
+    host.component.emitChangeHours('not a number');
+    tick();
+    expect(host.component.changeEntryHours.emit).not.toHaveBeenCalled();
+
+    host.component.emitChangeHours('not: a number');
+    tick();
+    expect(host.component.changeEntryHours.emit).not.toHaveBeenCalled();
+
+    host.component.emitChangeHours('not: 0');
+    tick();
+    expect(host.component.changeEntryHours.emit).not.toHaveBeenCalled();
+
+    host.component.emitChangeHours('1: not a number either');
+    tick();
+    expect(host.component.changeEntryHours.emit).not.toHaveBeenCalled();
+  }));
+
   it('should send hours for "," decimal separator', fakeAsync(() => {
     host.component.setEditing(true);
     fixture.detectChanges();
 
+    spyOn(host.component.changeEntryHours, 'emit');
     host.component.changeEntryHours.subscribe(v => {
       expect(v.newHours).toBe(1.25);
     });
 
     host.component.emitChangeHours('1,25');
     tick();
+    expect(host.component.changeEntryHours.emit).toHaveBeenCalled();
   }));
 
   it('should send hours for "." decimal separator', fakeAsync(() => {
     host.component.setEditing(true);
     fixture.detectChanges();
 
+    spyOn(host.component.changeEntryHours, 'emit');
     host.component.changeEntryHours.subscribe(v => {
       expect(v.newHours).toBe(1.25);
     });
 
     host.component.emitChangeHours('1.25');
     tick();
+    expect(host.component.changeEntryHours.emit).toHaveBeenCalled();
   }));
 
   it('should send hours for strings starting with "."', fakeAsync(() => {
     host.component.setEditing(true);
     fixture.detectChanges();
 
+    spyOn(host.component.changeEntryHours, 'emit');
     host.component.changeEntryHours.subscribe(v => {
       expect(v.newHours).toBe(0.25);
     });
 
     host.component.emitChangeHours('.25');
     tick();
+    expect(host.component.changeEntryHours.emit).toHaveBeenCalled();
+  }));
+
+  it('should support "h:m" input format', fakeAsync(() => {
+    host.component.setEditing(true);
+    fixture.detectChanges();
+
+    spyOn(host.component.changeEntryHours, 'emit');
+    host.component.changeEntryHours.subscribe(v => {
+      expect(v.newHours).toBe(0.25);
+    });
+
+    host.component.emitChangeHours('0:15');
+    tick();
+    expect(host.component.changeEntryHours.emit).toHaveBeenCalled();
+  }));
+
+  it('should support ":m" input format', fakeAsync(() => {
+    host.component.setEditing(true);
+    fixture.detectChanges();
+
+    spyOn(host.component.changeEntryHours, 'emit');
+    host.component.changeEntryHours.subscribe(v => {
+      expect(v.newHours).toBe(0.5);
+    });
+
+    host.component.emitChangeHours(':30');
+    tick();
+    expect(host.component.changeEntryHours.emit).toHaveBeenCalled();
   }));
 });
