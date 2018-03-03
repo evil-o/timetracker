@@ -16,7 +16,7 @@ export class FormatHoursPipe implements PipeTransform {
     }
     const hours = Math.floor(totalHours);
     const totalMinutes = ((totalHours - hours) * 60);
-    const minutes = Math.floor(totalMinutes);
+    const minutes = Math.round(totalMinutes);
     const totalSeconds = ((totalMinutes - minutes) * 60);
     const seconds = Math.floor(totalSeconds);
     let hourPrefix = '';
