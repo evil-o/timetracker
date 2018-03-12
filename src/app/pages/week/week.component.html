@@ -113,7 +113,7 @@
               <td class="text-right">{{attendanceStartTimeStr(attendance)}}</td>
               <td class="text-right">{{attendanceEndTimeStr(attendance)}}</td>
               <td class="text-right">{{attendance.hours | formatHours}}</td>
-              <td class="text-right">{{attendanceNonWorkingStr(attendance) | formatHours}}</td>
+              <td class="text-right">{{attendance.nonWorkingHours | formatHours}}</td>
               <td class="text-right">
                 <app-overtime-badge class="mr-1" [hours]="attendance.overtime"></app-overtime-badge>
               </td>

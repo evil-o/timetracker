@@ -30,6 +30,7 @@ import { IAttendanceWithTimes } from '../../redux/selectors';
 import { attendanceStateReducer } from '../../redux/reducers/attendanceReducer';
 import { PadNumberPipe } from '../../pipes/pad-number.pipe';
 import { core } from '@angular/compiler';
+import { FormatHoursPipe } from '../../pipes/format-hours.pipe';
 
 interface IDayEntry {
   dayOfTheWeek: number;
@@ -247,6 +248,9 @@ export class WeekComponent implements OnInit {
     const h = root.appendChild(document.createElement('h1'));
     h.innerText = `Week ${this.week.week} / ${this.week.year}`;
 
+    const hrPipe = new FormatHoursPipe();
+    const hrf = (hrs: number, format = '{h}:{m}') => hrPipe.transform(hrs, format);
+
     //
     // Activity time sheet
     //
@@ -284,10 +288,10 @@ export class WeekComponent implements OnInit {
       }
 
       for (const group of byId) {
-        activityTable.body.appendHeadingRow(activityName(group.activityId), `&sum; ${group.cumulativeHours} h`);
+        activityTable.body.appendHeadingRow(activityName(group.activityId), `&sum; ${hrf(group.cumulativeHours)}`);
 
         for (const subentry of group.entries) {
-          activityTable.body.appendRow(subentry.description || '&mdash;', `${subentry.hours} h`);
+          activityTable.body.appendRow(subentry.description || '&mdash;', hrf(subentry.hours));
         }
       }
     }
@@ -305,7 +309,7 @@ export class WeekComponent implements OnInit {
     attendanceTable.header.appendHeadingRow('Day', 'Start', 'End', 'Non-working hours', 'Overtime');
 
     const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    const pmHours = (hours: number) => `${hours > 0 ? '+' : ''}${hours} h`;
+    const pmHours = (hours: number) => hrPipe.transform(hours, '{+h}:{m}');
     for (const attendance of this.attendances) {
       const day = `${dayNames[attendance.date.getDay()]}`;
       const startTime = this.attendanceStartTimeStr(attendance);
@@ -318,7 +322,7 @@ export class WeekComponent implements OnInit {
     if (this.attendanceStats) {
       attendanceTable.body.appendRow(
         { contents: 'Totals', colSpan: 3 },
-        this.attendanceStats.totalNonWorkingHours.toString(),
+        hrf(this.attendanceStats.totalNonWorkingHours, '{h}:{m}'),
         { contents: pmHours(this.attendanceStats.totalOvertime), align: 'right' },
       );
     }
@@ -362,7 +366,7 @@ export class WeekComponent implements OnInit {
   }
 
   attendanceNonWorkingStr(attendance: IAttendanceWithTimes): string {
-    return attendance.nonWorkingHours !== undefined ? attendance.nonWorkingHours.toString() : '-';
+    return attendance.nonWorkingHours !== undefined ? (new FormatHoursPipe()).transform(attendance.nonWorkingHours, '{h}:{m}') : '-';
   }
 
   savePrint() {
