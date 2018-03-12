@@ -7,6 +7,7 @@ import { padNumber } from '../helpers';
 export class FormatHoursPipe implements PipeTransform {
 
   transform(totalHours: number, format = '{h}h {m}m'): any {
+    console.log('Formatting: ' + totalHours);
     if (totalHours === undefined) {
       return '-';
     }
@@ -16,16 +17,19 @@ export class FormatHoursPipe implements PipeTransform {
     }
     const hours = Math.floor(totalHours);
     const totalMinutes = ((totalHours - hours) * 60);
-    const minutes = Math.round(totalMinutes);
+    // round to about 5 digit precision to avoid issues with minute precision
+    const minutes = Math.floor(Math.round(10000 * totalMinutes) / 10000);
     const totalSeconds = ((totalMinutes - minutes) * 60);
     const seconds = Math.floor(totalSeconds);
     let hourPrefix = '';
     if (negative) {
       hourPrefix = '-';
     }
+    const plusH = negative ? '' : '+';
     let formatted = format;
     formatted = formatted.replace('{hh}', hourPrefix + padNumber(hours, 2, '0'));
     formatted = formatted.replace('{h}', hourPrefix + hours.toString());
+    formatted = formatted.replace('{+h}', plusH + hourPrefix + hours.toString());
     formatted = formatted.replace('{m}', padNumber(minutes, 2, '0'));
     formatted = formatted.replace('{s}', padNumber(seconds, 2, '0'));
     return formatted;

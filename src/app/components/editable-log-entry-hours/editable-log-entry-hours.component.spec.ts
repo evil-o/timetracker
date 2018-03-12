@@ -14,7 +14,7 @@ class TestHostComponent {
   public component: EditableLogEntryHoursComponent;
 }
 
-fdescribe('EditableLogEntryHoursComponent', () => {
+describe('EditableLogEntryHoursComponent', () => {
   let host: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
 

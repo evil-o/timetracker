@@ -19,6 +19,10 @@ describe('FormatHoursPipe', () => {
       { h: 0, f: '{h}:{m}', r: '0:00' },
       { h: -1.25, f: '{h}:{m}', r: '-1:15' },
       { h: -0.75, f: '{h}:{m}', r: '-0:45' },
+      { h: -0.75, f: '{+h}:{m}', r: '-0:45' },
+      { h: 0.75, f: '{+h}:{m}', r: '+0:45' },
+      { h: 1.75, f: '{+h}:{m}', r: '+1:45' },
+      { h: -1.75, f: '{+h}:{m}', r: '-1:45' },
     ];
 
     for (const expectation of expectations) {
@@ -27,7 +31,7 @@ describe('FormatHoursPipe', () => {
     }
   });
 
-  fit('should deal with minute precision correctly', () => {
+  it('should deal with minute precision correctly', () => {
     const pipe = new FormatHoursPipe();
     for (let hrs = 0; hrs < 24; ++hrs) {
       for (let min = 0; min < 60; ++min) {
