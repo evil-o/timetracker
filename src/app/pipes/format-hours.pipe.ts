@@ -7,7 +7,6 @@ import { padNumber } from '../helpers';
 export class FormatHoursPipe implements PipeTransform {
 
   transform(totalHours: number, format = '{h}h {m}m'): any {
-    console.log('Formatting: ' + totalHours);
     if (totalHours === undefined) {
       return '-';
     }
