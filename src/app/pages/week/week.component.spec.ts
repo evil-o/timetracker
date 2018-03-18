@@ -54,7 +54,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { effects } from '../../redux/effects';
 import { SetWeeklyWorkHoursAction, SetWeeklyWorkDaysAction } from '../../redux/actions/configurationActions';
 import { SetStartTimeAction, SetEndTimeAction } from '../../redux/actions/attendanceActions';
-import { valueToTime } from '../../helpers';
+import { valueToTime, getFirstDayOfCalendarWeek } from '../../helpers';
 import { FormatHoursPipe } from '../../pipes/format-hours.pipe';
 
 describe('WeekComponent', () => {
@@ -128,8 +128,8 @@ describe('WeekComponent', () => {
   it('should be correct for normal part time weeks', fakeAsync(() => {
     expect(component.week.year).toBe(2018);
     expect(component.week.week).toBe(1);
-    const start = new Date(component.week.year, 0, 1 + 7 * (component.week.week - 1));
-    const weekDates = [];
+    const start = getFirstDayOfCalendarWeek(component.week.year, component.week.week);
+    const weekDates: Date[] = [];
     for (let d = 0; d < 7; ++d) {
       const date = new Date(start);
       date.setDate(date.getDate() + d);
@@ -162,7 +162,8 @@ describe('WeekComponent', () => {
       const expectedOvertimes = [-4, -5];
       for (let i = 0; i < attendances.length; ++i) {
         const attendance = attendances[i];
-        const expected = expectedOvertimes[i];
+        const day_of_week = (attendance.date.getTime() - weekDates[0].getTime()) / (1000 * 60 * 60 * 24);
+        const expected = expectedOvertimes[day_of_week];
         expect(attendance.overtime).toBe(expected);
       }
     });

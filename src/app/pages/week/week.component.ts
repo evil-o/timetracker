@@ -31,6 +31,7 @@ import { attendanceStateReducer } from '../../redux/reducers/attendanceReducer';
 import { PadNumberPipe } from '../../pipes/pad-number.pipe';
 import { core } from '@angular/compiler';
 import { FormatHoursPipe } from '../../pipes/format-hours.pipe';
+import { getFirstDayOfCalendarWeek } from '../../helpers';
 
 interface IDayEntry {
   dayOfTheWeek: number;
@@ -167,7 +168,7 @@ export class WeekComponent implements OnInit {
         const weekdayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
         // calculate the start date of the week
-        const startOfWeek = new Date(this.week.year, 0, 1 + 7 * (this.week.week - 1));
+        const startOfWeek = getFirstDayOfCalendarWeek(this.week.year, this.week.week);
         // - 1: javascript week starts on sunday
         startOfWeek.setDate(startOfWeek.getDate() - ((startOfWeek.getDay() + 6) % 7));
 
@@ -200,7 +201,7 @@ export class WeekComponent implements OnInit {
     ).map(([entries, week]) => entries.filter(e => {
       const entryWeek = currentWeekNumber(e.date);
       return e.date.getFullYear() === week.year && entryWeek === week.week;
-    })).map(entries => entries.sort((a, b) => a.date.getUTCDate() - b.date.getUTCDate()));
+    })).map(entries => entries.sort((a, b) => a.date.getTime() - b.date.getTime()));
 
     this.attendanceCorrections$ = this.attendances$.map(attendances => {
       return attendances.map(v => v.corrections).reduce((prev, curr) => curr ? prev.concat(curr) : prev, []);
