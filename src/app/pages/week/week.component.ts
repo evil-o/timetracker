@@ -200,7 +200,7 @@ export class WeekComponent implements OnInit {
     ).map(([entries, week]) => entries.filter(e => {
       const entryWeek = currentWeekNumber(e.date);
       return e.date.getFullYear() === week.year && entryWeek === week.week;
-    }));
+    })).map(entries => entries.sort((a, b) => a.date.getUTCDate() - b.date.getUTCDate()));
 
     this.attendanceCorrections$ = this.attendances$.map(attendances => {
       return attendances.map(v => v.corrections).reduce((prev, curr) => curr ? prev.concat(curr) : prev, []);
