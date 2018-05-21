@@ -9,6 +9,7 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
 import { IActivityType } from '../../models/interfaces';
+import { TypeaheadDirective } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-activity-picker',
@@ -28,7 +29,10 @@ export class ActivityPickerComponent implements OnInit, OnDestroy {
   public confirm = new EventEmitter<void>();
 
   @ViewChild('textInput')
-  private textInput: ElementRef;
+  public textInput: ElementRef;
+
+  @ViewChild(TypeaheadDirective)
+  public typeahead: TypeaheadDirective;
 
   public activityNames: string[];
 
@@ -48,5 +52,11 @@ export class ActivityPickerComponent implements OnInit, OnDestroy {
 
   focus() {
     this.textInput.nativeElement.focus();
+  }
+
+  emitConfirm() {
+    if (!this.typeahead.typeahead) {
+      this.confirm.emit();
+    }
   }
 }

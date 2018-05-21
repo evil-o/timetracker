@@ -2,5 +2,5 @@
        [(ngModel)]="name"
        [typeahead]="activityNames"
        [placeholder]="placeholder"
-       (keyup.enter)="confirm.emit()"
+       (keyup.enter)="emitConfirm()"
        class="form-control">
