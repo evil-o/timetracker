@@ -53,7 +53,7 @@ describe('ActivityPickerComponent', () => {
     expect(component.activityPicker.typeahead).toBeTruthy();
   });
 
-  fit('should not confirm on enter when typeahead is active', fakeAsync(() => {
+  it('should not confirm on enter when typeahead is active', fakeAsync(() => {
     const typeaheadElement = fixture.debugElement.query(By.directive(TypeaheadDirective));
     expect(typeaheadElement).toBeDefined();
     const typeahead = typeaheadElement.injector.get(TypeaheadDirective);
