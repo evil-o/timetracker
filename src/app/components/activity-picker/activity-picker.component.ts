@@ -53,10 +53,4 @@ export class ActivityPickerComponent implements OnInit, OnDestroy {
   focus() {
     this.textInput.nativeElement.focus();
   }
-
-  emitConfirm() {
-    if (!this.typeahead.typeahead) {
-      this.confirm.emit();
-    }
-  }
 }

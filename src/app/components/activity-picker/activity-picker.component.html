@@ -1,6 +1,9 @@
+<form (submit)="this.confirm.emit()">
 <input #textInput
        [(ngModel)]="name"
        [typeahead]="activityNames"
        [placeholder]="placeholder"
-       (keyup.enter)="emitConfirm()"
-       class="form-control">
+       (typeaheadOnSelect)="this.confirm.emit()"
+       class="form-control"
+       name="activityPickerInput">
+      </form>
