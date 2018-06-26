@@ -3,6 +3,7 @@
     <tr>
       <th>Activity</th>
       <th>Non-working?</th>
+      <th>Archived?</th>
       <th>Color</th>
       <th>Actions</th>
     </tr>
@@ -15,6 +16,13 @@
           <input type="checkbox" #cb class="custom-control-input" id="nonWorking-{{activity.id}}" (click)="setNonWorking(activity.id, cb.checked)"
             [checked]="activity.isNonWorking">
           <label class="custom-control-label" for="nonWorking-{{activity.id}}">&nbsp;</label>
+        </div>
+      </td>
+      <td>
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" #cbArchived class="custom-control-input" id="isArchived-{{activity.id}}" (click)="setArchived(activity.id, cbArchived.checked)"
+            [checked]="activity.isArchived">
+          <label class="custom-control-label" for="isArchived-{{activity.id}}">&nbsp;</label>
         </div>
       </td>
       <td>

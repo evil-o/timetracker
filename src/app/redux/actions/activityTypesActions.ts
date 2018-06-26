@@ -4,6 +4,13 @@ export const CREATE = 'CREATE_ACTIVITY_TYPE_AND_LOG_TIME';
 export const CREATE_ACTIVITY_TYPE_AND_LOG_TIME = 'CREATE_ACTIVITY_TYPE_AND_LOG_TIME';
 export const SET_ACTIVITY_TYPE_IS_NON_WORKING = 'SET_ACTIVITY_TYPE_IS_NON_WORKING';
 export const SET_ACTIVITY_TYPE_IS_COLOR_ID = 'SET_ACTIVITY_TYPE_IS_COLOR_ID';
+export const SET_ARCHIVED = 'SET_ACTIVITY_TYPE_ARCHIVED';
+
+export class SetArchivedAction implements Action {
+  public readonly type = SET_ARCHIVED;
+
+  constructor(public id: string, public archived: boolean) { }
+}
 
 export class CreateActivityTypeAction implements Action {
   public readonly type = CREATE;
@@ -34,4 +41,5 @@ export type ActivityTypesActions =
   | CreateActivityTypeAndLogTimeAction
   | SetActivityTypeIsNonWorkingAction
   | SetActivityTypeColorIdAction
+  | SetArchivedAction
   ;

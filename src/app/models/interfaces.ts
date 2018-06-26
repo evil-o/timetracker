@@ -11,6 +11,8 @@ export interface IActivityType {
 
   isNonWorking: boolean;
 
+  isArchived: boolean;
+
   colorId?: string;
 }
 
