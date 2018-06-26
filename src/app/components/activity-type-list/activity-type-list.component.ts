@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IActivityType } from '../../models/interfaces';
 import { ApplicationState } from '../../redux/states/applicationState';
 import { Store } from '@ngrx/store';
-import { SetActivityTypeIsNonWorkingAction, SetActivityTypeColorIdAction } from '../../redux/actions/activityTypesActions';
+import { SetActivityTypeIsNonWorkingAction, SetActivityTypeColorIdAction, SetArchivedAction } from '../../redux/actions/activityTypesActions';
 
 @Component({
   selector: 'app-activity-type-list',
@@ -27,6 +27,10 @@ export class ActivityTypeListComponent implements OnInit {
   constructor(private store: Store<ApplicationState>) { }
 
   ngOnInit() {
+  }
+
+  setArchived(id: string, value: boolean) {
+    this.store.dispatch(new SetArchivedAction(id, value));
   }
 
   setNonWorking(id: string, value: boolean) {

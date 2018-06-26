@@ -41,7 +41,7 @@ export class ActivityPickerComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   ngOnInit() {
-    this.subscription = this.activities$.subscribe((value) => this.activityNames = value.map(v => v.name));
+    this.subscription = this.activities$.subscribe((value) => this.activityNames = value.filter(v => !v.isArchived).map(v => v.name));
   }
 
   ngOnDestroy() {

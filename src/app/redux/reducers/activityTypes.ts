@@ -9,7 +9,8 @@ import {
   CREATE_ACTIVITY_TYPE_AND_LOG_TIME,
   CREATE,
   SET_ACTIVITY_TYPE_IS_NON_WORKING,
-  SET_ACTIVITY_TYPE_IS_COLOR_ID
+  SET_ACTIVITY_TYPE_IS_COLOR_ID,
+  SET_ARCHIVED
 } from '../actions/activityTypesActions';
 import * as uuid from 'uuid';
 import { IncrementalMigrationAction, INCREMENTAL_MIGRATION } from '../actions/storageVersionActions';
@@ -43,6 +44,15 @@ export function activityTypesReducer(
       const [newState, entry] = getStateAndEntryForEditing(state, action.id);
       if (entry) {
         entry.isNonWorking = action.isNonWorking;
+      }
+
+      return newState;
+    }
+
+    case SET_ARCHIVED: {
+      const [newState, entry] = getStateAndEntryForEditing(state, action.id);
+      if (entry) {
+        entry.isArchived = action.archived;
       }
 
       return newState;
