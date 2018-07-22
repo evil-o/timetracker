@@ -41,7 +41,7 @@
           <input type="text" #hours class="form-control" placeholder="Enter +/- hours here" [value]="correction.hours">
         </div>
         <div class="form-group col-4">
-          <button class="btn btn-secondary" (click)="correctionsToUpdate$.next({id: correction.id, description: desc.value, hours: hours.value})">
+          <button class="btn btn-secondary" (click)="updateCorrection(correction.id, desc.value, hours.value)">
             <i class="fa fa-check"></i>
           </button>
           <button class="btn btn-danger" (click)="correctionsToDelete$.next(correction)">

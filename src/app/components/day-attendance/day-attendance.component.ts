@@ -107,6 +107,13 @@ export class DayAttendanceComponent implements OnInit {
       .map(([end, timeValues]) => this.endInput.nativeElement.value === end);
   }
 
+  public updateCorrection(correctionId: string, newDescription: string, newHours: string): void {
+    if (newHours.includes(',')) {
+      newHours = newHours.replace(',', '.');
+    }
+    this.correctionsToUpdate$.next({id: correctionId, description: newDescription, hours: +newHours});
+  }
+
   public setTimeToNowPlusMinutes(element: HTMLInputElement, minutesDelta: number) {
     const date = new Date();
     date.setMinutes(date.getMinutes() + minutesDelta);
