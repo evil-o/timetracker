@@ -56,7 +56,7 @@ describe('ActivityPickerComponent', () => {
     expect(component.activityPicker.typeahead).toBeTruthy();
   });
 
-  fit('should properly confirm on enter with partial text', fakeAsync(() => {
+  it('should properly confirm on enter with partial text', fakeAsync(() => {
     const typeaheadElement = fixture.debugElement.query(By.directive(TypeaheadDirective));
     expect(typeaheadElement).toBeDefined();
     const typeahead = typeaheadElement.injector.get(TypeaheadDirective);
@@ -91,7 +91,7 @@ describe('ActivityPickerComponent', () => {
     discardPeriodicTasks();
   }));
 
-  fit('should properly confirm on enter with full text', fakeAsync(() => {
+  it('should properly confirm on enter with full text', fakeAsync(() => {
     const typeaheadElement = fixture.debugElement.query(By.directive(TypeaheadDirective));
     expect(typeaheadElement).toBeDefined();
     const typeahead = typeaheadElement.injector.get(TypeaheadDirective);
