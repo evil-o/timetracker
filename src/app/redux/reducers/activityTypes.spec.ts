@@ -10,11 +10,13 @@ describe('the activity types reducer', () => {
       id: 'activity1',
       name: 'activity2',
       isNonWorking: false,
+      isArchived: false,
     };
     const a2: IActivityType = {
       id: 'activity2',
       name: 'activity1',
       isNonWorking: true,
+      isArchived: false,
     };
     const initialState: IActivityTypes = {
       activities: [a1, a2],
