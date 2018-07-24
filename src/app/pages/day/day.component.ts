@@ -18,6 +18,7 @@ import { HourBadgeComponent } from '../../components/hour-badge/hour-badge.compo
 import { ActivityPickerComponent } from '../../components/activity-picker/activity-picker.component';
 import { stringToDuration } from '../../helpers';
 
+
 @Component({
   selector: 'app-day',
   templateUrl: './day.component.html',
@@ -30,6 +31,7 @@ export class DayComponent implements OnInit {
 
   public totalHours$: Observable<number>;
   public startTime$: Observable<Date>;
+  public singInTime$: Observable<Date | undefined>;
 
   public date$ = new BehaviorSubject<Date>(new Date());
 
@@ -59,6 +61,8 @@ export class DayComponent implements OnInit {
 
   public hourLog$ = new Subject<{ hours: number, activityName: string, description?: string }>();
 
+  public hoursLeftToLog$ = new Observable<number | undefined>();
+
   constructor(private store: Store<ApplicationState>) {
     this.activityTypes$ = this.store.select(fromStore.activityTypes);
     this.activityLogEntries$ =
@@ -82,6 +86,22 @@ export class DayComponent implements OnInit {
 
     this.totalHours$ = this.activityLogEntries$.map(entries => entries.map(e => e.hours).reduce((total, current) => total + current, 0));
 
+    this.singInTime$ = this.store
+      .select(fromStore.attendanceEntries)
+      .withLatestFrom(this.date$)
+      .map(([entries, date]) => {
+        const entry = entries.find(
+          e => e.date.getDate() === date.getDate() &&
+          e.date.getMonth() === date.getMonth() &&
+          e.date.getFullYear() === date.getFullYear()
+        );
+        if (!entry) {
+          return undefined;
+        } else {
+          return entry.start;
+        }
+      });
+
     this.startTime$ = Observable.timer(0, 5)
       .withLatestFrom(this.totalHours$)
       .map(([timer, hoursFraction]) => {
@@ -91,6 +111,24 @@ export class DayComponent implements OnInit {
         start.setHours(start.getHours() - hours);
         start.setMinutes(start.getMinutes() - minutes);
         return start;
+      });
+
+    this.hoursLeftToLog$ = Observable
+      .combineLatest(this.startTime$, this.singInTime$)
+      .map(([startTime, singInTime]) => {
+        let signin: number;
+        if (singInTime) {
+          signin = singInTime.getTime();
+        } else {
+          signin = (new Date(startTime.getFullYear(), startTime.getMonth(), startTime.getDate())).getTime();
+        }
+        const diff = (startTime.getTime() - signin) / (1000 * 60 * 60);
+        // console.log('signin: ' + signin + ', start: ' + startTime.getTime() + ', diff: ' + diff);
+        if (diff < 0) {
+          return 0;
+        } else {
+          return diff;
+        }
       });
   }
 

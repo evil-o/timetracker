@@ -55,6 +55,14 @@
     <app-time-badge #startTimeDisplay [date]="startTime$ | async"></app-time-badge>
   </div>
 </div>
+<div class="row">
+  <div class="col-sm-1">
+    To log:
+  </div>
+  <div class="col-sm-2">
+    <app-hour-badge [hours]="hoursLeftToLog$ | async"></app-hour-badge>
+  </div>
+</div>
 
 <div class="row mt-2">
   <div class="col-sm-12">
