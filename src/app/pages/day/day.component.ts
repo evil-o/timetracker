@@ -35,6 +35,8 @@ export class DayComponent implements OnInit {
 
   public date$ = new BehaviorSubject<Date>(new Date());
 
+  private dateDayDeltas$ = new Subject<number>();
+
   public pickingDate = false;
   @ViewChild('datePickerInput')
   private datePickerInput: ElementRef;
@@ -172,5 +174,22 @@ export class DayComponent implements OnInit {
     const date = new Date(this.datePickerInput.nativeElement.value);
     this.pickingDate = false;
     this.date$.next(date);
+  }
+
+  pickToday() {
+    this.date$.next(new Date());
+  }
+
+  pickNextDay() {
+    this.skipDays(+1);
+  }
+
+  pickPreviousDay() {
+    this.skipDays(-1);
+  }
+
+  skipDays(days: number) {
+    const current = this.date$.value;
+    this.date$.next(new Date(current.getFullYear(), current.getMonth(), current.getDate() + days));
   }
 }

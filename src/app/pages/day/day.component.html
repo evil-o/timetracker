@@ -1,19 +1,23 @@
 <div class="row">
-  <div class="col">
-    <h1 [class.d-none]="pickingDate">
-      <a (click)="startDatePicking()">
-        <i class="far fa-calendar"></i>
-      </a>
-      {{date$.value.toLocaleDateString()}}
-    </h1>
-    <h1 [class.d-none]="!pickingDate" class="form-inline">
-      <a>
-        <i class="far fa-calendar"></i>
-      </a>
-      <input #datePickerInput #datePicker="bsDatepicker" class="form-control border-0" placeholder="Pick a date" bsDatepicker [bsValue]="date$.value"
+  <h1 class="col">
+    <!--span [class.d-none]="!pickingDate"-->
+      <input #datePickerInput #datePicker="bsDatepicker" class="invisible form-control border-0" placeholder="Pick a date" bsDatepicker [bsValue]="date$.value"
         (blur)="endDatePicking()" [bsConfig]="{containerClass: 'theme-default'}" (onHidden)="endDatePicking()">
-    </h1>
-  </div>
+    <!--/span -->
+    <button class="btn" (click)="startDatePicking()">
+      <i class="far fa-calendar-alt"></i>
+    </button>
+    <button class="btn" (click)="pickPreviousDay()">
+      <i class="fa fa-chevron-left"></i>
+    </button>
+    <button class="btn" (click)="pickToday()">
+      <i class="far fa-calendar-minus"></i>
+    </button>
+    <button class="btn" (click)="pickNextDay()">
+      <i class="fa fa-chevron-right"></i>
+    </button>
+    {{(date$ | async).toLocaleDateString()}}
+  </h1>
 </div>
 
 <app-day-attendance class="my-3" [date$]="date$"></app-day-attendance>
