@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { ChartsModule } from 'ng2-charts';
 
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -53,6 +54,7 @@ import { PadNumberPipe } from './pipes/pad-number.pipe';
 import { ConfigurationComponent } from './pages/configuration/configuration.component';
 import { DayAttendanceComponent } from './components/day-attendance/day-attendance.component';
 import { FormatHoursPipe } from './pipes/format-hours.pipe';
+import { StatisticsComponent } from './components/statistics/statistics.component';
 
 @NgModule({
   declarations: [
@@ -83,9 +85,11 @@ import { FormatHoursPipe } from './pipes/format-hours.pipe';
     ConfigurationComponent,
     DayAttendanceComponent,
     FormatHoursPipe,
+    StatisticsComponent,
   ],
   imports: [
     BrowserModule,
+    ChartsModule,
     FormsModule,
     AccordionModule.forRoot(),
     BsDropdownModule.forRoot(),

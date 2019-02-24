@@ -6,6 +6,7 @@ import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { AttendanceComponent } from './pages/attendance/attendance.component';
 import { ActivitiesComponent } from './pages/activities/activities.component';
 import { ConfigurationComponent } from './pages/configuration/configuration.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
 
 export const appRoutes: Routes = [
   {
@@ -35,5 +36,9 @@ export const appRoutes: Routes = [
   {
     path: 'configuration',
     component: ConfigurationComponent,
+  },
+  {
+    path: 'statistics',
+    component: StatisticsComponent,
   },
 ];

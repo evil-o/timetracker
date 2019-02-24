@@ -21,6 +21,7 @@ export class NavbarComponent implements OnInit {
     { label: 'Today', link: 'today', icon: 'calendar' },
     { label: 'Week', link: 'week', icon: 'calendar-alt' },
     { label: 'Activities', link: 'activities', icon: 'paper-plane' },
+    { label: 'Statistics', link: 'statistics', icon: 'chart-bar' },
   ];
 
   @Output()
