@@ -1,13 +1,17 @@
 <div class="container-fluid">
-  <div class="row h100">
-    <div class="col">
-      <canvas baseChart [data]="filteredActivityHours" [labels]="filteredActivityNames" [colors]="filteredChartColors()"
-        chartType="doughnut"></canvas>
+  <div class="row">
+    <div class="col text-center">
+      <h2>This month</h2>
     </div>
-
-    <!--div class="col">
-      <canvas baseChart [data]="filteredActivityHours" [labels]="filteredActivityNames" [colors]="filteredChartColors()"
-        chartType="doughnut"></canvas>
-    </div-->
+    <div class="col text-center">
+      <h2>Overall stats</h2>
+    </div>
+  </div>
+  <div class="row">
+    <app-activity-aggregation-chart class="col mr-2" [allActivities$]="allActivities$" [types$]="types$"
+      [startDate$]="startDate$" [endDate$]="endDate$">
+    </app-activity-aggregation-chart>
+    <app-activity-aggregation-chart class="col" [allActivities$]="allActivities$" [types$]="types$">
+    </app-activity-aggregation-chart>
   </div>
 </div>
