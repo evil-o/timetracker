@@ -2,6 +2,10 @@ export interface IActivityTypeColor {
   id: string;
 
   styleClass: string;
+
+  color?: {
+    r: number, g: number, b: number,
+  };
 }
 
 export interface IActivityType {

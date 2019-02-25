@@ -1,7 +1,13 @@
-<!-->div style="display: block">
-  <canvas baseChart [data]="activityHours$ | async" [labels]="activityNames$ | async" chartType="doughnut"></canvas>
-</div-->
+<div class="container-fluid">
+  <div class="row h100">
+    <div class="col">
+      <canvas baseChart [data]="filteredActivityHours" [labels]="filteredActivityNames" [colors]="filteredChartColors()"
+        chartType="doughnut"></canvas>
+    </div>
 
-<div style="display: block">
-  <canvas baseChart [data]="activityHours" [labels]="activityNames" chartType="doughnut"></canvas>
+    <!--div class="col">
+      <canvas baseChart [data]="filteredActivityHours" [labels]="filteredActivityNames" [colors]="filteredChartColors()"
+        chartType="doughnut"></canvas>
+    </div-->
+  </div>
 </div>
