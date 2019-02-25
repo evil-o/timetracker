@@ -1,17 +1,49 @@
 <div class="container-fluid">
+
   <div class="row">
-    <div class="col text-center">
-      <h2>This month</h2>
-    </div>
     <div class="col text-center">
       <h2>Overall stats</h2>
     </div>
   </div>
   <div class="row">
-    <app-activity-aggregation-chart class="col mr-2" [allActivities$]="allActivities$" [types$]="types$"
-      [startDate$]="startDate$" [endDate$]="endDate$">
-    </app-activity-aggregation-chart>
+    <div class="col-3"></div>
     <app-activity-aggregation-chart class="col" [allActivities$]="allActivities$" [types$]="types$">
     </app-activity-aggregation-chart>
+    <div class="col-3"></div>
   </div>
+
+  <div class="row mt-5">
+    <div class="col text-center">
+      <h2>This month</h2>
+    </div>
+    <div class="col text-center">
+      <h2>Last month</h2>
+    </div>
+  </div>
+  <div class="row">
+    <app-activity-aggregation-chart class="col mr-2" [allActivities$]="allActivities$" [types$]="types$"
+      [startDate$]="startDateCurrentMonth$" [endDate$]="endDateCurrentMonth$">
+    </app-activity-aggregation-chart>
+    <app-activity-aggregation-chart class="col mr-2" [allActivities$]="allActivities$" [types$]="types$"
+      [startDate$]="startDateLastMonth$" [endDate$]="endDateLastMonth$">
+    </app-activity-aggregation-chart>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col text-center">
+      <h2>This year</h2>
+    </div>
+    <div class="col text-center">
+      <h2>Last year</h2>
+    </div>
+  </div>
+  <div class="row">
+    <app-activity-aggregation-chart class="col mr-2" [allActivities$]="allActivities$" [types$]="types$"
+      [startDate$]="startDateCurrentYear$" [endDate$]="endDateCurrentYear$">
+    </app-activity-aggregation-chart>
+    <app-activity-aggregation-chart class="col mr-2" [allActivities$]="allActivities$" [types$]="types$"
+      [startDate$]="startDateLastYear$" [endDate$]="endDateLastYear$">
+    </app-activity-aggregation-chart>
+  </div>
+
 </div>

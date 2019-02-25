@@ -7,14 +7,35 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { IActivityTypes } from '../../redux/states/activityTypes';
 import { IActivityLog } from '../../redux/states/activityLog';
 
+function getMonthDateRange(year: number, month: number) {
+  const start = new Date(year, month, 1);
+  const end = new Date(year, month + 1, 0);
+  return { start, end };
+}
+
+function getYearDateRange(year: number) {
+  const start = new Date(year, 0, 1);
+  const end = new Date(year, 11, 31);
+  return { start, end };
+}
+
 @Component({
   selector: 'app-statistics',
   templateUrl: './statistics.component.html',
   styleUrls: ['./statistics.component.css']
 })
 export class StatisticsComponent {
-  public startDate$: BehaviorSubject<Date>;
-  public endDate$: BehaviorSubject<Date>;
+  public startDateCurrentMonth$: BehaviorSubject<Date>;
+  public endDateCurrentMonth$: BehaviorSubject<Date>;
+
+  public startDateLastMonth$: BehaviorSubject<Date>;
+  public endDateLastMonth$: BehaviorSubject<Date>;
+
+  public startDateCurrentYear$: BehaviorSubject<Date>;
+  public endDateCurrentYear$: BehaviorSubject<Date>;
+
+  public startDateLastYear$: BehaviorSubject<Date>;
+  public endDateLastYear$: BehaviorSubject<Date>;
 
   public allActivities$: Observable<IActivityLog>;
 
@@ -24,13 +45,34 @@ export class StatisticsComponent {
     this.allActivities$ = store.select(activityLog);
     this.types$ = store.select(activityTypes);
 
-    // initialize to display data from the current month
-    const start = new Date();
-    start.setDate(1);
-    const end = new Date();
-    end.setDate(1);
-    end.setMonth(end.getMonth() + 1);
-    this.startDate$ = new BehaviorSubject(start);
-    this.endDate$ = new BehaviorSubject(end);
+    const now = new Date();
+
+    // current month
+    {
+      const { start, end } = getMonthDateRange(now.getFullYear(), now.getMonth());
+      this.startDateCurrentMonth$ = new BehaviorSubject(start);
+      this.endDateCurrentMonth$ = new BehaviorSubject(end);
+    }
+
+    // last month
+    {
+      const { start, end } = getMonthDateRange(now.getFullYear(), now.getMonth() - 1);
+      this.startDateLastMonth$ = new BehaviorSubject(start);
+      this.endDateLastMonth$ = new BehaviorSubject(end);
+    }
+
+    // current year
+    {
+      const { start, end } = getYearDateRange(now.getFullYear());
+      this.startDateCurrentYear$ = new BehaviorSubject(start);
+      this.endDateCurrentYear$ = new BehaviorSubject(end);
+    }
+
+    // last year
+    {
+      const { start, end } = getYearDateRange(now.getFullYear() - 1);
+      this.startDateCurrentYear$ = new BehaviorSubject(start);
+      this.endDateCurrentYear$ = new BehaviorSubject(end);
+    }
   }
 }

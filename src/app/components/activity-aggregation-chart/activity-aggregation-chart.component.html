@@ -1,2 +1,7 @@
-<canvas baseChart width="1" height="1" [data]="filteredActivityHours" [labels]="filteredActivityNames"
-  [colors]="filteredChartColors" chartType="doughnut"></canvas>
+<canvas *ngIf="filteredActivityHours.length > 0; else noData" baseChart width="1" height="1"
+  [data]="filteredActivityHours" [labels]="filteredActivityNames" [colors]="filteredChartColors"
+  chartType="doughnut"></canvas>
+
+<ng-template #noData>
+  <div class="h-100 text-center align-middle">No data</div>
+</ng-template>
