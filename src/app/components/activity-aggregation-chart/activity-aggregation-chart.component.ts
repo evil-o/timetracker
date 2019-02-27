@@ -7,9 +7,9 @@ import { IActivityTypes } from '../../redux/states/activityTypes';
 class Aggregation {
   private aggregate = {};
 
-  public add(key: string, hours: number, color: any) {
+  public add(key: string, hours: number, color: any, colorId: string) {
     if (!(key in this.aggregate)) {
-      this.aggregate[key] = { hours: 0, color };
+      this.aggregate[key] = { hours: 0, color, colorId };
     }
 
     this.aggregate[key].hours += hours;
@@ -19,15 +19,23 @@ class Aggregation {
     const names: string[] = [];
     const values: number[] = [];
     const colors: string[] = [];
+    const colorIds: string[] = [];
     for (const key in this.aggregate) {
       if (key) {
         names.push(key);
         const val = this.aggregate[key];
         values.push(val.hours);
         colors.push(`rgba(${val.color.r},${val.color.g},${val.color.b},1.0)`);
+        colorIds.push(val.colorId);
       }
     }
-    return { names, values, colors };
+
+    const sortBasis = colorIds.map((value, index) => ({ value, index }));
+    const sortedIndices = sortBasis.sort((a, b) => a.value.localeCompare(b.value)).map((sorted) => sorted.index);
+    const sortedNames = sortedIndices.map((index) => names[index]);
+    const sortedValues = sortedIndices.map((index) => values[index]);
+    const sortedColors = sortedIndices.map((index) => colors[index]);
+    return { names: sortedNames, values: sortedValues, colors: sortedColors };
   }
 }
 
@@ -75,7 +83,7 @@ export class ActivityAggregationChartComponent implements OnInit {
         return activities.reduce((prev, current) => {
           const type = types.activities.find((a) => a.id === current.actvitiyId);
           const color = activityColors.find((c) => c.id === type.colorId) || { color: { r: 0xe0, g: 0xe0, b: 0xe0 } };
-          prev.add(type ? type.name : current.actvitiyId, current.hours, color.color);
+          prev.add(type ? type.name : current.actvitiyId, current.hours, color.color, type.colorId || '');
           return prev;
         }, new Aggregation());
       })
