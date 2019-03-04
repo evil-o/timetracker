@@ -8,7 +8,7 @@ import { ApplicationState } from '../../redux/states/applicationState';
 import { IActivityTypes } from '../../redux/states/activityTypes';
 import { IActivityType } from '../../models/interfaces';
 import { FetchOrCreateIdAndLogTimeAction, SetDescriptionAction } from '../../redux/actions/activityLogActions';
-import { IActivityLogEntry } from '../../redux/states/activityLog';
+import { IActivityLogEntry, IActivityLog } from '../../redux/states/activityLog';
 
 import * as fromStore from '../../redux/selectors';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -25,6 +25,7 @@ import { stringToDuration } from '../../helpers';
   styleUrls: ['./day.component.css']
 })
 export class DayComponent implements OnInit {
+  public activityLog$: Observable<IActivityLog>;
   public activityTypes$: Observable<IActivityTypes>;
   public activities$: Observable<IActivityType[]>;
   public activityLogEntries$: Observable<IActivityLogEntry[]>;
@@ -34,6 +35,9 @@ export class DayComponent implements OnInit {
   public singInTime$: Observable<Date | undefined>;
 
   public date$ = new BehaviorSubject<Date>(new Date());
+  public dateDayRange$: Observable<[Date, Date]>;
+  public dateDayStart$: Observable<Date>;
+  public dateDayEnd$: Observable<Date>;
 
   private dateDayDeltas$ = new Subject<number>();
 
@@ -66,14 +70,24 @@ export class DayComponent implements OnInit {
   public hoursLeftToLog$ = new Observable<number | undefined>();
 
   constructor(private store: Store<ApplicationState>) {
+    this.dateDayRange$ = this.date$.map((date) => {
+      const dayStart = new Date(date);
+      dayStart.setHours(0, 0, 0, 0);
+      const dayEnd = new Date(date);
+      dayEnd.setHours(23, 59, 59, 999);
+      return [dayStart, dayEnd] as [Date, Date];
+    });
+    this.dateDayStart$ = this.dateDayRange$.map((range) => range[0]);
+    this.dateDayEnd$ = this.dateDayRange$.map((range) => range[1]);
     this.activityTypes$ = this.store.select(fromStore.activityTypes);
+    this.activityLog$ = this.store.select(fromStore.activityLog);
     this.activityLogEntries$ =
       Observable.combineLatest(
-        this.store.select(fromStore.activityLogEntries),
+        this.activityLog$,
         this.date$,
       )
-        .map(([entries, date]) =>
-          entries.filter((entry) =>
+        .map(([log, date]) =>
+          log.entries.filter((entry) =>
             entry.year === date.getFullYear()
             && entry.month === date.getMonth()
             && entry.day === date.getDate()
@@ -94,8 +108,8 @@ export class DayComponent implements OnInit {
       .map(([entries, date]) => {
         const entry = entries.find(
           e => e.date.getDate() === date.getDate() &&
-          e.date.getMonth() === date.getMonth() &&
-          e.date.getFullYear() === date.getFullYear()
+            e.date.getMonth() === date.getMonth() &&
+            e.date.getFullYear() === date.getFullYear()
         );
         if (!entry) {
           return undefined;
@@ -173,7 +187,6 @@ export class DayComponent implements OnInit {
   endDatePicking() {
     const date = new Date(this.datePickerInput.nativeElement.value);
     this.pickingDate = false;
-    this.date$.next(date);
   }
 
   pickToday() {

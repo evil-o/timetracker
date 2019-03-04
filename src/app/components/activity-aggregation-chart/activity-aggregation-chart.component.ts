@@ -45,8 +45,23 @@ class Aggregation {
   styleUrls: ['./activity-aggregation-chart.component.css']
 })
 export class ActivityAggregationChartComponent implements OnInit {
-  public filteredActivityNames: string[];
-  public filteredActivityHours: number[];
+  public filteredActivityNames: string[] = [];
+  public filteredActivityHours: number[] = [];
+
+  public chartOptions = {
+    legend: {
+      display: false,
+      labels: {
+        display: false
+      }
+    }
+  };
+
+  @Input()
+  public set legend(display: boolean) {
+    this.chartOptions.legend.display = display;
+    this.chartOptions.legend.labels.display = display;
+  }
 
   @Input()
   public startDate$?: Observable<Date>;
@@ -63,6 +78,9 @@ export class ActivityAggregationChartComponent implements OnInit {
   public filteredChartColors: Array<any> = [];
 
   ngOnInit() {
+    if (!this.allActivities$) {
+      return;
+    }
     let activitiesInRage$: Observable<IActivityLogEntry[]>;
     if (this.startDate$ && this.endDate$) {
       activitiesInRage$ = Observable.combineLatest(
@@ -99,9 +117,11 @@ export class ActivityAggregationChartComponent implements OnInit {
     }));
 
     filteredActivities$.subscribe((data) => {
-      this.filteredActivityNames = data.names;
-      this.filteredActivityHours = data.hours;
-      this.filteredChartColors = data.colors;
+      setTimeout(() => {
+        this.filteredActivityNames = data.names;
+        this.filteredActivityHours = data.hours;
+        this.filteredChartColors = data.colors;
+      }, 0);
     });
   }
 

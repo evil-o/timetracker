@@ -1,9 +1,8 @@
 <div class="row">
   <h1 class="col">
-    <!--span [class.d-none]="!pickingDate"-->
-      <input #datePickerInput #datePicker="bsDatepicker" class="invisible form-control border-0" placeholder="Pick a date" bsDatepicker [bsValue]="date$.value"
-        (blur)="endDatePicking()" [bsConfig]="{containerClass: 'theme-default'}" (onHidden)="endDatePicking()">
-    <!--/span -->
+    <input #datePickerInput #datePicker="bsDatepicker" class="invisible form-control border-0" placeholder="Pick a date"
+      bsDatepicker [bsValue]="date$.value" (blur)="endDatePicking()" [bsConfig]="{containerClass: 'theme-default'}"
+      (onHidden)="endDatePicking()">
     <button class="btn" (click)="startDatePicking()">
       <i class="far fa-calendar-alt"></i>
     </button>
@@ -20,7 +19,12 @@
   </h1>
 </div>
 
-<app-day-attendance class="my-3" [date$]="date$"></app-day-attendance>
+<div class="row">
+  <app-day-attendance class="my-3 container-fluid col-9" [date$]="date$"></app-day-attendance>
+  <app-activity-aggregation-chart class="col-3" [allActivities$]="activityLog$" [types$]="activityTypes$"
+    [startDate$]="dateDayStart$" [endDate$]="dateDayEnd$">
+  </app-activity-aggregation-chart>
+</div>
 
 <div class="row mb-3 mt-5">
   <div class="col">
@@ -29,18 +33,22 @@
 </div>
 <div class="row">
   <div class="col-sm-8">
-    <app-activity-picker #activityToLog (confirm)="refocusOnEnter()" [activities$]="activities$" placeholder="What did you do today?"></app-activity-picker>
+    <app-activity-picker #activityToLog (confirm)="refocusOnEnter()" [activities$]="activities$"
+      placeholder="What did you do today?"></app-activity-picker>
   </div>
   <div class="col-sm-3">
-    <input id="duration" #hoursToLog (keyup.enter)="refocusOnEnter()" type="text" class="form-control mr-sm-2" placeholder="for how many hours?">
+    <input id="duration" #hoursToLog (keyup.enter)="refocusOnEnter()" type="text" class="form-control mr-sm-2"
+      placeholder="for how many hours?">
   </div>
 </div>
 <div class="row mt-2">
   <div class="col-sm-8">
-    <input #descriptionToLog (keyup.enter)="refocusOnEnter()" type="text" class="form-control mr-sm-2" placeholder="Put an (optional) description here">
+    <input #descriptionToLog (keyup.enter)="refocusOnEnter()" type="text" class="form-control mr-sm-2"
+      placeholder="Put an (optional) description here">
   </div>
   <div class="col-sm-3">
-    <button class="btn btn-primary float-right" #logHoursButton (click)="logHours(activityToLog.name, hoursToLog.value, descriptionToLog.value)">Log</button>
+    <button class="btn btn-primary float-right" #logHoursButton
+      (click)="logHours(activityToLog.name, hoursToLog.value, descriptionToLog.value)">Log</button>
   </div>
 </div>
 <div class="row mt-5">
@@ -70,7 +78,8 @@
 
 <div class="row mt-2">
   <div class="col-sm-12">
-    <app-actvity-log-list (changeEntryDescription)="changeEntryDescription($event)" [groups$]="activityLogEntries$ | groupActivityLogEntriesById"
-      [activityTypes$]="activityTypes$"></app-actvity-log-list>
+    <app-actvity-log-list (changeEntryDescription)="changeEntryDescription($event)"
+      [groups$]="activityLogEntries$ | groupActivityLogEntriesById" [activityTypes$]="activityTypes$">
+    </app-actvity-log-list>
   </div>
 </div>
