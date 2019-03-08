@@ -26,4 +26,9 @@ export const activityColors: IActivityTypeColor[] = [
     styleClass: 'activity-grey',
     color: { r: 170, g: 170, b: 170 },
   },
+  {
+    id: 'purple',
+    styleClass: 'activity-purple',
+    color: { r: 172, g: 161, b: 209 },
+  },
 ];

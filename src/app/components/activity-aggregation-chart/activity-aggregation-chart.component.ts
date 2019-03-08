@@ -117,6 +117,9 @@ export class ActivityAggregationChartComponent implements OnInit {
     }));
 
     filteredActivities$.subscribe((data) => {
+      this.filteredActivityNames = [];
+      this.filteredActivityHours = [];
+      this.filteredChartColors = [];
       setTimeout(() => {
         this.filteredActivityNames = data.names;
         this.filteredActivityHours = data.hours;
