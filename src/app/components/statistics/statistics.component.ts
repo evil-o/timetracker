@@ -71,8 +71,8 @@ export class StatisticsComponent {
     // last year
     {
       const { start, end } = getYearDateRange(now.getFullYear() - 1);
-      this.startDateCurrentYear$ = new BehaviorSubject(start);
-      this.endDateCurrentYear$ = new BehaviorSubject(end);
+      this.startDateLastYear$ = new BehaviorSubject(start);
+      this.endDateLastYear$ = new BehaviorSubject(end);
     }
   }
 }
