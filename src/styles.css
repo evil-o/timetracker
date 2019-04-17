@@ -1,5 +1,6 @@
 @import "../node_modules/bootstrap/dist/css/bootstrap.css";
 @import "../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css";
+@import "./colors.css";
 
 .noselect
 {
@@ -7,34 +8,4 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
-
-.activity-blue
-{
-  background-color: rgb(163, 186, 202);
-}
-
-.activity-yellow
-{
-  background-color: rgb(251, 234, 201);
-}
-
-.activity-green
-{
-  background-color: rgb(220, 255, 220);
-}
-
-.activity-red
-{
-  background-color: rgb(240, 204, 204);
-}
-
-.activity-grey
-{
-  background-color: rgb(170, 170, 170);
-}
-
-.activity-purple
-{
-  background-color: rgb(172, 161, 209);
 }
