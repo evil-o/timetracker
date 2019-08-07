@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+import { IAttendanceState } from '../states/attendanceState';
 
 export const SET_START_TIME = 'SET_START_TIME';
 export const SET_END_TIME = 'SET_END_TIME';
@@ -6,6 +7,7 @@ export const DELETE_ATTENDANCE_ENTRY = 'DELETE_ATTENDANCE_ENTRY';
 export const CREATE_CORRECTION = 'ADD_CORRECTION';
 export const UPDATE_CORRECTION = 'UPDATE_CORRECTION';
 export const DELETE_CORRECTION = 'DELETE_CORRECTION';
+export const IMPORT_ATTENDANCE = 'IMPORT_ATTENDANCE';
 
 export class SetStartTimeAction implements Action {
   public readonly type = SET_START_TIME;
@@ -58,6 +60,12 @@ export class DeleteCorrectionAction implements Action {
   ) { }
 }
 
+export class ImportAttendanceAction implements Action {
+  public readonly type = IMPORT_ATTENDANCE;
+
+  public constructor(public data: IAttendanceState) { }
+}
+
 export type AttendanceAction =
   | SetStartTimeAction
   | SetEndTimeAction
@@ -65,4 +73,5 @@ export type AttendanceAction =
   | CreateCorrectionAction
   | UpdateCorrectionAction
   | DeleteCorrectionAction
+  | ImportAttendanceAction
   ;

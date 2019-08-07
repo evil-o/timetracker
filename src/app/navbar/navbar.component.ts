@@ -1,10 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ElementRef } from '@angular/core';
 
 import { IActivityType } from '../models/interfaces';
 import { Observable } from 'rxjs/Observable';
 import { ApplicationState } from '../redux/states/applicationState';
 import { Store } from '@ngrx/store';
-import { ExportStorageAction } from '../redux/actions/storageVersionActions';
+import { ExportStorageAction, ImportStorageAction } from '../redux/actions/storageVersionActions';
 import { IAttendanceWithTimes, attendanceEntries } from '../redux/selectors/index';
 
 import * as fromStore from '../redux/selectors';
@@ -16,6 +16,9 @@ import * as fromStore from '../redux/selectors';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+
+  @ViewChild('importFileSelector')
+  private importFileElement: ElementRef;
 
   public entries = [
     { label: 'Today', link: 'today', icon: 'calendar' },
@@ -49,4 +52,12 @@ export class NavbarComponent implements OnInit {
     this.store.dispatch(new ExportStorageAction(dlAnchorElem));
   }
 
+  importStorage() {
+    const element = this.importFileElement.nativeElement as HTMLInputElement;
+    this.store.dispatch(new ImportStorageAction(element.files));
+  }
+
+  importStorageOpenFile() {
+    this.importFileElement.nativeElement.click();
+  }
 }

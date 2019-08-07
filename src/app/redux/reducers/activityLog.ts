@@ -5,7 +5,7 @@ import * as uuid from 'uuid';
 import { IActivityType } from '../../models/interfaces';
 import { CreateActivityTypeAction } from '../actions/activityTypesActions';
 
-import { LOG_TIME, ActivityLogAction, SET_DESCRIPTION, SET_HOURS, DELETE_ENTRY, MERGE_ACTIVITIES } from '../actions/activityLogActions';
+import { LOG_TIME, ActivityLogAction, SET_DESCRIPTION, SET_HOURS, DELETE_ENTRY, MERGE_ACTIVITIES, IMPORT_ACTIVITIES } from '../actions/activityLogActions';
 import { IActivityLog, IActivityLogEntry, ActivityLog, ActivityLogEntry } from '../states/activityLog';
 import { INCREMENTAL_MIGRATION, IncrementalMigrationAction } from '../actions/storageVersionActions';
 
@@ -72,6 +72,14 @@ export function activityLogReducer(state: IActivityLog = new ActivityLog, action
       const entries = [
         ...state.entries.map(v => v.actvitiyId === action.sourceActvityId ? { ...v, actvitiyId: action.targetActivityId } : v),
       ];
+      return { ...state, entries };
+    }
+
+    case IMPORT_ACTIVITIES: {
+      const entries = [...state.entries];
+      if (action.data.entries) {
+        entries.push(...action.data.entries);
+      }
       return { ...state, entries };
     }
 

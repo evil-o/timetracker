@@ -9,7 +9,8 @@ import {
   CREATE_CORRECTION,
   UPDATE_CORRECTION,
   DELETE_CORRECTION,
-  DELETE_ATTENDANCE_ENTRY
+  DELETE_ATTENDANCE_ENTRY,
+  IMPORT_ATTENDANCE
 } from '../actions/attendanceActions';
 import { IAttendanceState, AttendanceState, IAttendanceEntry, AttendanceEntry } from '../states/attendanceState';
 
@@ -118,6 +119,29 @@ export function attendanceStateReducer(state: IAttendanceState = new AttendanceS
       entry.corrections.splice(correctionIndex, 1);
 
       return newState;
+    }
+
+    case IMPORT_ATTENDANCE: {
+      const newEntries = [...state.entries];
+
+      // merge imported attendances into new ones
+      for (const entry of action.data.entries) {
+        const matchingEntry = findEntry(new Date(entry.date), newEntries);
+        if (matchingEntry !== undefined) {
+          console.warn('OVERWRITING attendance entry for', matchingEntry.date.toLocaleDateString());
+          // overwrite if there is already an entry
+          matchingEntry.start = entry.start;
+          matchingEntry.end = entry.end;
+          matchingEntry.corrections = entry.corrections;
+        } else {
+          // add a new entry
+          // tslint:disable-next-line: no-console
+          console.info('Adding attendance entry for', entry.date.toLocaleDateString());
+          newEntries.push({ ...entry });
+        }
+      }
+
+      return { ...state, entries: newEntries };
     }
 
     default:

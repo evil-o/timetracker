@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+import { IActivityLog } from '../states/activityLog';
 
 export const FETCH_OR_CREATE_ID_AND_LOG_TIME = 'FETCH_OR_CREATE_ID_AND_LOG_TIME';
 export const LOG_TIME = 'LOG_TIME';
@@ -6,6 +7,7 @@ export const SET_DESCRIPTION = 'SET_DESCRIPTION';
 export const SET_HOURS = 'SET_HOURS';
 export const DELETE_ENTRY = 'DELETE_ENTRY';
 export const MERGE_ACTIVITIES = 'MERGE_ENTRIES';
+export const IMPORT_ACTIVITIES = 'IMPORT_ACTIVITIES';
 
 export class FetchOrCreateIdAndLogTimeAction implements Action {
   public readonly type = FETCH_OR_CREATE_ID_AND_LOG_TIME;
@@ -43,6 +45,12 @@ export class MergeActivitiesAction implements Action {
   constructor(public sourceActvityId: string, public targetActivityId: string) { }
 }
 
+export class ImportActivitiesAction implements Action {
+  public readonly type = IMPORT_ACTIVITIES;
+
+  constructor(public data: Partial<IActivityLog>) { }
+}
+
 export type ActivityLogAction =
   | FetchOrCreateIdAndLogTimeAction
   | LogTimeAction
@@ -50,4 +58,5 @@ export type ActivityLogAction =
   | SetHoursAction
   | DeleteEntryAction
   | MergeActivitiesAction
+  | ImportActivitiesAction
   ;

@@ -10,7 +10,8 @@ import {
   CREATE,
   SET_ACTIVITY_TYPE_IS_NON_WORKING,
   SET_ACTIVITY_TYPE_IS_COLOR_ID,
-  SET_ARCHIVED
+  SET_ARCHIVED,
+  IMPORT_ACTIVITY_TYPES
 } from '../actions/activityTypesActions';
 import * as uuid from 'uuid';
 import { IncrementalMigrationAction, INCREMENTAL_MIGRATION } from '../actions/storageVersionActions';
@@ -90,6 +91,24 @@ export function activityTypesReducer(
           console.log('Unknown or unhandled version ("' + action.currentVersion + '") in incremental update of activity log.');
           return state;
       }
+
+    case IMPORT_ACTIVITY_TYPES: {
+      const newActivities = [...state.activities];
+      if (action.data.activities) {
+        for (const activity of action.data.activities) {
+          const match = newActivities.find((a) => a.id === activity.id);
+          if (match) {
+            console.warn(`Skipping duplicate activity id: ${activity.name} = ${match.name} (${activity.id} = ${match.id})`);
+            continue;
+          }
+          newActivities.push(activity);
+        }
+      }
+      return {
+        ...state,
+        activities: newActivities
+      } as IActivityTypes;
+    }
 
     default:
       return state;
