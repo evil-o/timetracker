@@ -53,7 +53,7 @@
     <app-activity-picker
       #activityToLog
       (confirm)="refocusOnEnter()"
-      [activities$]="activities$"
+      [activities]="activities$ | async"
       placeholder="What did you do today?"
     ></app-activity-picker>
   </div>

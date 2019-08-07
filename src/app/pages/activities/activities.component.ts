@@ -18,7 +18,7 @@ export class ActivitiesComponent implements OnInit {
   public modalRef: BsModalRef;
   public activities$: Observable<IActivityType[]>;
 
-  public confirmMerge$ = new Subject<{sourceName: string, targetName: string}>();
+  public confirmMerge$ = new Subject<{ source: IActivityType, target: IActivityType }>();
 
   public mergeSource: IActivityType;
 
@@ -26,10 +26,8 @@ export class ActivitiesComponent implements OnInit {
     this.activities$ = store.select(fromStore.activityTypes).map(types => types.activities);
 
     this.confirmMerge$.withLatestFrom(this.activities$).subscribe(([merge, activities]) => {
-      console.log('Activities: ' + JSON.stringify(activities, undefined, 2));
-      console.log(`src: ${merge.sourceName}, dst: ${merge.targetName}`);
-      const srcs = activities.filter(v => v.name === merge.sourceName);
-      const dsts = activities.filter(v => v.name === merge.targetName);
+      const srcs = activities.filter(v => v.id === merge.source.id);
+      const dsts = activities.filter(v => v.id === merge.target.id);
       if (srcs.length !== 1) {
         console.log('ERROR: wrong number of matching source activities found: ' + JSON.stringify(srcs, undefined, 2));
         return;
@@ -40,7 +38,7 @@ export class ActivitiesComponent implements OnInit {
       }
       const src = srcs[0];
       const dst = dsts[0];
-      console.log('merging ' + src.name + ' into ' + dst.name);
+      console.log('merging', src, ' into ', dst);
       this.store.dispatch(new MergeActivitiesAction(src.id, dst.id));
       this.hideModal();
     });

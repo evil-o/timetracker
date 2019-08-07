@@ -39,7 +39,7 @@
     "gulpclass": "0.1.2",
     "ng2-charts": "^1.6.0",
     "ngrx-store-localstorage": "0.3.0",
-    "ngx-bootstrap": "2.0.0-rc.0",
+    "ngx-bootstrap": "2.0.5",
     "run-sequence": "2.2.1",
     "rxjs": "5.5.6",
     "uuid": "3.1.0",

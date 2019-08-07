@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
@@ -24,7 +24,7 @@ import { stringToDuration } from '../../helpers';
   templateUrl: './day.component.html',
   styleUrls: ['./day.component.css']
 })
-export class DayComponent implements OnInit {
+export class DayComponent {
   public activityLog$: Observable<IActivityLog>;
   public activityTypes$: Observable<IActivityTypes>;
   public activities$: Observable<IActivityType[]>;
@@ -80,6 +80,7 @@ export class DayComponent implements OnInit {
     this.dateDayStart$ = this.dateDayRange$.map((range) => range[0]);
     this.dateDayEnd$ = this.dateDayRange$.map((range) => range[1]);
     this.activityTypes$ = this.store.select(fromStore.activityTypes);
+    this.activities$ = this.activityTypes$.map(types => types.activities);
     this.activityLog$ = this.store.select(fromStore.activityLog);
     this.activityLogEntries$ =
       Observable.combineLatest(
@@ -146,10 +147,6 @@ export class DayComponent implements OnInit {
           return diff;
         }
       });
-  }
-
-  ngOnInit() {
-    this.activities$ = this.activityTypes$.map(types => types.activities);
   }
 
   refocusOnEnter() {

@@ -1,7 +1,4 @@
-import { Component, EventEmitter, ElementRef, Input, Output, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
-import { Subscription } from 'rxjs/Subscription';
+import { Component, EventEmitter, ElementRef, Input, Output, ViewChild } from '@angular/core';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/merge';
 import 'rxjs/add/operator/filter';
@@ -16,11 +13,11 @@ import { TypeaheadDirective } from 'ngx-bootstrap';
   templateUrl: './activity-picker.component.html',
   styleUrls: ['./activity-picker.component.css']
 })
-export class ActivityPickerComponent implements OnInit, OnDestroy {
-  model: any;
-
+export class ActivityPickerComponent {
   @Input()
-  public activities$: Observable<IActivityType[]>;
+  public set activities(activities: IActivityType[]) {
+    this.items = activities.filter(v => !v.isArchived);
+  }
 
   @Input()
   public placeholder = 'What are you doing?';
@@ -34,20 +31,21 @@ export class ActivityPickerComponent implements OnInit, OnDestroy {
   @ViewChild(TypeaheadDirective)
   public typeahead: TypeaheadDirective;
 
-  public activityNames: string[];
+  public items: IActivityType[] = [];
 
   public name = '';
 
-  private subscription: Subscription;
+  public id = '';
 
-  ngOnInit() {
-    this.subscription = this.activities$.subscribe((value) => this.activityNames = value.filter(v => !v.isArchived).map(v => v.name));
-  }
-
-  ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
+  selected(selection: any) {
+    if (selection.item) {
+      this.name = selection.item.name;
+      this.id = selection.item.id;
+    } else {
+      this.name = '';
+      this.id = '';
     }
+    this.confirm.emit();
   }
 
   focus() {
