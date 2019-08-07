@@ -15,8 +15,8 @@ import { TypeaheadDirective } from 'ngx-bootstrap';
 })
 export class ActivityPickerComponent {
   @Input()
-  public set activities(activities: IActivityType[]) {
-    this.items = activities.filter(v => !v.isArchived);
+  public set activities(activities: IActivityType[] | undefined) {
+    this.items = activities ? activities.filter(v => !v.isArchived) : [];
   }
 
   @Input()

@@ -16,7 +16,7 @@
     <p>into the following activity:</p>
     <div>
       <app-activity-picker
-        [activities]="activities$ | async"
+        [activities]="activitiesWithoutSource"
         #moveTarget
         placeholder="select an move target"
       ></app-activity-picker>
