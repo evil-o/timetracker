@@ -12,49 +12,101 @@
   </div>
   <div class="form-row mb-2">
     <div class="col-4">
-      <input type="time" class="form-control" [class.is-valid]="this.startValid$ | async" id="dayStart" #dayStart
-        (change)="setButton.disabled = false; timeInputsChaged$.next()" [value]="start$ | async">
-      <button type="submit" class="btn btn-default my-2"
-        (click)="setTimeToNowPlusMinutes(dayStart, -2); setButton.disabled = false; timeInputsChaged$.next()">
+      <input
+        type="time"
+        class="form-control"
+        [class.is-valid]="this.startValid$ | async"
+        id="dayStart"
+        #dayStart
+        (change)="setButton.disabled = false; timeInputsChaged$.next()"
+        [value]="start$ | async"
+      />
+      <button
+        type="submit"
+        class="btn btn-default my-2"
+        (click)="
+          setTimeToNowPlusMinutes(dayStart, -2);
+          setButton.disabled = false;
+          timeInputsChaged$.next()
+        "
+      >
         <i class="fa fa-sign-in-alt"></i> 2 min ago
       </button>
     </div>
     <div class="col-4">
-      <input type="time" class="form-control" [class.is-valid]="this.endValid$ | async" id="dayEnd" #dayEnd
-        (change)="setButton.disabled = false; timeInputsChaged$.next()" [value]="end$ | async">
-      <button type="submit" class="btn btn-default my-2"
-        (click)="setTimeToNowPlusMinutes(dayEnd, +2); setButton.disabled = false; timeInputsChaged$.next()">
+      <input
+        type="time"
+        class="form-control"
+        [class.is-valid]="this.endValid$ | async"
+        id="dayEnd"
+        #dayEnd
+        (change)="setButton.disabled = false; timeInputsChaged$.next()"
+        [value]="end$ | async"
+      />
+      <button
+        type="submit"
+        class="btn btn-default my-2"
+        (click)="
+          setTimeToNowPlusMinutes(dayEnd, +2);
+          setButton.disabled = false;
+          timeInputsChaged$.next()
+        "
+      >
         <i class="fa fa-sign-out-alt"></i> in 2 min
       </button>
     </div>
     <div class="col-4">
-      <button #setButton type="submit" class="btn btn-primary mb-2" [disabled]="true"
-        (click)="timeValues$.next({start: dayStart.value, end: dayEnd.value})">
+      <button
+        #setButton
+        type="submit"
+        class="btn btn-primary mb-2"
+        [disabled]="true"
+        (click)="timeValues$.next({ start: dayStart.value, end: dayEnd.value })"
+      >
         <i class="fa fa-check"></i> set
       </button>
     </div>
   </div>
   <accordion>
     <accordion-group heading="Extra bookings">
-      <div class="form-row" *ngFor="let correction of (corrections$ | async)">
+      <div class="form-row" *ngFor="let correction of corrections$ | async">
         <div class="form-group col-5">
-          <input type="text" #desc class="form-control" placeholder="Enter correction description here"
-            [value]="correction.description">
+          <input
+            type="text"
+            #desc
+            class="form-control"
+            placeholder="Enter correction description here"
+            [value]="correction.description"
+          />
         </div>
         <div class="form-group col-3">
-          <input type="text" #hours class="form-control" placeholder="Enter +/- hours here" [value]="correction.hours">
+          <input
+            type="text"
+            #hours
+            class="form-control"
+            placeholder="Enter +/- hours here"
+            [value]="correction.hours | formatHours: '{h}:{m}'"
+          />
         </div>
         <div class="form-group col-4">
-          <button class="btn btn-secondary" (click)="updateCorrection(correction.id, desc.value, hours.value)">
+          <button
+            class="btn btn-secondary"
+            (click)="updateCorrection(correction.id, desc.value, hours.value)"
+          >
             <i class="fa fa-check"></i>
           </button>
-          <button class="btn btn-danger" (click)="correctionsToDelete$.next(correction)">
+          <button
+            class="btn btn-danger"
+            (click)="correctionsToDelete$.next(correction)"
+          >
             <i class="fa fa-trash"></i>
           </button>
         </div>
       </div>
       <div class="form-row mt-2">
-        <button class="btn btn-primary" (click)="correctionCreation$.next()">Add</button>
+        <button class="btn btn-primary" (click)="correctionCreation$.next()">
+          Add
+        </button>
       </div>
     </accordion-group>
   </accordion>

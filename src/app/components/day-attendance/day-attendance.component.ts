@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { IAttendanceEntry, IAttendanceCorrection, AttendanceEntry } from '../../redux/states/attendanceState';
-import { padNumber, valueToTime, dateToTimeInputValue } from '../../helpers';
+import { padNumber, valueToTime, dateToTimeInputValue, stringToDuration } from '../../helpers';
 import { Store } from '@ngrx/store';
 import { ApplicationState } from '../../redux/states/applicationState';
 import {
@@ -107,11 +107,13 @@ export class DayAttendanceComponent implements OnInit {
       .map(([end, timeValues]) => this.endInput.nativeElement.value === end);
   }
 
-  public updateCorrection(correctionId: string, newDescription: string, newHours: string): void {
-    if (newHours.includes(',')) {
-      newHours = newHours.replace(',', '.');
+  public updateCorrection(correctionId: string, newDescription: string, newHoursAsString: string): void {
+    const newHours = stringToDuration(newHoursAsString);
+    if (Number.isNaN(newHours)) {
+      // TODO show error
+      return;
     }
-    this.correctionsToUpdate$.next({id: correctionId, description: newDescription, hours: +newHours});
+    this.correctionsToUpdate$.next({ id: correctionId, description: newDescription, hours: newHours });
   }
 
   public setTimeToNowPlusMinutes(element: HTMLInputElement, minutesDelta: number) {
