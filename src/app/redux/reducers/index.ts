@@ -3,6 +3,7 @@ import { activityLogReducer } from './activityLog';
 import { storageVersionReducer } from './storageVersion';
 import { attendanceStateReducer } from './attendanceReducer';
 import { configurationReducer } from './configurationReducer';
+import { stopWatchReducer } from './stopWatchReducer';
 
 export const reducers = {
   activityTypes: activityTypesReducer,
@@ -10,4 +11,5 @@ export const reducers = {
   attendanceState: attendanceStateReducer,
   storageVersion: storageVersionReducer,
   configuration: configurationReducer,
+  stopWatch: stopWatchReducer,
 };

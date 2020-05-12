@@ -11,7 +11,8 @@ import {
   SET_ACTIVITY_TYPE_IS_NON_WORKING,
   SET_ACTIVITY_TYPE_IS_COLOR_ID,
   SET_ARCHIVED,
-  IMPORT_ACTIVITY_TYPES
+  IMPORT_ACTIVITY_TYPES,
+  CreateActivityTypeAndLogTimeAction
 } from '../actions/activityTypesActions';
 import * as uuid from 'uuid';
 import { IncrementalMigrationAction, INCREMENTAL_MIGRATION } from '../actions/storageVersionActions';
@@ -36,10 +37,18 @@ export function activityTypesReducer(
   switch (action.type) {
     case CREATE:
     case CREATE_ACTIVITY_TYPE_AND_LOG_TIME:
-      return {
-        ...state,
-        activities: [...state.activities, { name: action.name, id: uuid.v4() }]
-      };
+      const names = state.activities.map(activity => activity.name);
+      if (
+        action.type === CREATE_ACTIVITY_TYPE_AND_LOG_TIME
+        && !(action as CreateActivityTypeAndLogTimeAction).createIfExists
+        && names.includes(action.name)) {
+        return { ...state };
+      } else {
+        return {
+          ...state,
+          activities: [...state.activities, { name: action.name, id: uuid.v4() }]
+        };
+      }
 
     case SET_ACTIVITY_TYPE_IS_NON_WORKING: {
       const [newState, entry] = getStateAndEntryForEditing(state, action.id);

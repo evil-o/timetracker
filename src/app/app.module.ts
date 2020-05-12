@@ -56,6 +56,7 @@ import { DayAttendanceComponent } from './components/day-attendance/day-attendan
 import { FormatHoursPipe } from './pipes/format-hours.pipe';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { ActivityAggregationChartComponent } from './components/activity-aggregation-chart/activity-aggregation-chart.component';
+import { StopwatchComponent } from './components/stopwatch/stopwatch.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { ActivityAggregationChartComponent } from './components/activity-aggrega
     FormatHoursPipe,
     StatisticsComponent,
     ActivityAggregationChartComponent,
+    StopwatchComponent,
   ],
   imports: [
     BrowserModule,

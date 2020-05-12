@@ -114,3 +114,6 @@ export const attendanceEntriesWithOvertime = createSelector(
 export const overtimeSum = createSelector(attendanceEntriesWithOvertime, (times) => {
   return times.map(t => t.overtime).reduce((previous, current) => previous + current, 0);
 });
+
+
+export const stopWatchState = (state: ApplicationState) => state.stopWatch;

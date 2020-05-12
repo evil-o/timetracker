@@ -3,6 +3,7 @@ import { IActivityLog } from './activityLog';
 import { IStorageVersion } from './storageVersion';
 import { IAttendanceState } from './attendanceState';
 import { IConfigurationState } from './configuration';
+import { IStopWatch } from './stopwatchState';
 
 export class ApplicationState {
   public activityTypes: IActivityTypes;
@@ -14,4 +15,6 @@ export class ApplicationState {
   public storageVersion: IStorageVersion;
 
   public configuration: IConfigurationState;
+
+  public stopWatch: IStopWatch;
 }

@@ -1,0 +1,51 @@
+<div
+  class="navbar-text"
+  [class.text-success]="this.isRunning$ | async"
+  [class.text-info]="this.isPaused$ | async"
+>
+  <i class="fa fa-stopwatch mr-2"></i>
+</div>
+<span
+  class="navbar-text mr-3"
+  *ngIf="timeElapsedHours$ | async as timeElapsed; else notRunning"
+>
+  {{ timeElapsed | formatHours: "{h}:{m}" }}
+</span>
+<ng-template #notRunning>
+  <span class="navbar-text mr-3">
+    --:--
+  </span>
+</ng-template>
+<button
+  class="btn btn-outline-success mr-1"
+  [disabled]="this.isRunning$ | async"
+  (click)="start()"
+  title="Start stop watch"
+>
+  <i class="fa fa-play"></i>
+</button>
+<button
+  class="btn btn-outline mr-2"
+  [disabled]="!(this.isRunning$ | async)"
+  (click)="pause()"
+  title="Pause stop watch. Resume by clicking the start icon."
+>
+  <i class="fa fa-pause"></i>
+</button>
+<button
+  class="btn btn-outline-danger ml-2 mr-2"
+  [disabled]="!(this.isStarted$ | async) && !(this.isPaused$ | async)"
+  title="Reset stop watch to zero."
+  (click)="reset()"
+>
+  <i class="fa fa-stop"></i>
+</button>
+<app-activity-picker
+  #picker
+  class="navbar-text mr-sm-2"
+  placeholder="Log elapsed time as..."
+  [activities]="this.activities$ | async"
+></app-activity-picker>
+<button class="btn btn-outline-success" (click)="logClick$.next(picker.name)">
+  Log
+</button>

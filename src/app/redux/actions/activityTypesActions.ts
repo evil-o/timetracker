@@ -23,7 +23,7 @@ export class CreateActivityTypeAction implements Action {
 export class CreateActivityTypeAndLogTimeAction implements Action {
   public readonly type = CREATE_ACTIVITY_TYPE_AND_LOG_TIME;
 
-  constructor(public name: string, public hours: number, public date: Date, public description?: string) { }
+  constructor(public name: string, public hours: number, public date: Date, public description?: string, public createIfExists = true) { }
 }
 
 export class SetActivityTypeIsNonWorkingAction implements Action {

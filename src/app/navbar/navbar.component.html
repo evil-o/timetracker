@@ -26,15 +26,9 @@
         </a>
       </li>
     </ul>
-    <!--app-activity-picker class="form-inline my-2 mx-2" [activities$]="activities$"></app-activity-picker-->
-    <!--div class="form-inline my-2 mx-2">
-      <input class="form-control mr-sm-2" type="text" placeholder="label" aria-label="New label">
-      <button class="btn btn-outline-success my-2">Add</button>
-    </div-->
-    <!--div class="form-inline my-2 mx-2">
-      <input class="form-control mr-sm-2" type="text" #newActivityName placeholder="activity type" aria-label="New activity">
-      <button class="btn btn-outline-success my-2" (click)="createActivity(newActivityName.value)">Add</button>
-    </div-->
+    <div class="form-inline mx-auto">
+      <app-stopwatch></app-stopwatch>
+    </div>
     <div class="nav-item" dropdown>
       <app-overtime-badge
         [hours]="overallAttendanceSum$ | async"
@@ -44,7 +38,7 @@
       <a dropdownToggle href="javascript:void(0);" class="nav-link">
         <i class="fa fa-cog"></i>
       </a>
-      <a id="downloadElement" style="display:none"></a>
+      <a id="downloadElement" style="display: none;"></a>
       <ul *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu">
         <li role="menuitem" class="dropdown-item">
           <a class="dropdown-item" routerLink="configuration">Settings...</a>
@@ -60,7 +54,7 @@
         </li>
         <li role="menuitem" class="dropdown-item">
           <input
-            style="display:none"
+            style="display: none;"
             (change)="importStorage()"
             type="file"
             #importFileSelector
