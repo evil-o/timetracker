@@ -9,13 +9,13 @@ import { ActivityLogEntry } from '../../redux/states/activityLog';
 export class EditableLogEntryDescriptionComponent implements OnInit {
 
   @Input()
-  public entry: ActivityLogEntry;
+  public entry!: ActivityLogEntry;
 
   @Output()
   public changeEntryDescription = new EventEmitter<{entryId: string, newDescription: string}>();
 
   @ViewChild('descriptionInput')
-  public descriptionInput: ElementRef;
+  public descriptionInput!: ElementRef;
 
   public editing = false;
 

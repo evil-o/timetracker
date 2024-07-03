@@ -6,11 +6,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./overtime-badge.component.css'],
 })
 export class OvertimeBadgeComponent {
-
   public format = '{h}h {m}m';
 
   @Input() hours?: number;
-
-  constructor() { }
-
 }

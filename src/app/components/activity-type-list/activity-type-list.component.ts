@@ -13,16 +13,16 @@ export class ActivityTypeListComponent implements OnInit {
 
   @Output() public mergeRequest = new EventEmitter<IActivityType>();
 
-  _types: IActivityType[];
-  @Input() set types(value: IActivityType[]) {
-    this._types = value;
-    this.sortedTypes = this.types.sort((a, b) => a.name.localeCompare(b.name));
+  _types?: IActivityType[];
+  @Input() set types(value: IActivityType[] | undefined | null) {
+    this._types = value ?? undefined;
+    this.sortedTypes = this._types?.sort((a, b) => a.name.localeCompare(b.name));
   }
-  get types(): IActivityType[] {
+  get types(): IActivityType[] | undefined {
     return this._types;
   }
 
-  sortedTypes: IActivityType[];
+  sortedTypes?: IActivityType[];
 
   constructor(private store: Store<ApplicationState>) { }
 

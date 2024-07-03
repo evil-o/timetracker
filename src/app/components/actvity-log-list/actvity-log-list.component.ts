@@ -1,11 +1,8 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { IActivityLogEntry } from '../../redux/states/activityLog';
-import { Subject } from 'rxjs/Subject';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
 import { IActivityTypes, ActivityTypes } from '../../redux/states/activityTypes';
 import { IActivityType } from '../../models/interfaces';
+import { combineLatest, map, Observable } from 'rxjs';
 
 interface IGroupEntry {
   activityId: string;
@@ -19,21 +16,17 @@ interface IGroupEntry {
   styleUrls: ['./actvity-log-list.component.css']
 })
 export class ActivityLogListComponent implements OnInit {
-
-  private _groups: IGroupEntry[];
+  @Input()
+  public groups$!: Observable<IGroupEntry[]>;
 
   @Input()
-  public groups$: Observable<IGroupEntry[]>;
+  public activityTypes$!: Observable<IActivityTypes>;
 
-  public sortedGroups$: Observable<IGroupEntry[]>;
-
-  @Input() public activityTypes$: Observable<IActivityTypes>;
-
-  constructor() { }
+  public sortedGroups$!: Observable<IGroupEntry[]>;
 
   ngOnInit() {
-    this.sortedGroups$ = Observable.combineLatest(this.groups$, this.activityTypes$)
-      .map(([groups, activityTypes]) => {
+    this.sortedGroups$ = combineLatest([this.groups$, this.activityTypes$]).pipe(
+      map(([groups, activityTypes]) => {
         const copy: IGroupEntry[] = [];
         for (const group of groups) {
           copy.push({
@@ -59,6 +52,6 @@ export class ActivityLogListComponent implements OnInit {
         });
 
         return sorted;
-      });
+      }));
   }
 }

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { IGroupEntry } from '../../pipes/group-activity-log-entries-by-id.pipe';
 import { IActivityTypes } from '../../redux/states/activityTypes';
-import { AccordionComponent } from 'ngx-bootstrap';
+import { AccordionComponent } from 'ngx-bootstrap/accordion';
 import { ApplicationState } from '../../redux/states/applicationState';
 import { activityColors } from '../../models/activityColors';
 
@@ -17,7 +17,7 @@ import { SetDescriptionAction, SetHoursAction, DeleteEntryAction } from '../../r
 export class ActivityLogEntryComponent implements OnInit {
   private colors = activityColors;
 
-  public _group: IGroupEntry;
+  public _group!: IGroupEntry;
   @Input()
   public set group(value: IGroupEntry) {
     this._group = value;
@@ -27,9 +27,12 @@ export class ActivityLogEntryComponent implements OnInit {
     return this._group;
   }
 
-  private _activityTypes: IActivityTypes;
+  private _activityTypes!: IActivityTypes;
   @Input()
-  public set activityTypes(value: IActivityTypes) {
+  public set activityTypes(value: IActivityTypes | undefined) {
+    if (!value) {
+      return;
+    }
     this._activityTypes = value;
     this.updateCustomClass();
   }
@@ -68,7 +71,7 @@ export class ActivityLogEntryComponent implements OnInit {
       const type = this.activityTypes.activities.find(t => t.id === this.group.activityId);
       if (type && type.colorId) {
         const color = this.colors.find(c => c.id === type.colorId);
-        this.customColorClass = color.styleClass;
+        this.customColorClass = color!.styleClass;
       } else {
         this.customColorClass = '';
       }

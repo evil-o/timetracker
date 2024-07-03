@@ -1,6 +1,4 @@
-import { Action } from '@ngrx/store';
-
-import * as uuid from 'uuid';
+import { v4 as uuid } from 'uuid';
 
 import {
   AttendanceAction,
@@ -22,7 +20,7 @@ function findEntryIndex(forDate: Date, entries: IAttendanceEntry[]): number {
   return entries.findIndex(e => AttendanceEntry.equalsDate(e, forDate));
 }
 
-export function attendanceStateReducer(state: IAttendanceState = new AttendanceState, action: AttendanceAction) {
+export function attendanceStateReducer(state: IAttendanceState = new AttendanceState, action: AttendanceAction): IAttendanceState {
   switch (action.type) {
     case SET_START_TIME:
     case SET_END_TIME: {
@@ -86,7 +84,7 @@ export function attendanceStateReducer(state: IAttendanceState = new AttendanceS
         return state;
       }
 
-      entry.corrections = [...entry.corrections.map(c => ({ ...c }))];
+      entry.corrections = [...(entry.corrections ?? []).map(c => ({ ...c }))];
       const correction = entry.corrections.find(c => c.id === action.id);
       if (!correction) {
         console.log(`Could not update correction ${action.id}: id not found.`);
@@ -109,7 +107,7 @@ export function attendanceStateReducer(state: IAttendanceState = new AttendanceS
         return state;
       }
 
-      entry.corrections = [...entry.corrections];
+      entry.corrections = [...(entry.corrections ?? [])];
       const correctionIndex = entry.corrections.findIndex(c => c.id === action.id);
       if (correctionIndex < 0) {
         console.log(`Could not delete correction ${action.id}: id not found.`);

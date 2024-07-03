@@ -1,13 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ElementRef } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 
-import { IActivityType } from '../models/interfaces';
-import { Observable } from 'rxjs/Observable';
-import { ApplicationState } from '../redux/states/applicationState';
 import { Store } from '@ngrx/store';
 import { ExportStorageAction, ImportStorageAction } from '../redux/actions/storageVersionActions';
-import { IAttendanceWithTimes, attendanceEntries } from '../redux/selectors/index';
+import { IAttendanceWithTimes } from '../redux/selectors/index';
+import { ApplicationState } from '../redux/states/applicationState';
 
 import * as fromStore from '../redux/selectors';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -18,7 +17,7 @@ import * as fromStore from '../redux/selectors';
 export class NavbarComponent implements OnInit {
 
   @ViewChild('importFileSelector')
-  private importFileElement: ElementRef;
+  private importFileElement!: ElementRef;
 
   public entries = [
     { label: 'Today', link: 'today', icon: 'calendar' },
@@ -32,7 +31,7 @@ export class NavbarComponent implements OnInit {
 
   public attendances$: Observable<IAttendanceWithTimes[]>;
 
-  public overallAttendanceSum$: Observable<number>;
+  public overallAttendanceSum$: Observable<number | undefined>;
 
   constructor(private store: Store<ApplicationState>) {
     this.attendances$ = this.store.select(fromStore.attendanceEntriesWithOvertime);
@@ -49,12 +48,12 @@ export class NavbarComponent implements OnInit {
 
   downloadStorage() {
     const dlAnchorElem = document.getElementById('downloadElement');
-    this.store.dispatch(new ExportStorageAction(dlAnchorElem));
+    this.store.dispatch(new ExportStorageAction(dlAnchorElem!));
   }
 
   importStorage() {
     const element = this.importFileElement.nativeElement as HTMLInputElement;
-    this.store.dispatch(new ImportStorageAction(element.files));
+    this.store.dispatch(new ImportStorageAction(element!.files!));
   }
 
   importStorageOpenFile() {

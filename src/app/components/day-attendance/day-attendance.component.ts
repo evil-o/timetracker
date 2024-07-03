@@ -1,19 +1,17 @@
-import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
-import { IAttendanceEntry, IAttendanceCorrection, AttendanceEntry } from '../../redux/states/attendanceState';
-import { padNumber, valueToTime, dateToTimeInputValue, stringToDuration } from '../../helpers';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { ApplicationState } from '../../redux/states/applicationState';
+import { dateToTimeInputValue, stringToDuration, valueToTime } from '../../helpers';
 import {
-  SetStartTimeAction,
-  SetEndTimeAction,
   CreateCorrectionAction,
-  UpdateCorrectionAction,
   DeleteCorrectionAction,
+  SetEndTimeAction,
+  SetStartTimeAction,
+  UpdateCorrectionAction,
 } from '../../redux/actions/attendanceActions';
 import * as get from '../../redux/selectors';
+import { ApplicationState } from '../../redux/states/applicationState';
+import { AttendanceEntry, IAttendanceCorrection, IAttendanceEntry } from '../../redux/states/attendanceState';
+import { combineLatest, map, Observable, Subject, withLatestFrom } from 'rxjs';
 
 @Component({
   selector: 'app-day-attendance',
@@ -22,29 +20,29 @@ import * as get from '../../redux/selectors';
 })
 export class DayAttendanceComponent implements OnInit {
   @Input()
-  public date$;
+  public date$!: Observable<Date>;
 
   @ViewChild('dayStart')
-  public startInput: ElementRef;
+  public startInput!: ElementRef;
 
   @ViewChild('dayEnd')
-  public endInput: ElementRef;
+  public endInput!: ElementRef;
 
   public timeValues$ = new Subject<{ start: string, end: string }>();
 
   public timeInputsChaged$ = new Subject<void>();
 
-  public start$: Observable<string>;
-  public end$: Observable<string>;
+  public start$!: Observable<string>;
+  public end$!: Observable<string>;
 
-  public startValid$: Observable<boolean>;
-  public endValid$: Observable<boolean>;
+  public startValid$!: Observable<boolean>;
+  public endValid$!: Observable<boolean>;
 
-  private entries$: Observable<IAttendanceEntry[]>;
+  private entries$!: Observable<IAttendanceEntry[]>;
 
-  private entry$: Observable<IAttendanceEntry | null>;
+  private entry$!: Observable<IAttendanceEntry | undefined>;
 
-  public corrections$: Observable<IAttendanceCorrection[]>;
+  public corrections$!: Observable<IAttendanceCorrection[]>;
 
   public correctionCreation$ = new Subject<void>();
 
@@ -56,7 +54,7 @@ export class DayAttendanceComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.timeValues$.withLatestFrom(this.date$)
+    this.timeValues$.pipe(withLatestFrom(this.date$))
       .subscribe(([values, date]) => {
         const start = valueToTime(values.start);
         const end = valueToTime(values.end);
@@ -69,22 +67,21 @@ export class DayAttendanceComponent implements OnInit {
       });
 
     this.entries$ = this.store.select(get.attendanceEntries);
-    this.entry$ = Observable.combineLatest(this.entries$, this.date$)
-      .map(([v, date]) => v.find(e => AttendanceEntry.equalsDate(e, date)));
+    this.entry$ = combineLatest([this.entries$, this.date$]).pipe(map(([v, date]) => v.find(e => AttendanceEntry.equalsDate(e, date))));
 
-    this.corrections$ = this.entry$.map(e => (e ? e.corrections : undefined) || []);
+    this.corrections$ = this.entry$.pipe(map(e => (e ? e.corrections : undefined) || []));
 
-    this.start$ = this.entry$.map(e => e && e.start ? dateToTimeInputValue(e.start) : '');
-    this.end$ = this.entry$.map(e => e && e.end ? dateToTimeInputValue(e.end) : '');
+    this.start$ = this.entry$.pipe(map(e => e && e.start ? dateToTimeInputValue(e.start) : ''));
+    this.end$ = this.entry$.pipe(map(e => e && e.end ? dateToTimeInputValue(e.end) : ''));
 
-    this.correctionCreation$.withLatestFrom(this.date$)
-      .subscribe(([unused, date]) => {
+    this.correctionCreation$.pipe(withLatestFrom(this.date$))
+      .subscribe(([_, date]) => {
         if (date) {
           this.store.dispatch(new CreateCorrectionAction(date.getFullYear(), date.getMonth(), date.getDate()));
         }
       });
 
-    this.correctionsToUpdate$.withLatestFrom(this.date$)
+    this.correctionsToUpdate$.pipe(withLatestFrom(this.date$))
       .subscribe(([update, date]) => {
         if (date) {
           this.store.dispatch(
@@ -93,23 +90,25 @@ export class DayAttendanceComponent implements OnInit {
         }
       });
 
-    this.correctionsToDelete$.withLatestFrom(this.date$)
+    this.correctionsToDelete$.pipe(withLatestFrom(this.date$))
       .subscribe(([toDelete, date]) => {
         if (date) {
           this.store.dispatch(new DeleteCorrectionAction(date.getFullYear(), date.getMonth(), date.getDate(), toDelete.id));
         }
       });
 
-    this.startValid$ = Observable.combineLatest(this.start$, this.timeValues$, this.timeInputsChaged$)
-      .map(([start, timeValues]) => this.startInput.nativeElement.value === start);
+    this.startValid$ = combineLatest([this.start$, this.timeValues$, this.timeInputsChaged$]).pipe(
+      map(([start]) => this.startInput.nativeElement.value === start)
+    );
 
-    this.endValid$ = Observable.combineLatest(this.end$, this.timeValues$, this.timeInputsChaged$)
-      .map(([end, timeValues]) => this.endInput.nativeElement.value === end);
+    this.endValid$ = combineLatest([this.end$, this.timeValues$, this.timeInputsChaged$]).pipe(
+      map(([end]) => this.endInput.nativeElement.value === end)
+    );
   }
 
   public updateCorrection(correctionId: string, newDescription: string, newHoursAsString: string): void {
     const newHours = stringToDuration(newHoursAsString);
-    if (Number.isNaN(newHours)) {
+    if (!newHours || Number.isNaN(newHours)) {
       // TODO show error
       return;
     }

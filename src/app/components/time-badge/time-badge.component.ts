@@ -5,9 +5,9 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './time-badge.component.html',
   styleUrls: ['./time-badge.component.css']
 })
-export class TimeBadgeComponent implements OnInit {
+export class TimeBadgeComponent {
 
-  @Input() set date(value: Date) {
+  @Input() set date(value: Date | undefined | null) {
     if (value) {
       this.dateDisplayString = `${value.getHours()}:${this.zeroFill(2, value.getMinutes())}`;
     } else {
@@ -15,12 +15,7 @@ export class TimeBadgeComponent implements OnInit {
     }
   }
 
-  public dateDisplayString: string;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
+  public dateDisplayString: string = "";
 
   zeroFill(numDigits: number, numberToShow: number) {
     const str = '' + numberToShow;

@@ -5,13 +5,6 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './hour-badge.component.html',
   styleUrls: ['./hour-badge.component.css']
 })
-export class HourBadgeComponent implements OnInit {
-
-  @Input() hours: number;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class HourBadgeComponent {
+  @Input() hours: number | undefined | null;
 }

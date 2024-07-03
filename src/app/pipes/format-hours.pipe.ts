@@ -6,8 +6,8 @@ import { padNumber } from '../helpers';
 })
 export class FormatHoursPipe implements PipeTransform {
 
-  transform(totalHours: number, format = '{h}h {m}m'): any {
-    if (totalHours === undefined) {
+  transform(totalHours: number | undefined | null, format = '{h}h {m}m'): any {
+    if (totalHours === undefined || totalHours === null) {
       return '-';
     }
     const negative = totalHours < 0;

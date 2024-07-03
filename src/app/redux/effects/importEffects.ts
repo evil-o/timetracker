@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect } from '@ngrx/effects';
-import { Observable } from 'rxjs/Observable';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { IMPORT_STORAGE, ImportStorageAction, IMPORT_STORAGE_FILE, ImportStorageFileAction } from '../actions/storageVersionActions';
-import { Subject } from 'rxjs/Subject';
 import { ApplicationState } from '../states/applicationState';
 import { ImportAttendanceAction } from '../actions/attendanceActions';
 import { ImportActivityTypes } from '../actions/activityTypesActions';
 import { ImportActivitiesAction } from '../actions/activityLogActions';
+import { map, Subject, switchMap } from 'rxjs';
 
 function correctAttendance(state: Partial<ApplicationState>) {
   if (state.attendanceState) {
@@ -44,19 +43,20 @@ function correctStateTypes(state: Partial<ApplicationState>): Partial<Applicatio
 
 @Injectable()
 export class ImportStorageEffects {
-  @Effect() importFileList$: Observable<Action> = this.actions$
-    .ofType(IMPORT_STORAGE)
-    .switchMap((action: ImportStorageAction) => {
+  importFileList$ = createEffect(() => this.actions$.pipe(
+    ofType(IMPORT_STORAGE),
+    switchMap((action: ImportStorageAction) => {
       const actions: Action[] = [];
       for (let i = 0; i < action.files.length; ++i) {
         actions.push(new ImportStorageFileAction(action.files[i]));
       }
       return actions;
-    });
+    }))
+  );
 
-  @Effect() importFile$: Observable<Action> = this.actions$
-    .ofType(IMPORT_STORAGE_FILE)
-    .switchMap((action: ImportStorageFileAction) => {
+  importFile$ = createEffect(() => this.actions$.pipe(
+    ofType(IMPORT_STORAGE_FILE),
+    switchMap((action: ImportStorageFileAction) => {
       const obs = new Subject<string>();
       const reader = new FileReader();
       reader.onloadend = (ev) => {
@@ -65,9 +65,9 @@ export class ImportStorageEffects {
       };
       reader.readAsText(action.file, 'utf-8');
       return obs;
-    })
-    .map(rawContents => correctStateTypes(JSON.parse(rawContents)))
-    .switchMap((data) => {
+    }),
+    map(rawContents => correctStateTypes(JSON.parse(rawContents))),
+    switchMap((data) => {
       const actions: Action[] = [];
       // import states in order of dependencies
       if (data.attendanceState) {
@@ -80,7 +80,8 @@ export class ImportStorageEffects {
         actions.push(new ImportActivitiesAction(data.activityLog));
       }
       return actions;
-    });
+    })
+  ));
 
   constructor(
     private actions$: Actions,

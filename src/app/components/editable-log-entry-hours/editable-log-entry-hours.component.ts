@@ -10,13 +10,13 @@ import { stringToDuration } from '../../helpers';
 export class EditableLogEntryHoursComponent implements OnInit {
 
   @Input()
-  public entry: ActivityLogEntry;
+  public entry!: ActivityLogEntry;
 
   @Output()
   public changeEntryHours = new EventEmitter<{ entryId: string, newHours: number }>();
 
   @ViewChild('hoursInput')
-  public hoursInput: ElementRef;
+  public hoursInput!: ElementRef;
 
   public editing = false;
 

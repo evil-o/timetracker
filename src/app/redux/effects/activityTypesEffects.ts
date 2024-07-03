@@ -1,32 +1,26 @@
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/withLatestFrom';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Action, Store } from '@ngrx/store';
-import { Actions, Effect } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 
+import { map } from 'rxjs';
 import { FetchOrCreateIdAndLogTimeAction } from '../actions/activityLogActions';
-import { ApplicationState } from '../states/applicationState';
-import { INCREMENTAL_MIGRATION, IncrementalMigrationSuccessAction } from '../actions/storageVersionActions';
 import { CREATE_ACTIVITY_TYPE_AND_LOG_TIME, CreateActivityTypeAndLogTimeAction } from '../actions/activityTypesActions';
+import { INCREMENTAL_MIGRATION, IncrementalMigrationSuccessAction } from '../actions/storageVersionActions';
 
 @Injectable()
 export class ActivityTypesEffects {
+  incrementalMigrationComplete$ = createEffect(() => this.actions$.pipe(
+    ofType(INCREMENTAL_MIGRATION),
+    map(() => new IncrementalMigrationSuccessAction('ActivityTypesState'))
+  ));
 
-  @Effect() incrementalMigrationComplete$: Observable<Action> = this.actions$
-    .ofType(INCREMENTAL_MIGRATION)
-    .map(() => new IncrementalMigrationSuccessAction('ActivityTypesState'));
-
-  @Effect() createAndLogTime$: Observable<Action> = this.actions$
-    .ofType(CREATE_ACTIVITY_TYPE_AND_LOG_TIME)
-    .map((action: CreateActivityTypeAndLogTimeAction) =>
+  createAndLogTime$ = createEffect(() => this.actions$.pipe(
+    ofType(CREATE_ACTIVITY_TYPE_AND_LOG_TIME),
+    map((action: CreateActivityTypeAndLogTimeAction) =>
       new FetchOrCreateIdAndLogTimeAction(action.name, action.hours, action.date, action.description)
-    );
+    )
+  ));
 
   constructor(
     private actions$: Actions,
-    private store$: Store<ApplicationState>
   ) { }
 }

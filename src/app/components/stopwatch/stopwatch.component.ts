@@ -2,11 +2,10 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ApplicationState } from '../../redux/states/applicationState';
 import { StartStopWatchAction, PauseStopWatchAction, ResetStopWatchAction } from '../../redux/actions/stopWatchActions';
-import { Observable } from 'rxjs/Observable';
 import { stopWatchState, activityTypes } from '../../redux/selectors';
 import { IActivityType } from '../../models/interfaces';
 import { CreateActivityTypeAndLogTimeAction } from '../../redux/actions/activityTypesActions';
-import { Subject } from 'rxjs/Subject';
+import { map, Observable, Subject, timer, withLatestFrom } from 'rxjs';
 
 @Component({
   selector: 'app-stopwatch',
@@ -28,15 +27,14 @@ export class StopwatchComponent {
 
   constructor(private store: Store<ApplicationState>) {
     const state$ = this.store.select(stopWatchState);
-    this.isStarted$ = state$.map(v => v.startedAt !== undefined);
-    this.isRunning$ = state$.map(v => v.startedAt !== undefined && !v.isPaused);
-    this.isPaused$ = state$.map(v => v.isPaused);
+    this.isStarted$ = state$.pipe(map(v => v.startedAt !== undefined));
+    this.isRunning$ = state$.pipe(map(v => v.startedAt !== undefined && !v.isPaused));
+    this.isPaused$ = state$.pipe(map(v => v.isPaused));
 
     const msToH = (60 * 60 * 1000);
-    this.timeElapsedHours$ = Observable
-      .timer(0, StopwatchComponent.UPDATE_INTERVAL_MS)
-      .withLatestFrom(state$)
-      .map(([_, state]) => {
+    this.timeElapsedHours$ = timer(0, StopwatchComponent.UPDATE_INTERVAL_MS).pipe(
+      withLatestFrom(state$),
+      map(([_, state]) => {
         if (state.isPaused) {
           return state.additionalTimeInMs / msToH;
         } else {
@@ -47,12 +45,11 @@ export class StopwatchComponent {
           const milliseconds = Date.now() - state.startedAt.getTime() + state.additionalTimeInMs;
           return milliseconds / msToH;
         }
-      })
-      ;
+      }));
 
-    this.activities$ = this.store.select(activityTypes).map(v => v.activities);
+    this.activities$ = this.store.select(activityTypes).pipe(map(v => v.activities));
 
-    this.logClick$.withLatestFrom(this.timeElapsedHours$).subscribe(([activity, hours]) => {
+    this.logClick$.pipe(withLatestFrom(this.timeElapsedHours$)).subscribe(([activity, hours]) => {
       if (!activity || typeof activity !== 'string' || activity === '' || hours === undefined) {
         return;
       }

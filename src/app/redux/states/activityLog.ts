@@ -1,9 +1,9 @@
-import * as uuid from 'uuid';
+import { v4 as uuid } from 'uuid';
 
 export interface IActivityLogEntry {
   id: string;
 
-  description: string;
+  description?: string;
 
   actvitiyId: string;
 
@@ -21,21 +21,21 @@ export interface IActivityLog {
 }
 
 export class ActivityLogEntry implements IActivityLogEntry {
-  public id: string;
+  public id!: string;
 
-  public description: string;
+  public description?: string;
 
-  public actvitiyId: string;
+  public actvitiyId!: string;
 
-  public hours: number;
+  public hours!: number;
 
-  public day: number;
+  public day!: number;
 
-  public month: number;
+  public month!: number;
 
-  public year: number;
+  public year!: number;
 
-  public static createForDay(activityId: string, hours: number, date: Date, description?: string) {
+  public static createForDay(activityId: string, hours: number, date: Date, description?: string): IActivityLogEntry {
     // normalize empty string, null, ... to undefined
     if (!description) {
       description = undefined;

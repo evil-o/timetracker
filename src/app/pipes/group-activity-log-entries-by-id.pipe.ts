@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { IActivityLogEntry } from '../redux/states/activityLog';
-import { Observable } from 'rxjs/Observable';
+import { map, Observable } from 'rxjs';
 
 export interface IGroupEntry {
   activityId: string;
@@ -14,7 +14,7 @@ export interface IGroupEntry {
 export class GroupActivityLogEntriesByIdPipe implements PipeTransform {
 
   transform(entries$: Observable<IActivityLogEntry[]>): Observable<IGroupEntry[]> {
-    return entries$.map(entries => {
+    return entries$.pipe(map(entries => {
       const grouped: IGroupEntry[] = [];
 
       for (const entry of entries) {
@@ -29,6 +29,6 @@ export class GroupActivityLogEntriesByIdPipe implements PipeTransform {
       }
 
       return grouped;
-    });
+    }));
   }
 }

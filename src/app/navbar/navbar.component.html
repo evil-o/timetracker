@@ -31,7 +31,7 @@
     </div>
     <div class="nav-item" dropdown>
       <app-overtime-badge
-        [hours]="overallAttendanceSum$ | async"
+        [hours]="(overallAttendanceSum$ | async) ?? undefined"
       ></app-overtime-badge>
     </div>
     <div class="nav-item dropdown" dropdown>

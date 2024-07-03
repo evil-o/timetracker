@@ -33,7 +33,7 @@
       (click)="
         confirmMerge$.next({
           source: mergeSource,
-          target: { name: moveTarget.name, id: moveTarget.id }
+          target: { name: moveTarget.name, id: moveTarget.id, isNonWorking: false, isArchived: false }
         })
       "
     >

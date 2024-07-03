@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import { activityColors } from '../../models/activityColors';
 import { IActivityLog, IActivityLogEntry } from '../../redux/states/activityLog';
 import { IActivityTypes } from '../../redux/states/activityTypes';
+import { combineLatest, map, Observable } from 'rxjs';
 
 class Aggregation {
-  private aggregate = {};
+  private aggregate: Record<any, any> = {};
 
   public add(key: string, hours: number, color: any, colorId: string) {
     if (!(key in this.aggregate)) {
@@ -83,38 +83,39 @@ export class ActivityAggregationChartComponent implements OnInit {
     }
     let activitiesInRage$: Observable<IActivityLogEntry[]>;
     if (this.startDate$ && this.endDate$) {
-      activitiesInRage$ = Observable.combineLatest(
+      activitiesInRage$ = combineLatest([
         this.allActivities$,
         this.startDate$,
         this.endDate$
-      )
-        .map(([activities, sliceStart, sliceEnd]) => activities.entries.filter((entry) => {
+      ]).pipe(
+        map(([activities, sliceStart, sliceEnd]) => activities.entries.filter((entry) => {
           const date = new Date(entry.year, entry.month, entry.day);
           return date >= sliceStart && date < sliceEnd;
-        }));
+        })));
     } else {
-      activitiesInRage$ = this.allActivities$.map((a) => a.entries);
+      activitiesInRage$ = this.allActivities$.pipe(map((a) => a.entries));
     }
 
-    const aggregation$ = Observable.combineLatest(activitiesInRage$, this.types$)
-      .map(([activities, types]) => {
+    const aggregation$ = combineLatest([activitiesInRage$, this.types$!]).pipe(
+      map(([activities, types]) => {
         return activities.reduce((prev, current) => {
           const type = types.activities.find((a) => a.id === current.actvitiyId);
-          const color = activityColors.find((c) => c.id === type.colorId) || { color: { r: 0xe0, g: 0xe0, b: 0xe0 } };
-          prev.add(type ? type.name : current.actvitiyId, current.hours, color.color, type.colorId || '');
+          const color = activityColors.find((c) => c.id === type!.colorId) || { color: { r: 0xe0, g: 0xe0, b: 0xe0 } };
+          prev.add(type ? type.name : current.actvitiyId, current.hours, color.color, type!.colorId || '');
           return prev;
         }, new Aggregation());
-      })
-      .map((aggregate) => aggregate.toLists());
+      }),
+      map((aggregate) => aggregate.toLists())
+    );
 
-    const filteredActivities$ = aggregation$.map((aggregation) => ({
+    const filteredActivities$ = aggregation$.pipe(map((aggregation) => ({
       names: aggregation.names,
       hours: aggregation.values.map((h) => Math.round(h * 10) / 10),
       colors: [aggregation.colors.reduce((prev, cur) => {
         prev.backgroundColor.push(cur);
         return prev;
-      }, { backgroundColor: [] })]
-    }));
+      }, { backgroundColor: [] as string[] })]
+    })));
 
     filteredActivities$.subscribe((data) => {
       this.filteredActivityNames = [];

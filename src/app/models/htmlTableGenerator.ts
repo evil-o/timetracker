@@ -19,7 +19,7 @@ export class Cell implements ICell {
 
   public align?: 'left' | 'right';
 
-  public contents: string;
+    public contents: string = "";
 
   protected elementType = 'td';
 
@@ -47,7 +47,7 @@ export class Cell implements ICell {
 }
 
 export class HeaderCell extends Cell {
-  protected elementType = 'th';
+  protected override elementType = 'th';
 }
 
 export class Row {

@@ -1,12 +1,7 @@
 import { Component, EventEmitter, ElementRef, Input, Output, ViewChild } from '@angular/core';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/merge';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
 
 import { IActivityType } from '../../models/interfaces';
-import { TypeaheadDirective } from 'ngx-bootstrap';
+import { TypeaheadDirective } from 'ngx-bootstrap/typeahead';
 
 @Component({
   selector: 'app-activity-picker',
@@ -26,10 +21,10 @@ export class ActivityPickerComponent {
   public confirm = new EventEmitter<void>();
 
   @ViewChild('textInput')
-  public textInput: ElementRef;
+  public textInput!: ElementRef;
 
   @ViewChild(TypeaheadDirective)
-  public typeahead: TypeaheadDirective;
+  public typeahead!: TypeaheadDirective;
 
   public items: IActivityType[] = [];
 

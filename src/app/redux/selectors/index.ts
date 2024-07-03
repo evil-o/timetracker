@@ -8,7 +8,7 @@ export const activityTypes = (state: ApplicationState) => state.activityTypes;
 export const activityLog = (state: ApplicationState) => state.activityLog;
 export const activityLogEntries = createSelector(activityLog, (state) => state.entries);
 export const activityLogEntriesByDay = createSelector(activityLogEntries, (entries) => {
-  const byDay = {};
+  const byDay: Record<number, any> = {};
   for (const entry of entries) {
     if (!(entry.year in byDay)) {
       byDay[entry.year] = {};
@@ -112,7 +112,7 @@ export const attendanceEntriesWithOvertime = createSelector(
   });
 
 export const overtimeSum = createSelector(attendanceEntriesWithOvertime, (times) => {
-  return times.map(t => t.overtime).reduce((previous, current) => previous + current, 0);
+  return times.map(t => t.overtime).reduce((previous, current) => (previous ?? 0) + (current ?? 0), 0);
 });
 
 

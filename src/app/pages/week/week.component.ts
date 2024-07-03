@@ -1,37 +1,26 @@
-import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 
-import { Subject } from 'rxjs/Subject';
-// TODO: this should be the line, but combineLatest does not work with it
-// import { Observable } from 'rxjs/Observable';
-import { Observable } from 'rxjs/Rx';
-import 'rxjs/add/operator/combinelatest';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/zip';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
-import { BsModalService } from 'ngx-bootstrap/modal';
-import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-
-import { ApplicationState } from '../../redux/states/applicationState';
-import { IActivityLogEntry } from '../../redux/states/activityLog';
 import * as fromStore from '../../redux/selectors';
+import { IActivityLogEntry } from '../../redux/states/activityLog';
 import { IActivityTypes } from '../../redux/states/activityTypes';
+import { ApplicationState } from '../../redux/states/applicationState';
 
-import { HtmlTableGenerator, Row, Cell, HeaderCell } from '../../models/htmlTableGenerator';
+import { HtmlTableGenerator } from '../../models/htmlTableGenerator';
 
-import * as currentWeekNumber from 'current-week-number';
-import { SetDescriptionAction } from '../../redux/actions/activityLogActions';
-import { IGroupEntry } from '../../pipes/group-activity-log-entries-by-id.pipe';
-import { IAttendanceEntry, IAttendanceCorrection } from '../../redux/states/attendanceState';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { IAttendanceWithTimes } from '../../redux/selectors';
-import { attendanceStateReducer } from '../../redux/reducers/attendanceReducer';
-import { PadNumberPipe } from '../../pipes/pad-number.pipe';
-import { core } from '@angular/compiler';
-import { FormatHoursPipe } from '../../pipes/format-hours.pipe';
 import { getFirstDayOfCalendarWeek } from '../../helpers';
+import { FormatHoursPipe } from '../../pipes/format-hours.pipe';
+import { IGroupEntry } from '../../pipes/group-activity-log-entries-by-id.pipe';
+import { PadNumberPipe } from '../../pipes/pad-number.pipe';
+import { IAttendanceWithTimes } from '../../redux/selectors';
+import { IAttendanceCorrection, IAttendanceEntry } from '../../redux/states/attendanceState';
+import { BehaviorSubject, combineLatest, map, Observable, withLatestFrom } from 'rxjs';
+import currentWeekNumber from 'current-week-number';
+
 
 interface IDayEntry {
   dayOfTheWeek: number;
@@ -59,7 +48,6 @@ interface IWeekAttendanceStats {
 @Component({
   selector: 'app-week',
   templateUrl: './week.component.html',
-  styleUrls: ['./week.component.css'],
 })
 export class WeekComponent implements OnInit {
 
@@ -70,21 +58,21 @@ export class WeekComponent implements OnInit {
   public filteredLogEntries$: Observable<IActivityLogEntry[]>;
 
   public nextWeek$: Observable<IWeekDate>;
-  public nextWeek: IWeekDate;
+  public nextWeek?: IWeekDate;
 
   public week$: Observable<IWeekDate>;
-  public week: IWeekDate;
+  public week?: IWeekDate;
 
   public previousWeek$: Observable<IWeekDate>;
-  public previousWeek: IWeekDate;
+  public previousWeek?: IWeekDate;
 
   public days$: Observable<IDayEntry[]>;
 
   public loggedSum$: Observable<number>;
 
-  public modalRef: BsModalRef;
+  public modalRef!: BsModalRef;
 
-  public printPreviewContents: string;
+  public printPreviewContents?: string;
 
   public attendances$: Observable<IAttendanceWithTimes[]>;
   public attendanceCorrections$: Observable<IAttendanceCorrection[]>;
@@ -92,11 +80,11 @@ export class WeekComponent implements OnInit {
   public attendanceStats$: Observable<IWeekAttendanceStats>;
 
   private attendances: IAttendanceWithTimes[] = [];
-  private attendanceStats: IWeekAttendanceStats;
+  private attendanceStats!: IWeekAttendanceStats;
 
   public selectedTab: 'tally' | 'daily' | 'attendance' = 'tally';
 
-  public overallAttendanceSum$: Observable<number>;
+  public overallAttendanceSum$: Observable<number | undefined>;
   private overallAttendanceSum?: number;
 
   constructor(
@@ -105,7 +93,7 @@ export class WeekComponent implements OnInit {
     private modalService: BsModalService,
   ) {
 
-    this.week$ = this.activatedRoute.params.map((parameters) => {
+    this.week$ = this.activatedRoute.params.pipe(map((parameters) => {
       let year = Number(parameters['year']);
       let week = Number(parameters['week']);
       if (Number.isNaN(year) || Number.isNaN(week)) {
@@ -114,15 +102,15 @@ export class WeekComponent implements OnInit {
         week = currentWeekNumber(today);
       }
       return { year, week };
-    });
+    }));
 
     this.week$.subscribe((week) => this.week = week);
 
     this.activityTypes$ = this.store.select(fromStore.activityTypes);
     this.activityLogEntries$ = this.store.select(fromStore.activityLogEntries);
 
-    this.previousWeek$ = this.week$
-      .map((week) => {
+    this.previousWeek$ = this.week$.pipe(
+      map((week) => {
         let previousWeek = week.week - 1;
         let previousWeekYear = week.year;
         if (previousWeek < 1) {
@@ -131,14 +119,14 @@ export class WeekComponent implements OnInit {
         }
 
         return { year: previousWeekYear, week: previousWeek };
-      });
+      }));
 
     this.previousWeek$.subscribe((value) => {
       this.previousWeek = value;
     });
 
-    this.nextWeek$ = this.week$
-      .map((week) => {
+    this.nextWeek$ = this.week$.pipe(
+      map((week) => {
         let nextWeek = week.week + 1;
         let nextWeekYear = week.year;
         if (nextWeek > 52) {
@@ -147,28 +135,28 @@ export class WeekComponent implements OnInit {
         }
 
         return { year: nextWeekYear, week: nextWeek };
-      });
+      }));
 
     this.nextWeek$.subscribe((value) => {
       this.nextWeek = value;
     });
 
     this.filteredLogEntries$ =
-      Observable.combineLatest(this.week$, this.activityLogEntries$)
-        .map(([week, entries]) => {
+      combineLatest([this.week$, this.activityLogEntries$]).pipe(
+        map(([week, entries]) => {
           return entries.filter((entry) => {
             const date = new Date(entry.year, entry.month, entry.day);
             return entry.year === week.year && currentWeekNumber(date) === week.week;
           });
-        });
+        }));
 
-    this.days$ = this.filteredLogEntries$
-      .map((entries) => {
+    this.days$ = this.filteredLogEntries$.pipe(
+      map((entries) => {
         const days: IDayEntry[] = [];
         const weekdayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
         // calculate the start date of the week
-        const startOfWeek = getFirstDayOfCalendarWeek(this.week.year, this.week.week);
+        const startOfWeek = getFirstDayOfCalendarWeek(this.week!.year, this.week!.week);
         // - 1: javascript week starts on sunday
         startOfWeek.setDate(startOfWeek.getDate() - ((startOfWeek.getDay() + 6) % 7));
 
@@ -188,41 +176,42 @@ export class WeekComponent implements OnInit {
         });
 
         return days;
-      });
+      }));
 
-    this.loggedSum$ = this.filteredLogEntries$.map(v => v.map(d => d.hours)).map(v => v.reduce((prev, curr) => prev + curr, 0));
+    this.loggedSum$ = this.filteredLogEntries$.pipe(map(v => v.map(d => d.hours)), map(v => v.reduce((prev, curr) => prev + curr, 0)));
 
     this.overallAttendanceSum$ = this.store.select(fromStore.overtimeSum);
     this.overallAttendanceSum$.subscribe((sum) => this.overallAttendanceSum = sum);
 
-    this.attendances$ = Observable.combineLatest(
-      this.store.select(fromStore.attendanceEntriesWithOvertime),
-      this.week$,
-    ).map(([entries, week]) => entries.filter(e => {
-      const entryWeek = currentWeekNumber(e.date);
-      return e.date.getFullYear() === week.year && entryWeek === week.week;
-    })).map(entries => entries.sort((a, b) => a.date.getTime() - b.date.getTime()));
+    this.attendances$ = combineLatest([this.store.select(fromStore.attendanceEntriesWithOvertime), this.week$]).pipe(
+      map(([entries, week]) => entries.filter(e => {
+        const entryWeek = currentWeekNumber(e.date);
+        return e.date.getFullYear() === week.year && entryWeek === week.week;
+      })),
+      map(entries => entries.sort((a, b) => a.date.getTime() - b.date.getTime()))
+    );
 
-    this.attendanceCorrections$ = this.attendances$.map(attendances => {
-      return attendances.map(v => v.corrections).reduce((prev, curr) => curr ? prev.concat(curr) : prev, []);
-    });
+    this.attendanceCorrections$ = this.attendances$.pipe(map(attendances => {
+      return attendances.map(v => v.corrections ?? []).reduce((prev, curr) => (prev ?? []).concat(curr ?? []), []);
+    }));
 
-    this.attendanceStats$ = this.attendances$.map((attendances) => {
+    this.attendanceStats$ = this.attendances$.pipe(map((attendances) => {
       let totalHours = 0;
       let totalNonWorkingHours = 0;
       let totalOvertime = 0;
 
       for (const attendance of attendances) {
-        totalHours += attendance.hours;
-        totalNonWorkingHours += attendance.nonWorkingHours;
-        totalOvertime += attendance.overtime;
+        totalHours += attendance.hours ?? 0;
+        totalNonWorkingHours += attendance.nonWorkingHours ?? 0;
+        totalOvertime += attendance.overtime ?? 0;
       }
 
       return { totalHours, totalNonWorkingHours, totalOvertime };
-    });
+    }));
 
-    Observable.combineLatest(this.attendances$, this.attendanceStats$, this.days$, this.attendanceCorrections$)
-      .withLatestFrom(this.activityTypes$)
+    combineLatest([this.attendances$, this.attendanceStats$, this.days$, this.attendanceCorrections$]).pipe(
+      withLatestFrom(this.activityTypes$)
+    )
       .subscribe(([[attendances, stats, days, corrections], types]) => {
         this.attendances = attendances;
         this.attendanceStats = stats;
@@ -247,7 +236,7 @@ export class WeekComponent implements OnInit {
   refreshPrintPreviewContents(days: IDayEntry[], types: IActivityTypes, corrections: IAttendanceCorrection[]) {
     const root = document.createElement('div');
     const h = root.appendChild(document.createElement('h1'));
-    h.innerText = `Week ${this.week.week} / ${this.week.year}`;
+    h.innerText = `Week ${this.week!.week} / ${this.week!.year}`;
 
     const hrPipe = new FormatHoursPipe();
     const hrf = (hrs: number, format = '{h}:{m}') => hrPipe.transform(hrs, format);
@@ -262,7 +251,7 @@ export class WeekComponent implements OnInit {
     activityTable.border = '1pt';
     activityTable.header.appendHeadingRow('Activity', 'Hours');
 
-    const activityName = (id: string) => types.activities.find((t) => t.id === id).name;
+    const activityName = (id: string) => types.activities.find((t) => t.id === id)!.name;
     for (const day of days) {
       const hs1 = activityTable.body.appendHeadingSpan(`${day.name}, ${day.date.getMonth() + 1} / ${day.date.getDate()}`, 2);
       hs1.bgColor = '#D0D0D0';
@@ -310,7 +299,7 @@ export class WeekComponent implements OnInit {
     attendanceTable.header.appendHeadingRow('Day', 'Start', 'End', 'Non-working hours', 'Overtime');
 
     const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    const pmHours = (hours: number) => hrPipe.transform(hours, '{+h}:{m}');
+    const pmHours = (hours: number | undefined) => hrPipe.transform(hours, '{+h}:{m}');
     for (const attendance of this.attendances) {
       const day = `${dayNames[attendance.date.getDay()]}`;
       const startTime = this.attendanceStartTimeStr(attendance);
@@ -372,6 +361,9 @@ export class WeekComponent implements OnInit {
 
   savePrint() {
     const a = document.getElementById('printDownload');
+    if (!a) {
+      throw new Error("#printDownload not found!");
+    }
     // TODO pad is copied from storageVersion effects, put this somewhere and reuse it
     const pad = (n: number, width = 2, fill = '0') => {
       let n_str = `${n}`;
@@ -381,8 +373,7 @@ export class WeekComponent implements OnInit {
       return n_str;
     };
 
-    const now = new Date();
-    const downloadName = `Timesheet-${this.week.year}-${pad(this.week.week)}`;
+    const downloadName = `Timesheet-${this.week!.year}-${pad(this.week!.week)}`;
 
     const html = `<!DOCTYPE html><html><head><title>Timesheet</title><meta charset="utf-8"><body>${this.printPreviewContents}</body><html>`;
 

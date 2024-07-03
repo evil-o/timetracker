@@ -23,8 +23,8 @@
     <button class="btn" (click)="pickNextDay()">
       <i class="fa fa-chevron-right"></i>
     </button>
-    {{ (date$ | async).toLocaleDateString("en-us", { weekday: "long" }) }},
-    {{ (date$ | async).toLocaleDateString() }}
+    {{ (date$ | async)?.toLocaleDateString("en-us", { weekday: "long" }) }},
+    {{ (date$ | async)?.toLocaleDateString() }}
   </h1>
 </div>
 
@@ -53,7 +53,7 @@
     <app-activity-picker
       #activityToLog
       (confirm)="refocusOnEnter()"
-      [activities]="activities$ | async"
+      [activities]="(activities$ | async) ?? undefined"
       placeholder="What did you do today?"
     ></app-activity-picker>
   </div>
@@ -123,8 +123,8 @@
 
 <div class="row mt-2">
   <div class="col-sm-12">
+    <!-- vvv (changeEntryDescription)="changeEntryDescription($event)" -->
     <app-actvity-log-list
-      (changeEntryDescription)="changeEntryDescription($event)"
       [groups$]="activityLogEntries$ | groupActivityLogEntriesById"
       [activityTypes$]="activityTypes$"
     >

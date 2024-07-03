@@ -1,22 +1,19 @@
-import { Action } from '@ngrx/store';
 
+import { v4 as uuid } from 'uuid';
 import { IActivityType } from '../../models/interfaces';
-import { ActivityTypes, IActivityTypes } from '../states/activityTypes';
-import { ApplicationState } from '../states/applicationState';
+import { MERGE_ACTIVITIES, MergeActivitiesAction } from '../actions/activityLogActions';
 import {
   ActivityTypesActions,
-  CreateActivityTypeAction,
-  CREATE_ACTIVITY_TYPE_AND_LOG_TIME,
   CREATE,
-  SET_ACTIVITY_TYPE_IS_NON_WORKING,
-  SET_ACTIVITY_TYPE_IS_COLOR_ID,
-  SET_ARCHIVED,
+  CREATE_ACTIVITY_TYPE_AND_LOG_TIME,
+  CreateActivityTypeAndLogTimeAction,
   IMPORT_ACTIVITY_TYPES,
-  CreateActivityTypeAndLogTimeAction
+  SET_ACTIVITY_TYPE_IS_COLOR_ID,
+  SET_ACTIVITY_TYPE_IS_NON_WORKING,
+  SET_ARCHIVED
 } from '../actions/activityTypesActions';
-import * as uuid from 'uuid';
-import { IncrementalMigrationAction, INCREMENTAL_MIGRATION } from '../actions/storageVersionActions';
-import { MergeActivitiesAction, MERGE_ACTIVITIES } from '../actions/activityLogActions';
+import { INCREMENTAL_MIGRATION, IncrementalMigrationAction } from '../actions/storageVersionActions';
+import { ActivityTypes, IActivityTypes } from '../states/activityTypes';
 
 function getStateAndEntryForEditing(state: IActivityTypes, activityTypeId: string): [IActivityTypes, IActivityType] {
   const newState = {
@@ -28,12 +25,12 @@ function getStateAndEntryForEditing(state: IActivityTypes, activityTypeId: strin
   if (!entry) {
     console.log(`Activity type ${activityTypeId} not found.`);
   }
-  return [newState, entry];
+  return [newState, entry!];
 }
 
 export function activityTypesReducer(
   state: IActivityTypes = new ActivityTypes(), action: ActivityTypesActions | IncrementalMigrationAction | MergeActivitiesAction
-) {
+): IActivityTypes {
   switch (action.type) {
     case CREATE:
     case CREATE_ACTIVITY_TYPE_AND_LOG_TIME:
@@ -44,9 +41,10 @@ export function activityTypesReducer(
         && names.includes(action.name)) {
         return { ...state };
       } else {
+        const newActivity: IActivityType = { name: action.name, id: uuid(), isNonWorking: false, isArchived: false };
         return {
           ...state,
-          activities: [...state.activities, { name: action.name, id: uuid.v4() }]
+          activities: [...state.activities, newActivity]
         };
       }
 
@@ -89,7 +87,9 @@ export function activityTypesReducer(
         return state;
       }
 
-      const newState = { activities: [...state.activities], ...state };
+      // was bugged:
+      // const newState = { activities: [...state.activities], ...state };
+      const newState = { ...state };
       newState.activities.splice(idx, 1);
       return newState;
     }

@@ -2,10 +2,9 @@ import { Component } from '@angular/core';
 import { ApplicationState } from '../../redux/states/applicationState';
 import { Store } from '@ngrx/store';
 import { activityLog, activityTypes } from '../../redux/selectors';
-import { Observable, } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { IActivityTypes } from '../../redux/states/activityTypes';
 import { IActivityLog } from '../../redux/states/activityLog';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 function getMonthDateRange(year: number, month: number) {
   const start = new Date(year, month, 1);

@@ -8,7 +8,7 @@ export function padNumber(num: number, minLength: number = 2, padding = '0') {
 }
 
 export function valueToTime(value: string | undefined): Date | undefined {
-  value = value.trim();
+  value = value?.trim();
   if (!value) {
     return undefined;
   } else {
@@ -35,7 +35,7 @@ export function dateToTimeInputValue(date: Date) {
 }
 
 export function stringToDuration(durationStr: string): number | undefined {
-  let hoursNumber: number;
+  let hoursNumber: number | undefined;
 
   const newHours = Number(durationStr.replace(',', '.'));
   if (!Number.isNaN(newHours)) {

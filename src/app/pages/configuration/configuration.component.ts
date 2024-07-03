@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 import * as fromStore from '../../redux/selectors';
-import { Observable } from 'rxjs/Observable';
-import { IConfigurationState } from '../../redux/states/configuration';
 import { ApplicationState } from '../../redux/states/applicationState';
 import { Store } from '@ngrx/store';
 import { SetWeeklyWorkHoursAction, SetWeeklyWorkDaysAction } from '../../redux/actions/configurationActions';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-configuration',
@@ -14,13 +13,13 @@ import { SetWeeklyWorkHoursAction, SetWeeklyWorkDaysAction } from '../../redux/a
 })
 export class ConfigurationComponent implements OnInit {
 
-  public workingHoursPerWeek$: Observable<number>;
+  public workingHoursPerWeek$!: Observable<number>;
 
-  public workingDaysPerWeek$: Observable<number>;
+  public workingDaysPerWeek$!: Observable<number>;
 
-  public inputWorkingHoursPerWeek: number;
+  public inputWorkingHoursPerWeek?: number;
 
-  public inputWorkingDaysPerWeek: number;
+  public inputWorkingDaysPerWeek?: number;
 
   constructor(public store: Store<ApplicationState>) { }
 
@@ -38,4 +37,11 @@ export class ConfigurationComponent implements OnInit {
     }
   }
 
+  public setInputWorkingHoursPerWeek(value: number | string) : void {
+    this.inputWorkingHoursPerWeek = typeof value === "string"? Number.parseFloat(value) : value;
+  }
+
+  public setInputWorkingDaysPerWeek(value: number | string) : void {
+    this.inputWorkingHoursPerWeek = typeof value === "string"? Number.parseFloat(value) : value;
+  }
 }

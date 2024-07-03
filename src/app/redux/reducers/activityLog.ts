@@ -1,16 +1,17 @@
 
-import * as uuid from 'uuid';
+import { v4 as uuid } from 'uuid';
 
-import { LOG_TIME, ActivityLogAction, SET_DESCRIPTION, SET_HOURS, DELETE_ENTRY, MERGE_ACTIVITIES, IMPORT_ACTIVITIES } from '../actions/activityLogActions';
-import { IActivityLog, IActivityLogEntry, ActivityLog, ActivityLogEntry } from '../states/activityLog';
+import { ActivityLogAction, DELETE_ENTRY, IMPORT_ACTIVITIES, LOG_TIME, MERGE_ACTIVITIES, SET_DESCRIPTION, SET_HOURS } from '../actions/activityLogActions';
 import { INCREMENTAL_MIGRATION, IncrementalMigrationAction } from '../actions/storageVersionActions';
+import { ActivityLog, ActivityLogEntry, IActivityLog } from '../states/activityLog';
 
-export function activityLogReducer(state: IActivityLog = new ActivityLog, action: ActivityLogAction | IncrementalMigrationAction) {
+export function activityLogReducer(state: IActivityLog = new ActivityLog, action: ActivityLogAction | IncrementalMigrationAction): IActivityLog {
   switch (action.type) {
     case LOG_TIME:
+      const newEntry = ActivityLogEntry.createForDay(action.id, action.hoursToLog, action.date, action.description);
       return {
         ...state,
-        entries: [...state.entries, ActivityLogEntry.createForDay(action.id, action.hoursToLog, action.date, action.description)],
+        entries: [...state.entries, newEntry],
       };
 
     case INCREMENTAL_MIGRATION: {

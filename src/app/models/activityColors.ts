@@ -1,6 +1,5 @@
 import { IActivityTypeColor } from './interfaces';
 import * as convert from 'color-convert';
-import { ColdObservable } from 'rxjs/testing/ColdObservable';
 
 /*function rgb(r: number, g: number, b: number) {
   return {

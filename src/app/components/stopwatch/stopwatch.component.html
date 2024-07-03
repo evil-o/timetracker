@@ -44,7 +44,7 @@
   #picker
   class="navbar-text mr-sm-2"
   placeholder="Log elapsed time as..."
-  [activities]="this.activities$ | async"
+  [activities]="(this.activities$ | async) ?? undefined"
 ></app-activity-picker>
 <button class="btn btn-outline-success" (click)="logClick$.next(picker.name)">
   Log
