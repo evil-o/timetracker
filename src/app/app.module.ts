@@ -1,4 +1,3 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ChartsModule } from 'ng2-charts';
@@ -12,12 +11,13 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { ActivityPickerComponent } from './activity-picker/activity-picker.component';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ActivityPickerComponent } from './components/activity-picker/activity-picker.component';
 
-import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { environment } from '../environments/environment';

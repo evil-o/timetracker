@@ -5,16 +5,16 @@ import { IAttendanceState } from './attendanceState';
 import { IConfigurationState } from './configuration';
 import { IStopWatch } from './stopwatchState';
 
-export class ApplicationState {
-  public activityTypes: IActivityTypes;
+export interface ApplicationState {
+  activityTypes: IActivityTypes;
 
-  public activityLog: IActivityLog;
+  activityLog: IActivityLog;
 
-  public attendanceState: IAttendanceState;
+  attendanceState: IAttendanceState;
 
-  public storageVersion: IStorageVersion;
+  storageVersion: IStorageVersion;
 
-  public configuration: IConfigurationState;
+  configuration: IConfigurationState;
 
-  public stopWatch: IStopWatch;
+  stopWatch: IStopWatch;
 }

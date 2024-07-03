@@ -1,9 +1,5 @@
-import { Action } from '@ngrx/store';
 
 import * as uuid from 'uuid';
-
-import { IActivityType } from '../../models/interfaces';
-import { CreateActivityTypeAction } from '../actions/activityTypesActions';
 
 import { LOG_TIME, ActivityLogAction, SET_DESCRIPTION, SET_HOURS, DELETE_ENTRY, MERGE_ACTIVITIES, IMPORT_ACTIVITIES } from '../actions/activityLogActions';
 import { IActivityLog, IActivityLogEntry, ActivityLog, ActivityLogEntry } from '../states/activityLog';
