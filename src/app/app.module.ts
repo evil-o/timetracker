@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { provideAnimations } from "@angular/platform-browser/animations";
 
 import { FormsModule } from '@angular/forms';
 
@@ -54,6 +55,7 @@ import { GroupActivityLogEntriesByIdPipe } from './pipes/group-activity-log-entr
 import { LogEntryTallyPipe } from './pipes/log-entry-tally.pipe';
 import { PadNumberPipe } from './pipes/pad-number.pipe';
 import { PrecisionPipe } from './pipes/precision.pipe';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -85,10 +87,10 @@ import { PrecisionPipe } from './pipes/precision.pipe';
     DayAttendanceComponent,
     FormatHoursPipe,
     StatisticsComponent,
-    ActivityAggregationChartComponent,
     StopwatchComponent,
   ],
   imports: [
+    ActivityAggregationChartComponent,
     BrowserModule,
     CommonModule,
     FormsModule,
@@ -107,7 +109,7 @@ import { PrecisionPipe } from './pipes/precision.pipe';
     EffectsModule.forRoot(effects),
     RouterModule.forRoot(appRoutes),
   ],
-  providers: [],
+  providers: [provideCharts(withDefaultRegisterables()), provideAnimations()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

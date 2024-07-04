@@ -3,6 +3,9 @@ import { activityColors } from '../../models/activityColors';
 import { IActivityLog, IActivityLogEntry } from '../../redux/states/activityLog';
 import { IActivityTypes } from '../../redux/states/activityTypes';
 import { combineLatest, map, Observable } from 'rxjs';
+import { BaseChartDirective } from 'ng2-charts';
+import { ChartData, ChartOptions, ChartType } from 'chart.js';
+import { CommonModule } from '@angular/common';
 
 class Aggregation {
   private aggregate: Record<any, any> = {};
@@ -42,25 +45,35 @@ class Aggregation {
 @Component({
   selector: 'app-activity-aggregation-chart',
   templateUrl: './activity-aggregation-chart.component.html',
-  styleUrls: ['./activity-aggregation-chart.component.css']
+  styleUrls: ['./activity-aggregation-chart.component.css'],
+  imports: [BaseChartDirective, CommonModule],
+  standalone: true
 })
 export class ActivityAggregationChartComponent implements OnInit {
-  public filteredActivityNames: string[] = [];
-  public filteredActivityHours: number[] = [];
+  protected chartData?: ChartData<"doughnut">;
+  protected doughnutChartType = "doughnut" as const;
 
-  public chartOptions = {
-    legend: {
-      display: false,
-      labels: {
-        display: false
-      }
+  public chartOptions: ChartOptions<"doughnut"> = {
+    plugins: {
+      legend: {
+        display: false,
+      },
     }
+    // legend: {
+    //   display: false,
+    //   labels: {
+    //     display: false
+    //   }
+    // }
   };
 
   @Input()
   public set legend(display: boolean) {
-    this.chartOptions.legend.display = display;
-    this.chartOptions.legend.labels.display = display;
+    if (!this.chartOptions.plugins?.legend) {
+      return;
+    }
+    this.chartOptions.plugins.legend.display = display;
+    // this.chartOptions.plugins.legend.labels.display = display;
   }
 
   @Input()
@@ -108,23 +121,13 @@ export class ActivityAggregationChartComponent implements OnInit {
       map((aggregate) => aggregate.toLists())
     );
 
-    const filteredActivities$ = aggregation$.pipe(map((aggregation) => ({
-      names: aggregation.names,
-      hours: aggregation.values.map((h) => Math.round(h * 10) / 10),
-      colors: [aggregation.colors.reduce((prev, cur) => {
-        prev.backgroundColor.push(cur);
-        return prev;
-      }, { backgroundColor: [] as string[] })]
-    })));
-
-    filteredActivities$.subscribe((data) => {
-      this.filteredActivityNames = [];
-      this.filteredActivityHours = [];
-      this.filteredChartColors = [];
+    aggregation$.subscribe((aggregation) => {
+      const hours = aggregation.values.map((h) => Math.round(h * 10) / 10);
       setTimeout(() => {
-        this.filteredActivityNames = data.names;
-        this.filteredActivityHours = data.hours;
-        this.filteredChartColors = data.colors;
+        this.chartData = {
+          datasets: [{ data: hours, backgroundColor: (context) => aggregation.colors[context.dataIndex] }],
+          labels: aggregation.names,
+        }
       }, 0);
     });
   }
