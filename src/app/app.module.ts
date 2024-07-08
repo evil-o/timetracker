@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { provideAnimations } from "@angular/platform-browser/animations";
+import { RouterModule } from '@angular/router';
 
 import { FormsModule } from '@angular/forms';
 
@@ -21,12 +21,14 @@ import { reducers } from './redux/reducers/index';
 
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+
 import { appRoutes } from './app.routes';
 import { ActivityAggregationChartComponent } from './components/activity-aggregation-chart/activity-aggregation-chart.component';
 import { ActivityColorPickerComponent } from './components/activity-color-picker/activity-color-picker.component';
@@ -55,7 +57,6 @@ import { GroupActivityLogEntriesByIdPipe } from './pipes/group-activity-log-entr
 import { LogEntryTallyPipe } from './pipes/log-entry-tally.pipe';
 import { PadNumberPipe } from './pipes/pad-number.pipe';
 import { PrecisionPipe } from './pipes/precision.pipe';
-import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -94,10 +95,10 @@ import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
     BrowserModule,
     CommonModule,
     FormsModule,
-    AccordionModule,
-    BsDropdownModule,
-    BsDatepickerModule,
-    NgbModalModule,
+    // ModalModule.forRoot(),
+    AccordionModule.forRoot(),
+    BsDropdownModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     TabsModule.forRoot(),
     TypeaheadModule.forRoot(),
     StoreModule.forRoot(reducers, { metaReducers }),

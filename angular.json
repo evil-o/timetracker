@@ -30,7 +30,9 @@
               "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/fontawesome.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -89,7 +91,7 @@
               "src/styles.css"
             ],
             "scripts": [
-              "src/assets/fontawesome-all.min.js"
+              "src/assets/fontawesome.min.js"
             ]
           }
         }
