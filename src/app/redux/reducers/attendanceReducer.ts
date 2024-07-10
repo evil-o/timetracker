@@ -2,15 +2,16 @@ import { v4 as uuid } from 'uuid';
 
 import {
   AttendanceAction,
-  SET_START_TIME,
-  SET_END_TIME,
   CREATE_CORRECTION,
-  UPDATE_CORRECTION,
-  DELETE_CORRECTION,
   DELETE_ATTENDANCE_ENTRY,
-  IMPORT_ATTENDANCE
+  DELETE_CORRECTION,
+  IMPORT_ATTENDANCE,
+  SET_END_TIME,
+  SET_START_TIME,
+  UPDATE_CORRECTION
 } from '../actions/attendanceActions';
-import { IAttendanceState, AttendanceState, IAttendanceEntry, AttendanceEntry } from '../states/attendanceState';
+import { AttendanceEntry, AttendanceState, IAttendanceEntry, IAttendanceState } from '../states/attendanceState';
+import { produce } from 'immer';
 
 function findEntry(forDate: Date, entries: IAttendanceEntry[]): IAttendanceEntry | undefined {
   return entries.find(e => AttendanceEntry.equalsDate(e, forDate));
@@ -24,20 +25,19 @@ export function attendanceStateReducer(state: IAttendanceState = new AttendanceS
   switch (action.type) {
     case SET_START_TIME:
     case SET_END_TIME: {
-      const newState = { ...state, entries: [...state.entries] };
-
-      let entry = findEntry(action.date, newState.entries);
-      if (!entry) {
-        entry = new AttendanceEntry(action.date);
-        newState.entries.push(entry);
-      }
-      if (action.type === SET_START_TIME) {
-        entry.start = action.start;
-      } else if (action.type === SET_END_TIME) {
-        entry.end = action.end;
-      }
-
-      return newState;
+      // const newState = { ...state, entries: [...state.entries] };
+      return produce(state, (draft) => {
+        let entry = findEntry(action.date, draft.entries);
+        if (!entry) {
+          entry = new AttendanceEntry(action.date);
+          draft.entries.push(entry);
+        }
+        if (action.type === SET_START_TIME) {
+          entry.start = action.start;
+        } else if (action.type === SET_END_TIME) {
+          entry.end = action.end;
+        }
+      });
     }
 
     case DELETE_ATTENDANCE_ENTRY: {

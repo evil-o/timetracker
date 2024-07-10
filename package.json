@@ -31,6 +31,7 @@
     "color-convert": "2.0.1",
     "core-js": "3.37.1",
     "current-week-number": "1.0.7",
+    "immer": "10.1.1",
     "ng2-charts": "6.0.1",
     "ngrx-store-localstorage": "18.0.0",
     "ngx-bootstrap": "18.0.0",

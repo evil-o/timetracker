@@ -15,7 +15,7 @@ export class ActivityTypeListComponent implements OnInit {
 
   _types?: IActivityType[];
   @Input() set types(value: IActivityType[] | undefined | null) {
-    this._types = value ?? undefined;
+    this._types = value? [...value] : undefined;
     this.sortedTypes = this._types?.sort((a, b) => a.name.localeCompare(b.name));
   }
   get types(): IActivityType[] | undefined {
