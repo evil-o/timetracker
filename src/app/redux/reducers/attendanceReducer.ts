@@ -1,5 +1,6 @@
 import { v4 as uuid } from 'uuid';
 
+import { produce } from 'immer';
 import {
   AttendanceAction,
   CREATE_CORRECTION,
@@ -7,11 +8,11 @@ import {
   DELETE_CORRECTION,
   IMPORT_ATTENDANCE,
   SET_END_TIME,
+  SET_START_AND_END_TIME,
   SET_START_TIME,
   UPDATE_CORRECTION
 } from '../actions/attendanceActions';
 import { AttendanceEntry, AttendanceState, IAttendanceEntry, IAttendanceState } from '../states/attendanceState';
-import { produce } from 'immer';
 
 function findEntry(forDate: Date, entries: IAttendanceEntry[]): IAttendanceEntry | undefined {
   return entries.find(e => AttendanceEntry.equalsDate(e, forDate));
@@ -23,9 +24,20 @@ function findEntryIndex(forDate: Date, entries: IAttendanceEntry[]): number {
 
 export function attendanceStateReducer(state: IAttendanceState = new AttendanceState, action: AttendanceAction): IAttendanceState {
   switch (action.type) {
+    case SET_START_AND_END_TIME: {
+      return produce(state, (draft) => {
+        let entry = findEntry(action.date, draft.entries);
+        if (!entry) {
+          entry = new AttendanceEntry(action.date);
+          draft.entries.push(entry);
+        }
+        entry.start = action.start;
+        entry.end = action.end;
+      });
+    }
+
     case SET_START_TIME:
-    case SET_END_TIME: {
-      // const newState = { ...state, entries: [...state.entries] };
+      case SET_END_TIME: {
       return produce(state, (draft) => {
         let entry = findEntry(action.date, draft.entries);
         if (!entry) {

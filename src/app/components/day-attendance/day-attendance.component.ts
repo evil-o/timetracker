@@ -5,6 +5,7 @@ import {
   CreateCorrectionAction,
   DeleteCorrectionAction,
   SetEndTimeAction,
+  SetStartAndEndTimeAction,
   SetStartTimeAction,
   UpdateCorrectionAction,
 } from '../../redux/actions/attendanceActions';
@@ -58,12 +59,7 @@ export class DayAttendanceComponent implements OnInit {
       .subscribe(([values, date]) => {
         const start = valueToTime(values.start);
         const end = valueToTime(values.end);
-        if (start) {
-          this.store.dispatch(new SetStartTimeAction(date, start));
-        }
-        if (end) {
-          this.store.dispatch(new SetEndTimeAction(date, end));
-        }
+        this.store.dispatch(new SetStartAndEndTimeAction(date, start, end));
       });
 
     this.entries$ = this.store.select(get.attendanceEntries);
