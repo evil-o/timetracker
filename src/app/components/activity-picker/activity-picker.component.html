@@ -1,5 +1,6 @@
 <form (submit)="this.confirm.emit()">
   <input
+    data-testid="activity-input"
     #textInput
     [(ngModel)]="name"
     [typeahead]="items"

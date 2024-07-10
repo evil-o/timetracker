@@ -20,10 +20,10 @@ export class NavbarComponent implements OnInit {
   private importFileElement!: ElementRef;
 
   public entries = [
-    { label: 'Today', link: 'today', icon: 'calendar' },
-    { label: 'Week', link: 'week', icon: 'calendar-alt' },
-    { label: 'Activities', link: 'activities', icon: 'paper-plane' },
-    { label: 'Statistics', link: 'statistics', icon: 'chart-bar' },
+    { label: 'Today', link: 'today', icon: 'calendar', id: 'today' },
+    { label: 'Week', link: 'week', icon: 'calendar-alt', id: 'week' },
+    { label: 'Activities', link: 'activities', icon: 'paper-plane', id: 'activities' },
+    { label: 'Statistics', link: 'statistics', icon: 'chart-bar', id: 'statistics' },
   ];
 
   @Output()

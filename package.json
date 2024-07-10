@@ -8,7 +8,7 @@
     "build": "ng build --prod --aot --base-href=",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
+    "cy:open": "cypress open",
     "generate:colors": "ts-node generate-colors.ts"
   },
   "private": true,
@@ -49,6 +49,7 @@
     "@types/jasminewd2": "2.0.13",
     "@types/node": "20.14.9",
     "@types/uuid": "10.0.0",
+    "cypress": "^13.13.0",
     "jasmine-core": "5.1.2",
     "jasmine-spec-reporter": "7.0.0",
     "karma": "6.4.3",

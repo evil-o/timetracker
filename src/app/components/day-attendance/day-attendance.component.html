@@ -16,6 +16,7 @@
         type="time"
         class="form-control"
         [class.is-valid]="this.startValid$ | async"
+        data-testid="day-start"
         id="dayStart"
         #dayStart
         (change)="setButton.disabled = false; timeInputsChaged$.next()"
@@ -23,6 +24,7 @@
       />
       <button
         type="submit"
+        data-testid="clock-in-button"
         class="btn btn-light my-2"
         (click)="
           setTimeToNowPlusMinutes(dayStart, -2);
@@ -36,6 +38,7 @@
     <div class="col-4">
       <input
         type="time"
+        data-testid="day-end"
         class="form-control"
         [class.is-valid]="this.endValid$ | async"
         id="dayEnd"
@@ -45,6 +48,7 @@
       />
       <button
         type="submit"
+        data-testid="clock-out-button"
         class="btn btn-light my-2"
         (click)="
           setTimeToNowPlusMinutes(dayEnd, +2);
@@ -59,6 +63,7 @@
       <button
         #setButton
         type="submit"
+        data-testid="submit-attendance"
         class="btn btn-primary mb-2"
         [disabled]="true"
         (click)="timeValues$.next({ start: dayStart.value, end: dayEnd.value })"
@@ -68,11 +73,12 @@
     </div>
   </div>
   <accordion>
-    <accordion-group heading="Extra bookings">
+    <accordion-group heading="Extra bookings" data-testid="extra-bookings">
       <div class="form-row" *ngFor="let correction of corrections$ | async">
         <div class="form-group col-5">
           <input
             type="text"
+            data-testid="extra-booking-description"
             #desc
             class="form-control"
             placeholder="Enter correction description here"
@@ -82,6 +88,7 @@
         <div class="form-group col-3">
           <input
             type="text"
+            data-testid="extra-booking-hours"
             #hours
             class="form-control"
             placeholder="Enter +/- hours here"
@@ -91,12 +98,14 @@
         <div class="form-group col-4">
           <button
             class="btn btn-secondary mr-1"
+            data-testid="confirm-update-correction"
             (click)="updateCorrection(correction.id, desc.value, hours.value)"
           >
             <i class="fa fa-check"></i>
           </button>
           <button
             class="btn btn-danger"
+            data-testid="cancel-update-correction"
             (click)="correctionsToDelete$.next(correction)"
           >
             <i class="fa fa-trash"></i>
@@ -104,7 +113,7 @@
         </div>
       </div>
       <div class="form-row mt-2">
-        <button class="btn btn-primary" (click)="correctionCreation$.next()">
+        <button class="btn btn-primary" data-testid="add-extra-booking" (click)="correctionCreation$.next()">
           Add
         </button>
       </div>

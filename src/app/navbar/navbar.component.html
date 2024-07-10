@@ -18,6 +18,7 @@
         class="nav-item"
         routerLinkActive="active"
         *ngFor="let entry of entries"
+        [attr.data-testid]="entry.id"
       >
         <a class="nav-link" [routerLink]="entry.link">
           <i class="far fa-{{ entry.icon }}"></i>
