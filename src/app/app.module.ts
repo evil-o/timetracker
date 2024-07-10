@@ -95,7 +95,7 @@ import { PrecisionPipe } from './pipes/precision.pipe';
     BrowserModule,
     CommonModule,
     FormsModule,
-    // ModalModule.forRoot(),
+    ModalModule.forRoot(),
     AccordionModule.forRoot(),
     BsDropdownModule.forRoot(),
     BsDatepickerModule.forRoot(),
