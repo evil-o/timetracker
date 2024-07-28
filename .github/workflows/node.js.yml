@@ -49,7 +49,7 @@ jobs:
 
     # Deployment prep ==
     
-    - name: Cypress tests
+    - name: Bundle
       run: npm run bundle
 
     - name: Upload dist folder
