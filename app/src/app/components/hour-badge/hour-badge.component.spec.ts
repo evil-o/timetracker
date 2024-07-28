@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HourBadgeComponent } from './hour-badge.component';
 import { FormatHoursPipe } from '../../pipes/format-hours.pipe';
@@ -7,14 +7,14 @@ describe('HourBadgeComponent', () => {
   let component: HourBadgeComponent;
   let fixture: ComponentFixture<HourBadgeComponent>;
 
-  beforeEach(async(() => {
+  beforeEach((() => {
     TestBed.configureTestingModule({
       declarations: [
         FormatHoursPipe,
         HourBadgeComponent,
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

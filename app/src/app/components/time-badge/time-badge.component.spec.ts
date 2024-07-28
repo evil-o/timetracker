@@ -1,9 +1,9 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { By } from '@angular/platform-browser';
 
 import { TimeBadgeComponent } from './time-badge.component';
-import { DebugElement } from '@angular/core/src/debug/debug_node';
+import { DebugElement } from '@angular/core';
 
 describe('TimeBadgeComponent', () => {
   let component: TimeBadgeComponent;
@@ -12,7 +12,7 @@ describe('TimeBadgeComponent', () => {
   let displaySpanDebug: DebugElement;
   let displaySpan: HTMLSpanElement;
 
-  beforeEach(async(() => {
+  beforeEach((() => {
     TestBed.configureTestingModule({
       declarations: [TimeBadgeComponent]
     })

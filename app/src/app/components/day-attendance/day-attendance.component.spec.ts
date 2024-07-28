@@ -1,23 +1,22 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DayAttendanceComponent } from './day-attendance.component';
 import { StoreModule } from '@ngrx/store';
-import { reducers } from '../../redux/reducers';
-import { Subject } from 'rxjs/Subject';
-import { AccordionModule } from 'ngx-bootstrap';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { Subject } from 'rxjs';
+import { DayAttendanceComponent } from './day-attendance.component';
 
 describe('DayAttendanceComponent', () => {
   let component: DayAttendanceComponent;
   let fixture: ComponentFixture<DayAttendanceComponent>;
 
-  beforeEach(async(() => {
+  beforeEach((() => {
     TestBed.configureTestingModule({
       declarations: [
         DayAttendanceComponent,
       ],
       imports: [
         AccordionModule.forRoot(),
-        StoreModule.forRoot(reducers),
+        StoreModule.forRoot(),
       ],
     })
       .compileComponents();

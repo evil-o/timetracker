@@ -1,21 +1,22 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ActivityLogEntryComponent } from './activity-log-entry.component';
 import { ActivityTypeIdToNamePipe } from '../../pipes/activity-type-id-to-name.pipe';
-import { HourBadgeComponent } from '../hour-badge/hour-badge.component';
 import { EditableLogEntryDescriptionComponent } from '../editable-log-entry-description/editable-log-entry-description.component';
 import { EditableLogEntryHoursComponent } from '../editable-log-entry-hours/editable-log-entry-hours.component';
-import { AccordionModule } from 'ngx-bootstrap';
+import { HourBadgeComponent } from '../hour-badge/hour-badge.component';
+import { ActivityLogEntryComponent } from './activity-log-entry.component';
+
 import { StoreModule } from '@ngrx/store';
-import { reducers } from '../../redux/reducers/index';
-import { metaReducers } from '../../redux/metaReducers';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { FormatHoursPipe } from '../../pipes/format-hours.pipe';
+import { metaReducers } from '../../redux/metaReducers';
+import { reducers } from '../../redux/reducers/index';
 
 describe('ActivityLogEntryComponent', () => {
   let component: ActivityLogEntryComponent;
   let fixture: ComponentFixture<ActivityLogEntryComponent>;
 
-  beforeEach(async(() => {
+  beforeEach((() => {
     TestBed.configureTestingModule({
       declarations: [
         ActivityLogEntryComponent,

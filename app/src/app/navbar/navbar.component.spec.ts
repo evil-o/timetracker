@@ -1,54 +1,52 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { APP_BASE_HREF } from '@angular/common';
 
-import { NavbarComponent } from './navbar.component';
-import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { NavbarComponent } from './navbar.component';
 
-import { AccordionModule } from 'ngx-bootstrap';
-import { BsDatepickerModule } from 'ngx-bootstrap';
-import { TabsModule } from 'ngx-bootstrap';
-import { TypeaheadModule } from 'ngx-bootstrap';
 
-import { StoreModule, Store } from '@ngrx/store';
+import { Store, StoreModule } from '@ngrx/store';
 
 import { reducers } from '../redux/reducers/index';
-import { effects } from '../redux/effects/index';
-import { metaReducers } from '../redux/metaReducers';
 
 import { appRoutes } from '../app.routes';
-import { WelcomeComponent } from '../pages/welcome/welcome.component';
-import { DayComponent } from '../pages/day/day.component';
-import { WeekComponent } from '../pages/week/week.component';
-import { ActivityPickerComponent } from '../components/activity-picker/activity-picker.component';
-import { HourBadgeComponent } from '../components/hour-badge/hour-badge.component';
-import { TimeBadgeComponent } from '../components/time-badge/time-badge.component';
-import { GroupActivityLogEntriesByIdPipe } from '../pipes/group-activity-log-entries-by-id.pipe';
-import { ActivityLogListComponent } from '../components/actvity-log-list/actvity-log-list.component';
+import { ActivityColorPickerComponent } from '../components/activity-color-picker/activity-color-picker.component';
 import { ActivityLogEntryComponent } from '../components/activity-log-entry/activity-log-entry.component';
-import { ActivityTypeIdToNamePipe } from '../pipes/activity-type-id-to-name.pipe';
+import { ActivityPickerComponent } from '../components/activity-picker/activity-picker.component';
+import { ActivityTypeListComponent } from '../components/activity-type-list/activity-type-list.component';
+import { ActivityLogListComponent } from '../components/actvity-log-list/actvity-log-list.component';
+import { DayAttendanceComponent } from '../components/day-attendance/day-attendance.component';
 import {
   EditableLogEntryDescriptionComponent
 } from '../components/editable-log-entry-description/editable-log-entry-description.component';
 import { EditableLogEntryHoursComponent } from '../components/editable-log-entry-hours/editable-log-entry-hours.component';
+import { HourBadgeComponent } from '../components/hour-badge/hour-badge.component';
 import { NoActivityLogEntryPresentComponent } from '../components/no-activity-log-entry-present/no-activity-log-entry-present.component';
-import { TallyComponent } from '../components/tally/tally.component';
-import { LogEntryTallyPipe } from '../pipes/log-entry-tally.pipe';
-import { AttendanceComponent } from '../pages/attendance/attendance.component';
-import { ActivitiesComponent } from '../pages/activities/activities.component';
-import { ActivityTypeListComponent } from '../components/activity-type-list/activity-type-list.component';
 import { OvertimeBadgeComponent } from '../components/overtime-badge/overtime-badge.component';
-import { PrecisionPipe } from '../pipes/precision.pipe';
-import { ActivityColorPickerComponent } from '../components/activity-color-picker/activity-color-picker.component';
-import { PadNumberPipe } from '../pipes/pad-number.pipe';
-import { ConfigurationComponent } from '../pages/configuration/configuration.component';
-import { DayAttendanceComponent } from '../components/day-attendance/day-attendance.component';
-import { ApplicationState } from '../redux/states/applicationState';
-import { SetStartTimeAction, SetEndTimeAction } from '../redux/actions/attendanceActions';
+import { TallyComponent } from '../components/tally/tally.component';
+import { TimeBadgeComponent } from '../components/time-badge/time-badge.component';
 import { valueToTime } from '../helpers';
-import { SetWeeklyWorkHoursAction, SetWeeklyWorkDaysAction } from '../redux/actions/configurationActions';
+import { ActivitiesComponent } from '../pages/activities/activities.component';
+import { AttendanceComponent } from '../pages/attendance/attendance.component';
+import { ConfigurationComponent } from '../pages/configuration/configuration.component';
+import { DayComponent } from '../pages/day/day.component';
+import { WeekComponent } from '../pages/week/week.component';
+import { WelcomeComponent } from '../pages/welcome/welcome.component';
+import { ActivityTypeIdToNamePipe } from '../pipes/activity-type-id-to-name.pipe';
 import { FormatHoursPipe } from '../pipes/format-hours.pipe';
+import { GroupActivityLogEntriesByIdPipe } from '../pipes/group-activity-log-entries-by-id.pipe';
+import { LogEntryTallyPipe } from '../pipes/log-entry-tally.pipe';
+import { PadNumberPipe } from '../pipes/pad-number.pipe';
+import { PrecisionPipe } from '../pipes/precision.pipe';
+import { SetEndTimeAction, SetStartTimeAction } from '../redux/actions/attendanceActions';
+import { SetWeeklyWorkDaysAction, SetWeeklyWorkHoursAction } from '../redux/actions/configurationActions';
+import { ApplicationState } from '../redux/states/applicationState';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
@@ -56,11 +54,11 @@ describe('NavbarComponent', () => {
   let store: Store<ApplicationState>;
 
   function setAttendance(start: string, end: string, date: Date) {
-    store.dispatch(new SetStartTimeAction(date, valueToTime(start)));
-    store.dispatch(new SetEndTimeAction(date, valueToTime(end)));
+    store.dispatch(new SetStartTimeAction(date, valueToTime(start)!));
+    store.dispatch(new SetEndTimeAction(date, valueToTime(end)!));
   }
 
-  beforeEach(async(() => {
+  beforeEach((() => {
     TestBed.configureTestingModule({
       declarations: [
         ActivitiesComponent,
@@ -94,7 +92,7 @@ describe('NavbarComponent', () => {
         AccordionModule.forRoot(),
         BsDatepickerModule.forRoot(),
         FormsModule,
-        StoreModule.forRoot(reducers),
+        StoreModule.forRoot(),
         TabsModule.forRoot(),
         TypeaheadModule.forRoot(),
         RouterModule.forRoot(appRoutes),

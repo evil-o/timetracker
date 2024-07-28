@@ -1,37 +1,34 @@
-import { async, ComponentFixture, TestBed, fakeAsync, tick, discardPeriodicTasks } from '@angular/core/testing';
+import {  ComponentFixture, discardPeriodicTasks, fakeAsync, TestBed, tick } from '@angular/core/testing';
 
 import { FormsModule } from '@angular/forms';
 
-import { AccordionModule } from 'ngx-bootstrap';
-import { BsDatepickerModule } from 'ngx-bootstrap';
-import { TypeaheadModule } from 'ngx-bootstrap';
 
 import { StoreModule } from '@ngrx/store';
 import { reducers } from '../../redux/reducers/index';
-import { metaReducers } from '../../redux/metaReducers';
 
-import { DayComponent } from './day.component';
-import { ActivityPickerComponent } from '../../components/activity-picker/activity-picker.component';
-import { HourBadgeComponent } from '../../components/hour-badge/hour-badge.component';
-import { TimeBadgeComponent } from '../../components/time-badge/time-badge.component';
-import { GroupActivityLogEntriesByIdPipe } from '../../pipes/group-activity-log-entries-by-id.pipe';
-import { ActivityLogListComponent } from '../../components/actvity-log-list/actvity-log-list.component';
+import { Store } from '@ngrx/store';
+import { ActivityColorPickerComponent } from '../../components/activity-color-picker/activity-color-picker.component';
 import { ActivityLogEntryComponent } from '../../components/activity-log-entry/activity-log-entry.component';
-import { ActivityTypeIdToNamePipe } from '../../pipes/activity-type-id-to-name.pipe';
+import { ActivityPickerComponent } from '../../components/activity-picker/activity-picker.component';
+import { ActivityLogListComponent } from '../../components/actvity-log-list/actvity-log-list.component';
+import { DayAttendanceComponent } from '../../components/day-attendance/day-attendance.component';
 import {
   EditableLogEntryDescriptionComponent
 } from '../../components/editable-log-entry-description/editable-log-entry-description.component';
 import { EditableLogEntryHoursComponent } from '../../components/editable-log-entry-hours/editable-log-entry-hours.component';
+import { HourBadgeComponent } from '../../components/hour-badge/hour-badge.component';
 import { NoActivityLogEntryPresentComponent } from '../../components/no-activity-log-entry-present/no-activity-log-entry-present.component';
-import { Subject } from 'rxjs/Subject';
-import { ActivityLogEntry } from '../../redux/states/activityLog';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { ApplicationState } from '../../redux/states/applicationState';
-import { Store } from '@ngrx/store';
-import { LogTimeAction } from '../../redux/actions/activityLogActions';
-import { DayAttendanceComponent } from '../../components/day-attendance/day-attendance.component';
-import { ActivityColorPickerComponent } from '../../components/activity-color-picker/activity-color-picker.component';
+import { TimeBadgeComponent } from '../../components/time-badge/time-badge.component';
+import { ActivityTypeIdToNamePipe } from '../../pipes/activity-type-id-to-name.pipe';
 import { FormatHoursPipe } from '../../pipes/format-hours.pipe';
+import { GroupActivityLogEntriesByIdPipe } from '../../pipes/group-activity-log-entries-by-id.pipe';
+import { LogTimeAction } from '../../redux/actions/activityLogActions';
+import { ActivityLogEntry } from '../../redux/states/activityLog';
+import { ApplicationState } from '../../redux/states/applicationState';
+import { DayComponent } from './day.component';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 describe('DayComponent', () => {
   let component: DayComponent;
@@ -60,7 +57,7 @@ describe('DayComponent', () => {
 
   let store: Store<ApplicationState>;
 
-  beforeEach(async(() => {
+  beforeEach((() => {
     TestBed.configureTestingModule({
       declarations: [
         ActivityColorPickerComponent,
@@ -82,7 +79,7 @@ describe('DayComponent', () => {
         AccordionModule.forRoot(),
         BsDatepickerModule.forRoot(),
         FormsModule,
-        StoreModule.forRoot(reducers),
+        StoreModule.forRoot(),
         TypeaheadModule.forRoot(),
       ]
     })

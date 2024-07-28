@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ActivityColorPickerComponent } from './activity-color-picker.component';
 
@@ -6,11 +6,11 @@ describe('ActivityColorPickerComponent', () => {
   let component: ActivityColorPickerComponent;
   let fixture: ComponentFixture<ActivityColorPickerComponent>;
 
-  beforeEach(async(() => {
+  beforeEach((() => {
     TestBed.configureTestingModule({
-      declarations: [ ActivityColorPickerComponent ]
+      declarations: [ActivityColorPickerComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

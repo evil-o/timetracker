@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {  ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OvertimeBadgeComponent } from './overtime-badge.component';
 import { PrecisionPipe } from '../../pipes/precision.pipe';
@@ -11,7 +11,7 @@ describe('OvertimeBadgeComponent', () => {
   let fixture: ComponentFixture<OvertimeBadgeComponent>;
   let span: DebugElement;
 
-  beforeEach(async(() => {
+  beforeEach((() => {
     TestBed.configureTestingModule({
       declarations: [
         FormatHoursPipe,

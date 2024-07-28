@@ -1,13 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
-import { async, ComponentFixture, TestBed, fakeAsync, discardPeriodicTasks, tick, flushMicrotasks } from '@angular/core/testing';
+import { ComponentFixture, TestBed, discardPeriodicTasks, fakeAsync, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { TypeaheadModule, TypeaheadDirective } from 'ngx-bootstrap';
 
-import { ActivityPickerComponent } from './activity-picker.component';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
-import { IActivityType } from '../../models/interfaces';
 import { By } from '@angular/platform-browser';
+import { TypeaheadDirective, TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import { of } from 'rxjs';
+import { IActivityType } from '../../models/interfaces';
+import { ActivityPickerComponent } from './activity-picker.component';
 
 @Component({
   selector: `app-test-host-activity-picker-component`,
@@ -17,10 +16,10 @@ class TestHostActivityPickerComponent {
   public activities$;
 
   @ViewChild(ActivityPickerComponent)
-  public activityPicker: ActivityPickerComponent;
+  public activityPicker!: ActivityPickerComponent;
 
   constructor() {
-    this.activities$ = Observable.of([
+    this.activities$ = of([
       { id: 'test1', name: 'test', isNonWorking: false },
       { id: 'test2', name: 'anothertest', isNonWorking: false },
     ] as IActivityType[]);
@@ -31,7 +30,7 @@ describe('ActivityPickerComponent', () => {
   let component: TestHostActivityPickerComponent;
   let fixture: ComponentFixture<TestHostActivityPickerComponent>;
 
-  beforeEach(async(() => {
+  beforeEach((() => {
     TestBed.configureTestingModule({
       declarations: [
         ActivityPickerComponent,

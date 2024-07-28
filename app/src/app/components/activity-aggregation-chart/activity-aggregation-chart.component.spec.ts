@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ActivityAggregationChartComponent } from './activity-aggregation-chart.component';
 
@@ -6,11 +6,11 @@ describe('ActivityAggregationChartComponent', () => {
   let component: ActivityAggregationChartComponent;
   let fixture: ComponentFixture<ActivityAggregationChartComponent>;
 
-  beforeEach(async(() => {
+  beforeEach((() => {
     TestBed.configureTestingModule({
-      declarations: [ ActivityAggregationChartComponent ]
+      declarations: [ActivityAggregationChartComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -1,20 +1,19 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ConfigurationComponent } from './configuration.component';
 import { StoreModule } from '@ngrx/store';
-import { reducers } from '../../redux/reducers';
+import { ConfigurationComponent } from './configuration.component';
 
 describe('ConfigurationComponent', () => {
   let component: ConfigurationComponent;
   let fixture: ComponentFixture<ConfigurationComponent>;
 
-  beforeEach(async(() => {
+  beforeEach((() => {
     TestBed.configureTestingModule({
       declarations: [
         ConfigurationComponent,
       ],
       imports: [
-        StoreModule.forRoot(reducers),
+        StoreModule.forRoot(),
       ],
     })
       .compileComponents();

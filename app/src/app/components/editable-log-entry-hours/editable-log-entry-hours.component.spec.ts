@@ -1,9 +1,8 @@
-import { async, ComponentFixture, TestBed, fakeAsync, discardPeriodicTasks, tick } from '@angular/core/testing';
-import { Component, ViewChild, DebugElement } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 
-import { EditableLogEntryHoursComponent } from './editable-log-entry-hours.component';
 import { FormatHoursPipe } from '../../pipes/format-hours.pipe';
-import { By } from '@angular/platform-browser';
+import { EditableLogEntryHoursComponent } from './editable-log-entry-hours.component';
 
 @Component({
   selector: `app-test-host-component`,
@@ -11,14 +10,14 @@ import { By } from '@angular/platform-browser';
 })
 class TestHostComponent {
   @ViewChild(EditableLogEntryHoursComponent)
-  public component: EditableLogEntryHoursComponent;
+  public component!: EditableLogEntryHoursComponent;
 }
 
 describe('EditableLogEntryHoursComponent', () => {
   let host: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
 
-  beforeEach(async(() => {
+  beforeEach((() => {
     TestBed.configureTestingModule({
       declarations: [
         EditableLogEntryHoursComponent,

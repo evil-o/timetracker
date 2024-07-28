@@ -1,61 +1,55 @@
-import { async, ComponentFixture, TestBed, fakeAsync } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
 
 import { APP_BASE_HREF } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterModule, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 
-import { AccordionModule } from 'ngx-bootstrap';
-import { BsDatepickerModule } from 'ngx-bootstrap';
-import { BsModalService } from 'ngx-bootstrap';
-import { TabsModule } from 'ngx-bootstrap';
-import { TypeaheadModule } from 'ngx-bootstrap';
 
-import { StoreModule, Store } from '@ngrx/store';
+import { Store, StoreModule } from '@ngrx/store';
 
 import { reducers } from '../../redux/reducers/index';
-import { metaReducers } from '../../redux/metaReducers';
 
 import { appRoutes } from '../../app.routes';
 
-import { WeekComponent } from './week.component';
-import { TallyComponent } from '../../components/tally/tally.component';
-import { NoActivityLogEntryPresentComponent } from '../../components/no-activity-log-entry-present/no-activity-log-entry-present.component';
-import { LogEntryTallyPipe } from '../../pipes/log-entry-tally.pipe';
+import { EffectsModule } from '@ngrx/effects';
+import { ActivityColorPickerComponent } from '../../components/activity-color-picker/activity-color-picker.component';
 import { ActivityLogEntryComponent } from '../../components/activity-log-entry/activity-log-entry.component';
-import { ActivityTypeIdToNamePipe } from '../../pipes/activity-type-id-to-name.pipe';
-import { HourBadgeComponent } from '../../components/hour-badge/hour-badge.component';
+import { ActivityPickerComponent } from '../../components/activity-picker/activity-picker.component';
+import { ActivityTypeListComponent } from '../../components/activity-type-list/activity-type-list.component';
+import { ActivityLogListComponent } from '../../components/actvity-log-list/actvity-log-list.component';
+import { DayAttendanceComponent } from '../../components/day-attendance/day-attendance.component';
 import {
   EditableLogEntryDescriptionComponent
 } from '../../components/editable-log-entry-description/editable-log-entry-description.component';
 import { EditableLogEntryHoursComponent } from '../../components/editable-log-entry-hours/editable-log-entry-hours.component';
-import { GroupActivityLogEntriesByIdPipe } from '../../pipes/group-activity-log-entries-by-id.pipe';
-import { ActivityLogListComponent } from '../../components/actvity-log-list/actvity-log-list.component';
-import { WelcomeComponent } from '../welcome/welcome.component';
-import { DayComponent } from '../day/day.component';
-import { ActivityPickerComponent } from '../../components/activity-picker/activity-picker.component';
-import { TimeBadgeComponent } from '../../components/time-badge/time-badge.component';
-import { AttendanceComponent } from '../attendance/attendance.component';
-import { ActivitiesComponent } from '../activities/activities.component';
-import { ActivityTypeListComponent } from '../../components/activity-type-list/activity-type-list.component';
+import { HourBadgeComponent } from '../../components/hour-badge/hour-badge.component';
+import { NoActivityLogEntryPresentComponent } from '../../components/no-activity-log-entry-present/no-activity-log-entry-present.component';
 import { OvertimeBadgeComponent } from '../../components/overtime-badge/overtime-badge.component';
-import { PrecisionPipe } from '../../pipes/precision.pipe';
-import { ApplicationState } from '../../redux/states/applicationState';
-import { ActivityLog, ActivityLogEntry } from '../../redux/states/activityLog';
-import { ConfigurationComponent } from '../configuration/configuration.component';
-import { ActivityColorPickerComponent } from '../../components/activity-color-picker/activity-color-picker.component';
-import { DayAttendanceComponent } from '../../components/day-attendance/day-attendance.component';
-import { ConfigurationState } from '../../redux/states/configuration';
-import { Observable } from 'rxjs/Observable';
-import { ActivityTypes } from '../../redux/states/activityTypes';
-import { IActivityType } from '../../models/interfaces';
-import { CreateActivityTypeAction } from '../../redux/actions/activityTypesActions';
-import { LogTimeAction, FetchOrCreateIdAndLogTimeAction } from '../../redux/actions/activityLogActions';
-import { EffectsModule } from '@ngrx/effects';
-import { effects } from '../../redux/effects';
-import { SetWeeklyWorkHoursAction, SetWeeklyWorkDaysAction } from '../../redux/actions/configurationActions';
-import { SetStartTimeAction, SetEndTimeAction } from '../../redux/actions/attendanceActions';
-import { valueToTime, getFirstDayOfCalendarWeek } from '../../helpers';
+import { TallyComponent } from '../../components/tally/tally.component';
+import { TimeBadgeComponent } from '../../components/time-badge/time-badge.component';
+import { getFirstDayOfCalendarWeek, valueToTime } from '../../helpers';
+import { ActivityTypeIdToNamePipe } from '../../pipes/activity-type-id-to-name.pipe';
 import { FormatHoursPipe } from '../../pipes/format-hours.pipe';
+import { GroupActivityLogEntriesByIdPipe } from '../../pipes/group-activity-log-entries-by-id.pipe';
+import { LogEntryTallyPipe } from '../../pipes/log-entry-tally.pipe';
+import { PrecisionPipe } from '../../pipes/precision.pipe';
+import { FetchOrCreateIdAndLogTimeAction } from '../../redux/actions/activityLogActions';
+import { SetEndTimeAction, SetStartTimeAction } from '../../redux/actions/attendanceActions';
+import { SetWeeklyWorkDaysAction, SetWeeklyWorkHoursAction } from '../../redux/actions/configurationActions';
+import { effects } from '../../redux/effects';
+import { ApplicationState } from '../../redux/states/applicationState';
+import { ActivitiesComponent } from '../activities/activities.component';
+import { AttendanceComponent } from '../attendance/attendance.component';
+import { ConfigurationComponent } from '../configuration/configuration.component';
+import { DayComponent } from '../day/day.component';
+import { WelcomeComponent } from '../welcome/welcome.component';
+import { WeekComponent } from './week.component';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { of } from 'rxjs';
 
 describe('WeekComponent', () => {
   let component: WeekComponent;
@@ -63,11 +57,11 @@ describe('WeekComponent', () => {
   let store: Store<ApplicationState>;
 
   function setAttendance(start: string, end: string, date: Date) {
-    store.dispatch(new SetStartTimeAction(date, valueToTime(start)));
-    store.dispatch(new SetEndTimeAction(date, valueToTime(end)));
+    store.dispatch(new SetStartTimeAction(date, valueToTime(start)!));
+    store.dispatch(new SetEndTimeAction(date, valueToTime(end)!));
   }
 
-  beforeEach(async(() => {
+  beforeEach((() => {
     TestBed.configureTestingModule({
       declarations: [
         ActivitiesComponent,
@@ -100,7 +94,7 @@ describe('WeekComponent', () => {
         BsDatepickerModule.forRoot(),
         FormsModule,
         RouterModule.forRoot(appRoutes),
-        StoreModule.forRoot(reducers),
+        StoreModule.forRoot(),
         EffectsModule.forRoot(effects),
         TabsModule.forRoot(),
         TypeaheadModule.forRoot(),
@@ -108,7 +102,7 @@ describe('WeekComponent', () => {
       providers: [
         { provide: APP_BASE_HREF, useValue: '/' },
         { provide: BsModalService },
-        { provide: ActivatedRoute, useValue: { params: Observable.of({ year: 2018, week: 1 }) } },
+        { provide: ActivatedRoute, useValue: { params: of({ year: 2018, week: 1 }) } },
       ]
     })
       .compileComponents();
@@ -126,9 +120,9 @@ describe('WeekComponent', () => {
   });
 
   it('should be correct for normal part time weeks', fakeAsync(() => {
-    expect(component.week.year).toBe(2018);
-    expect(component.week.week).toBe(1);
-    const start = getFirstDayOfCalendarWeek(component.week.year, component.week.week);
+    expect(component.week!.year).toBe(2018);
+    expect(component.week!.week).toBe(1);
+    const start = getFirstDayOfCalendarWeek(component.week!.year, component.week!.week);
     const weekDates: Date[] = [];
     for (let d = 0; d < 7; ++d) {
       const date = new Date(start);

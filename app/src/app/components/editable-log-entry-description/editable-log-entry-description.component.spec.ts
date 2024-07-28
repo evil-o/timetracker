@@ -1,5 +1,5 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EditableLogEntryDescriptionComponent } from './editable-log-entry-description.component';
 
@@ -9,14 +9,14 @@ import { EditableLogEntryDescriptionComponent } from './editable-log-entry-descr
 })
 class TestHostComponent {
   @ViewChild(EditableLogEntryDescriptionComponent)
-  public component: EditableLogEntryDescriptionComponent;
+  public component!: EditableLogEntryDescriptionComponent;
 }
 
 describe('EditableLogEntryDescriptionComponent', () => {
   let host: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
 
-  beforeEach(async(() => {
+  beforeEach((() => {
     TestBed.configureTestingModule({
       declarations: [
         EditableLogEntryDescriptionComponent,
