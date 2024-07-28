@@ -10,7 +10,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     strategy:
@@ -24,9 +24,23 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-    - name: Setup
+
+    - name: Setup root
       run: npm ci
+
+    - name: Setup app
       working-directory: ./app
+      run: npm ci
+
+    - name: Setup Cypress
+      working-directory: ./testing
+      run: npm ci
+
+    # Unit tests
     - name: Test
-      run: npm run test:ci
       working-directory: ./app
+      run: npm run test:ci
+
+    # Cypress tests
+    - name: Run Cypress tests
+      run: npm run e2e
