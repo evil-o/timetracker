@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { provideNoopAnimations } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
@@ -21,6 +22,7 @@ describe('AttendanceComponent', () => {
         BsDatepickerModule.forRoot(),
         StoreModule.forRoot(),
       ],
+      providers: [provideNoopAnimations()]
     })
       .compileComponents();
   }));

@@ -6,6 +6,7 @@ import { EditableLogEntryHoursComponent } from '../editable-log-entry-hours/edit
 import { HourBadgeComponent } from '../hour-badge/hour-badge.component';
 import { ActivityLogEntryComponent } from './activity-log-entry.component';
 
+import { provideNoopAnimations } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { FormatHoursPipe } from '../../pipes/format-hours.pipe';
@@ -29,7 +30,8 @@ describe('ActivityLogEntryComponent', () => {
       imports: [
         AccordionModule.forRoot(),
         StoreModule.forRoot(reducers, { metaReducers }),
-      ]
+      ],
+      providers: [provideNoopAnimations()]
     })
       .compileComponents();
   }));

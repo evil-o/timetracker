@@ -8,7 +8,7 @@ describe('ActivityAggregationChartComponent', () => {
 
   beforeEach((() => {
     TestBed.configureTestingModule({
-      declarations: [ActivityAggregationChartComponent]
+      imports: [ActivityAggregationChartComponent]
     })
       .compileComponents();
   }));

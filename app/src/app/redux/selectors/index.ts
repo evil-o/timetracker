@@ -1,12 +1,12 @@
 import { createSelector } from '@ngrx/store';
-import { ApplicationState } from '../states/applicationState';
 import { IActivityLogEntry } from '../states/activityLog';
+import { ApplicationState } from '../states/applicationState';
 import { IAttendanceEntry } from '../states/attendanceState';
 
 export const activityTypes = (state: ApplicationState) => state.activityTypes;
 
 export const activityLog = (state: ApplicationState) => state.activityLog;
-export const activityLogEntries = createSelector(activityLog, (state) => state.entries);
+export const activityLogEntries = createSelector(activityLog, (state) => state?.entries);
 export const activityLogEntriesByDay = createSelector(activityLogEntries, (entries) => {
   const byDay: Record<number, any> = {};
   for (const entry of entries) {
@@ -30,7 +30,7 @@ export const activityLogEntriesByDay = createSelector(activityLogEntries, (entri
 export const storageVersion = (state: ApplicationState) => state.storageVersion;
 
 export const attendanceState = (state: ApplicationState) => state.attendanceState;
-export const attendanceEntries = createSelector(attendanceState, (state) => state.entries);
+export const attendanceEntries = createSelector(attendanceState, (state) => state?.entries);
 
 export const configurationState = (state: ApplicationState) => state.configuration;
 export const weeklyWorkingHours = createSelector(configurationState, (state) => state.workingHoursPerWeek);
