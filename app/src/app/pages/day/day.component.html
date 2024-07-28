@@ -1,16 +1,8 @@
 <div class="row">
   <h1 class="col">
-    <input
-      #datePickerInput
-      #datePicker="bsDatepicker"
-      class="invisible form-control border-0"
-      placeholder="Pick a date"
-      bsDatepicker
-      [bsValue]="date$.value"
-      (blur)="endDatePicking()"
-      [bsConfig]="{ containerClass: 'theme-default' }"
-      (onHidden)="endDatePicking()"
-    />
+    <input #datePickerInput #datePicker="bsDatepicker" class="invisible form-control border-0" placeholder="Pick a date"
+      bsDatepicker [bsValue]="date$.value" (blur)="endDatePicking()" [bsConfig]="{ containerClass: 'theme-default' }"
+      (onHidden)="endDatePicking()" />
     <button class="btn btn-light mr-2" (click)="startDatePicking()">
       <i class="far fa-calendar-alt"></i>
     </button>
@@ -29,17 +21,9 @@
 </div>
 
 <div class="row">
-  <app-day-attendance
-    class="my-3 container-fluid col-9"
-    [date$]="date$"
-  ></app-day-attendance>
-  <app-activity-aggregation-chart
-    class="col-3"
-    [allActivities$]="activityLog$"
-    [types$]="activityTypes$"
-    [startDate$]="dateDayStart$"
-    [endDate$]="dateDayEnd$"
-  >
+  <app-day-attendance class="my-3 container-fluid col-9" [date$]="date$"></app-day-attendance>
+  <app-activity-aggregation-chart class="col-3" [allActivities$]="activityLog$" [types$]="activityTypes$"
+    [startDate$]="dateDayStart$" [endDate$]="dateDayEnd$">
   </app-activity-aggregation-chart>
 </div>
 
@@ -50,43 +34,23 @@
 </div>
 <div class="row">
   <div class="col-sm-8">
-    <app-activity-picker
-      #activityToLog
-      (confirm)="refocusOnEnter()"
-      [activities]="(activities$ | async) ?? undefined"
-      placeholder="What did you do today?"
-    ></app-activity-picker>
+    <app-activity-picker #activityToLog (confirm)="refocusOnEnter()" [activities]="(activities$ | async) ?? undefined"
+      placeholder="What did you do today?"></app-activity-picker>
   </div>
   <div class="col-sm-3">
-    <input
-      id="duration"
-      data-testid="duration"
-      #hoursToLog
-      (keyup.enter)="refocusOnEnter()"
-      type="text"
-      class="form-control mr-sm-2"
-      placeholder="for how many hours?"
-    />
+    <input id="duration" data-testid="duration" #hoursToLog (keyup.enter)="refocusOnEnter()" type="text"
+      class="form-control mr-sm-2" placeholder="for how many hours?" />
   </div>
 </div>
 <div class="row mt-2">
   <div class="col-sm-8">
-    <input
-      #descriptionToLog
-      (keyup.enter)="refocusOnEnter()"
-      type="text"
-      class="form-control mr-sm-2"
-      placeholder="Put an (optional) description here"
-    />
+    <input #descriptionToLog data-testid="activity-description" (keyup.enter)="refocusOnEnter()" type="text"
+      class="form-control mr-sm-2" placeholder="Put an (optional) description here" />
   </div>
   <div class="col-sm-3">
-    <button
-      class="btn btn-primary float-right"
-      #logHoursButton
-      (click)="
+    <button class="btn btn-primary float-right" #logHoursButton data-testid="log-activity-btn" (click)="
         logHours(activityToLog.name, hoursToLog.value, descriptionToLog.value)
-      "
-    >
+      ">
       Log
     </button>
   </div>
@@ -96,10 +60,7 @@
     Total:
   </div>
   <div class="col-sm-2">
-    <app-hour-badge
-      #totalHoursDisplay
-      [hours]="totalHours$ | async"
-    ></app-hour-badge>
+    <app-hour-badge #totalHoursDisplay [hours]="totalHours$ | async"></app-hour-badge>
   </div>
 </div>
 <div class="row">
@@ -107,10 +68,7 @@
     Began:
   </div>
   <div class="col-sm-2">
-    <app-time-badge
-      #startTimeDisplay
-      [date]="startTime$ | async"
-    ></app-time-badge>
+    <app-time-badge #startTimeDisplay [date]="startTime$ | async"></app-time-badge>
   </div>
 </div>
 <div class="row">
@@ -125,10 +83,8 @@
 <div class="row mt-2">
   <div class="col-sm-12">
     <!-- vvv (changeEntryDescription)="changeEntryDescription($event)" -->
-    <app-actvity-log-list
-      [groups$]="activityLogEntries$ | groupActivityLogEntriesById"
-      [activityTypes$]="activityTypes$"
-    >
+    <app-actvity-log-list [groups$]="activityLogEntries$ | groupActivityLogEntriesById"
+      [activityTypes$]="activityTypes$">
     </app-actvity-log-list>
   </div>
 </div>

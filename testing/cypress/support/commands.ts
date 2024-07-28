@@ -11,12 +11,13 @@
 //
 //
 
-export {};
+export { };
 
 declare global {
     namespace Cypress {
         interface Chainable {
             byTestId: typeof byTestId,
+            findByTestId: (testId: string) => Cypress.Chainable<JQuery<HTMLElement>>,
             //       login(email: string, password: string): Chainable<void>
             //       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
             //       dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
@@ -25,12 +26,17 @@ declare global {
     }
 }
 
-// -- This is a parent command --
 function byTestId(testId: string): Cypress.Chainable<JQuery<HTMLElement>> {
     return cy.get(`[data-testid="${testId}"]`);
 }
 
 Cypress.Commands.add('byTestId', byTestId);
+
+function findByTestId(subject: JQuery<HTMLElement>, testId: string): Cypress.Chainable<JQuery<HTMLElement>> {
+    return cy.wrap(subject).find(`[data-testid="${testId}"]`);
+}
+
+Cypress.Commands.add('findByTestId', { prevSubject: 'element' }, findByTestId);
 //
 //
 // -- This is a child command --
