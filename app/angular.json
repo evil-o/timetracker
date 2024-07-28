@@ -88,9 +88,7 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": [
-              "src/assets/fontawesome.min.js"
-            ]
+            "scripts": []
           }
         }
       }
