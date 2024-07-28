@@ -1,6 +1,5 @@
-import { Action, createAction, createActionGroup } from '@ngrx/store';
+import { Action } from '@ngrx/store';
 import { IAttendanceState } from '../states/attendanceState';
-import { props } from 'cypress/types/bluebird';
 
 export const SET_START_TIME = 'SET_START_TIME';
 export const SET_END_TIME = 'SET_END_TIME';

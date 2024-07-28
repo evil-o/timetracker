@@ -1,0 +1,15 @@
+{
+  "name": "time-tracker-cypress-specs",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {
+    "cy:open": "cypress open"
+  },
+  "private": true,
+  "dependencies": {
+    "cypress": "^13.13.1"
+  },
+  "devDependencies": {
+    "typescript": "5.4.5"
+  }
+}
