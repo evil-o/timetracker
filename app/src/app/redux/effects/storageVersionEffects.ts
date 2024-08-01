@@ -25,6 +25,8 @@ import { StorageVersion } from '../states/storageVersion';
 
 import { filter, map, withLatestFrom } from 'rxjs';
 import { rehydratedStorageKeys } from '../../redux/metaReducers';
+import { downloadDataAsFile } from '../../utils/download-data-as-file';
+import { makeTimestampedFileName } from '../../utils/file-name';
 
 @Injectable()
 export class StorageVersionEffects {
@@ -76,16 +78,7 @@ export class StorageVersionEffects {
     map(action => action as ExportStorageAction),
     withLatestFrom(this.store$),
     map(([action, state]) => {
-      const pad = (n: number, width = 2, fill = '0') => {
-        let n_str = `${n}`;
-        if (n_str.length < width) {
-          n_str = fill.repeat(width - n_str.length) + n_str;
-        }
-        return n_str;
-      }
-      const now = new Date();
-      const downloadName = `TimeTracker-Export-${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`
-        + `--${pad(now.getHours())}.${pad(now.getMinutes())}.${pad(now.getSeconds())}`;
+      const downloadName = makeTimestampedFileName("TimeTracker-Export", "json");
       const exportObject: Record<any, any> = {};
       for (const key of Object.keys(rehydratedStorageKeys) as (keyof ApplicationState)[]) {
         if (key in state) {
@@ -93,11 +86,7 @@ export class StorageVersionEffects {
         }
       }
 
-      const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(exportObject));
-      const a = action.blindDownloadAnchor;
-      a.setAttribute('href', dataStr);
-      a.setAttribute('download', downloadName + '.json');
-      a.click();
+      downloadDataAsFile(exportObject, downloadName);
       return new ExportStorageSuccessAction();
     })));
 

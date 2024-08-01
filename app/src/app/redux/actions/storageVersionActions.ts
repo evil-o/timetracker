@@ -59,7 +59,7 @@ export class StorageUpgradeFinishedAction implements Action {
 export class ExportStorageAction implements Action {
   public readonly type = EXPORT_STORAGE;
 
-  constructor(public blindDownloadAnchor: HTMLElement) { }
+  constructor() { }
 }
 
 export class ExportStorageSuccessAction implements Action {

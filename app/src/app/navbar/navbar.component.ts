@@ -5,8 +5,8 @@ import { ExportStorageAction, ImportStorageAction } from '../redux/actions/stora
 import { IAttendanceWithTimes } from '../redux/selectors/index';
 import { ApplicationState } from '../redux/states/applicationState';
 
-import * as fromStore from '../redux/selectors';
 import { Observable } from 'rxjs';
+import * as fromStore from '../redux/selectors';
 
 
 @Component({
@@ -47,8 +47,7 @@ export class NavbarComponent implements OnInit {
   }
 
   downloadStorage() {
-    const dlAnchorElem = document.getElementById('downloadElement');
-    this.store.dispatch(new ExportStorageAction(dlAnchorElem!));
+    this.store.dispatch(new ExportStorageAction());
   }
 
   importStorage() {
