@@ -43,3 +43,6 @@ testem.log
 Thumbs.db
 fontawesome-free-*/
 .angular/*
+
+# Cypress
+testing/cypress/downloads/*

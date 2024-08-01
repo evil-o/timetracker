@@ -7,6 +7,10 @@ describe('The time tracker', () => {
   let activities: ActivitiesPage;
   let globalPage: GlobalPage;
 
+  before(() => {
+    cy.deleteDownloadsFolder();
+  })
+
   beforeEach(() => {
     today = new TodayPage();
     globalPage = new GlobalPage();
@@ -69,4 +73,38 @@ describe('The time tracker', () => {
 
     globalPage.expectOvertime("-7", "45");
   });
+
+  it("exports data", () => {
+    const expectedStorageKeys = [
+      'activityTypes',
+      'activityLog',
+      'attendanceState',
+      'storageVersion',
+      'configuration',
+      'stopWatch',
+    ];
+    const activityType = "e2e break";
+    const hours = "3";
+    const minutes = "45";
+
+    today.startTimeInput.type("08:00");
+    today.endTimeInput.type("12:00");
+    today.submitAttendance.click();
+
+    today.addActivity.activityInput.type(activityType);
+    today.addActivity.activityDudation.type(`${hours}:${minutes}`);
+    today.addActivity.logActivityButton.click();
+
+    globalPage.settingsToggle.click();
+    globalPage.exportData.click();
+
+    // const downloadsFolder = Cypress.config("downloadsFolder");
+    // cy.readFile(downloadsFolder);
+    cy.getLastDownloadFilePath().then(path => {
+      if (!path) {
+        throw new Error(`Last download not found.`);
+      }
+      return cy.readFile(path)
+    }).should("have.keys", ...expectedStorageKeys);
+  })
 })

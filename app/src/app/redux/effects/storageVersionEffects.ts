@@ -77,9 +77,10 @@ export class StorageVersionEffects {
     ofType(EXPORT_STORAGE),
     map(action => action as ExportStorageAction),
     withLatestFrom(this.store$),
-    map(([action, state]) => {
+    map(([_action, state]) => {
       const downloadName = makeTimestampedFileName("TimeTracker-Export", "json");
       const exportObject: Record<any, any> = {};
+      // should be: Object.values
       for (const key of Object.keys(rehydratedStorageKeys) as (keyof ApplicationState)[]) {
         if (key in state) {
           exportObject[key] = state[key];

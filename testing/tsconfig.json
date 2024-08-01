@@ -11,7 +11,8 @@
         ],
         "types": [
             "cypress",
-            "node"
+            "node",
+            "cypress-delete-downloads-folder"
         ]
     }
 }

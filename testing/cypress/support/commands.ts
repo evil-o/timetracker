@@ -11,12 +11,15 @@
 //
 //
 
+require('cypress-delete-downloads-folder').addCustomCommand();
+
 export { };
 
 declare global {
     namespace Cypress {
         interface Chainable {
             byTestId: typeof byTestId,
+            getLastDownloadFilePath: typeof getLastDownloadFilePath,
             findByTestId: (testId: string) => Cypress.Chainable<JQuery<HTMLElement>>,
             //       login(email: string, password: string): Chainable<void>
             //       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
@@ -37,6 +40,19 @@ function findByTestId(subject: JQuery<HTMLElement>, testId: string): Cypress.Cha
 }
 
 Cypress.Commands.add('findByTestId', { prevSubject: 'element' }, findByTestId);
+
+function getLastDownloadFilePath(): Cypress.Chainable<string | undefined> {
+    const downloadsFolder = Cypress.config("downloadsFolder");
+    return cy.task("getFilesOrderedByTime", { path: downloadsFolder }).then((results) => {
+        if (results === undefined) {
+            return cy.wrap<string | undefined>(undefined);
+        }
+        return cy.wrap<string | undefined>((results as any[])[0])
+    });
+}
+
+Cypress.Commands.add('getLastDownloadFilePath', getLastDownloadFilePath);
+
 //
 //
 // -- This is a child command --
