@@ -56,13 +56,8 @@ jobs:
       if: github.ref == 'refs/heads/main'
       uses: actions/upload-pages-artifact@v1
       with:
-        path: "./app/dist/timetracker/browser"
-
-    - name: Upload static routing
-      if: github.ref == 'refs/heads/main'
-      uses: actions/upload-pages-artifact@v1
-      with:
-        path: "./pages-static-routing"
+        name: dist-folder
+        path: "./dist/timetracker/browser"
 
   deploy-to-pages:
       if: github.ref == 'refs/heads/main'
@@ -80,5 +75,7 @@ jobs:
 
       steps:
         - name: Deploy to GitHub Pages
-          id: deployment
+          id: dist-deployment
           uses: actions/deploy-pages@v2
+          with:
+            artifact_name: dist-folder

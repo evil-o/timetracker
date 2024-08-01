@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/timetracker",
+            "outputPath": "../dist/timetracker",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -22,8 +22,12 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               {
-                "glob": "**/*",
-                "input": "public"
+                "input": "public",
+                "glob": "**/*"
+              },
+              {
+                "input": "../pages-static-routing",
+                "glob": "**/*"
               }
             ],
             "styles": [
