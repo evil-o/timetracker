@@ -5,14 +5,13 @@ import { Store } from '@ngrx/store';
 import { map, withLatestFrom } from 'rxjs';
 import { activityLogActions } from '../actions/activity-log.actions';
 import { activityTypeActions } from '../actions/activity-types.actions';
-import { stopWatchActions } from '../actions/stop-watch.actions';
 import { INCREMENTAL_MIGRATION, IncrementalMigrationSuccessAction } from '../actions/storageVersionActions.legacy';
 import { ApplicationState } from '../states/applicationState';
 
 @Injectable()
 export class ActivityLogEffects {
   newActivityTypeLogged$ = createEffect(() => this.actions$.pipe(
-    ofType(stopWatchActions.fetchOrCreateIdAndLogTime),
+    ofType(activityLogActions.fetchOrCreateIdAndLogTime),
     withLatestFrom(this.store$),
     map(([action, state]) => {
       const found = state.activityTypes.activities.find((activity) => activity.name === action.name);

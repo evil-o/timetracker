@@ -13,7 +13,6 @@ import { HourBadgeComponent } from '../../components/hour-badge/hour-badge.compo
 import { TimeBadgeComponent } from '../../components/time-badge/time-badge.component';
 import { stringToDuration } from '../../helpers';
 import { activityLogActions } from '../../redux/actions/activity-log.actions';
-import { stopWatchActions } from '../../redux/actions/stop-watch.actions';
 import * as fromStore from '../../redux/selectors';
 
 
@@ -93,7 +92,7 @@ export class DayComponent {
         ));
 
     this.hourLog$.pipe(withLatestFrom(this.date$)).subscribe(([log, date]) => {
-      this.store.dispatch(stopWatchActions.fetchOrCreateIdAndLogTime({ name: log.activityName, hoursToLog: log.hours, date, description: log.description }));
+      this.store.dispatch(activityLogActions.fetchOrCreateIdAndLogTime({ name: log.activityName, hoursToLog: log.hours, date, description: log.description }));
       this.hoursToLog.nativeElement.value = '';
       this.logDescription.nativeElement.value = '';
     });
