@@ -35,7 +35,7 @@ import { GroupActivityLogEntriesByIdPipe } from './pipes/group-activity-log-entr
 import { LogEntryTallyPipe } from './pipes/log-entry-tally.pipe';
 import { PadNumberPipe } from './pipes/pad-number.pipe';
 import { PrecisionPipe } from './pipes/precision.pipe';
-import { metaReducers } from './redux/metaReducers';
+import { metaReducers } from './redux/metaReducers.legacy';
 import { reducers } from './redux/reducers/index';
 
 describe('AppComponent', () => {

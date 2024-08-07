@@ -1,12 +1,12 @@
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { AccordionComponent } from 'ngx-bootstrap/accordion';
+import { activityColors } from '../../models/activityColors';
 import { IGroupEntry } from '../../pipes/group-activity-log-entries-by-id.pipe';
 import { IActivityTypes } from '../../redux/states/activityTypes';
-import { AccordionComponent } from 'ngx-bootstrap/accordion';
 import { ApplicationState } from '../../redux/states/applicationState';
-import { activityColors } from '../../models/activityColors';
 
 import { Store } from '@ngrx/store';
-import { SetDescriptionAction, SetHoursAction, DeleteEntryAction } from '../../redux/actions/activityLogActions';
+import { DeleteEntryAction, SetDescriptionAction, SetHoursAction } from '../../redux/actions/activityLogActions.legacy';
 
 @Component({
   selector: 'app-activity-log-entry',

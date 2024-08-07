@@ -1,17 +1,14 @@
-import { Action } from '@ngrx/store';
 
-import { CreateActivityTypeAction } from '../actions/activityTypesActions';
 
 import {
-  CHECK_STORAGE_VERSION,
-  StorageVersionAction,
-  PRE_MIGRATION_BACKUP,
   INCREMENTAL_MIGRATION,
-  PREPARE_INCREMENTAL_MIGRATION,
   INCREMENTAL_MIGRATION_SUCCESS,
-  STORAGE_VERSION_MIGRATED,
+  PRE_MIGRATION_BACKUP,
+  PREPARE_INCREMENTAL_MIGRATION,
   STORAGE_UPGRADE_FINISHED,
-} from '../actions/storageVersionActions';
+  STORAGE_VERSION_MIGRATED,
+  StorageVersionAction
+} from '../actions/storageVersionActions.legacy';
 import { IStorageVersion, StorageVersion } from '../states/storageVersion';
 
 export function storageVersionReducer(state: IStorageVersion = new StorageVersion(), action: StorageVersionAction): IStorageVersion {

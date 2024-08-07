@@ -1,12 +1,12 @@
 import { Component, TemplateRef } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { ApplicationState } from '../../redux/states/applicationState';
 import { IActivityType } from '../../models/interfaces';
+import { ApplicationState } from '../../redux/states/applicationState';
 
-import * as fromStore from '../../redux/selectors';
-import { MergeActivitiesAction } from '../../redux/actions/activityLogActions';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { map, Observable, Subject, withLatestFrom } from 'rxjs';
+import { MergeActivitiesAction } from '../../redux/actions/activityLogActions.legacy';
+import * as fromStore from '../../redux/selectors';
 
 @Component({
   selector: 'app-activities',

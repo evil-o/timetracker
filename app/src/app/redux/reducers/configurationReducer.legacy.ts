@@ -1,5 +1,5 @@
-import { IConfigurationState, ConfigurationState } from '../states/configuration';
-import { ConfigurationAction, SET_WEEKLY_WORK_HOURS, SET_WEEKLY_WORK_DAYS } from '../actions/configurationActions';
+import { ConfigurationAction, SET_WEEKLY_WORK_DAYS, SET_WEEKLY_WORK_HOURS } from '../actions/configurationActions.legacy';
+import { ConfigurationState, IConfigurationState } from '../states/configuration';
 
 
 export function configurationReducer(

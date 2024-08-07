@@ -11,7 +11,7 @@ import {
   SET_START_AND_END_TIME,
   SET_START_TIME,
   UPDATE_CORRECTION
-} from '../actions/attendanceActions';
+} from '../actions/attendanceActions.legacy';
 import { AttendanceEntry, AttendanceState, IAttendanceEntry, IAttendanceState } from '../states/attendanceState';
 
 function findEntry(forDate: Date, entries: IAttendanceEntry[]): IAttendanceEntry | undefined {
@@ -37,7 +37,7 @@ export function attendanceStateReducer(state: IAttendanceState = new AttendanceS
     }
 
     case SET_START_TIME:
-      case SET_END_TIME: {
+    case SET_END_TIME: {
       return produce(state, (draft) => {
         let entry = findEntry(action.date, draft.entries);
         if (!entry) {

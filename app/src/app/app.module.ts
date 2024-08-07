@@ -16,7 +16,7 @@ import { environment } from '../environments/environment';
 import { DayComponent } from './pages/day/day.component';
 
 import { effects } from './redux/effects/index';
-import { metaReducers } from './redux/metaReducers';
+import { metaReducers } from './redux/metaReducers.legacy';
 import { reducers } from './redux/reducers/index';
 
 import { CommonModule } from '@angular/common';

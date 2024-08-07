@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { ApplicationState } from '../../redux/states/applicationState';
-import { StartStopWatchAction, PauseStopWatchAction, ResetStopWatchAction } from '../../redux/actions/stopWatchActions';
-import { stopWatchState, activityTypes } from '../../redux/selectors';
-import { IActivityType } from '../../models/interfaces';
-import { CreateActivityTypeAndLogTimeAction } from '../../redux/actions/activityTypesActions';
 import { map, Observable, Subject, timer, withLatestFrom } from 'rxjs';
+import { IActivityType } from '../../models/interfaces';
+import { CreateActivityTypeAndLogTimeAction } from '../../redux/actions/activityTypesActions.legacy';
+import { PauseStopWatchAction, ResetStopWatchAction, StartStopWatchAction } from '../../redux/actions/stopWatchActions.legacy';
+import { activityTypes, stopWatchState } from '../../redux/selectors';
+import { ApplicationState } from '../../redux/states/applicationState';
 
 @Component({
   selector: 'app-stopwatch',

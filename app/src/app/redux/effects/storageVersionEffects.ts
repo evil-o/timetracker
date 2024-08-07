@@ -19,14 +19,14 @@ import {
   STORAGE_VERSION_MIGRATED,
   StorageUpgradeFinishedAction,
   StorageVersionMigratedAction
-} from '../actions/storageVersionActions';
+} from '../actions/storageVersionActions.legacy';
 import { ApplicationState } from '../states/applicationState';
 import { StorageVersion } from '../states/storageVersion';
 
 import { filter, map, withLatestFrom } from 'rxjs';
-import { rehydratedStorageKeys } from '../../redux/metaReducers';
 import { downloadDataAsFile } from '../../utils/download-data-as-file';
 import { makeTimestampedFileName } from '../../utils/file-name';
+import { rehydratedStorageKeys } from '../metaReducers.legacy';
 
 @Injectable()
 export class StorageVersionEffects {

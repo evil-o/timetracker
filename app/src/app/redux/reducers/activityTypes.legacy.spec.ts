@@ -1,7 +1,7 @@
-import { activityTypesReducer } from './activityTypes';
-import { IActivityTypes } from '../states/activityTypes';
-import { MergeActivitiesAction } from '../actions/activityLogActions';
 import { IActivityType } from '../../models/interfaces';
+import { MergeActivitiesAction } from '../actions/activityLogActions.legacy';
+import { IActivityTypes } from '../states/activityTypes';
+import { activityTypesReducer } from './activityTypes.legacy';
 
 describe('the activity types reducer', () => {
 

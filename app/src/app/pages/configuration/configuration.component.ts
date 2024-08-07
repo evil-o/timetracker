@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { SetWeeklyWorkDaysAction, SetWeeklyWorkHoursAction } from '../../redux/actions/configurationActions.legacy';
 import * as fromStore from '../../redux/selectors';
 import { ApplicationState } from '../../redux/states/applicationState';
-import { Store } from '@ngrx/store';
-import { SetWeeklyWorkHoursAction, SetWeeklyWorkDaysAction } from '../../redux/actions/configurationActions';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-configuration',
@@ -37,11 +37,11 @@ export class ConfigurationComponent implements OnInit {
     }
   }
 
-  public setInputWorkingHoursPerWeek(value: number | string) : void {
-    this.inputWorkingHoursPerWeek = typeof value === "string"? Number.parseFloat(value) : value;
+  public setInputWorkingHoursPerWeek(value: number | string): void {
+    this.inputWorkingHoursPerWeek = typeof value === "string" ? Number.parseFloat(value) : value;
   }
 
-  public setInputWorkingDaysPerWeek(value: number | string) : void {
-    this.inputWorkingHoursPerWeek = typeof value === "string"? Number.parseFloat(value) : value;
+  public setInputWorkingDaysPerWeek(value: number | string): void {
+    this.inputWorkingHoursPerWeek = typeof value === "string" ? Number.parseFloat(value) : value;
   }
 }

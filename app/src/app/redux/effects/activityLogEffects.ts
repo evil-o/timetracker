@@ -3,9 +3,9 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
 import { map, withLatestFrom } from 'rxjs';
-import { FETCH_OR_CREATE_ID_AND_LOG_TIME, FetchOrCreateIdAndLogTimeAction, LogTimeAction } from '../actions/activityLogActions';
-import { CreateActivityTypeAndLogTimeAction } from '../actions/activityTypesActions';
-import { INCREMENTAL_MIGRATION, IncrementalMigrationSuccessAction } from '../actions/storageVersionActions';
+import { FETCH_OR_CREATE_ID_AND_LOG_TIME, FetchOrCreateIdAndLogTimeAction, LogTimeAction } from '../actions/activityLogActions.legacy';
+import { CreateActivityTypeAndLogTimeAction } from '../actions/activityTypesActions.legacy';
+import { INCREMENTAL_MIGRATION, IncrementalMigrationSuccessAction } from '../actions/storageVersionActions.legacy';
 import { ApplicationState } from '../states/applicationState';
 
 @Injectable()

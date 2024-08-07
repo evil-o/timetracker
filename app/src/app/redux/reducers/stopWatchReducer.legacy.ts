@@ -1,5 +1,5 @@
+import { StopWatchAction } from '../actions/stopWatchActions.legacy';
 import { IStopWatch, StopWatch } from '../states/stopwatchState';
-import { StopWatchAction } from '../actions/stopWatchActions';
 
 export function stopWatchReducer(state: IStopWatch = new StopWatch, action: StopWatchAction): IStopWatch {
   switch (action.type) {

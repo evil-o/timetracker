@@ -10,7 +10,7 @@ import { provideNoopAnimations } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { FormatHoursPipe } from '../../pipes/format-hours.pipe';
-import { metaReducers } from '../../redux/metaReducers';
+import { metaReducers } from '../../redux/metaReducers.legacy';
 import { reducers } from '../../redux/reducers/index';
 
 describe('ActivityLogEntryComponent', () => {

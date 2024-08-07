@@ -21,7 +21,7 @@ import { TimeBadgeComponent } from '../../components/time-badge/time-badge.compo
 import { ActivityTypeIdToNamePipe } from '../../pipes/activity-type-id-to-name.pipe';
 import { FormatHoursPipe } from '../../pipes/format-hours.pipe';
 import { GroupActivityLogEntriesByIdPipe } from '../../pipes/group-activity-log-entries-by-id.pipe';
-import { LogTimeAction } from '../../redux/actions/activityLogActions';
+import { LogTimeAction } from '../../redux/actions/activityLogActions.legacy';
 import { ActivityLogEntry } from '../../redux/states/activityLog';
 import { ApplicationState } from '../../redux/states/applicationState';
 import { DayComponent } from './day.component';

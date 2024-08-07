@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 
 import { Store } from '@ngrx/store';
-import { ExportStorageAction, ImportStorageFileAction, } from '../redux/actions/storageVersionActions';
+import { ExportStorageAction, ImportStorageFileAction, } from '../redux/actions/storageVersionActions.legacy';
 import { IAttendanceWithTimes } from '../redux/selectors/index';
 import { ApplicationState } from '../redux/states/applicationState';
 

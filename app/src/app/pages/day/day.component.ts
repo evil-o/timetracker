@@ -3,18 +3,18 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 
-import { ApplicationState } from '../../redux/states/applicationState';
-import { IActivityTypes } from '../../redux/states/activityTypes';
 import { IActivityType } from '../../models/interfaces';
-import { FetchOrCreateIdAndLogTimeAction, SetDescriptionAction } from '../../redux/actions/activityLogActions';
-import { IActivityLogEntry, IActivityLog } from '../../redux/states/activityLog';
+import { FetchOrCreateIdAndLogTimeAction, SetDescriptionAction } from '../../redux/actions/activityLogActions.legacy';
+import { IActivityLog, IActivityLogEntry } from '../../redux/states/activityLog';
+import { IActivityTypes } from '../../redux/states/activityTypes';
+import { ApplicationState } from '../../redux/states/applicationState';
 
-import * as fromStore from '../../redux/selectors';
-import { TimeBadgeComponent } from '../../components/time-badge/time-badge.component';
-import { HourBadgeComponent } from '../../components/hour-badge/hour-badge.component';
-import { ActivityPickerComponent } from '../../components/activity-picker/activity-picker.component';
-import { stringToDuration } from '../../helpers';
 import { BehaviorSubject, combineLatest, map, Observable, Subject, timer, withLatestFrom } from 'rxjs';
+import { ActivityPickerComponent } from '../../components/activity-picker/activity-picker.component';
+import { HourBadgeComponent } from '../../components/hour-badge/hour-badge.component';
+import { TimeBadgeComponent } from '../../components/time-badge/time-badge.component';
+import { stringToDuration } from '../../helpers';
+import * as fromStore from '../../redux/selectors';
 
 
 @Component({

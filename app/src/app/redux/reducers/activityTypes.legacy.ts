@@ -1,7 +1,7 @@
 
 import { v4 as uuid } from 'uuid';
 import { IActivityType } from '../../models/interfaces';
-import { MERGE_ACTIVITIES, MergeActivitiesAction } from '../actions/activityLogActions';
+import { MERGE_ACTIVITIES, MergeActivitiesAction } from '../actions/activityLogActions.legacy';
 import {
   ActivityTypesActions,
   CREATE,
@@ -11,8 +11,8 @@ import {
   SET_ACTIVITY_TYPE_IS_COLOR_ID,
   SET_ACTIVITY_TYPE_IS_NON_WORKING,
   SET_ARCHIVED
-} from '../actions/activityTypesActions';
-import { INCREMENTAL_MIGRATION, IncrementalMigrationAction } from '../actions/storageVersionActions';
+} from '../actions/activityTypesActions.legacy';
+import { INCREMENTAL_MIGRATION, IncrementalMigrationAction } from '../actions/storageVersionActions.legacy';
 import { ActivityTypes, IActivityTypes } from '../states/activityTypes';
 
 function getStateAndEntryForEditing(state: IActivityTypes, activityTypeId: string): [IActivityTypes, IActivityType] {

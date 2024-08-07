@@ -4,14 +4,14 @@ import { Component, OnInit } from '@angular/core';
 import { ApplicationState } from './redux/states/applicationState';
 
 import { Store } from '@ngrx/store';
-import { IActivityTypes } from './redux/states/activityTypes';
 import { IActivityType } from './models/interfaces';
-import { CreateActivityTypeAction } from './redux/actions/activityTypesActions';
+import { CreateActivityTypeAction } from './redux/actions/activityTypesActions.legacy';
+import { IActivityTypes } from './redux/states/activityTypes';
 
+import { map, Observable } from 'rxjs';
+import { CheckStorageVersionAction } from './redux/actions/storageVersionActions.legacy';
 import * as get from './redux/selectors';
 import { IStorageVersion } from './redux/states/storageVersion';
-import { CheckStorageVersionAction } from './redux/actions/storageVersionActions';
-import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',

@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { IActivityType } from '../../models/interfaces';
-import { ApplicationState } from '../../redux/states/applicationState';
 import { Store } from '@ngrx/store';
-import { SetActivityTypeIsNonWorkingAction, SetActivityTypeColorIdAction, SetArchivedAction } from '../../redux/actions/activityTypesActions';
+import { IActivityType } from '../../models/interfaces';
+import { SetActivityTypeColorIdAction, SetActivityTypeIsNonWorkingAction, SetArchivedAction } from '../../redux/actions/activityTypesActions.legacy';
+import { ApplicationState } from '../../redux/states/applicationState';
 
 @Component({
   selector: 'app-activity-type-list',
@@ -15,7 +15,7 @@ export class ActivityTypeListComponent implements OnInit {
 
   _types?: IActivityType[];
   @Input() set types(value: IActivityType[] | undefined | null) {
-    this._types = value? [...value] : undefined;
+    this._types = value ? [...value] : undefined;
     this.sortedTypes = this._types?.sort((a, b) => a.name.localeCompare(b.name));
   }
   get types(): IActivityType[] | undefined {

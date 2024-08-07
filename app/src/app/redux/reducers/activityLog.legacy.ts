@@ -1,8 +1,8 @@
 
 import { v4 as uuid } from 'uuid';
 
-import { ActivityLogAction, DELETE_ENTRY, IMPORT_ACTIVITIES, LOG_TIME, MERGE_ACTIVITIES, SET_DESCRIPTION, SET_HOURS } from '../actions/activityLogActions';
-import { INCREMENTAL_MIGRATION, IncrementalMigrationAction } from '../actions/storageVersionActions';
+import { ActivityLogAction, DELETE_ENTRY, IMPORT_ACTIVITIES, LOG_TIME, MERGE_ACTIVITIES, SET_DESCRIPTION, SET_HOURS } from '../actions/activityLogActions.legacy';
+import { INCREMENTAL_MIGRATION, IncrementalMigrationAction } from '../actions/storageVersionActions.legacy';
 import { ActivityLog, ActivityLogEntry, IActivityLog } from '../states/activityLog';
 
 export function activityLogReducer(state: IActivityLog = new ActivityLog, action: ActivityLogAction | IncrementalMigrationAction): IActivityLog {

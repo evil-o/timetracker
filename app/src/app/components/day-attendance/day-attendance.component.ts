@@ -1,18 +1,16 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { combineLatest, map, Observable, Subject, withLatestFrom } from 'rxjs';
 import { dateToTimeInputValue, stringToDuration, valueToTime } from '../../helpers';
 import {
   CreateCorrectionAction,
   DeleteCorrectionAction,
-  SetEndTimeAction,
   SetStartAndEndTimeAction,
-  SetStartTimeAction,
-  UpdateCorrectionAction,
-} from '../../redux/actions/attendanceActions';
+  UpdateCorrectionAction
+} from '../../redux/actions/attendanceActions.legacy';
 import * as get from '../../redux/selectors';
 import { ApplicationState } from '../../redux/states/applicationState';
 import { AttendanceEntry, IAttendanceCorrection, IAttendanceEntry } from '../../redux/states/attendanceState';
-import { combineLatest, map, Observable, Subject, withLatestFrom } from 'rxjs';
 
 @Component({
   selector: 'app-day-attendance',
