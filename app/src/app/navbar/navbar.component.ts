@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 
 import { Store } from '@ngrx/store';
-import { ExportStorageAction, ImportStorageAction } from '../redux/actions/storageVersionActions';
+import { ExportStorageAction, ImportStorageFileAction, } from '../redux/actions/storageVersionActions';
 import { IAttendanceWithTimes } from '../redux/selectors/index';
 import { ApplicationState } from '../redux/states/applicationState';
 
@@ -52,8 +52,23 @@ export class NavbarComponent implements OnInit {
 
   importStorage() {
     const element = this.importFileElement.nativeElement as HTMLInputElement;
-    this.store.dispatch(new ImportStorageAction(element!.files!));
+    const files = element!.files!;
+
+    if (files.length < 1) {
+      throw new Error(`Expected one file, but got ${files.length}`);
+    }
+    const file = files[0];
+    const reader = new FileReader();
+    reader.onloadend = (ev) => {
+      const content = ev.target?.result;
+      if (!content) {
+        throw new Error(`File content is empty: ${content}`);
+      }
+      this.store.dispatch(new ImportStorageFileAction(content.toString()));
+    };
+    reader.readAsText(file, 'utf-8');
   }
+
 
   importStorageOpenFile() {
     this.importFileElement.nativeElement.click();

@@ -1,6 +1,10 @@
 export class GlobalPage {
+    public get overtimeBadge(): Cypress.Chainable<JQuery<HTMLElement>> {
+        return cy.get("app-overtime-badge");
+    }
+
     public expectOvertime(hours: string, minutes: string): void {
-        cy.get("app-overtime-badge").should("contain.text", `${hours}h ${minutes}m`);
+        this.overtimeBadge.should("contain.text", `${hours}h ${minutes}m`);
     }
 
     public get settingsToggle(): Cypress.Chainable<JQuery<HTMLElement>> {

@@ -41,13 +41,13 @@ function findByTestId(subject: JQuery<HTMLElement>, testId: string): Cypress.Cha
 
 Cypress.Commands.add('findByTestId', { prevSubject: 'element' }, findByTestId);
 
-function getLastDownloadFilePath(): Cypress.Chainable<string | undefined> {
+function getLastDownloadFilePath(): Cypress.Chainable<string> {
     const downloadsFolder = Cypress.config("downloadsFolder");
     return cy.task("getFilesOrderedByTime", { path: downloadsFolder }).then((results) => {
         if (results === undefined) {
-            return cy.wrap<string | undefined>(undefined);
+            throw new Error(`Last download not found.`);
         }
-        return cy.wrap<string | undefined>((results as any[])[0])
+        return cy.wrap<string>((results as any[])[0])
     });
 }
 

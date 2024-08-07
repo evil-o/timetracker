@@ -34,7 +34,8 @@
           <a class="dropdown-item" href="javascript:void(0);" (click)="downloadStorage()">Export data</a>
         </li>
         <li role="menuitem" class="dropdown-item" data-testid="import-data">
-          <input style="display: none;" (change)="importStorage()" type="file" #importFileSelector />
+          <input data-testid="import-data-input" style="display: none;" (change)="importStorage()" type="file"
+            #importFileSelector />
           <a class="dropdown-item" href="javascript:void(0);" (click)="importStorageOpenFile()">Import data</a>
         </li>
       </ul>

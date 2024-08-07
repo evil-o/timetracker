@@ -68,16 +68,10 @@ export class ExportStorageSuccessAction implements Action {
   constructor() { }
 }
 
-export class ImportStorageAction implements Action {
-  public readonly type = IMPORT_STORAGE;
-
-  constructor(public files: FileList) { }
-}
-
 export class ImportStorageFileAction implements Action {
   public readonly type = IMPORT_STORAGE_FILE;
 
-  constructor(public file: File) { }
+  constructor(public fileContent: string) { }
 }
 
 export class ImportStorageSuccessAction implements Action {
@@ -90,7 +84,6 @@ export type StorageVersionAction =
   | CheckStorageVersionAction
   | ExportStorageAction
   | ExportStorageSuccessAction
-  | ImportStorageAction
   | ImportStorageFileAction
   | ImportStorageSuccessAction
   | PreMigrationBackupAction

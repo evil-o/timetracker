@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
-import { IMPORT_STORAGE, ImportStorageAction, IMPORT_STORAGE_FILE, ImportStorageFileAction } from '../actions/storageVersionActions';
-import { ApplicationState } from '../states/applicationState';
-import { ImportAttendanceAction } from '../actions/attendanceActions';
-import { ImportActivityTypes } from '../actions/activityTypesActions';
+import { map, switchMap } from 'rxjs';
 import { ImportActivitiesAction } from '../actions/activityLogActions';
-import { map, Subject, switchMap } from 'rxjs';
+import { ImportActivityTypes } from '../actions/activityTypesActions';
+import { ImportAttendanceAction } from '../actions/attendanceActions';
+import { IMPORT_STORAGE_FILE } from '../actions/storageVersionActions';
+import { ApplicationState } from '../states/applicationState';
 
 function correctAttendance(state: Partial<ApplicationState>) {
   if (state.attendanceState) {
@@ -43,32 +43,12 @@ function correctStateTypes(state: Partial<ApplicationState>): Partial<Applicatio
 
 @Injectable()
 export class ImportStorageEffects {
-  importFileList$ = createEffect(() => this.actions$.pipe(
-    ofType(IMPORT_STORAGE),
-    switchMap((action: ImportStorageAction) => {
-      const actions: Action[] = [];
-      for (let i = 0; i < action.files.length; ++i) {
-        actions.push(new ImportStorageFileAction(action.files[i]));
-      }
-      return actions;
-    }))
-  );
-
   importFile$ = createEffect(() => this.actions$.pipe(
     ofType(IMPORT_STORAGE_FILE),
-    switchMap((action: ImportStorageFileAction) => {
-      const obs = new Subject<string>();
-      const reader = new FileReader();
-      reader.onloadend = (ev) => {
-        obs.next((ev.target as any).result);
-        obs.complete();
-      };
-      reader.readAsText(action.file, 'utf-8');
-      return obs;
-    }),
-    map(rawContents => correctStateTypes(JSON.parse(rawContents))),
+    map(({ fileContent }) => correctStateTypes(JSON.parse(fileContent))),
     switchMap((data) => {
       const actions: Action[] = [];
+      console.log("importing", data);
       // import states in order of dependencies
       if (data.attendanceState) {
         actions.push(new ImportAttendanceAction(data.attendanceState));
