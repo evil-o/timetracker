@@ -3,7 +3,6 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { IActivityType } from '../../models/interfaces';
-import { SetDescriptionAction } from '../../redux/actions/activityLogActions.legacy';
 import { IActivityLog, IActivityLogEntry } from '../../redux/states/activityLog';
 import { IActivityTypes } from '../../redux/states/activityTypes';
 import { ApplicationState } from '../../redux/states/applicationState';
@@ -13,6 +12,7 @@ import { ActivityPickerComponent } from '../../components/activity-picker/activi
 import { HourBadgeComponent } from '../../components/hour-badge/hour-badge.component';
 import { TimeBadgeComponent } from '../../components/time-badge/time-badge.component';
 import { stringToDuration } from '../../helpers';
+import { activityLogActions } from '../../redux/actions/activity-log.actions';
 import { stopWatchActions } from '../../redux/actions/stop-watch.actions';
 import * as fromStore from '../../redux/selectors';
 
@@ -158,7 +158,7 @@ export class DayComponent {
   }
 
   changeEntryDescription(params: { entryId: string, newDescription: string }) {
-    this.store.dispatch(new SetDescriptionAction(params.entryId, params.newDescription));
+    this.store.dispatch(activityLogActions.setDescription({ entryId: params.entryId, description: params.newDescription }));
   }
 
   logHours(activityName: string, hours: string, description?: string) {

@@ -2,6 +2,14 @@ import { ActivitiesPage } from "../pages/activities.page";
 import { GlobalPage } from "../pages/global.page";
 import { TodayPage } from "../pages/today.page.cy";
 
+/**
+ * To test:
+ * - changes description of a log entry
+ * - changes time of a log entry
+ * - deletes log entries
+ * - merges activities
+ */
+
 describe('The time tracker', () => {
   let today: TodayPage;
   let activities: ActivitiesPage;

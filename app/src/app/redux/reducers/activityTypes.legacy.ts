@@ -1,7 +1,6 @@
 
 import { v4 as uuid } from 'uuid';
 import { IActivityType } from '../../models/interfaces';
-import { MERGE_ACTIVITIES, MergeActivitiesAction } from '../actions/activityLogActions.legacy';
 import {
   ActivityTypesActions,
   CREATE,
@@ -14,6 +13,7 @@ import {
 } from '../actions/activityTypesActions.legacy';
 import { INCREMENTAL_MIGRATION, IncrementalMigrationAction } from '../actions/storageVersionActions.legacy';
 import { ActivityTypes, IActivityTypes } from '../states/activityTypes';
+import { activityTypesReducer as activityTypesReducerNew } from "./activity-types.reducer";
 
 function getStateAndEntryForEditing(state: IActivityTypes, activityTypeId: string): [IActivityTypes, IActivityType] {
   const newState = {
@@ -29,7 +29,7 @@ function getStateAndEntryForEditing(state: IActivityTypes, activityTypeId: strin
 }
 
 export function activityTypesReducer(
-  state: IActivityTypes = new ActivityTypes(), action: ActivityTypesActions | IncrementalMigrationAction | MergeActivitiesAction
+  state: IActivityTypes = new ActivityTypes(), action: ActivityTypesActions | IncrementalMigrationAction
 ): IActivityTypes {
   switch (action.type) {
     case CREATE:
@@ -81,19 +81,6 @@ export function activityTypesReducer(
       return newState;
     }
 
-    case MERGE_ACTIVITIES: {
-      const idx = state.activities.findIndex(v => v.id === action.sourceActvityId);
-      if (idx < 0) {
-        return state;
-      }
-
-      // was bugged:
-      // const newState = { activities: [...state.activities], ...state };
-      const newState = { ...state };
-      newState.activities.splice(idx, 1);
-      return newState;
-    }
-
     case INCREMENTAL_MIGRATION:
       switch (action.currentVersion) {
         default:
@@ -120,6 +107,6 @@ export function activityTypesReducer(
     }
 
     default:
-      return state;
+      return activityTypesReducerNew(state, action);
   }
 }

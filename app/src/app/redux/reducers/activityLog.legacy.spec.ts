@@ -1,4 +1,4 @@
-import { MergeActivitiesAction } from '../actions/activityLogActions.legacy';
+import { MergeActivitiesAction } from '../actions/activity-log.actions';
 import { IActivityLog } from '../states/activityLog';
 import { activityLogReducer } from './activityLog.legacy';
 

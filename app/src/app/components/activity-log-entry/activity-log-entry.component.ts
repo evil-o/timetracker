@@ -6,7 +6,7 @@ import { IActivityTypes } from '../../redux/states/activityTypes';
 import { ApplicationState } from '../../redux/states/applicationState';
 
 import { Store } from '@ngrx/store';
-import { DeleteEntryAction, SetDescriptionAction, SetHoursAction } from '../../redux/actions/activityLogActions.legacy';
+import { activityLogActions } from '../../redux/actions/activity-log.actions';
 
 @Component({
   selector: 'app-activity-log-entry',
@@ -47,11 +47,11 @@ export class ActivityLogEntryComponent implements OnInit {
   constructor(public store: Store<ApplicationState>) { }
 
   public changeEntryDescription(params: { entryId: string, newDescription: string }) {
-    this.store.dispatch(new SetDescriptionAction(params.entryId, params.newDescription));
+    this.store.dispatch(activityLogActions.setDescription({ entryId: params.entryId, description: params.newDescription }));
   }
 
   public changeEntryHours(params: { entryId: string, newHours: number }) {
-    this.store.dispatch(new SetHoursAction(params.entryId, params.newHours));
+    this.store.dispatch(activityLogActions.setHours({ entryId: params.entryId, hours: params.newHours }));
   }
 
   ngOnInit() {
@@ -60,7 +60,7 @@ export class ActivityLogEntryComponent implements OnInit {
   public deleteEntry(id: string) {
     if (this.confirmDelete === id) {
       this.confirmDelete = undefined;
-      this.store.dispatch(new DeleteEntryAction(id));
+      this.store.dispatch(activityLogActions.deleteEntry({ entryId: id }));
     } else {
       console.log(`Did not delete entry ${id} because it was not confirmed.`);
     }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { map, switchMap } from 'rxjs';
-import { ImportActivitiesAction } from '../actions/activityLogActions.legacy';
+import { activityLogActions } from '../actions/activity-log.actions';
 import { ImportActivityTypes } from '../actions/activityTypesActions.legacy';
 import { ImportAttendanceAction } from '../actions/attendanceActions.legacy';
 import { IMPORT_STORAGE_FILE } from '../actions/storageVersionActions.legacy';
@@ -57,7 +57,7 @@ export class ImportStorageEffects {
         actions.push(new ImportActivityTypes(data.activityTypes));
       }
       if (data.activityLog) {
-        actions.push(new ImportActivitiesAction(data.activityLog));
+        actions.push(activityLogActions.importActivities({ data: data.activityLog }));
       }
       return actions;
     })

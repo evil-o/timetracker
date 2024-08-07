@@ -1,5 +1,5 @@
 import { IActivityType } from '../../models/interfaces';
-import { MergeActivitiesAction } from '../actions/activityLogActions.legacy';
+import { MergeActivitiesAction } from '../actions/activity-log.actions';
 import { IActivityTypes } from '../states/activityTypes';
 import { activityTypesReducer } from './activityTypes.legacy';
 
