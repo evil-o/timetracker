@@ -3,16 +3,16 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
 import { map, withLatestFrom } from 'rxjs';
-import { FETCH_OR_CREATE_ID_AND_LOG_TIME, FetchOrCreateIdAndLogTimeAction, LogTimeAction } from '../actions/activityLogActions.legacy';
+import { LogTimeAction } from '../actions/activityLogActions.legacy';
 import { CreateActivityTypeAndLogTimeAction } from '../actions/activityTypesActions.legacy';
+import { stopWatchActions } from '../actions/stop-watch.actions';
 import { INCREMENTAL_MIGRATION, IncrementalMigrationSuccessAction } from '../actions/storageVersionActions.legacy';
 import { ApplicationState } from '../states/applicationState';
 
 @Injectable()
 export class ActivityLogEffects {
   newActivityTypeLogged$ = createEffect(() => this.actions$.pipe(
-    ofType(FETCH_OR_CREATE_ID_AND_LOG_TIME),
-    map(action => action as FetchOrCreateIdAndLogTimeAction),
+    ofType(stopWatchActions.fetchOrCreateIdAndLogTime),
     withLatestFrom(this.store$),
     map(([action, state]) => {
       const found = state.activityTypes.activities.find((activity) => activity.name === action.name);

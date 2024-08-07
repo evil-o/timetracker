@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import { map } from 'rxjs';
-import { FetchOrCreateIdAndLogTimeAction } from '../actions/activityLogActions.legacy';
 import { CREATE_ACTIVITY_TYPE_AND_LOG_TIME, CreateActivityTypeAndLogTimeAction } from '../actions/activityTypesActions.legacy';
+import { stopWatchActions } from '../actions/stop-watch.actions';
 import { INCREMENTAL_MIGRATION, IncrementalMigrationSuccessAction } from '../actions/storageVersionActions.legacy';
 
 @Injectable()
@@ -16,7 +16,7 @@ export class ActivityTypesEffects {
   createAndLogTime$ = createEffect(() => this.actions$.pipe(
     ofType(CREATE_ACTIVITY_TYPE_AND_LOG_TIME),
     map((action: CreateActivityTypeAndLogTimeAction) =>
-      new FetchOrCreateIdAndLogTimeAction(action.name, action.hours, action.date, action.description)
+      stopWatchActions.fetchOrCreateIdAndLogTime({ name: action.name, hoursToLog: action.hours, date: action.date, description: action.description })
     )
   ));
 

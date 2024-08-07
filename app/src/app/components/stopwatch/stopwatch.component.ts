@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { map, Observable, Subject, timer, withLatestFrom } from 'rxjs';
 import { IActivityType } from '../../models/interfaces';
 import { CreateActivityTypeAndLogTimeAction } from '../../redux/actions/activityTypesActions.legacy';
-import { PauseStopWatchAction, ResetStopWatchAction, StartStopWatchAction } from '../../redux/actions/stopWatchActions.legacy';
+import { stopWatchActions } from '../../redux/actions/stop-watch.actions';
 import { activityTypes, stopWatchState } from '../../redux/selectors';
 import { ApplicationState } from '../../redux/states/applicationState';
 
@@ -54,20 +54,20 @@ export class StopwatchComponent {
         return;
       }
       this.store.dispatch(new CreateActivityTypeAndLogTimeAction(activity, hours, new Date(), 'Timed with stop watch', false));
-      this.store.dispatch(new ResetStopWatchAction());
+      this.store.dispatch(stopWatchActions.reset());
     });
   }
 
   public start() {
-    this.store.dispatch(new StartStopWatchAction(new Date()));
+    this.store.dispatch(stopWatchActions.start({ startTime: new Date() }));
   }
 
   public pause() {
-    this.store.dispatch(new PauseStopWatchAction(new Date()));
+    this.store.dispatch(stopWatchActions.pause({ pauseTime: new Date() }));
   }
 
   public reset() {
-    this.store.dispatch(new ResetStopWatchAction());
+    this.store.dispatch(stopWatchActions.reset());
   }
 
   public logNow(activityName: string) {
