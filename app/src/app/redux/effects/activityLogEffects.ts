@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 
 import { map, withLatestFrom } from 'rxjs';
 import { activityLogActions } from '../actions/activity-log.actions';
-import { CreateActivityTypeAndLogTimeAction } from '../actions/activityTypesActions.legacy';
+import { activityTypeActions } from '../actions/activity-types.actions';
 import { stopWatchActions } from '../actions/stop-watch.actions';
 import { INCREMENTAL_MIGRATION, IncrementalMigrationSuccessAction } from '../actions/storageVersionActions.legacy';
 import { ApplicationState } from '../states/applicationState';
@@ -19,7 +19,7 @@ export class ActivityLogEffects {
       if (found) {
         return activityLogActions.logTime({ id: found.id, hoursToLog: action.hoursToLog, date: action.date, description: action.description });
       } else {
-        return new CreateActivityTypeAndLogTimeAction(action.name, action.hoursToLog, action.date, action.description);
+        return activityTypeActions.createAndLogTime({ name: action.name, hours: action.hoursToLog, date: action.date, description: action.description, createIfExists: true });
       }
     })
   ));

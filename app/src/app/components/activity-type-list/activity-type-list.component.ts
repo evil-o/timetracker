@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { IActivityType } from '../../models/interfaces';
-import { SetActivityTypeColorIdAction, SetActivityTypeIsNonWorkingAction, SetArchivedAction } from '../../redux/actions/activityTypesActions.legacy';
+import { activityTypeActions } from '../../redux/actions/activity-types.actions';
 import { ApplicationState } from '../../redux/states/applicationState';
 
 @Component({
@@ -30,14 +30,14 @@ export class ActivityTypeListComponent implements OnInit {
   }
 
   setArchived(id: string, value: boolean) {
-    this.store.dispatch(new SetArchivedAction(id, value));
+    this.store.dispatch(activityTypeActions.setArchived({ id, archived: value }));
   }
 
   setNonWorking(id: string, value: boolean) {
-    this.store.dispatch(new SetActivityTypeIsNonWorkingAction(id, value));
+    this.store.dispatch(activityTypeActions.setNonWorking({ id, isNonWorking: value }));
   }
 
   setColor(activityId: string, colorId?: string) {
-    this.store.dispatch(new SetActivityTypeColorIdAction(activityId, colorId));
+    this.store.dispatch(activityTypeActions.setColorId({ activityTypeId: activityId, colorId }));
   }
 }

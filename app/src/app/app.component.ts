@@ -5,10 +5,10 @@ import { ApplicationState } from './redux/states/applicationState';
 
 import { Store } from '@ngrx/store';
 import { IActivityType } from './models/interfaces';
-import { CreateActivityTypeAction } from './redux/actions/activityTypesActions.legacy';
 import { IActivityTypes } from './redux/states/activityTypes';
 
 import { map, Observable } from 'rxjs';
+import { activityTypeActions } from './redux/actions/activity-types.actions';
 import { CheckStorageVersionAction } from './redux/actions/storageVersionActions.legacy';
 import * as get from './redux/selectors';
 import { IStorageVersion } from './redux/states/storageVersion';
@@ -39,6 +39,6 @@ export class AppComponent implements OnInit {
   }
 
   public createActivityType(name: string) {
-    this.store.dispatch(new CreateActivityTypeAction(name));
+    this.store.dispatch(activityTypeActions.create({ name }));
   }
 }

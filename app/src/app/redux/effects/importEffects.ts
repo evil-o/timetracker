@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { map, switchMap } from 'rxjs';
 import { activityLogActions } from '../actions/activity-log.actions';
-import { ImportActivityTypes } from '../actions/activityTypesActions.legacy';
+import { activityTypeActions } from '../actions/activity-types.actions';
 import { ImportAttendanceAction } from '../actions/attendanceActions.legacy';
 import { IMPORT_STORAGE_FILE } from '../actions/storageVersionActions.legacy';
 import { ApplicationState } from '../states/applicationState';
@@ -54,7 +54,7 @@ export class ImportStorageEffects {
         actions.push(new ImportAttendanceAction(data.attendanceState));
       }
       if (data.activityTypes) {
-        actions.push(new ImportActivityTypes(data.activityTypes));
+        actions.push(activityTypeActions.import({ data: data.activityTypes }));
       }
       if (data.activityLog) {
         actions.push(activityLogActions.importActivities({ data: data.activityLog }));
