@@ -9,7 +9,7 @@ import { IActivityTypes } from './redux/states/activityTypes';
 
 import { map, Observable } from 'rxjs';
 import { activityTypeActions } from './redux/actions/activity-types.actions';
-import { CheckStorageVersionAction } from './redux/actions/storageVersionActions.legacy';
+import { storageVersionActions } from './redux/actions/storage-version.actions';
 import * as get from './redux/selectors';
 import { IStorageVersion } from './redux/states/storageVersion';
 
@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.activities$ = this.activityTypes$.pipe(map(types => types.activities));
 
-    this.store.dispatch(new CheckStorageVersionAction());
+    this.store.dispatch(storageVersionActions.checkStorageVersion());
   }
 
   public createActivityType(name: string) {

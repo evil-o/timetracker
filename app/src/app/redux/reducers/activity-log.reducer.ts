@@ -1,6 +1,8 @@
 import { createReducer } from "@ngrx/store";
+import { v4 as uuid } from 'uuid';
 import { produceOn } from "../../utils/ngrx";
 import { activityLogActions } from "../actions/activity-log.actions";
+import { storageVersionActions } from "../actions/storage-version.actions";
 import { ActivityLog, ActivityLogEntry } from "../states/activityLog";
 
 export const activityLogReducer = createReducer(
@@ -43,4 +45,15 @@ export const activityLogReducer = createReducer(
             draft.entries.push(...data.entries);
         }
     }),
+
+    produceOn(storageVersionActions.incrementalMigration, (draft, { currentVersion }) => {
+        // check that all log entries have an id
+        if (currentVersion < 5) {
+            for (const entry of draft.entries) {
+                if (!entry.id) {
+                    entry.id = uuid();
+                }
+            }
+        }
+    })
 );

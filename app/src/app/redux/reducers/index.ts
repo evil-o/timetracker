@@ -1,13 +1,13 @@
-import { activityLogReducer as activityLogReducerLegacy } from './activityLog.legacy';
-import { activityTypesReducer as activityTypesReducerLegacy } from './activityTypes.legacy';
+import { activityLogReducer } from './activity-log.reducer';
+import { activityTypesReducer } from './activity-types.reducer';
 import { attendanceReducer } from './attendance.reducer';
 import { configurationReducer } from './configuration.reducer';
 import { stopWatchReducer } from './stop-watch.reducer';
-import { storageVersionReducer } from './storageVersion.legacy';
+import { storageVersionReducer } from './storage-version.reducer';
 
 export const reducers = {
-  activityTypes: activityTypesReducerLegacy,
-  activityLog: activityLogReducerLegacy,
+  activityTypes: activityTypesReducer,
+  activityLog: activityLogReducer,
   attendanceState: attendanceReducer,
   storageVersion: storageVersionReducer,
   configuration: configurationReducer,

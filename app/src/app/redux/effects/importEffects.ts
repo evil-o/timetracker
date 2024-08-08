@@ -5,7 +5,7 @@ import { map, switchMap } from 'rxjs';
 import { activityLogActions } from '../actions/activity-log.actions';
 import { activityTypeActions } from '../actions/activity-types.actions';
 import { attendanceActions } from '../actions/attendance.actions';
-import { IMPORT_STORAGE_FILE } from '../actions/storageVersionActions.legacy';
+import { storageVersionActions } from '../actions/storage-version.actions';
 import { ApplicationState } from '../states/applicationState';
 
 function correctAttendance(state: Partial<ApplicationState>) {
@@ -44,7 +44,7 @@ function correctStateTypes(state: Partial<ApplicationState>): Partial<Applicatio
 @Injectable()
 export class ImportStorageEffects {
   importFile$ = createEffect(() => this.actions$.pipe(
-    ofType(IMPORT_STORAGE_FILE),
+    ofType(storageVersionActions.importStorageFile),
     map(({ fileContent }) => correctStateTypes(JSON.parse(fileContent))),
     switchMap((data) => {
       const actions: Action[] = [];

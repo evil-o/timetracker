@@ -4,6 +4,7 @@ import { IActivityType } from "../../models/interfaces";
 import { produceOn } from "../../utils/ngrx";
 import { activityLogActions } from "../actions/activity-log.actions";
 import { activityTypeActions } from "../actions/activity-types.actions";
+import { storageVersionActions } from "../actions/storage-version.actions";
 import { ActivityTypes, IActivityTypes } from "../states/activityTypes";
 
 
@@ -70,4 +71,12 @@ export const activityTypesReducer = createReducer(
 
     draft.activities.splice(idx, 1);
   }),
+
+  produceOn(storageVersionActions.incrementalMigration, (_draft, { currentVersion }) => {
+    switch (currentVersion) {
+      default:
+        console.log('Unknown or unhandled version ("' + currentVersion + '") in incremental update of activity types.');
+        return;
+    }
+  })
 )

@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { map, withLatestFrom } from 'rxjs';
 import { activityLogActions } from '../actions/activity-log.actions';
 import { activityTypeActions } from '../actions/activity-types.actions';
-import { INCREMENTAL_MIGRATION, IncrementalMigrationSuccessAction } from '../actions/storageVersionActions.legacy';
+import { storageVersionActions } from '../actions/storage-version.actions';
 import { ApplicationState } from '../states/applicationState';
 
 @Injectable()
@@ -24,8 +24,8 @@ export class ActivityLogEffects {
   ));
 
   incrementalMigrationComplete$ = createEffect(() => this.actions$.pipe(
-    ofType(INCREMENTAL_MIGRATION),
-    map(() => new IncrementalMigrationSuccessAction('ActivityLogState'))
+    ofType(storageVersionActions.incrementalMigration),
+    map(() => storageVersionActions.incrementalMigrationSuccess({ updatedState: 'ActivityLogState' }))
   ));
 
   constructor(
