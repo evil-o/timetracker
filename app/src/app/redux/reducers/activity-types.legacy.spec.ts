@@ -1,7 +1,7 @@
 import { IActivityType } from '../../models/interfaces';
-import { MergeActivitiesAction } from '../actions/activity-log.actions';
+import { activityLogActions } from '../actions/activity-log.actions';
 import { IActivityTypes } from '../states/activity-types';
-import { activityTypesReducer } from './activityTypes.legacy';
+import { activityTypesReducer } from './activity-types.reducer';
 
 describe('the activity types reducer', () => {
 
@@ -24,7 +24,7 @@ describe('the activity types reducer', () => {
 
     const src = 'activity1';
     const dst = 'activity2';
-    const next = activityTypesReducer(initialState, new MergeActivitiesAction(src, dst));
+    const next = activityTypesReducer(initialState, activityLogActions.mergeActivities({ sourceActvityId: src, targetActivityId: dst }));
     expect(next.activities.length).toEqual(1);
     expect(next.activities[0]).toEqual(a2);
   });
