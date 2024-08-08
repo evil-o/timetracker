@@ -2,12 +2,7 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { combineLatest, map, Observable, Subject, withLatestFrom } from 'rxjs';
 import { dateToTimeInputValue, stringToDuration, valueToTime } from '../../helpers';
-import {
-  CreateCorrectionAction,
-  DeleteCorrectionAction,
-  SetStartAndEndTimeAction,
-  UpdateCorrectionAction
-} from '../../redux/actions/attendanceActions.legacy';
+import { attendanceActions } from '../../redux/actions/attendance.actions';
 import * as get from '../../redux/selectors';
 import { ApplicationState } from '../../redux/states/applicationState';
 import { AttendanceEntry, IAttendanceCorrection, IAttendanceEntry } from '../../redux/states/attendanceState';
@@ -57,7 +52,7 @@ export class DayAttendanceComponent implements OnInit {
       .subscribe(([values, date]) => {
         const start = valueToTime(values.start);
         const end = valueToTime(values.end);
-        this.store.dispatch(new SetStartAndEndTimeAction(date, start, end));
+        this.store.dispatch(attendanceActions.setStartAndEndTime({ date, start, end }));
       });
 
     this.entries$ = this.store.select(get.attendanceEntries);
@@ -71,7 +66,7 @@ export class DayAttendanceComponent implements OnInit {
     this.correctionCreation$.pipe(withLatestFrom(this.date$))
       .subscribe(([_, date]) => {
         if (date) {
-          this.store.dispatch(new CreateCorrectionAction(date.getFullYear(), date.getMonth(), date.getDate()));
+          this.store.dispatch(attendanceActions.createCorrection({ year: date.getFullYear(), month: date.getMonth(), day: date.getDate() }));
         }
       });
 
@@ -79,7 +74,7 @@ export class DayAttendanceComponent implements OnInit {
       .subscribe(([update, date]) => {
         if (date) {
           this.store.dispatch(
-            new UpdateCorrectionAction(date.getFullYear(), date.getMonth(), date.getDate(), update.id, update.hours, update.description)
+            attendanceActions.updateCorrection({ year: date.getFullYear(), month: date.getMonth(), day: date.getDate(), id: update.id, newHours: update.hours, newDescription: update.description })
           );
         }
       });
@@ -87,7 +82,7 @@ export class DayAttendanceComponent implements OnInit {
     this.correctionsToDelete$.pipe(withLatestFrom(this.date$))
       .subscribe(([toDelete, date]) => {
         if (date) {
-          this.store.dispatch(new DeleteCorrectionAction(date.getFullYear(), date.getMonth(), date.getDate(), toDelete.id));
+          this.store.dispatch(attendanceActions.deleteCorrection({ year: date.getFullYear(), month: date.getMonth(), day: date.getDate(), id: toDelete.id }));
         }
       });
 

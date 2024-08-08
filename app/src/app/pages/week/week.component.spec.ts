@@ -39,7 +39,7 @@ import { GroupActivityLogEntriesByIdPipe } from '../../pipes/group-activity-log-
 import { LogEntryTallyPipe } from '../../pipes/log-entry-tally.pipe';
 import { PrecisionPipe } from '../../pipes/precision.pipe';
 import { FetchOrCreateIdAndLogTimeAction } from '../../redux/actions/activity-log.actions';
-import { SetEndTimeAction, SetStartTimeAction } from '../../redux/actions/attendanceActions.legacy';
+import { SetEndTimeAction, SetStartTimeAction } from '../../redux/actions/attendance.actions';
 import { SetWeeklyWorkDaysAction, SetWeeklyWorkHoursAction } from '../../redux/actions/configurationActions.legacy';
 import { effects } from '../../redux/effects';
 import { ApplicationState } from '../../redux/states/applicationState';

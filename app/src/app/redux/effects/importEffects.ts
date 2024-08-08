@@ -4,7 +4,7 @@ import { Action } from '@ngrx/store';
 import { map, switchMap } from 'rxjs';
 import { activityLogActions } from '../actions/activity-log.actions';
 import { activityTypeActions } from '../actions/activity-types.actions';
-import { ImportAttendanceAction } from '../actions/attendanceActions.legacy';
+import { attendanceActions } from '../actions/attendance.actions';
 import { IMPORT_STORAGE_FILE } from '../actions/storageVersionActions.legacy';
 import { ApplicationState } from '../states/applicationState';
 
@@ -51,7 +51,7 @@ export class ImportStorageEffects {
       console.log("importing", data);
       // import states in order of dependencies
       if (data.attendanceState) {
-        actions.push(new ImportAttendanceAction(data.attendanceState));
+        actions.push(attendanceActions.import({ data: data.attendanceState }));
       }
       if (data.activityTypes) {
         actions.push(activityTypeActions.import({ data: data.activityTypes }));
