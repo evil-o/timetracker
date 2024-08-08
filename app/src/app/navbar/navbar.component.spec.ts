@@ -45,7 +45,7 @@ import { LogEntryTallyPipe } from '../pipes/log-entry-tally.pipe';
 import { PadNumberPipe } from '../pipes/pad-number.pipe';
 import { PrecisionPipe } from '../pipes/precision.pipe';
 import { SetEndTimeAction, SetStartTimeAction } from '../redux/actions/attendance.actions';
-import { SetWeeklyWorkDaysAction, SetWeeklyWorkHoursAction } from '../redux/actions/configurationActions.legacy';
+import { SetWeeklyWorkDaysAction, SetWeeklyWorkHoursAction } from '../redux/actions/configuration.actions';
 import { ApplicationState } from '../redux/states/applicationState';
 
 xdescribe('NavbarComponent', () => {

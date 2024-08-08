@@ -1,7 +1,7 @@
 import { activityLogReducer as activityLogReducerLegacy } from './activityLog.legacy';
 import { activityTypesReducer as activityTypesReducerLegacy } from './activityTypes.legacy';
 import { attendanceReducer } from './attendance.reducer';
-import { configurationReducer } from './configurationReducer.legacy';
+import { configurationReducer } from './configuration.reducer';
 import { stopWatchReducer } from './stop-watch.reducer';
 import { storageVersionReducer } from './storageVersion.legacy';
 
