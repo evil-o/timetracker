@@ -4,8 +4,8 @@ import { combineLatest, map, Observable, Subject, withLatestFrom } from 'rxjs';
 import { dateToTimeInputValue, stringToDuration, valueToTime } from '../../helpers';
 import { attendanceActions } from '../../redux/actions/attendance.actions';
 import * as get from '../../redux/selectors';
-import { ApplicationState } from '../../redux/states/applicationState';
-import { AttendanceEntry, IAttendanceCorrection, IAttendanceEntry } from '../../redux/states/attendanceState';
+import { ApplicationState } from '../../redux/states/application-state';
+import { AttendanceEntry, IAttendanceCorrection, IAttendanceEntry } from '../../redux/states/attendance-state';
 
 @Component({
   selector: 'app-day-attendance',

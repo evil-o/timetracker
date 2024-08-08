@@ -6,7 +6,7 @@ import { map, withLatestFrom } from 'rxjs';
 import { activityLogActions } from '../actions/activity-log.actions';
 import { activityTypeActions } from '../actions/activity-types.actions';
 import { storageVersionActions } from '../actions/storage-version.actions';
-import { ApplicationState } from '../states/applicationState';
+import { ApplicationState } from '../states/application-state';
 
 @Injectable()
 export class ActivityLogEffects {

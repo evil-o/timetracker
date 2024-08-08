@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
-import { ApplicationState } from '../states/applicationState';
-import { StorageVersion } from '../states/storageVersion';
+import { ApplicationState } from '../states/application-state';
+import { StorageVersion } from '../states/storage-version';
 
 import { filter, map, withLatestFrom } from 'rxjs';
 import { downloadDataAsFile } from '../../utils/download-data-as-file';
@@ -49,7 +49,7 @@ export class StorageVersionEffects {
     withLatestFrom(this.store$),
     filter(([_action, state]) => state.storageVersion.pendingIncrementalBackups.length <= 0),
     map(([_action, state]) => {
-      return storageVersionActions.storageVersionMigrated({ newVersion: state.storageVersion.version! + 1 ?? 1 });
+      return storageVersionActions.storageVersionMigrated({ newVersion: (state.storageVersion.version ?? 0)! + 1 });
     })
   ));
 

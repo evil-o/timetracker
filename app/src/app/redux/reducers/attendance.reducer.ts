@@ -3,7 +3,7 @@ import { v4 as uuid } from 'uuid';
 import { createReducer } from '@ngrx/store';
 import { produceOn } from '../../utils/ngrx';
 import { attendanceActions } from '../actions/attendance.actions';
-import { AttendanceEntry, AttendanceState, IAttendanceEntry } from '../states/attendanceState';
+import { AttendanceEntry, AttendanceState, IAttendanceEntry } from '../states/attendance-state';
 
 function findEntry(forDate: Date, entries: IAttendanceEntry[]): IAttendanceEntry | undefined {
   return entries.find(e => AttendanceEntry.equalsDate(e, forDate));

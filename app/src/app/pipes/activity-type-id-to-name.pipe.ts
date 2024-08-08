@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { IActivityTypes, ActivityTypes } from '../redux/states/activityTypes';
+import { ActivityTypes, IActivityTypes } from '../redux/states/activity-types';
 
 @Pipe({
   name: 'activityTypeIdToName'

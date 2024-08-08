@@ -2,7 +2,7 @@ import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '
 
 import { Store } from '@ngrx/store';
 import { IAttendanceWithTimes } from '../redux/selectors/index';
-import { ApplicationState } from '../redux/states/applicationState';
+import { ApplicationState } from '../redux/states/application-state';
 
 import { Observable } from 'rxjs';
 import { storageVersionActions } from '../redux/actions/storage-version.actions';

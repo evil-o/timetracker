@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import { produceOn } from '../../utils/ngrx';
 import { storageVersionActions } from '../actions/storage-version.actions';
-import { StorageVersion } from '../states/storageVersion';
+import { StorageVersion } from '../states/storage-version';
 
 export const storageVersionReducer = createReducer(
   new StorageVersion(),

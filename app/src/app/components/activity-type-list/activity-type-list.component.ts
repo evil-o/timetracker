@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { IActivityType } from '../../models/interfaces';
 import { activityTypeActions } from '../../redux/actions/activity-types.actions';
-import { ApplicationState } from '../../redux/states/applicationState';
+import { ApplicationState } from '../../redux/states/application-state';
 
 @Component({
   selector: 'app-activity-type-list',

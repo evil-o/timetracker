@@ -1,5 +1,5 @@
 import { MergeActivitiesAction } from '../actions/activity-log.actions';
-import { IActivityLog } from '../states/activityLog';
+import { IActivityLog } from '../states/activity-log';
 import { activityLogReducer } from './activityLog.legacy';
 
 describe('the activity log reducer', () => {

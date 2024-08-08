@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { configurationActions } from '../../redux/actions/configuration.actions';
 import * as fromStore from '../../redux/selectors';
-import { ApplicationState } from '../../redux/states/applicationState';
+import { ApplicationState } from '../../redux/states/application-state';
 
 @Component({
   selector: 'app-configuration',

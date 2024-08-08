@@ -6,7 +6,7 @@ import { activityLogActions } from '../actions/activity-log.actions';
 import { activityTypeActions } from '../actions/activity-types.actions';
 import { attendanceActions } from '../actions/attendance.actions';
 import { storageVersionActions } from '../actions/storage-version.actions';
-import { ApplicationState } from '../states/applicationState';
+import { ApplicationState } from '../states/application-state';
 
 function correctAttendance(state: Partial<ApplicationState>) {
   if (state.attendanceState) {

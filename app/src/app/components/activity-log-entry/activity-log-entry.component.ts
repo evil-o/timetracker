@@ -2,8 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AccordionComponent } from 'ngx-bootstrap/accordion';
 import { activityColors } from '../../models/activityColors';
 import { IGroupEntry } from '../../pipes/group-activity-log-entries-by-id.pipe';
-import { IActivityTypes } from '../../redux/states/activityTypes';
-import { ApplicationState } from '../../redux/states/applicationState';
+import { IActivityTypes } from '../../redux/states/activity-types';
+import { ApplicationState } from '../../redux/states/application-state';
 
 import { Store } from '@ngrx/store';
 import { activityLogActions } from '../../redux/actions/activity-log.actions';

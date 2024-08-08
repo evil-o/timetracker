@@ -42,7 +42,7 @@ import { FetchOrCreateIdAndLogTimeAction } from '../../redux/actions/activity-lo
 import { SetEndTimeAction, SetStartTimeAction } from '../../redux/actions/attendance.actions';
 import { SetWeeklyWorkDaysAction, SetWeeklyWorkHoursAction } from '../../redux/actions/configuration.actions';
 import { effects } from '../../redux/effects';
-import { ApplicationState } from '../../redux/states/applicationState';
+import { ApplicationState } from '../../redux/states/application-state';
 import { ActivitiesComponent } from '../activities/activities.component';
 import { AttendanceComponent } from '../attendance/attendance.component';
 import { ConfigurationComponent } from '../configuration/configuration.component';

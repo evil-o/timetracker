@@ -46,7 +46,7 @@ import { PadNumberPipe } from '../pipes/pad-number.pipe';
 import { PrecisionPipe } from '../pipes/precision.pipe';
 import { SetEndTimeAction, SetStartTimeAction } from '../redux/actions/attendance.actions';
 import { SetWeeklyWorkDaysAction, SetWeeklyWorkHoursAction } from '../redux/actions/configuration.actions';
-import { ApplicationState } from '../redux/states/applicationState';
+import { ApplicationState } from '../redux/states/application-state';
 
 xdescribe('NavbarComponent', () => {
   let component: NavbarComponent;

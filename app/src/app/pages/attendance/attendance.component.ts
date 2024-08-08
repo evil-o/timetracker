@@ -1,8 +1,8 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { ApplicationState } from '../../redux/states/applicationState';
 import { BehaviorSubject } from 'rxjs';
+import { ApplicationState } from '../../redux/states/application-state';
 
 @Component({
   selector: 'app-attendance',
@@ -22,7 +22,7 @@ export class AttendanceComponent {
   @ViewChild('datePicker')
   private datePicker!: ElementRef;
 
-  constructor(public store: Store<ApplicationState>) {}
+  constructor(public store: Store<ApplicationState>) { }
 
   startDatePicking() {
     this.pickingDate = true;

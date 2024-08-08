@@ -3,9 +3,9 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { IActivityType } from '../../models/interfaces';
-import { IActivityLog, IActivityLogEntry } from '../../redux/states/activityLog';
-import { IActivityTypes } from '../../redux/states/activityTypes';
-import { ApplicationState } from '../../redux/states/applicationState';
+import { IActivityLog, IActivityLogEntry } from '../../redux/states/activity-log';
+import { IActivityTypes } from '../../redux/states/activity-types';
+import { ApplicationState } from '../../redux/states/application-state';
 
 import { BehaviorSubject, combineLatest, map, Observable, Subject, timer, withLatestFrom } from 'rxjs';
 import { ActivityPickerComponent } from '../../components/activity-picker/activity-picker.component';

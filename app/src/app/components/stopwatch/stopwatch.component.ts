@@ -5,7 +5,7 @@ import { IActivityType } from '../../models/interfaces';
 import { activityTypeActions } from '../../redux/actions/activity-types.actions';
 import { stopWatchActions } from '../../redux/actions/stop-watch.actions';
 import { activityTypes, stopWatchState } from '../../redux/selectors';
-import { ApplicationState } from '../../redux/states/applicationState';
+import { ApplicationState } from '../../redux/states/application-state';
 
 @Component({
   selector: 'app-stopwatch',

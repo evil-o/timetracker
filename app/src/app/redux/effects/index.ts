@@ -1,7 +1,7 @@
-import { ActivityLogEffects } from './activityLogEffects';
-import { ActivityTypesEffects } from './activityTypesEffects';
-import { StorageVersionEffects } from './storageVersionEffects';
-import { ImportStorageEffects } from './importEffects';
+import { ActivityLogEffects } from './activity-log.effects';
+import { ActivityTypesEffects } from './activity-types.effects';
+import { ImportStorageEffects } from './import.effects';
+import { StorageVersionEffects } from './storage-version.effects';
 
 export const effects = [
   ActivityLogEffects,

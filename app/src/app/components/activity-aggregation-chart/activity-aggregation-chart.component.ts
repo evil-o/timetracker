@@ -1,11 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { activityColors } from '../../models/activityColors';
-import { IActivityLog, IActivityLogEntry } from '../../redux/states/activityLog';
-import { IActivityTypes } from '../../redux/states/activityTypes';
-import { combineLatest, map, Observable } from 'rxjs';
-import { BaseChartDirective } from 'ng2-charts';
-import { ChartData, ChartOptions, ChartType } from 'chart.js';
 import { CommonModule } from '@angular/common';
+import { Component, Input, OnInit } from '@angular/core';
+import { ChartData, ChartOptions } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
+import { combineLatest, map, Observable } from 'rxjs';
+import { activityColors } from '../../models/activityColors';
+import { IActivityLog, IActivityLogEntry } from '../../redux/states/activity-log';
+import { IActivityTypes } from '../../redux/states/activity-types';
 
 class Aggregation {
   private aggregate: Record<any, any> = {};

@@ -1,7 +1,7 @@
 import { Component, TemplateRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { IActivityType } from '../../models/interfaces';
-import { ApplicationState } from '../../redux/states/applicationState';
+import { ApplicationState } from '../../redux/states/application-state';
 
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { map, Observable, Subject, withLatestFrom } from 'rxjs';

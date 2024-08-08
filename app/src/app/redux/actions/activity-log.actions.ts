@@ -1,5 +1,5 @@
 import { createActionGroup, props } from '@ngrx/store';
-import { IActivityLog } from '../states/activityLog';
+import { IActivityLog } from '../states/activity-log';
 
 export const activityLogActions = createActionGroup({
   source: "ActivityLog",

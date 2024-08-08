@@ -3,7 +3,7 @@ import { v4 as uuid } from 'uuid';
 import { produceOn } from "../../utils/ngrx";
 import { activityLogActions } from "../actions/activity-log.actions";
 import { storageVersionActions } from "../actions/storage-version.actions";
-import { ActivityLog, ActivityLogEntry } from "../states/activityLog";
+import { ActivityLog, ActivityLogEntry } from "../states/activity-log";
 
 export const activityLogReducer = createReducer(
     new ActivityLog(),

@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 
 
-import { ApplicationState } from './redux/states/applicationState';
+import { ApplicationState } from './redux/states/application-state';
 
 import { Store } from '@ngrx/store';
 import { IActivityType } from './models/interfaces';
-import { IActivityTypes } from './redux/states/activityTypes';
+import { IActivityTypes } from './redux/states/activity-types';
 
 import { map, Observable } from 'rxjs';
 import { activityTypeActions } from './redux/actions/activity-types.actions';
 import { storageVersionActions } from './redux/actions/storage-version.actions';
 import * as get from './redux/selectors';
-import { IStorageVersion } from './redux/states/storageVersion';
+import { IStorageVersion } from './redux/states/storage-version';
 
 @Component({
   selector: 'app-root',

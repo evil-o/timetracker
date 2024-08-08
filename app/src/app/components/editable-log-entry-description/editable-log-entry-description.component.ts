@@ -1,5 +1,5 @@
-import { Component, EventEmitter, ElementRef, Input, Output, OnInit, ViewChild } from '@angular/core';
-import { ActivityLogEntry } from '../../redux/states/activityLog';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ActivityLogEntry } from '../../redux/states/activity-log';
 
 @Component({
   selector: 'app-editable-log-entry-description',
@@ -12,7 +12,7 @@ export class EditableLogEntryDescriptionComponent implements OnInit {
   public entry!: ActivityLogEntry;
 
   @Output()
-  public changeEntryDescription = new EventEmitter<{entryId: string, newDescription: string}>();
+  public changeEntryDescription = new EventEmitter<{ entryId: string, newDescription: string }>();
 
   @ViewChild('descriptionInput')
   public descriptionInput!: ElementRef;

@@ -5,7 +5,7 @@ import { produceOn } from "../../utils/ngrx";
 import { activityLogActions } from "../actions/activity-log.actions";
 import { activityTypeActions } from "../actions/activity-types.actions";
 import { storageVersionActions } from "../actions/storage-version.actions";
-import { ActivityTypes, IActivityTypes } from "../states/activityTypes";
+import { ActivityTypes, IActivityTypes } from "../states/activity-types";
 
 
 function getStateAndEntryForEditing(state: IActivityTypes, activityTypeId: string): IActivityType {
