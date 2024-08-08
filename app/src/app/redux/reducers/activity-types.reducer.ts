@@ -24,9 +24,8 @@ export const activityTypesReducer = createReducer(
   }),
 
   produceOn(activityTypeActions.createAndLogTime, (draft, { name, createIfExists }) => {
-    const names = draft.activities.map(activity => activity.name);
-    if (!names.includes(name) || createIfExists) {
-      const newActivity: IActivityType = { name: name, id: uuid(), isNonWorking: false, isArchived: false };
+    if (createIfExists || !draft.activities.some(activity => activity.name === name)) {
+      const newActivity: IActivityType = { name, id: uuid(), isNonWorking: false, isArchived: false };
       draft.activities.push(newActivity);
     }
   }),
