@@ -12,13 +12,29 @@ describe('Activity tracking', () => {
 
     const defaultActivityType = "e2e test activity";
     const defaultDescription = "e2e test activity description";
+    const defaultHours: HourString = "3";
+    const defaultMinutes: MinuteString = "45";
 
-    function enterLogEntry(activityType: string = defaultActivityType, description: string = defaultDescription, hours: HourString = "3", minutes: MinuteString = "45"): void {
+    function enterLogEntry(
+        activityType: string = defaultActivityType,
+        description: string = defaultDescription,
+        hours: HourString = defaultHours,
+        minutes: MinuteString = defaultMinutes,
+    ): void {
         cy.log("create log entry");
         today.addActivity.activityInput.type(activityType);
         today.addActivity.activityDescription.type(description);
         today.addActivity.activityDudation.type(`${hours}:${minutes}`);
         today.addActivity.logActivityButton.click();
+    }
+
+    function expandLogEntry(activityType: string = defaultActivityType): void {
+        cy.log("expand log entry");
+        today.actvityLogList.entries.contains(activityType).click();
+    }
+
+    function expectEntryTime(hours: HourString = defaultHours, minutes: MinuteString = defaultMinutes): void {
+        today.actvityLogList.entryDurationBadges.first().should("contain.text", `${hours}h ${minutes}m`);
     }
 
     beforeEach(() => {
@@ -44,8 +60,7 @@ describe('Activity tracking', () => {
 
         enterLogEntry(defaultActivityType, activityTypeDescriptionBefore);
 
-        cy.log("change description");
-        today.actvityLogList.entries.contains(defaultActivityType).click();
+        expandLogEntry();
 
         const enterNewDescription = () => {
             today.actvityLogList.entryDescriptions.contains(activityTypeDescriptionBefore).dblclick();
@@ -77,8 +92,7 @@ describe('Activity tracking', () => {
 
         enterLogEntry(defaultActivityType);
 
-        cy.log("expand log entry");
-        today.actvityLogList.entries.contains(defaultActivityType).click();
+        expandLogEntry();
 
         cy.log("change duration and cancel");
         enterNewHours();
@@ -88,6 +102,22 @@ describe('Activity tracking', () => {
         enterNewHours();
         today.actvityLogList.confirmDurationChange.click();
 
-        today.actvityLogList.entryDurationBadges.first().should("contain.text", `${newHours}h ${newMinutes}m`);
-    })
+        expectEntryTime(newHours, newMinutes);
+    });
+
+    it("deletes log entries", () => {
+        enterLogEntry();
+        expectEntryTime();
+
+        cy.log("cancel delete");
+        expandLogEntry();
+        today.actvityLogList.deleteLogEntryButton.click();
+        today.actvityLogList.cancelDeleteLogEntryButton.click();
+        expectEntryTime();
+
+        cy.log("confirm delete");
+        today.actvityLogList.deleteLogEntryButton.click();
+        today.actvityLogList.confirmDeleteLogEntryButton.click();
+        today.actvityLogList.noEntriesIndicator.should("exist");
+    });
 })
