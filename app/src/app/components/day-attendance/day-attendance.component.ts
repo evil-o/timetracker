@@ -22,32 +22,31 @@ export class DayAttendanceComponent implements OnInit {
   @ViewChild('dayEnd')
   public endInput!: ElementRef;
 
-  public timeValues$ = new Subject<{ start: string, end: string }>();
+  protected timeValues$ = new Subject<{ start: string, end: string }>();
 
-  public timeInputsChaged$ = new Subject<void>();
+  protected timeInputsChaged$ = new Subject<void>();
 
-  public start$!: Observable<string>;
-  public end$!: Observable<string>;
+  protected start$!: Observable<string>;
+  protected end$!: Observable<string>;
 
-  public startValid$!: Observable<boolean>;
-  public endValid$!: Observable<boolean>;
+  protected startValid$!: Observable<boolean>;
+  protected endValid$!: Observable<boolean>;
 
   private entries$!: Observable<IAttendanceEntry[]>;
 
   private entry$!: Observable<IAttendanceEntry | undefined>;
 
-  public corrections$!: Observable<IAttendanceCorrection[]>;
+  protected corrections$!: Observable<IAttendanceCorrection[]>;
 
-  public correctionCreation$ = new Subject<void>();
+  protected correctionCreation$ = new Subject<void>();
 
-  public correctionsToUpdate$ = new Subject<IAttendanceCorrection>();
+  protected correctionsToUpdate$ = new Subject<IAttendanceCorrection>();
 
-  public correctionsToDelete$ = new Subject<IAttendanceCorrection>();
+  protected correctionsToDelete$ = new Subject<IAttendanceCorrection>();
 
-  constructor(public store: Store<ApplicationState>) {
-  }
+  constructor(public store: Store<ApplicationState>) { }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.timeValues$.pipe(withLatestFrom(this.date$))
       .subscribe(([values, date]) => {
         const start = valueToTime(values.start);

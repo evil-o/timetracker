@@ -52,10 +52,14 @@ export const attendanceReducer = createReducer(
   }),
 
   produceOn(attendanceActions.createCorrection, (draft, { year, month, day }) => {
-    let entry = draft.entries.find(
+    // TODO: this function is currently needlessly complex because otherwise, a bug appears where the corrections don't show up on the today page
+    let entryIndex = draft.entries.findIndex(
       v => v.date.getFullYear() === year && v.date.getMonth() === month && v.date.getDate() === day
     );
-    if (!entry) {
+    let entry: IAttendanceEntry;
+    if (entryIndex >= 0) {
+      entry = draft.entries[entryIndex];
+    } else {
       entry = {
         date: new Date(year, month, day),
         corrections: [],
@@ -71,6 +75,9 @@ export const attendanceReducer = createReducer(
       description: '',
       hours: 0,
     });
+    // this is key for the bug fix, i.e., creating a copy of the entry so all observables update
+    // needs to be fixed with more refactoring
+    draft.entries[entryIndex] = { ...entry };
   }),
 
   produceOn(attendanceActions.updateCorrection, (draft, { year, month, day, id, newHours, newDescription }) => {

@@ -1,0 +1,24 @@
+Cypress specs:
+[ ] changes description of a log entry
+[ ] changes time of a log entry
+[ ] deletes log entries
+[ ] merges activities
+
+Setup:
+[ ] setup prettier
+[ ] setup eslint + some basic code formatting rules
+    [ ] eslint setup
+    [ ] eslint in pipeline
+    [ ] member ordering rule (public before private etc.)
+    [ ] Auto semicolon on save
+    [ ] No "only" in Cypress
+    [ ] No console.log
+
+Refactoring:
+[ ] enable router input binding
+
+Bugs:
+[ ] Various subscriptions are not canceled
+
+Fixes:
+[ ] Angular warning: "Polyfill for "@angular/localize/init" was added automatically."
