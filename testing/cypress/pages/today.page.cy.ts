@@ -65,6 +65,10 @@ export class TodayPage {
             return cy.get("app-actvity-log-list").get("app-activity-log-entry");
         },
 
+        get entryDurationBadges() {
+            return this.entries.find("app-hour-badge")
+        },
+
         get entryDescriptions() {
             return cy.get("app-actvity-log-list").byTestId("activity-log-descriptions");
         },
@@ -79,6 +83,22 @@ export class TodayPage {
 
         get cancelDescriptionChange() {
             return cy.byTestId("cancel-description-change");
+        },
+
+        get entryDurations() {
+            return cy.get("app-actvity-log-list").get("app-editable-log-entry-hours");
+        },
+
+        get logEntryDurationInput() {
+            return cy.byTestId("log-entry-duration-input");
+        },
+
+        get confirmDurationChange() {
+            return cy.byTestId("confirm-duration-change");
+        },
+
+        get cancelDurationChange() {
+            return cy.byTestId("cancel-duration-change");
         },
     }
 }

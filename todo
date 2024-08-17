@@ -1,7 +1,9 @@
 Cypress specs:
-[ ] changes time of a log entry
 [ ] deletes log entries
 [ ] merges activities
+
+Unit tests:
+[ ] various ways of entering time for log entries: "2" (hours), ":10" (minutes), "1:23" (hh:mm), ":90" (minutes)
 
 Setup:
 [ ] setup prettier
@@ -13,6 +15,8 @@ Setup:
     [ ] No "only" in Cypress
     [ ] No console.log
 [ ] commitizen + commit linting
+[ ] some way to run all cypress specs locally
+[ ] faker for Cypress specs
 
 Refactoring:
 [ ] enable router input binding
