@@ -25,4 +25,33 @@ describe('Activity tracking', () => {
         today.actvityLogList.entries.should("contain.text", activityType)
         today.actvityLogList.entries.should("contain.text", `${hours}h ${minutes}m`)
     });
+
+    it("changes the description of a log entry", () => {
+        const activityType = "e2e test activity";
+        const activityTypeDescriptionBefore = "e2e test activity before";
+        const activityTypeDescriptionAfter = "e2e test activity after";
+        const hours = "3";
+        const minutes = "45";
+
+        cy.log("add initial log entry");
+        today.addActivity.activityInput.type(activityType);
+        today.addActivity.activityDescription.type(activityTypeDescriptionBefore);
+        today.addActivity.activityDudation.type(`${hours}:${minutes}`);
+        today.addActivity.logActivityButton.click();
+
+        cy.log("change duration");
+        today.actvityLogList.entries.contains(activityType).click();
+
+        cy.log("cancel and expect no change");
+        today.actvityLogList.entryDescriptions.contains(activityTypeDescriptionBefore).dblclick();
+        today.actvityLogList.logEntryDescriptionInput.clear().type(activityTypeDescriptionAfter);
+        today.actvityLogList.cancelDescriptionChange.click();
+
+        cy.log("confirm and expect change");
+        today.actvityLogList.entryDescriptions.contains(activityTypeDescriptionBefore).dblclick();
+        today.actvityLogList.logEntryDescriptionInput.clear().type(activityTypeDescriptionAfter);
+        today.actvityLogList.confirmDescriptionChange.click();
+
+        today.actvityLogList.entryDescriptions.contains(activityTypeDescriptionAfter).should("exist");
+    })
 })

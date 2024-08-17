@@ -8,12 +8,15 @@
     </div>
   </div>
   <div *ngIf="editing" class="input-group">
-    <input type="text" #descriptionInput class="form-control" placeholder="Enter a description" [value]="entry.description || ''">
+    <input type="text" #descriptionInput data-testid="log-entry-description-input" class="form-control"
+      placeholder="Enter a description" [value]="entry.description || ''">
     <div class="input-group-append">
-      <button class="btn btn-outline-primary" type="button" (click)="emitChangeDescription(descriptionInput.value); setEditing(false);">
+      <button data-testid="confirm-description-change" class="btn btn-outline-primary" type="button"
+        (click)="emitChangeDescription(descriptionInput.value); setEditing(false);">
         <i class="fa fa-check"></i>
       </button>
-      <button class="btn btn-outline-secondary" type="button" (click)="setEditing(false)">
+      <button data-testid="cancel-description-change" class="btn btn-outline-secondary" type="button"
+        (click)="setEditing(false)">
         <i class="fa fa-ban"></i>
       </button>
     </div>

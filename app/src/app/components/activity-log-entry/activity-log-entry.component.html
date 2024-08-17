@@ -3,14 +3,16 @@
     {{group.activityId | activityTypeIdToName: activityTypes}}
     <app-hour-badge [hours]="group.cumulativeHours" class="float-right pull-right"></app-hour-badge>
   </div>
-  <div class="row my-1" *ngFor="let entry of group.entries">
-    <div class="col-8">
-      <app-editable-log-entry-description [entry]="entry" (changeEntryDescription)="changeEntryDescription($event)"></app-editable-log-entry-description>
+  <div class="row my-1" data-testid="activity-log-descriptions" *ngFor="let entry of group.entries">
+    <div class="col-8 d-flex align-items-center">
+      <app-editable-log-entry-description [entry]="entry"
+        (changeEntryDescription)="changeEntryDescription($event)"></app-editable-log-entry-description>
     </div>
-    <div class="col-2">
-      <app-editable-log-entry-hours [entry]="entry" (changeEntryHours)="changeEntryHours($event)"></app-editable-log-entry-hours>
+    <div class="col-2 d-flex align-items-center">
+      <app-editable-log-entry-hours [entry]="entry"
+        (changeEntryHours)="changeEntryHours($event)"></app-editable-log-entry-hours>
     </div>
-    <div class="col-2">
+    <div class="col-2 d-flex align-items-center">
       <button [class.d-none]="confirmDelete === entry.id" class="btn btn-danger" (click)="confirmDelete = entry.id">
         <i class="far fa-trash-alt"></i>
       </button>
@@ -24,7 +26,7 @@
   </div>
 </accordion-group>
 <accordion-group class="container-fluid my-1" *ngIf="!group">
-    <div accordion-heading class="clearfix">
-      No entires.
-    </div>
+  <div accordion-heading class="clearfix">
+    No entires.
+  </div>
 </accordion-group>

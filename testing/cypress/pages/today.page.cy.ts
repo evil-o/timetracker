@@ -63,6 +63,22 @@ export class TodayPage {
     public actvityLogList = {
         get entries() {
             return cy.get("app-actvity-log-list").get("app-activity-log-entry");
-        }
+        },
+
+        get entryDescriptions() {
+            return cy.get("app-actvity-log-list").byTestId("activity-log-descriptions");
+        },
+
+        get logEntryDescriptionInput() {
+            return cy.byTestId("log-entry-description-input");
+        },
+
+        get confirmDescriptionChange() {
+            return cy.byTestId("confirm-description-change");
+        },
+
+        get cancelDescriptionChange() {
+            return cy.byTestId("cancel-description-change");
+        },
     }
 }

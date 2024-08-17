@@ -1,5 +1,4 @@
 Cypress specs:
-[ ] changes description of a log entry
 [ ] changes time of a log entry
 [ ] deletes log entries
 [ ] merges activities
@@ -13,9 +12,16 @@ Setup:
     [ ] Auto semicolon on save
     [ ] No "only" in Cypress
     [ ] No console.log
+[ ] commitizen + commit linting
 
 Refactoring:
 [ ] enable router input binding
+[ ] refactor components, maybe with FSD?
+
+Fetures:
+[ ] add a changelog
+[ ] auto backup export option
+[ ] auto week report saving option
 
 Bugs:
 [ ] Various subscriptions are not canceled
