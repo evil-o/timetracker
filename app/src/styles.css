@@ -3,10 +3,9 @@
 @import "./styles/all.min.css";
 @import "./colors.css";
 
-.noselect
-{
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+.noselect {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }

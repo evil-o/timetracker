@@ -1,12 +1,12 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input } from "@angular/core";
 
 @Component({
-  selector: 'app-overtime-badge',
-  templateUrl: './overtime-badge.component.html',
-  styleUrls: ['./overtime-badge.component.css'],
+    selector: "app-overtime-badge",
+    templateUrl: "./overtime-badge.component.html",
+    styleUrls: ["./overtime-badge.component.css"],
 })
 export class OvertimeBadgeComponent {
-  public format = '{h}h {m}m';
+    public format = "{h}h {m}m";
 
-  @Input() hours?: number;
+    @Input() hours?: number;
 }

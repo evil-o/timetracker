@@ -9,24 +9,24 @@ describe("The Time Tracker's import and export", () => {
 
     before(() => {
         cy.deleteDownloadsFolder();
-    })
+    });
 
     beforeEach(() => {
         today = new TodayPage();
         globalPage = new GlobalPage();
         activities = new ActivitiesPage();
         today.navigateFromHome();
-    })
+    });
 
     it("exports and re-imports data", () => {
         cy.log("Input some data");
         const expectedStorageKeys = [
-            'activityTypes',
-            'activityLog',
-            'attendanceState',
-            'storageVersion',
-            'configuration',
-            'stopWatch',
+            "activityTypes",
+            "activityLog",
+            "attendanceState",
+            "storageVersion",
+            "configuration",
+            "stopWatch",
         ];
         const activityType = "e2e break";
         const hours = "3";
@@ -47,9 +47,11 @@ describe("The Time Tracker's import and export", () => {
         globalPage.settingsToggle.click();
         globalPage.exportData.click();
 
-        cy.getLastDownloadFilePath().then(path => {
-            return cy.readFile(path)
-        }).should("have.keys", ...expectedStorageKeys);
+        cy.getLastDownloadFilePath()
+            .then((path) => {
+                return cy.readFile(path);
+            })
+            .should("have.keys", ...expectedStorageKeys);
 
         cy.log("Clear data");
         cy.clearLocalStorage();
@@ -59,14 +61,20 @@ describe("The Time Tracker's import and export", () => {
         cy.log("Re-Import data");
 
         globalPage.settingsToggle.click();
-        cy.getLastDownloadFilePath().then(path => {
+        cy.getLastDownloadFilePath().then((path) => {
             // forced, hidden input element
-            cy.byTestId("import-data-input").selectFile(path, { force: true, action: "select" })
+            cy.byTestId("import-data-input").selectFile(path, {
+                force: true,
+                action: "select",
+            });
         });
         today.navigateFromHome();
 
         globalPage.expectOvertime("4", "00");
-        today.actvityLogList.entries.should("contain.text", activityType)
-        today.actvityLogList.entries.should("contain.text", `${hours}h ${minutes}m`)
-    })
+        today.actvityLogList.entries.should("contain.text", activityType);
+        today.actvityLogList.entries.should(
+            "contain.text",
+            `${hours}h ${minutes}m`
+        );
+    });
 });

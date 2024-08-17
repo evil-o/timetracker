@@ -1,17 +1,17 @@
 {
-  "name": "time-tracker-cypress-specs",
-  "version": "0.0.0",
-  "license": "UNLICENSED",
-  "private": true,
-  "scripts": {
-    "cy:open": "cypress open",
-    "cy:ci": "cypress run"
-  },
-  "dependencies": {
-    "cypress": "^13.13.1"
-  },
-  "devDependencies": {
-    "cypress-delete-downloads-folder": "^0.0.6",
-    "typescript": "5.4.5"
-  }
+    "name": "time-tracker-cypress-specs",
+    "version": "0.0.0",
+    "license": "UNLICENSED",
+    "private": true,
+    "scripts": {
+        "cy:open": "cypress open",
+        "cy:ci": "cypress run"
+    },
+    "dependencies": {
+        "cypress": "^13.13.1"
+    },
+    "devDependencies": {
+        "cypress-delete-downloads-folder": "^0.0.6",
+        "typescript": "5.4.5"
+    }
 }

@@ -13,7 +13,6 @@ export class GlobalPage {
 
     public get importData(): Cypress.Chainable<JQuery<HTMLElement>> {
         return cy.byTestId("import-data");
-
     }
     public get exportData(): Cypress.Chainable<JQuery<HTMLElement>> {
         return cy.byTestId("export-data");

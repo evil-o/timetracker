@@ -1,44 +1,96 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#"><i class="far fa-clock"></i></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <a class="navbar-brand" href="#"><i class="far fa-clock"></i></a>
+    <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+    >
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item" routerLinkActive="active" *ngFor="let entry of entries" [attr.data-testid]="entry.id">
-        <a class="nav-link" [routerLink]="entry.link">
-          <i class="far fa-{{ entry.icon }}"></i>
-          {{ entry.label }}
-          <span class="sr-only">(current)</span>
-        </a>
-      </li>
-    </ul>
-    <div class="form-inline mx-auto">
-      <app-stopwatch></app-stopwatch>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li
+                class="nav-item"
+                routerLinkActive="active"
+                *ngFor="let entry of entries"
+                [attr.data-testid]="entry.id"
+            >
+                <a class="nav-link" [routerLink]="entry.link">
+                    <i class="far fa-{{ entry.icon }}"></i>
+                    {{ entry.label }}
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+        </ul>
+        <div class="form-inline mx-auto">
+            <app-stopwatch></app-stopwatch>
+        </div>
+        <div class="nav-item" dropdown>
+            <app-overtime-badge
+                [hours]="(overallAttendanceSum$ | async) ?? undefined"
+            ></app-overtime-badge>
+        </div>
+        <div class="nav-item dropdown" dropdown>
+            <a
+                dropdownToggle
+                data-testid="settings-toggle"
+                href="javascript:void(0);"
+                class="nav-link"
+            >
+                <i class="fa fa-cog"></i>
+            </a>
+            <ul
+                *dropdownMenu
+                class="dropdown-menu dropdown-menu-right"
+                role="menu"
+            >
+                <li
+                    role="menuitem"
+                    class="dropdown-item"
+                    data-testid="settings-link"
+                >
+                    <a class="dropdown-item" routerLink="configuration"
+                        >Settings...</a
+                    >
+                </li>
+                <li role="separator" class="dropdown-separator"></li>
+                <li
+                    role="menuitem"
+                    class="dropdown-item"
+                    data-testid="export-data"
+                >
+                    <a
+                        class="dropdown-item"
+                        href="javascript:void(0);"
+                        (click)="downloadStorage()"
+                        >Export data</a
+                    >
+                </li>
+                <li
+                    role="menuitem"
+                    class="dropdown-item"
+                    data-testid="import-data"
+                >
+                    <input
+                        data-testid="import-data-input"
+                        style="display: none"
+                        (change)="importStorage()"
+                        type="file"
+                        #importFileSelector
+                    />
+                    <a
+                        class="dropdown-item"
+                        href="javascript:void(0);"
+                        (click)="importStorageOpenFile()"
+                        >Import data</a
+                    >
+                </li>
+            </ul>
+        </div>
     </div>
-    <div class="nav-item" dropdown>
-      <app-overtime-badge [hours]="(overallAttendanceSum$ | async) ?? undefined"></app-overtime-badge>
-    </div>
-    <div class="nav-item dropdown" dropdown>
-      <a dropdownToggle data-testid="settings-toggle" href="javascript:void(0);" class="nav-link">
-        <i class="fa fa-cog"></i>
-      </a>
-      <ul *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu">
-        <li role="menuitem" class="dropdown-item" data-testid="settings-link">
-          <a class="dropdown-item" routerLink="configuration">Settings...</a>
-        </li>
-        <li role="separator" class="dropdown-separator"></li>
-        <li role="menuitem" class="dropdown-item" data-testid="export-data">
-          <a class="dropdown-item" href="javascript:void(0);" (click)="downloadStorage()">Export data</a>
-        </li>
-        <li role="menuitem" class="dropdown-item" data-testid="import-data">
-          <input data-testid="import-data-input" style="display: none;" (change)="importStorage()" type="file"
-            #importFileSelector />
-          <a class="dropdown-item" href="javascript:void(0);" (click)="importStorageOpenFile()">Import data</a>
-        </li>
-      </ul>
-    </div>
-  </div>
 </nav>

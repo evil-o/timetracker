@@ -1,41 +1,67 @@
 <table class="table">
-  <thead>
-    <tr>
-      <th>Activity</th>
-      <th>Non-working?</th>
-      <th>Archived?</th>
-      <th>Color</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let activity of sortedTypes">
-      <td>{{activity.name}}</td>
-      <td>
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" #cb class="custom-control-input" data-testid="non-working-cb"
-            id="nonWorking-{{activity.id}}" (click)="setNonWorking(activity.id, cb.checked)"
-            [checked]="activity.isNonWorking">
-          <label class="custom-control-label" data-testid="non-working-label"
-            for="nonWorking-{{activity.id}}">&nbsp;</label>
-        </div>
-      </td>
-      <td>
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" #cbArchived class="custom-control-input" data-testid="archived-cb"
-            id="isArchived-{{activity.id}}" (click)="setArchived(activity.id, cbArchived.checked)"
-            [checked]="activity.isArchived">
-          <label class="custom-control-label" for="isArchived-{{activity.id}}">&nbsp;</label>
-        </div>
-      </td>
-      <td>
-        <app-activity-color-picker [activityType]="activity"
-          (colorPicked)="setColor(activity.id, $event.colorId)"></app-activity-color-picker>
-      </td>
-      <td>
-        <button class="btn btn-default" (click)="mergeRequest.emit(activity)"><i
-            class="fa fa-sign-in-alt "></i></button>
-      </td>
-    </tr>
-  </tbody>
+    <thead>
+        <tr>
+            <th>Activity</th>
+            <th>Non-working?</th>
+            <th>Archived?</th>
+            <th>Color</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let activity of sortedTypes">
+            <td>{{ activity.name }}</td>
+            <td>
+                <div class="custom-control custom-checkbox">
+                    <input
+                        type="checkbox"
+                        #cb
+                        class="custom-control-input"
+                        data-testid="non-working-cb"
+                        id="nonWorking-{{ activity.id }}"
+                        (click)="setNonWorking(activity.id, cb.checked)"
+                        [checked]="activity.isNonWorking"
+                    />
+                    <label
+                        class="custom-control-label"
+                        data-testid="non-working-label"
+                        for="nonWorking-{{ activity.id }}"
+                        >&nbsp;</label
+                    >
+                </div>
+            </td>
+            <td>
+                <div class="custom-control custom-checkbox">
+                    <input
+                        type="checkbox"
+                        #cbArchived
+                        class="custom-control-input"
+                        data-testid="archived-cb"
+                        id="isArchived-{{ activity.id }}"
+                        (click)="setArchived(activity.id, cbArchived.checked)"
+                        [checked]="activity.isArchived"
+                    />
+                    <label
+                        class="custom-control-label"
+                        for="isArchived-{{ activity.id }}"
+                        >&nbsp;</label
+                    >
+                </div>
+            </td>
+            <td>
+                <app-activity-color-picker
+                    [activityType]="activity"
+                    (colorPicked)="setColor(activity.id, $event.colorId)"
+                ></app-activity-color-picker>
+            </td>
+            <td>
+                <button
+                    class="btn btn-default"
+                    (click)="mergeRequest.emit(activity)"
+                >
+                    <i class="fa fa-sign-in-alt"></i>
+                </button>
+            </td>
+        </tr>
+    </tbody>
 </table>

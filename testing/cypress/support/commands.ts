@@ -11,16 +11,18 @@
 //
 //
 
-require('cypress-delete-downloads-folder').addCustomCommand();
+require("cypress-delete-downloads-folder").addCustomCommand();
 
-export { };
+export {};
 
 declare global {
     namespace Cypress {
         interface Chainable {
-            byTestId: typeof byTestId,
-            getLastDownloadFilePath: typeof getLastDownloadFilePath,
-            findByTestId: (testId: string) => Cypress.Chainable<JQuery<HTMLElement>>,
+            byTestId: typeof byTestId;
+            getLastDownloadFilePath: typeof getLastDownloadFilePath;
+            findByTestId: (
+                testId: string
+            ) => Cypress.Chainable<JQuery<HTMLElement>>;
             //       login(email: string, password: string): Chainable<void>
             //       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
             //       dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
@@ -33,25 +35,30 @@ function byTestId(testId: string): Cypress.Chainable<JQuery<HTMLElement>> {
     return cy.get(`[data-testid="${testId}"]`);
 }
 
-Cypress.Commands.add('byTestId', byTestId);
+Cypress.Commands.add("byTestId", byTestId);
 
-function findByTestId(subject: JQuery<HTMLElement>, testId: string): Cypress.Chainable<JQuery<HTMLElement>> {
+function findByTestId(
+    subject: JQuery<HTMLElement>,
+    testId: string
+): Cypress.Chainable<JQuery<HTMLElement>> {
     return cy.wrap(subject).find(`[data-testid="${testId}"]`);
 }
 
-Cypress.Commands.add('findByTestId', { prevSubject: 'element' }, findByTestId);
+Cypress.Commands.add("findByTestId", { prevSubject: "element" }, findByTestId);
 
 function getLastDownloadFilePath(): Cypress.Chainable<string> {
     const downloadsFolder = Cypress.config("downloadsFolder");
-    return cy.task("getFilesOrderedByTime", { path: downloadsFolder }).then((results) => {
-        if (results === undefined) {
-            throw new Error(`Last download not found.`);
-        }
-        return cy.wrap<string>((results as any[])[0])
-    });
+    return cy
+        .task("getFilesOrderedByTime", { path: downloadsFolder })
+        .then((results) => {
+            if (results === undefined) {
+                throw new Error(`Last download not found.`);
+            }
+            return cy.wrap<string>((results as any[])[0]);
+        });
 }
 
-Cypress.Commands.add('getLastDownloadFilePath', getLastDownloadFilePath);
+Cypress.Commands.add("getLastDownloadFilePath", getLastDownloadFilePath);
 
 //
 //

@@ -1,25 +1,24 @@
-import {  ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { NoActivityLogEntryPresentComponent } from './no-activity-log-entry-present.component';
+import { NoActivityLogEntryPresentComponent } from "./no-activity-log-entry-present.component";
 
-describe('NoActivityLogEntryPresentComponent', () => {
-  let component: NoActivityLogEntryPresentComponent;
-  let fixture: ComponentFixture<NoActivityLogEntryPresentComponent>;
+describe("NoActivityLogEntryPresentComponent", () => {
+    let component: NoActivityLogEntryPresentComponent;
+    let fixture: ComponentFixture<NoActivityLogEntryPresentComponent>;
 
-  beforeEach((() => {
-    TestBed.configureTestingModule({
-      declarations: [ NoActivityLogEntryPresentComponent ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            declarations: [NoActivityLogEntryPresentComponent],
+        }).compileComponents();
+    });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(NoActivityLogEntryPresentComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(NoActivityLogEntryPresentComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it("should create", () => {
+        expect(component).toBeTruthy();
+    });
 });

@@ -1,29 +1,25 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { HourBadgeComponent } from './hour-badge.component';
-import { FormatHoursPipe } from '../../pipes/format-hours.pipe';
+import { HourBadgeComponent } from "./hour-badge.component";
+import { FormatHoursPipe } from "../../pipes/format-hours.pipe";
 
-describe('HourBadgeComponent', () => {
-  let component: HourBadgeComponent;
-  let fixture: ComponentFixture<HourBadgeComponent>;
+describe("HourBadgeComponent", () => {
+    let component: HourBadgeComponent;
+    let fixture: ComponentFixture<HourBadgeComponent>;
 
-  beforeEach((() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        FormatHoursPipe,
-        HourBadgeComponent,
-      ]
-    })
-      .compileComponents();
-  }));
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            declarations: [FormatHoursPipe, HourBadgeComponent],
+        }).compileComponents();
+    });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(HourBadgeComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(HourBadgeComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it("should create", () => {
+        expect(component).toBeTruthy();
+    });
 });

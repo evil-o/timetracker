@@ -1,3 +1,3 @@
-declare module 'current-week-number' {
-    export = <any> {};
+declare module "current-week-number" {
+    export = <any>{};
 }

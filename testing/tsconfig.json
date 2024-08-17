@@ -1,18 +1,9 @@
 {
-    "include": [
-        "**/*.ts"
-    ],
+    "include": ["**/*.ts"],
     "compilerOptions": {
         "strict": true,
         "target": "es5",
-        "lib": [
-            "es5",
-            "dom"
-        ],
-        "types": [
-            "cypress",
-            "node",
-            "cypress-delete-downloads-folder"
-        ]
+        "lib": ["es5", "dom"],
+        "types": ["cypress", "node", "cypress-delete-downloads-folder"]
     }
 }

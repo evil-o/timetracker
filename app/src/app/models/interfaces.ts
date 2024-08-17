@@ -1,34 +1,36 @@
 export interface IActivityTypeColor {
-  id: string;
+    id: string;
 
-  styleClass: string;
+    styleClass: string;
 
-  color?: {
-    r: number, g: number, b: number,
-  };
+    color?: {
+        r: number;
+        g: number;
+        b: number;
+    };
 }
 
 export interface IActivityType {
-  name: string;
+    name: string;
 
-  id: string;
+    id: string;
 
-  isNonWorking: boolean;
+    isNonWorking: boolean;
 
-  isArchived: boolean;
+    isArchived: boolean;
 
-  colorId?: string;
+    colorId?: string;
 }
 
 export interface IEntry {
-  activityTypeId: string;
-  accumulatedSeconds: number;
+    activityTypeId: string;
+    accumulatedSeconds: number;
 }
 
 export interface IWeek {
-  calendarWeekNumber: number;
+    calendarWeekNumber: number;
 
-  year: number;
+    year: number;
 
-  entries: IEntry[];
+    entries: IEntry[];
 }
