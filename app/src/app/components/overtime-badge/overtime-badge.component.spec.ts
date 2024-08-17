@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { OvertimeBadgeComponent } from "./overtime-badge.component";
-import { PrecisionPipe } from "../../pipes/precision.pipe";
-import { By } from "@angular/platform-browser";
 import { DebugElement } from "@angular/core";
+import { By } from "@angular/platform-browser";
 import { FormatHoursPipe } from "../../pipes/format-hours.pipe";
+import { PrecisionPipe } from "../../pipes/precision.pipe";
+import { OvertimeBadgeComponent } from "./overtime-badge.component";
 
 describe("OvertimeBadgeComponent", () => {
     let component: OvertimeBadgeComponent;
@@ -37,7 +37,7 @@ describe("OvertimeBadgeComponent", () => {
         fixture.detectChanges();
         span = fixture.debugElement.query(By.css(".badge"));
         expect(span).toBeTruthy();
-        span = fixture.debugElement.query(By.css(".badge-success"));
+        span = fixture.debugElement.query(By.css(".bg-success"));
 
         expect(span).toBeTruthy();
         expect(span.nativeElement.innerText).toContain("+1");
@@ -49,7 +49,7 @@ describe("OvertimeBadgeComponent", () => {
         fixture.detectChanges();
         span = fixture.debugElement.query(By.css(".badge"));
         expect(span).toBeTruthy();
-        span = fixture.debugElement.query(By.css(".badge-danger"));
+        span = fixture.debugElement.query(By.css(".bg-danger"));
 
         expect(span).toBeTruthy();
         expect(span.nativeElement.innerText).toContain("-1");
@@ -75,7 +75,7 @@ describe("OvertimeBadgeComponent", () => {
         span = fixture.debugElement.query(By.css(".badge"));
         expect(span).toBeTruthy();
 
-        span = fixture.debugElement.query(By.css(".badge-secondary"));
+        span = fixture.debugElement.query(By.css(".bg-secondary"));
         expect(span).toBeTruthy();
 
         expect(span.nativeElement.innerText).toContain("0");

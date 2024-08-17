@@ -1,8 +1,8 @@
 <form>
-    <div class="form-row my-3">
+    <div class="row my-3">
         <h3>Attendance</h3>
     </div>
-    <div class="form-row">
+    <div class="row">
         <div class="col-4">
             <label for="dayStart">Start</label>
         </div>
@@ -10,7 +10,7 @@
             <label for="dayEnd">End</label>
         </div>
     </div>
-    <div class="form-row mb-2">
+    <div class="row mb-2">
         <div class="col-4">
             <input
                 type="time"
@@ -80,7 +80,7 @@
     <accordion>
         <accordion-group heading="Extra bookings" data-testid="extra-bookings">
             <div
-                class="form-row"
+                class="row mb-2"
                 *ngFor="let correction of corrections$ | async"
             >
                 <div class="form-group col-5">
@@ -105,7 +105,7 @@
                 </div>
                 <div class="form-group col-4">
                     <button
-                        class="btn btn-secondary mr-1"
+                        class="btn btn-secondary me-1"
                         data-testid="confirm-update-correction"
                         (click)="
                             updateCorrection(
@@ -126,14 +126,16 @@
                     </button>
                 </div>
             </div>
-            <div class="form-row mt-2">
-                <button
-                    class="btn btn-primary"
-                    data-testid="add-extra-booking"
-                    (click)="correctionCreation$.next()"
-                >
-                    Add
-                </button>
+            <div class="row mt-1">
+                <div class="col">
+                    <button
+                        class="btn btn-primary"
+                        data-testid="add-extra-booking"
+                        (click)="correctionCreation$.next()"
+                    >
+                        Add
+                    </button>
+                </div>
             </div>
         </accordion-group>
     </accordion>
