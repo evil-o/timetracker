@@ -2,19 +2,18 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
-
-import { ApplicationState } from '../../redux/states/applicationState';
-import { IActivityTypes } from '../../redux/states/activityTypes';
 import { IActivityType } from '../../models/interfaces';
-import { FetchOrCreateIdAndLogTimeAction, SetDescriptionAction } from '../../redux/actions/activityLogActions';
-import { IActivityLogEntry, IActivityLog } from '../../redux/states/activityLog';
+import { IActivityLog, IActivityLogEntry } from '../../redux/states/activity-log';
+import { IActivityTypes } from '../../redux/states/activity-types';
+import { ApplicationState } from '../../redux/states/application-state';
 
-import * as fromStore from '../../redux/selectors';
-import { TimeBadgeComponent } from '../../components/time-badge/time-badge.component';
-import { HourBadgeComponent } from '../../components/hour-badge/hour-badge.component';
-import { ActivityPickerComponent } from '../../components/activity-picker/activity-picker.component';
-import { stringToDuration } from '../../helpers';
 import { BehaviorSubject, combineLatest, map, Observable, Subject, timer, withLatestFrom } from 'rxjs';
+import { ActivityPickerComponent } from '../../components/activity-picker/activity-picker.component';
+import { HourBadgeComponent } from '../../components/hour-badge/hour-badge.component';
+import { TimeBadgeComponent } from '../../components/time-badge/time-badge.component';
+import { stringToDuration } from '../../helpers';
+import { activityLogActions } from '../../redux/actions/activity-log.actions';
+import * as fromStore from '../../redux/selectors';
 
 
 @Component({
@@ -93,7 +92,7 @@ export class DayComponent {
         ));
 
     this.hourLog$.pipe(withLatestFrom(this.date$)).subscribe(([log, date]) => {
-      this.store.dispatch(new FetchOrCreateIdAndLogTimeAction(log.activityName, log.hours, date, log.description));
+      this.store.dispatch(activityLogActions.fetchOrCreateIdAndLogTime({ name: log.activityName, hoursToLog: log.hours, date, description: log.description }));
       this.hoursToLog.nativeElement.value = '';
       this.logDescription.nativeElement.value = '';
     });
@@ -158,7 +157,7 @@ export class DayComponent {
   }
 
   changeEntryDescription(params: { entryId: string, newDescription: string }) {
-    this.store.dispatch(new SetDescriptionAction(params.entryId, params.newDescription));
+    this.store.dispatch(activityLogActions.setDescription({ entryId: params.entryId, description: params.newDescription }));
   }
 
   logHours(activityName: string, hours: string, description?: string) {

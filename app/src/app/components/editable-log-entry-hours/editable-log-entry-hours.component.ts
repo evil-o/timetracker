@@ -1,6 +1,6 @@
-import { Component, ElementRef, EventEmitter, Input, Output, OnInit, ViewChild } from '@angular/core';
-import { ActivityLogEntry } from '../../redux/states/activityLog';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { stringToDuration } from '../../helpers';
+import { ActivityLogEntry } from '../../redux/states/activity-log';
 
 @Component({
   selector: 'app-editable-log-entry-hours',

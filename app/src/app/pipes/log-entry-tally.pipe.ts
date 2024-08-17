@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { IActivityLogEntry } from '../redux/states/activityLog';
+import { IActivityLogEntry } from '../redux/states/activity-log';
+import { IActivityTypes } from '../redux/states/activity-types';
 import { IGroupEntry } from './group-activity-log-entries-by-id.pipe';
-import { IActivityTypes } from '../redux/states/activityTypes';
 
 @Pipe({
   name: 'logEntryTally'

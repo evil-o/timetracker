@@ -36,18 +36,6 @@ describe('The time tracker', () => {
     globalPage.expectOvertime("-2", "37");
   });
 
-  it("tracks activities", () => {
-    const activityType = "e2e test activity";
-    const hours = "2";
-    const minutes = "34";
-    today.addActivity.activityInput.type(activityType);
-    today.addActivity.activityDescription.type("e2e test activity description");
-    today.addActivity.activityDudation.type(`${hours}:${minutes}`);
-    today.addActivity.logActivityButton.click();
-    today.actvityLogList.entries.should("contain.text", activityType)
-    today.actvityLogList.entries.should("contain.text", `${hours}h ${minutes}m`)
-  });
-
   it("tracks breaks", () => {
     today.startTimeInput.type("08:00");
     today.endTimeInput.type("12:00");

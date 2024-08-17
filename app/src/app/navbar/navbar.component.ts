@@ -1,11 +1,11 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 
 import { Store } from '@ngrx/store';
-import { ExportStorageAction, ImportStorageFileAction, } from '../redux/actions/storageVersionActions';
 import { IAttendanceWithTimes } from '../redux/selectors/index';
-import { ApplicationState } from '../redux/states/applicationState';
+import { ApplicationState } from '../redux/states/application-state';
 
 import { Observable } from 'rxjs';
+import { storageVersionActions } from '../redux/actions/storage-version.actions';
 import * as fromStore from '../redux/selectors';
 
 
@@ -47,7 +47,7 @@ export class NavbarComponent implements OnInit {
   }
 
   downloadStorage() {
-    this.store.dispatch(new ExportStorageAction());
+    this.store.dispatch(storageVersionActions.exportStorage());
   }
 
   importStorage() {
@@ -64,7 +64,7 @@ export class NavbarComponent implements OnInit {
       if (!content) {
         throw new Error(`File content is empty: ${content}`);
       }
-      this.store.dispatch(new ImportStorageFileAction(content.toString()));
+      this.store.dispatch(storageVersionActions.importStorageFile({ fileContent: content.toString() }));
     };
     reader.readAsText(file, 'utf-8');
   }

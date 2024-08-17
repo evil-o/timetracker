@@ -44,9 +44,9 @@ import { GroupActivityLogEntriesByIdPipe } from '../pipes/group-activity-log-ent
 import { LogEntryTallyPipe } from '../pipes/log-entry-tally.pipe';
 import { PadNumberPipe } from '../pipes/pad-number.pipe';
 import { PrecisionPipe } from '../pipes/precision.pipe';
-import { SetEndTimeAction, SetStartTimeAction } from '../redux/actions/attendanceActions';
-import { SetWeeklyWorkDaysAction, SetWeeklyWorkHoursAction } from '../redux/actions/configurationActions';
-import { ApplicationState } from '../redux/states/applicationState';
+import { attendanceActions } from '../redux/actions/attendance.actions';
+import { configurationActions } from '../redux/actions/configuration.actions';
+import { ApplicationState } from '../redux/states/application-state';
 
 xdescribe('NavbarComponent', () => {
   let component: NavbarComponent;
@@ -54,8 +54,8 @@ xdescribe('NavbarComponent', () => {
   let store: Store<ApplicationState>;
 
   function setAttendance(start: string, end: string, date: Date) {
-    store.dispatch(new SetStartTimeAction(date, valueToTime(start)!));
-    store.dispatch(new SetEndTimeAction(date, valueToTime(end)!));
+    store.dispatch(attendanceActions.setStartTime({ date, start: valueToTime(start)! }));
+    store.dispatch(attendanceActions.setEndTime({ date, end: valueToTime(end)! }));
   }
 
   beforeEach((() => {
@@ -117,7 +117,7 @@ xdescribe('NavbarComponent', () => {
   });
 
   it('should correctly display overall overtime for 40h work week', () => {
-    store.dispatch(new SetWeeklyWorkHoursAction(40));
+    store.dispatch(configurationActions.setWeeklyWorkHours({ newWeeklyHours: 40 }));
 
     // -4
     setAttendance('8:30', '12:30', new Date(2018, 0, 1));
@@ -136,8 +136,8 @@ xdescribe('NavbarComponent', () => {
   });
 
   it('should correctly display overall overtime for 16h work week', () => {
-    store.dispatch(new SetWeeklyWorkHoursAction(16));
-    store.dispatch(new SetWeeklyWorkDaysAction(2));
+    store.dispatch(configurationActions.setWeeklyWorkHours({ newWeeklyHours: 16 }));
+    store.dispatch(configurationActions.setWeeklyWorkDays({ newWeeklyWorkDays: 2 }));
 
     // -4
     setAttendance('8:30', '12:30', new Date(2018, 0, 1));

@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { map, switchMap } from 'rxjs';
-import { ImportActivitiesAction } from '../actions/activityLogActions';
-import { ImportActivityTypes } from '../actions/activityTypesActions';
-import { ImportAttendanceAction } from '../actions/attendanceActions';
-import { IMPORT_STORAGE_FILE } from '../actions/storageVersionActions';
-import { ApplicationState } from '../states/applicationState';
+import { activityLogActions } from '../actions/activity-log.actions';
+import { activityTypeActions } from '../actions/activity-types.actions';
+import { attendanceActions } from '../actions/attendance.actions';
+import { storageVersionActions } from '../actions/storage-version.actions';
+import { ApplicationState } from '../states/application-state';
 
 function correctAttendance(state: Partial<ApplicationState>) {
   if (state.attendanceState) {
@@ -44,20 +44,20 @@ function correctStateTypes(state: Partial<ApplicationState>): Partial<Applicatio
 @Injectable()
 export class ImportStorageEffects {
   importFile$ = createEffect(() => this.actions$.pipe(
-    ofType(IMPORT_STORAGE_FILE),
+    ofType(storageVersionActions.importStorageFile),
     map(({ fileContent }) => correctStateTypes(JSON.parse(fileContent))),
     switchMap((data) => {
       const actions: Action[] = [];
       console.log("importing", data);
       // import states in order of dependencies
       if (data.attendanceState) {
-        actions.push(new ImportAttendanceAction(data.attendanceState));
+        actions.push(attendanceActions.import({ data: data.attendanceState }));
       }
       if (data.activityTypes) {
-        actions.push(new ImportActivityTypes(data.activityTypes));
+        actions.push(activityTypeActions.import({ data: data.activityTypes }));
       }
       if (data.activityLog) {
-        actions.push(new ImportActivitiesAction(data.activityLog));
+        actions.push(activityLogActions.importActivities({ data: data.activityLog }));
       }
       return actions;
     })

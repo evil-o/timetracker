@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { ApplicationState } from '../../redux/states/applicationState';
-import { StartStopWatchAction, PauseStopWatchAction, ResetStopWatchAction } from '../../redux/actions/stopWatchActions';
-import { stopWatchState, activityTypes } from '../../redux/selectors';
-import { IActivityType } from '../../models/interfaces';
-import { CreateActivityTypeAndLogTimeAction } from '../../redux/actions/activityTypesActions';
 import { map, Observable, Subject, timer, withLatestFrom } from 'rxjs';
+import { IActivityType } from '../../models/interfaces';
+import { activityTypeActions } from '../../redux/actions/activity-types.actions';
+import { stopWatchActions } from '../../redux/actions/stop-watch.actions';
+import { activityTypes, stopWatchState } from '../../redux/selectors';
+import { ApplicationState } from '../../redux/states/application-state';
 
 @Component({
   selector: 'app-stopwatch',
@@ -53,21 +53,21 @@ export class StopwatchComponent {
       if (!activity || typeof activity !== 'string' || activity === '' || hours === undefined) {
         return;
       }
-      this.store.dispatch(new CreateActivityTypeAndLogTimeAction(activity, hours, new Date(), 'Timed with stop watch', false));
-      this.store.dispatch(new ResetStopWatchAction());
+      this.store.dispatch(activityTypeActions.createAndLogTime({ name: activity, hours, date: new Date(), description: 'Timed with stop watch', createIfExists: false }));
+      this.store.dispatch(stopWatchActions.reset());
     });
   }
 
   public start() {
-    this.store.dispatch(new StartStopWatchAction(new Date()));
+    this.store.dispatch(stopWatchActions.start({ startTime: new Date() }));
   }
 
   public pause() {
-    this.store.dispatch(new PauseStopWatchAction(new Date()));
+    this.store.dispatch(stopWatchActions.pause({ pauseTime: new Date() }));
   }
 
   public reset() {
-    this.store.dispatch(new ResetStopWatchAction());
+    this.store.dispatch(stopWatchActions.reset());
   }
 
   public logNow(activityName: string) {

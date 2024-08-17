@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { IActivityLogEntry } from '../redux/states/activityLog';
 import { map, Observable } from 'rxjs';
+import { IActivityLogEntry } from '../redux/states/activity-log';
 
 export interface IGroupEntry {
   activityId: string;

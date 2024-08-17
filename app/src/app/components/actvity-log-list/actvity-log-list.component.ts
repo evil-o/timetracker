@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
-import { IActivityLogEntry } from '../../redux/states/activityLog';
-import { IActivityTypes, ActivityTypes } from '../../redux/states/activityTypes';
-import { IActivityType } from '../../models/interfaces';
+import { Component, Input, OnInit } from '@angular/core';
 import { combineLatest, map, Observable } from 'rxjs';
+import { IActivityType } from '../../models/interfaces';
+import { IActivityLogEntry } from '../../redux/states/activity-log';
+import { IActivityTypes } from '../../redux/states/activity-types';
 
 interface IGroupEntry {
   activityId: string;

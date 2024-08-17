@@ -21,9 +21,9 @@ import { TimeBadgeComponent } from '../../components/time-badge/time-badge.compo
 import { ActivityTypeIdToNamePipe } from '../../pipes/activity-type-id-to-name.pipe';
 import { FormatHoursPipe } from '../../pipes/format-hours.pipe';
 import { GroupActivityLogEntriesByIdPipe } from '../../pipes/group-activity-log-entries-by-id.pipe';
-import { LogTimeAction } from '../../redux/actions/activityLogActions';
-import { ActivityLogEntry } from '../../redux/states/activityLog';
-import { ApplicationState } from '../../redux/states/applicationState';
+import { activityLogActions } from '../../redux/actions/activity-log.actions';
+import { ActivityLogEntry } from '../../redux/states/activity-log';
+import { ApplicationState } from '../../redux/states/application-state';
 import { DayComponent } from './day.component';
 
 describe('DayComponent', () => {
@@ -91,7 +91,7 @@ describe('DayComponent', () => {
 
     // populate store
     for (const entry of testEntries) {
-      store.dispatch(new LogTimeAction(entry.actvitiyId, entry.hours, new Date(entry.year, entry.month, entry.day)));
+      store.dispatch(activityLogActions.logTime({ id: entry.actvitiyId, hoursToLog: entry.hours, date: new Date(entry.year, entry.month, entry.day) }));
     }
 
     fixture.detectChanges();
@@ -117,7 +117,6 @@ describe('DayComponent', () => {
       expect(value.getHours()).toBe(n.getHours() - 6);
       expect(value.getMinutes()).toBe(Math.floor(n.getMinutes() + 60 - 15));
     });
-
 
     discardPeriodicTasks();
   }));

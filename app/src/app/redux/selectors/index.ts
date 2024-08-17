@@ -1,7 +1,7 @@
 import { createSelector } from '@ngrx/store';
-import { IActivityLogEntry } from '../states/activityLog';
-import { ApplicationState } from '../states/applicationState';
-import { IAttendanceEntry } from '../states/attendanceState';
+import { IActivityLogEntry } from '../states/activity-log';
+import { ApplicationState } from '../states/application-state';
+import { IAttendanceEntry } from '../states/attendance-state';
 
 export const activityTypes = (state: ApplicationState) => state.activityTypes;
 

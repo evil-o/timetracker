@@ -1,15 +1,15 @@
-import { activityTypesReducer } from './activityTypes';
-import { activityLogReducer } from './activityLog';
-import { storageVersionReducer } from './storageVersion';
-import { attendanceStateReducer } from './attendanceReducer';
-import { configurationReducer } from './configurationReducer';
-import { stopWatchReducer } from './stopWatchReducer';
+import { activityLogReducer } from './activity-log.reducer';
+import { activityTypesReducer } from './activity-types.reducer';
+import { attendanceReducer } from './attendance.reducer';
+import { configurationReducer } from './configuration.reducer';
+import { stopWatchReducer } from './stop-watch.reducer';
+import { storageVersionReducer } from './storage-version.reducer';
 
 export const reducers = {
   activityTypes: activityTypesReducer,
   activityLog: activityLogReducer,
-  attendanceState: attendanceStateReducer,
+  attendanceState: attendanceReducer,
   storageVersion: storageVersionReducer,
   configuration: configurationReducer,
-  stopWatch: stopWatchReducer,
+  stopWatch: stopWatchReducer
 };

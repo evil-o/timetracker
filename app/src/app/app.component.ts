@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 
 
-import { ApplicationState } from './redux/states/applicationState';
+import { ApplicationState } from './redux/states/application-state';
 
 import { Store } from '@ngrx/store';
-import { IActivityTypes } from './redux/states/activityTypes';
 import { IActivityType } from './models/interfaces';
-import { CreateActivityTypeAction } from './redux/actions/activityTypesActions';
+import { IActivityTypes } from './redux/states/activity-types';
 
-import * as get from './redux/selectors';
-import { IStorageVersion } from './redux/states/storageVersion';
-import { CheckStorageVersionAction } from './redux/actions/storageVersionActions';
 import { map, Observable } from 'rxjs';
+import { activityTypeActions } from './redux/actions/activity-types.actions';
+import { storageVersionActions } from './redux/actions/storage-version.actions';
+import * as get from './redux/selectors';
+import { IStorageVersion } from './redux/states/storage-version';
 
 @Component({
   selector: 'app-root',
@@ -35,10 +35,10 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.activities$ = this.activityTypes$.pipe(map(types => types.activities));
 
-    this.store.dispatch(new CheckStorageVersionAction());
+    this.store.dispatch(storageVersionActions.checkStorageVersion());
   }
 
   public createActivityType(name: string) {
-    this.store.dispatch(new CreateActivityTypeAction(name));
+    this.store.dispatch(activityTypeActions.create({ name }));
   }
 }

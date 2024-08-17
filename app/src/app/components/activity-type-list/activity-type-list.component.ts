@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { IActivityType } from '../../models/interfaces';
-import { ApplicationState } from '../../redux/states/applicationState';
 import { Store } from '@ngrx/store';
-import { SetActivityTypeIsNonWorkingAction, SetActivityTypeColorIdAction, SetArchivedAction } from '../../redux/actions/activityTypesActions';
+import { IActivityType } from '../../models/interfaces';
+import { activityTypeActions } from '../../redux/actions/activity-types.actions';
+import { ApplicationState } from '../../redux/states/application-state';
 
 @Component({
   selector: 'app-activity-type-list',
@@ -15,7 +15,7 @@ export class ActivityTypeListComponent implements OnInit {
 
   _types?: IActivityType[];
   @Input() set types(value: IActivityType[] | undefined | null) {
-    this._types = value? [...value] : undefined;
+    this._types = value ? [...value] : undefined;
     this.sortedTypes = this._types?.sort((a, b) => a.name.localeCompare(b.name));
   }
   get types(): IActivityType[] | undefined {
@@ -30,14 +30,14 @@ export class ActivityTypeListComponent implements OnInit {
   }
 
   setArchived(id: string, value: boolean) {
-    this.store.dispatch(new SetArchivedAction(id, value));
+    this.store.dispatch(activityTypeActions.setArchived({ id, archived: value }));
   }
 
   setNonWorking(id: string, value: boolean) {
-    this.store.dispatch(new SetActivityTypeIsNonWorkingAction(id, value));
+    this.store.dispatch(activityTypeActions.setNonWorking({ id, isNonWorking: value }));
   }
 
   setColor(activityId: string, colorId?: string) {
-    this.store.dispatch(new SetActivityTypeColorIdAction(activityId, colorId));
+    this.store.dispatch(activityTypeActions.setColorId({ activityTypeId: activityId, colorId }));
   }
 }

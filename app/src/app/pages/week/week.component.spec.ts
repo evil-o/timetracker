@@ -38,11 +38,11 @@ import { FormatHoursPipe } from '../../pipes/format-hours.pipe';
 import { GroupActivityLogEntriesByIdPipe } from '../../pipes/group-activity-log-entries-by-id.pipe';
 import { LogEntryTallyPipe } from '../../pipes/log-entry-tally.pipe';
 import { PrecisionPipe } from '../../pipes/precision.pipe';
-import { FetchOrCreateIdAndLogTimeAction } from '../../redux/actions/activityLogActions';
-import { SetEndTimeAction, SetStartTimeAction } from '../../redux/actions/attendanceActions';
-import { SetWeeklyWorkDaysAction, SetWeeklyWorkHoursAction } from '../../redux/actions/configurationActions';
+import { activityLogActions } from '../../redux/actions/activity-log.actions';
+import { attendanceActions } from '../../redux/actions/attendance.actions';
+import { configurationActions } from '../../redux/actions/configuration.actions';
 import { effects } from '../../redux/effects';
-import { ApplicationState } from '../../redux/states/applicationState';
+import { ApplicationState } from '../../redux/states/application-state';
 import { ActivitiesComponent } from '../activities/activities.component';
 import { AttendanceComponent } from '../attendance/attendance.component';
 import { ConfigurationComponent } from '../configuration/configuration.component';
@@ -56,8 +56,8 @@ describe('WeekComponent', () => {
   let store: Store<ApplicationState>;
 
   function setAttendance(start: string, end: string, date: Date) {
-    store.dispatch(new SetStartTimeAction(date, valueToTime(start)!));
-    store.dispatch(new SetEndTimeAction(date, valueToTime(end)!));
+    store.dispatch(attendanceActions.setStartTime({ date, start: valueToTime(start)! }));
+    store.dispatch(attendanceActions.setEndTime({ date, end: valueToTime(end)! }));
   }
 
   beforeEach((() => {
@@ -130,10 +130,10 @@ describe('WeekComponent', () => {
     }
 
     const a1 = 'test activity 1';
-    store.dispatch(new FetchOrCreateIdAndLogTimeAction(a1, 4, weekDates[0]));
-    store.dispatch(new FetchOrCreateIdAndLogTimeAction(a1, 3, weekDates[1]));
-    store.dispatch(new SetWeeklyWorkHoursAction(16));
-    store.dispatch(new SetWeeklyWorkDaysAction(2));
+    store.dispatch(activityLogActions.fetchOrCreateIdAndLogTime({ name: a1, hoursToLog: 4, date: weekDates[0] }));
+    store.dispatch(activityLogActions.fetchOrCreateIdAndLogTime({ name: a1, hoursToLog: 3, date: weekDates[1] }));
+    store.dispatch(configurationActions.setWeeklyWorkHours({ newWeeklyHours: 16 }));
+    store.dispatch(configurationActions.setWeeklyWorkDays({ newWeeklyWorkDays: 2 }));
 
     // 4 hours on day 1
     setAttendance('8:30', '12:30', weekDates[0]);

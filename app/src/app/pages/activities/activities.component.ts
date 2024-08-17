@@ -1,12 +1,12 @@
 import { Component, TemplateRef } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { ApplicationState } from '../../redux/states/applicationState';
 import { IActivityType } from '../../models/interfaces';
+import { ApplicationState } from '../../redux/states/application-state';
 
-import * as fromStore from '../../redux/selectors';
-import { MergeActivitiesAction } from '../../redux/actions/activityLogActions';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { map, Observable, Subject, withLatestFrom } from 'rxjs';
+import { activityLogActions } from '../../redux/actions/activity-log.actions';
+import * as fromStore from '../../redux/selectors';
 
 @Component({
   selector: 'app-activities',
@@ -50,7 +50,7 @@ export class ActivitiesComponent {
       const src = srcs[0];
       const dst = dsts[0];
       console.log('merging', src, ' into ', dst);
-      this.store.dispatch(new MergeActivitiesAction(src.id, dst.id));
+      this.store.dispatch(activityLogActions.mergeActivities({ sourceActvityId: src.id, targetActivityId: dst.id }));
       this.hideModal();
     });
   }

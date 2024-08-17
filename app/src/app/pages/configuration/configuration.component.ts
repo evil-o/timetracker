@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import * as fromStore from '../../redux/selectors';
-import { ApplicationState } from '../../redux/states/applicationState';
 import { Store } from '@ngrx/store';
-import { SetWeeklyWorkHoursAction, SetWeeklyWorkDaysAction } from '../../redux/actions/configurationActions';
 import { Observable } from 'rxjs';
+import { configurationActions } from '../../redux/actions/configuration.actions';
+import * as fromStore from '../../redux/selectors';
+import { ApplicationState } from '../../redux/states/application-state';
 
 @Component({
   selector: 'app-configuration',
@@ -30,18 +30,18 @@ export class ConfigurationComponent implements OnInit {
 
   public applyValues() {
     if (this.inputWorkingHoursPerWeek) {
-      this.store.dispatch(new SetWeeklyWorkHoursAction(this.inputWorkingHoursPerWeek));
+      this.store.dispatch(configurationActions.setWeeklyWorkHours({ newWeeklyHours: this.inputWorkingHoursPerWeek }));
     }
     if (this.inputWorkingDaysPerWeek) {
-      this.store.dispatch(new SetWeeklyWorkDaysAction(this.inputWorkingDaysPerWeek));
+      this.store.dispatch(configurationActions.setWeeklyWorkDays({ newWeeklyWorkDays: this.inputWorkingDaysPerWeek }));
     }
   }
 
-  public setInputWorkingHoursPerWeek(value: number | string) : void {
-    this.inputWorkingHoursPerWeek = typeof value === "string"? Number.parseFloat(value) : value;
+  public setInputWorkingHoursPerWeek(value: number | string): void {
+    this.inputWorkingHoursPerWeek = typeof value === "string" ? Number.parseFloat(value) : value;
   }
 
-  public setInputWorkingDaysPerWeek(value: number | string) : void {
-    this.inputWorkingHoursPerWeek = typeof value === "string"? Number.parseFloat(value) : value;
+  public setInputWorkingDaysPerWeek(value: number | string): void {
+    this.inputWorkingHoursPerWeek = typeof value === "string" ? Number.parseFloat(value) : value;
   }
 }

@@ -3,28 +3,33 @@
     {{group.activityId | activityTypeIdToName: activityTypes}}
     <app-hour-badge [hours]="group.cumulativeHours" class="float-right pull-right"></app-hour-badge>
   </div>
-  <div class="row my-1" *ngFor="let entry of group.entries">
-    <div class="col-8">
-      <app-editable-log-entry-description [entry]="entry" (changeEntryDescription)="changeEntryDescription($event)"></app-editable-log-entry-description>
+  <div class="row my-1" data-testid="activity-log-descriptions" *ngFor="let entry of group.entries">
+    <div class="col-8 d-flex align-items-center">
+      <app-editable-log-entry-description [entry]="entry"
+        (changeEntryDescription)="changeEntryDescription($event)"></app-editable-log-entry-description>
     </div>
-    <div class="col-2">
-      <app-editable-log-entry-hours [entry]="entry" (changeEntryHours)="changeEntryHours($event)"></app-editable-log-entry-hours>
+    <div class="col-2 d-flex align-items-center">
+      <app-editable-log-entry-hours [entry]="entry"
+        (changeEntryHours)="changeEntryHours($event)"></app-editable-log-entry-hours>
     </div>
-    <div class="col-2">
-      <button [class.d-none]="confirmDelete === entry.id" class="btn btn-danger" (click)="confirmDelete = entry.id">
+    <div class="col-2 d-flex align-items-center">
+      <button [class.d-none]="confirmDelete === entry.id" class="btn btn-danger" data-testid="delete-activity-log-entry"
+        (click)="confirmDelete = entry.id">
         <i class="far fa-trash-alt"></i>
       </button>
-      <button [class.d-none]="confirmDelete !== entry.id" class="btn btn-success" (click)="confirmDelete = undefined">
+      <button [class.d-none]="confirmDelete !== entry.id" class="btn btn-success"
+        data-testid="delete-activity-log-entry-cancel" (click)="confirmDelete = undefined">
         <i class="fa fa-times"></i>
       </button>
-      <button [class.invisible]="confirmDelete !== entry.id" class="btn btn-danger" (click)="deleteEntry(entry.id)">
+      <button [class.invisible]="confirmDelete !== entry.id" class="btn btn-danger"
+        data-testid="delete-activity-log-entry-confirm" (click)="deleteEntry(entry.id)">
         <i class="fa fa-check"></i>
       </button>
     </div>
   </div>
 </accordion-group>
 <accordion-group class="container-fluid my-1" *ngIf="!group">
-    <div accordion-heading class="clearfix">
-      No entires.
-    </div>
+  <div accordion-heading class="clearfix">
+    No entires.
+  </div>
 </accordion-group>

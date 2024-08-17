@@ -8,13 +8,15 @@
     </div>
   </div>
   <div *ngIf="editing" class="input-group">
-    <input type="text" #hoursInput id="hoursInput" class="form-control" placeholder="#hours" [value]="(entry.hours | formatHours: '{h}:{m}') || ''"
-      (keyup.enter)="submit()" (keyup.escape)="cancel()">
+    <input type="text" #hoursInput id="hoursInput" data-testid="log-entry-duration-input" class="form-control"
+      placeholder="#hours" [value]="(entry.hours | formatHours: '{h}:{m}') || ''" (keyup.enter)="submit()"
+      (keyup.escape)="cancel()">
     <div class="input-group-append">
-      <button class="btn btn-outline-primary" type="button" (click)="submit()">
+      <button data-testid="confirm-duration-change" class="btn btn-outline-primary" type="button" (click)="submit()">
         <i class="fa fa-check"></i>
       </button>
-      <button class="btn btn-outline-secondary" id="submitButton" type="button" (click)="cancel()">
+      <button data-testid="cancel-duration-change" class="btn btn-outline-secondary" id="submitButton" type="button"
+        (click)="cancel()">
         <i class="fa fa-ban"></i>
       </button>
     </div>

@@ -1,18 +1,11 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { dateToTimeInputValue, stringToDuration, valueToTime } from '../../helpers';
-import {
-  CreateCorrectionAction,
-  DeleteCorrectionAction,
-  SetEndTimeAction,
-  SetStartAndEndTimeAction,
-  SetStartTimeAction,
-  UpdateCorrectionAction,
-} from '../../redux/actions/attendanceActions';
-import * as get from '../../redux/selectors';
-import { ApplicationState } from '../../redux/states/applicationState';
-import { AttendanceEntry, IAttendanceCorrection, IAttendanceEntry } from '../../redux/states/attendanceState';
 import { combineLatest, map, Observable, Subject, withLatestFrom } from 'rxjs';
+import { dateToTimeInputValue, stringToDuration, valueToTime } from '../../helpers';
+import { attendanceActions } from '../../redux/actions/attendance.actions';
+import * as get from '../../redux/selectors';
+import { ApplicationState } from '../../redux/states/application-state';
+import { AttendanceEntry, IAttendanceCorrection, IAttendanceEntry } from '../../redux/states/attendance-state';
 
 @Component({
   selector: 'app-day-attendance',
@@ -29,37 +22,36 @@ export class DayAttendanceComponent implements OnInit {
   @ViewChild('dayEnd')
   public endInput!: ElementRef;
 
-  public timeValues$ = new Subject<{ start: string, end: string }>();
+  protected timeValues$ = new Subject<{ start: string, end: string }>();
 
-  public timeInputsChaged$ = new Subject<void>();
+  protected timeInputsChaged$ = new Subject<void>();
 
-  public start$!: Observable<string>;
-  public end$!: Observable<string>;
+  protected start$!: Observable<string>;
+  protected end$!: Observable<string>;
 
-  public startValid$!: Observable<boolean>;
-  public endValid$!: Observable<boolean>;
+  protected startValid$!: Observable<boolean>;
+  protected endValid$!: Observable<boolean>;
 
   private entries$!: Observable<IAttendanceEntry[]>;
 
   private entry$!: Observable<IAttendanceEntry | undefined>;
 
-  public corrections$!: Observable<IAttendanceCorrection[]>;
+  protected corrections$!: Observable<IAttendanceCorrection[]>;
 
-  public correctionCreation$ = new Subject<void>();
+  protected correctionCreation$ = new Subject<void>();
 
-  public correctionsToUpdate$ = new Subject<IAttendanceCorrection>();
+  protected correctionsToUpdate$ = new Subject<IAttendanceCorrection>();
 
-  public correctionsToDelete$ = new Subject<IAttendanceCorrection>();
+  protected correctionsToDelete$ = new Subject<IAttendanceCorrection>();
 
-  constructor(public store: Store<ApplicationState>) {
-  }
+  constructor(public store: Store<ApplicationState>) { }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.timeValues$.pipe(withLatestFrom(this.date$))
       .subscribe(([values, date]) => {
         const start = valueToTime(values.start);
         const end = valueToTime(values.end);
-        this.store.dispatch(new SetStartAndEndTimeAction(date, start, end));
+        this.store.dispatch(attendanceActions.setStartAndEndTime({ date, start, end }));
       });
 
     this.entries$ = this.store.select(get.attendanceEntries);
@@ -73,7 +65,7 @@ export class DayAttendanceComponent implements OnInit {
     this.correctionCreation$.pipe(withLatestFrom(this.date$))
       .subscribe(([_, date]) => {
         if (date) {
-          this.store.dispatch(new CreateCorrectionAction(date.getFullYear(), date.getMonth(), date.getDate()));
+          this.store.dispatch(attendanceActions.createCorrection({ year: date.getFullYear(), month: date.getMonth(), day: date.getDate() }));
         }
       });
 
@@ -81,7 +73,7 @@ export class DayAttendanceComponent implements OnInit {
       .subscribe(([update, date]) => {
         if (date) {
           this.store.dispatch(
-            new UpdateCorrectionAction(date.getFullYear(), date.getMonth(), date.getDate(), update.id, update.hours, update.description)
+            attendanceActions.updateCorrection({ year: date.getFullYear(), month: date.getMonth(), day: date.getDate(), id: update.id, newHours: update.hours, newDescription: update.description })
           );
         }
       });
@@ -89,7 +81,7 @@ export class DayAttendanceComponent implements OnInit {
     this.correctionsToDelete$.pipe(withLatestFrom(this.date$))
       .subscribe(([toDelete, date]) => {
         if (date) {
-          this.store.dispatch(new DeleteCorrectionAction(date.getFullYear(), date.getMonth(), date.getDate(), toDelete.id));
+          this.store.dispatch(attendanceActions.deleteCorrection({ year: date.getFullYear(), month: date.getMonth(), day: date.getDate(), id: toDelete.id }));
         }
       });
 

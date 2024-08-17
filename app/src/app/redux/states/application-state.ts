@@ -1,9 +1,9 @@
-import { IActivityTypes } from './activityTypes';
-import { IActivityLog } from './activityLog';
-import { IStorageVersion } from './storageVersion';
-import { IAttendanceState } from './attendanceState';
+import { IActivityLog } from './activity-log';
+import { IActivityTypes } from './activity-types';
+import { IAttendanceState } from './attendance-state';
 import { IConfigurationState } from './configuration';
-import { IStopWatch } from './stopwatchState';
+import { IStopWatch } from './stopwatch-state';
+import { IStorageVersion } from './storage-version';
 
 export interface ApplicationState {
   activityTypes: IActivityTypes;
