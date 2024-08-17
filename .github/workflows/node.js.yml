@@ -39,6 +39,12 @@ jobs:
               working-directory: ./testing
               run: npm ci
 
+            # Chores ===========
+
+            - name: Check prettier
+              working-directory: .
+              run: npm run prettier:check
+
             # Testing ==========
 
             - name: Unit tests
