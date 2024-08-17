@@ -3,7 +3,7 @@
         <h4 class="modal-title pull-left">Print preview...</h4>
         <button
             type="button"
-            class="close pull-right"
+            class="close pull-end"
             aria-label="Close"
             (click)="modalRef.hide()"
         >
@@ -27,7 +27,7 @@
 
 <nav aria-label="Week navigation">
     <ul class="nav">
-        <li class="nav-item ml-auto">
+        <li class="nav-item ms-auto">
             <ul class="pagination">
                 <li class="page-item">
                     <a
@@ -92,7 +92,7 @@
                 </li>
             </ul>
         </li>
-        <li class="nav-item ml-auto">
+        <li class="nav-item ms-auto">
             <button
                 class="btn btn-secondary"
                 (click)="openLargeModal(printPreview)"
@@ -118,7 +118,7 @@
                 <div class="card-header text-right">
                     Total:
                     <app-hour-badge
-                        class="mr-2"
+                        class="me-2"
                         [hours]="loggedSum$ | async"
                     ></app-hour-badge>
                 </div>
@@ -200,7 +200,7 @@
                             </td>
                             <td class="text-right">
                                 <app-overtime-badge
-                                    class="mr-1"
+                                    class="me-1"
                                     [hours]="attendance.overtime"
                                 ></app-overtime-badge>
                             </td>
@@ -224,7 +224,7 @@
                             <td class="text-right">
                                 <b>
                                     <app-overtime-badge
-                                        class="mr-1"
+                                        class="me-1"
                                         [hours]="
                                             (attendanceStats$ | async)
                                                 ?.totalOvertime
