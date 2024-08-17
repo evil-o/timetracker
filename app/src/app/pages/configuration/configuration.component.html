@@ -1,23 +1,33 @@
 <form>
-  <div class="row">
-    <div class="col">
-      Working hours per week:
+    <div class="row">
+        <div class="col">Working hours per week:</div>
+        <div class="col">
+            <input
+                type="text"
+                #wwh
+                class="form-control"
+                [value]="workingHoursPerWeek$ | async"
+                (blur)="setInputWorkingHoursPerWeek(wwh.value)"
+            />
+        </div>
     </div>
-    <div class="col">
-      <input type="text" #wwh class="form-control" [value]="workingHoursPerWeek$ | async" (blur)="setInputWorkingHoursPerWeek(wwh.value)">
+    <div class="row">
+        <div class="col">Working days per week:</div>
+        <div class="col">
+            <input
+                type="text"
+                #wwd
+                class="form-control"
+                [value]="(workingDaysPerWeek$ | async) || 5"
+                (blur)="setInputWorkingDaysPerWeek(wwd.value)"
+            />
+        </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      Working days per week:
+    <div class="row">
+        <div class="col">
+            <button (click)="applyValues()" class="btn btn-primary">
+                Apply
+            </button>
+        </div>
     </div>
-    <div class="col">
-      <input type="text" #wwd class="form-control" [value]="(workingDaysPerWeek$ | async)|| 5" (blur)="setInputWorkingDaysPerWeek(wwd.value)">
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <button (click)="applyValues()" class="btn btn-primary">Apply</button>
-    </div>
-  </div>
 </form>

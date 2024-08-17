@@ -1,14 +1,12 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform } from "@angular/core";
 
-import { padNumber } from '../helpers';
+import { padNumber } from "../helpers";
 
 @Pipe({
-  name: 'padNumber'
+    name: "padNumber",
 })
 export class PadNumberPipe implements PipeTransform {
-
-  transform(num: number, minLength = 2, padding = '0'): any {
-    return padNumber(num, minLength || 2, padding);
-  }
-
+    transform(num: number, minLength = 2, padding = "0"): any {
+        return padNumber(num, minLength || 2, padding);
+    }
 }

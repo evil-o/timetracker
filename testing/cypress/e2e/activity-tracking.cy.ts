@@ -2,10 +2,10 @@ import { ActivitiesPage } from "../pages/activities.page";
 import { GlobalPage } from "../pages/global.page";
 import { TodayPage } from "../pages/today.page.cy";
 
-type HourString = `${number | ''}${number}`;
+type HourString = `${number | ""}${number}`;
 type MinuteString = `${number}${number}`;
 
-describe('Activity tracking', () => {
+describe("Activity tracking", () => {
     let today: TodayPage;
     let activities: ActivitiesPage;
     let globalPage: GlobalPage;
@@ -19,7 +19,7 @@ describe('Activity tracking', () => {
         activityType: string = defaultActivityType,
         description: string = defaultDescription,
         hours: HourString = defaultHours,
-        minutes: MinuteString = defaultMinutes,
+        minutes: MinuteString = defaultMinutes
     ): void {
         cy.log("create log entry");
         today.addActivity.activityInput.type(activityType);
@@ -33,8 +33,13 @@ describe('Activity tracking', () => {
         today.actvityLogList.entries.contains(activityType).click();
     }
 
-    function expectEntryTime(hours: HourString = defaultHours, minutes: MinuteString = defaultMinutes): void {
-        today.actvityLogList.entryDurationBadges.first().should("contain.text", `${hours}h ${minutes}m`);
+    function expectEntryTime(
+        hours: HourString = defaultHours,
+        minutes: MinuteString = defaultMinutes
+    ): void {
+        today.actvityLogList.entryDurationBadges
+            .first()
+            .should("contain.text", `${hours}h ${minutes}m`);
     }
 
     beforeEach(() => {
@@ -50,8 +55,14 @@ describe('Activity tracking', () => {
 
         enterLogEntry(defaultActivityType, defaultDescription, hours, minutes);
 
-        today.actvityLogList.entries.should("contain.text", defaultActivityType)
-        today.actvityLogList.entries.should("contain.text", `${hours}h ${minutes}m`)
+        today.actvityLogList.entries.should(
+            "contain.text",
+            defaultActivityType
+        );
+        today.actvityLogList.entries.should(
+            "contain.text",
+            `${hours}h ${minutes}m`
+        );
     });
 
     it("changes the description of a log entry", () => {
@@ -63,9 +74,13 @@ describe('Activity tracking', () => {
         expandLogEntry();
 
         const enterNewDescription = () => {
-            today.actvityLogList.entryDescriptions.contains(activityTypeDescriptionBefore).dblclick();
-            today.actvityLogList.logEntryDescriptionInput.clear().type(activityTypeDescriptionAfter);
-        }
+            today.actvityLogList.entryDescriptions
+                .contains(activityTypeDescriptionBefore)
+                .dblclick();
+            today.actvityLogList.logEntryDescriptionInput
+                .clear()
+                .type(activityTypeDescriptionAfter);
+        };
 
         cy.log("cancel and expect no change");
         enterNewDescription();
@@ -75,20 +90,21 @@ describe('Activity tracking', () => {
         enterNewDescription();
         today.actvityLogList.confirmDescriptionChange.click();
 
-        today.actvityLogList.entryDescriptions.contains(activityTypeDescriptionAfter).should("exist");
-    })
+        today.actvityLogList.entryDescriptions
+            .contains(activityTypeDescriptionAfter)
+            .should("exist");
+    });
 
     it("changes the time of a log entry", () => {
         const newHours = "1";
         const newMinutes = "23";
 
         const enterNewHours = () => {
-            today.actvityLogList.entryDurations.first()
-                .dblclick();
+            today.actvityLogList.entryDurations.first().dblclick();
             today.actvityLogList.logEntryDurationInput
                 .clear()
                 .type(`${newHours}:${newMinutes}`);
-        }
+        };
 
         enterLogEntry(defaultActivityType);
 
@@ -120,4 +136,4 @@ describe('Activity tracking', () => {
         today.actvityLogList.confirmDeleteLogEntryButton.click();
         today.actvityLogList.noEntriesIndicator.should("exist");
     });
-})
+});

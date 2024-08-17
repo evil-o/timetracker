@@ -3,7 +3,6 @@ import { produceOn } from "../../utils/ngrx";
 import { stopWatchActions } from "../actions/stop-watch.actions";
 import { StopWatch } from "../states/stopwatch-state";
 
-
 export const stopWatchReducer = createReducer(
     new StopWatch(),
 
@@ -15,7 +14,8 @@ export const stopWatchReducer = createReducer(
     produceOn(stopWatchActions.pause, (draft, { pauseTime }) => {
         let additionalTimeInMs = draft.additionalTimeInMs;
         if (draft.startedAt) {
-            additionalTimeInMs += pauseTime.getTime() - draft.startedAt.getTime();
+            additionalTimeInMs +=
+                pauseTime.getTime() - draft.startedAt.getTime();
         }
         draft.isPaused = true;
         draft.startedAt = undefined;
@@ -26,5 +26,5 @@ export const stopWatchReducer = createReducer(
         draft.isPaused = false;
         draft.startedAt = undefined;
         draft.additionalTimeInMs = 0;
-    }),
+    })
 );

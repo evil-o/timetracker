@@ -1,9 +1,9 @@
-import { IActivityType } from '../../models/interfaces';
+import { IActivityType } from "../../models/interfaces";
 
 export interface IActivityTypes {
-  activities: IActivityType[];
+    activities: IActivityType[];
 }
 
 export class ActivityTypes implements IActivityTypes {
-  public activities: IActivityType[] = [];
+    public activities: IActivityType[] = [];
 }

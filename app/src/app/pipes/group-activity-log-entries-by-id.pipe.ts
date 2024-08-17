@@ -1,34 +1,41 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import { map, Observable } from 'rxjs';
-import { IActivityLogEntry } from '../redux/states/activity-log';
+import { Pipe, PipeTransform } from "@angular/core";
+import { map, Observable } from "rxjs";
+import { IActivityLogEntry } from "../redux/states/activity-log";
 
 export interface IGroupEntry {
-  activityId: string;
-  cumulativeHours: number;
-  entries: IActivityLogEntry[];
+    activityId: string;
+    cumulativeHours: number;
+    entries: IActivityLogEntry[];
 }
 
 @Pipe({
-  name: 'groupActivityLogEntriesById'
+    name: "groupActivityLogEntriesById",
 })
 export class GroupActivityLogEntriesByIdPipe implements PipeTransform {
+    transform(
+        entries$: Observable<IActivityLogEntry[]>
+    ): Observable<IGroupEntry[]> {
+        return entries$.pipe(
+            map((entries) => {
+                const grouped: IGroupEntry[] = [];
 
-  transform(entries$: Observable<IActivityLogEntry[]>): Observable<IGroupEntry[]> {
-    return entries$.pipe(map(entries => {
-      const grouped: IGroupEntry[] = [];
+                for (const entry of entries) {
+                    const id = entry.actvitiyId;
+                    const group = grouped.find((e) => e.activityId === id);
+                    if (group) {
+                        group.cumulativeHours += entry.hours;
+                        group.entries.push(entry);
+                    } else {
+                        grouped.push({
+                            activityId: id,
+                            entries: [entry],
+                            cumulativeHours: entry.hours,
+                        });
+                    }
+                }
 
-      for (const entry of entries) {
-        const id = entry.actvitiyId;
-        const group = grouped.find((e) => e.activityId === id);
-        if (group) {
-          group.cumulativeHours += entry.hours;
-          group.entries.push(entry);
-        } else {
-          grouped.push({ activityId: id, entries: [entry], cumulativeHours: entry.hours });
-        }
-      }
-
-      return grouped;
-    }));
-  }
+                return grouped;
+            })
+        );
+    }
 }

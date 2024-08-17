@@ -1,33 +1,39 @@
-Cypress specs:
-[ ] merges activities
+## Cypress specs
 
-Unit tests:
-[ ] various ways of entering time for log entries: "2" (hours), ":10" (minutes), "1:23" (hh:mm), ":90" (minutes)
+-   merges activities
 
-Setup:
-[ ] setup prettier
-[ ] setup eslint + some basic code formatting rules
-    [ ] eslint setup
-    [ ] eslint in pipeline
-    [ ] member ordering rule (public before private etc.)
-    [ ] Auto semicolon on save
-    [ ] No "only" in Cypress
-    [ ] No console.log
-[ ] commitizen + commit linting
-[ ] some way to run all cypress specs locally
-[ ] faker for Cypress specs
+## Unit tests
 
-Refactoring:
-[ ] enable router input binding
-[ ] refactor components, maybe with FSD?
+-   various ways of entering time for log entries: "2" (hours), ":10" (minutes), "1:23" (hh:mm), ":90" (minutes)
 
-Fetures:
-[ ] add a changelog
-[ ] auto backup export option
-[ ] auto week report saving option
+## Setup
 
-Bugs:
-[ ] Various subscriptions are not canceled
+-   setup eslint + some basic code formatting rules
+    -   eslint setup
+    -   eslint in pipeline
+    -   member ordering rule (public before private etc.)
+    -   Auto semicolon on save
+    -   No "only" in Cypress
+    -   No console.log
+-   commitizen + commit linting
+-   some way to run all cypress specs locally
+-   faker for Cypress specs
 
-Fixes:
-[ ] Angular warning: "Polyfill for "@angular/localize/init" was added automatically."
+## Refactoring
+
+-   enable router input binding
+-   refactor components, maybe with FSD?
+
+## Fetures
+
+-   add a changelog
+-   auto backup export option
+-   auto week report saving option
+
+## Bugs
+
+-   Various subscriptions are not canceled
+
+## Fixes
+
+-   Angular warning: "Polyfill for "@angular/localize/init" was added automatically."

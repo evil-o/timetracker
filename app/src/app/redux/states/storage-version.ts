@@ -1,27 +1,26 @@
 export type StateType =
-  | 'ActivityLogState'
-  | 'ActivityTypesState'
-  | 'StorageVersion'
-  ;
+    | "ActivityLogState"
+    | "ActivityTypesState"
+    | "StorageVersion";
 
 export interface IStorageVersion {
-  version?: number;
+    version?: number;
 
-  upgradeComplete: boolean;
+    upgradeComplete: boolean;
 
-  previousStateBackup?: any;
+    previousStateBackup?: any;
 
-  pendingIncrementalBackups: StateType[];
+    pendingIncrementalBackups: StateType[];
 }
 
 export class StorageVersion implements IStorageVersion {
-  public static CURRENT_VERSION = 5;
+    public static CURRENT_VERSION = 5;
 
-  public version?: number = undefined;
+    public version?: number = undefined;
 
-  public upgradeComplete = false;
+    public upgradeComplete = false;
 
-  public previousStateBackup: IStorageVersion | null = null;
+    public previousStateBackup: IStorageVersion | null = null;
 
-  public pendingIncrementalBackups: StateType[] = [];
+    public pendingIncrementalBackups: StateType[] = [];
 }

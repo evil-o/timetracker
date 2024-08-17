@@ -1,49 +1,54 @@
 <ng-template #mergeActivitiesDialog>
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">Modal</h4>
-    <button
-      type="button"
-      class="close pull-right"
-      aria-label="Close"
-      (click)="hideModal()"
-    >
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <p>You are about to move all activites from:</p>
-    <div>{{ mergeSource ? mergeSource.name : "not set" }}</div>
-    <p>into the following activity:</p>
-    <div>
-      <app-activity-picker
-        [activities]="activitiesWithoutSource"
-        #moveTarget
-        placeholder="select an move target"
-      ></app-activity-picker>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Modal</h4>
+        <button
+            type="button"
+            class="close pull-right"
+            aria-label="Close"
+            (click)="hideModal()"
+        >
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
-    <p>
-      Afterwards, {{ mergeSource ? mergeSource.name : "not set" }} will be
-      deleted.
-    </p>
-  </div>
-  <div class="modal-footer">
-    <button
-      class="btn btn-danger"
-      [disabled]="!mergeSource || !moveTarget.name"
-      (click)="
-        confirmMerge$.next({
-          source: mergeSource,
-          target: { name: moveTarget.name, id: moveTarget.id, isNonWorking: false, isArchived: false }
-        })
-      "
-    >
-      Merge and delete source
-    </button>
-    <button class="btn btn-default" (click)="hideModal()">Cancel</button>
-  </div>
+    <div class="modal-body">
+        <p>You are about to move all activites from:</p>
+        <div>{{ mergeSource ? mergeSource.name : "not set" }}</div>
+        <p>into the following activity:</p>
+        <div>
+            <app-activity-picker
+                [activities]="activitiesWithoutSource"
+                #moveTarget
+                placeholder="select an move target"
+            ></app-activity-picker>
+        </div>
+        <p>
+            Afterwards, {{ mergeSource ? mergeSource.name : "not set" }} will be
+            deleted.
+        </p>
+    </div>
+    <div class="modal-footer">
+        <button
+            class="btn btn-danger"
+            [disabled]="!mergeSource || !moveTarget.name"
+            (click)="
+                confirmMerge$.next({
+                    source: mergeSource,
+                    target: {
+                        name: moveTarget.name,
+                        id: moveTarget.id,
+                        isNonWorking: false,
+                        isArchived: false,
+                    },
+                })
+            "
+        >
+            Merge and delete source
+        </button>
+        <button class="btn btn-default" (click)="hideModal()">Cancel</button>
+    </div>
 </ng-template>
 
 <app-activity-type-list
-  [types]="activities$ | async"
-  (mergeRequest)="openMergeDialog(mergeActivitiesDialog, $event)"
+    [types]="activities$ | async"
+    (mergeRequest)="openMergeDialog(mergeActivitiesDialog, $event)"
 ></app-activity-type-list>

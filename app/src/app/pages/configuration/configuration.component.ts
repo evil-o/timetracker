@@ -1,47 +1,60 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { configurationActions } from '../../redux/actions/configuration.actions';
-import * as fromStore from '../../redux/selectors';
-import { ApplicationState } from '../../redux/states/application-state';
+import { Store } from "@ngrx/store";
+import { Observable } from "rxjs";
+import { configurationActions } from "../../redux/actions/configuration.actions";
+import * as fromStore from "../../redux/selectors";
+import { ApplicationState } from "../../redux/states/application-state";
 
 @Component({
-  selector: 'app-configuration',
-  templateUrl: './configuration.component.html',
-  styleUrls: ['./configuration.component.css']
+    selector: "app-configuration",
+    templateUrl: "./configuration.component.html",
+    styleUrls: ["./configuration.component.css"],
 })
 export class ConfigurationComponent implements OnInit {
+    public workingHoursPerWeek$!: Observable<number>;
 
-  public workingHoursPerWeek$!: Observable<number>;
+    public workingDaysPerWeek$!: Observable<number>;
 
-  public workingDaysPerWeek$!: Observable<number>;
+    public inputWorkingHoursPerWeek?: number;
 
-  public inputWorkingHoursPerWeek?: number;
+    public inputWorkingDaysPerWeek?: number;
 
-  public inputWorkingDaysPerWeek?: number;
+    constructor(public store: Store<ApplicationState>) {}
 
-  constructor(public store: Store<ApplicationState>) { }
-
-  ngOnInit() {
-    this.workingHoursPerWeek$ = this.store.select(fromStore.weeklyWorkingHours);
-    this.workingDaysPerWeek$ = this.store.select(fromStore.weeklyWorkingDays);
-  }
-
-  public applyValues() {
-    if (this.inputWorkingHoursPerWeek) {
-      this.store.dispatch(configurationActions.setWeeklyWorkHours({ newWeeklyHours: this.inputWorkingHoursPerWeek }));
+    ngOnInit() {
+        this.workingHoursPerWeek$ = this.store.select(
+            fromStore.weeklyWorkingHours
+        );
+        this.workingDaysPerWeek$ = this.store.select(
+            fromStore.weeklyWorkingDays
+        );
     }
-    if (this.inputWorkingDaysPerWeek) {
-      this.store.dispatch(configurationActions.setWeeklyWorkDays({ newWeeklyWorkDays: this.inputWorkingDaysPerWeek }));
+
+    public applyValues() {
+        if (this.inputWorkingHoursPerWeek) {
+            this.store.dispatch(
+                configurationActions.setWeeklyWorkHours({
+                    newWeeklyHours: this.inputWorkingHoursPerWeek,
+                })
+            );
+        }
+        if (this.inputWorkingDaysPerWeek) {
+            this.store.dispatch(
+                configurationActions.setWeeklyWorkDays({
+                    newWeeklyWorkDays: this.inputWorkingDaysPerWeek,
+                })
+            );
+        }
     }
-  }
 
-  public setInputWorkingHoursPerWeek(value: number | string): void {
-    this.inputWorkingHoursPerWeek = typeof value === "string" ? Number.parseFloat(value) : value;
-  }
+    public setInputWorkingHoursPerWeek(value: number | string): void {
+        this.inputWorkingHoursPerWeek =
+            typeof value === "string" ? Number.parseFloat(value) : value;
+    }
 
-  public setInputWorkingDaysPerWeek(value: number | string): void {
-    this.inputWorkingHoursPerWeek = typeof value === "string" ? Number.parseFloat(value) : value;
-  }
+    public setInputWorkingDaysPerWeek(value: number | string): void {
+        this.inputWorkingHoursPerWeek =
+            typeof value === "string" ? Number.parseFloat(value) : value;
+    }
 }

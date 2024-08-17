@@ -1,41 +1,50 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { ActivityLogEntry } from '../../redux/states/activity-log';
+import {
+    Component,
+    ElementRef,
+    EventEmitter,
+    Input,
+    OnInit,
+    Output,
+    ViewChild,
+} from "@angular/core";
+import { ActivityLogEntry } from "../../redux/states/activity-log";
 
 @Component({
-  selector: 'app-editable-log-entry-description',
-  templateUrl: './editable-log-entry-description.component.html',
-  styleUrls: ['./editable-log-entry-description.component.css']
+    selector: "app-editable-log-entry-description",
+    templateUrl: "./editable-log-entry-description.component.html",
+    styleUrls: ["./editable-log-entry-description.component.css"],
 })
 export class EditableLogEntryDescriptionComponent implements OnInit {
+    @Input()
+    public entry!: ActivityLogEntry;
 
-  @Input()
-  public entry!: ActivityLogEntry;
+    @Output()
+    public changeEntryDescription = new EventEmitter<{
+        entryId: string;
+        newDescription: string;
+    }>();
 
-  @Output()
-  public changeEntryDescription = new EventEmitter<{ entryId: string, newDescription: string }>();
+    @ViewChild("descriptionInput")
+    public descriptionInput!: ElementRef;
 
-  @ViewChild('descriptionInput')
-  public descriptionInput!: ElementRef;
+    public editing = false;
 
-  public editing = false;
+    constructor() {}
 
-  constructor() { }
+    ngOnInit() {}
 
-  ngOnInit() {
-  }
+    public setEditing(editing: boolean) {
+        this.editing = editing;
 
-  public setEditing(editing: boolean) {
-    this.editing = editing;
-
-    if (this.editing) {
-      setTimeout(() => this.descriptionInput.nativeElement.focus(), 0);
+        if (this.editing) {
+            setTimeout(() => this.descriptionInput.nativeElement.focus(), 0);
+        }
     }
-  }
 
-  public emitChangeDescription(newDescription: string) {
-    this.changeEntryDescription.emit({
-      entryId: this.entry.id,
-      newDescription: newDescription,
-    });
-  }
+    public emitChangeDescription(newDescription: string) {
+        this.changeEntryDescription.emit({
+            entryId: this.entry.id,
+            newDescription: newDescription,
+        });
+    }
 }

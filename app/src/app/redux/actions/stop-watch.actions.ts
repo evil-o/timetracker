@@ -6,5 +6,5 @@ export const stopWatchActions = createActionGroup({
         start: props<{ startTime: Date }>(),
         pause: props<{ pauseTime: Date }>(),
         reset: emptyProps(),
-    }
-})
+    },
+});

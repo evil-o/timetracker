@@ -1,44 +1,49 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import { IActivityLogEntry } from '../redux/states/activity-log';
-import { IActivityTypes } from '../redux/states/activity-types';
-import { IGroupEntry } from './group-activity-log-entries-by-id.pipe';
+import { Pipe, PipeTransform } from "@angular/core";
+import { IActivityLogEntry } from "../redux/states/activity-log";
+import { IActivityTypes } from "../redux/states/activity-types";
+import { IGroupEntry } from "./group-activity-log-entries-by-id.pipe";
 
 @Pipe({
-  name: 'logEntryTally'
+    name: "logEntryTally",
 })
 export class LogEntryTallyPipe implements PipeTransform {
+    transform(
+        entries: IActivityLogEntry[],
+        types: IActivityTypes
+    ): IGroupEntry[] {
+        if (!entries) {
+            return [];
+        }
 
-  transform(entries: IActivityLogEntry[], types: IActivityTypes): IGroupEntry[] {
-    if (!entries) {
-      return [];
-    }
+        const tallies: IGroupEntry[] = [];
+        for (const entry of entries) {
+            let tally = tallies.find((t) => t.activityId === entry.actvitiyId);
+            if (tally) {
+                tally.entries.push(entry);
+                tally.cumulativeHours += entry.hours;
+            } else {
+                tally = {
+                    activityId: entry.actvitiyId,
+                    entries: [entry],
+                    cumulativeHours: entry.hours,
+                };
+                tallies.push(tally);
+            }
+        }
 
-    const tallies: IGroupEntry[] = [];
-    for (const entry of entries) {
-      let tally = tallies.find((t) => t.activityId === entry.actvitiyId);
-      if (tally) {
-        tally.entries.push(entry);
-        tally.cumulativeHours += entry.hours;
-      } else {
-        tally = {
-          activityId: entry.actvitiyId,
-          entries: [entry],
-          cumulativeHours: entry.hours,
+        const activityNameOf = (entry: IGroupEntry) => {
+            const type = types.activities.find(
+                (t) => t.id === entry.activityId
+            );
+            if (type) {
+                return type.name;
+            } else {
+                return "Unknown";
+            }
         };
-        tallies.push(tally);
-      }
+
+        return tallies.sort((a, b) =>
+            activityNameOf(a).localeCompare(activityNameOf(b))
+        );
     }
-
-    const activityNameOf = (entry: IGroupEntry) => {
-      const type = types.activities.find(t => t.id === entry.activityId);
-      if (type) {
-        return type.name;
-      } else {
-        return 'Unknown';
-      }
-    };
-
-    return tallies.sort((a, b) => activityNameOf(a).localeCompare(activityNameOf(b)));
-  }
-
 }

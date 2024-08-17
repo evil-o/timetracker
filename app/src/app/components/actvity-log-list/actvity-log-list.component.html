@@ -1,6 +1,10 @@
 <accordion *ngIf="(sortedGroups$ | async)?.length; else noEntries">
-  <app-activity-log-entry *ngFor="let group of (sortedGroups$ | async)" [activityTypes]="(activityTypes$ | async) ?? undefined" [group]="group"></app-activity-log-entry>
+    <app-activity-log-entry
+        *ngFor="let group of sortedGroups$ | async"
+        [activityTypes]="(activityTypes$ | async) ?? undefined"
+        [group]="group"
+    ></app-activity-log-entry>
 </accordion>
 <ng-template #noEntries>
-  <app-no-activity-log-entry-present></app-no-activity-log-entry-present>
+    <app-no-activity-log-entry-present></app-no-activity-log-entry-present>
 </ng-template>
