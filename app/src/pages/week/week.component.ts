@@ -5,12 +5,12 @@ import { Store } from "@ngrx/store";
 
 import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 
-import * as fromStore from "../../redux/selectors";
-import { IActivityLogEntry } from "../../redux/states/activity-log";
-import { IActivityTypes } from "../../redux/states/activity-types";
-import { ApplicationState } from "../../redux/states/application-state";
+import * as fromStore from "../../app/redux/selectors";
+import { IActivityLogEntry } from "../../app/redux/states/activity-log";
+import { IActivityTypes } from "../../app/redux/states/activity-types";
+import { ApplicationState } from "../../app/redux/states/application-state";
 
-import { HtmlTableGenerator } from "../../models/htmlTableGenerator";
+import { HtmlTableGenerator } from "../../app/models/htmlTableGenerator";
 
 import currentWeekNumber from "current-week-number";
 import {
@@ -20,15 +20,15 @@ import {
     Observable,
     withLatestFrom,
 } from "rxjs";
-import { getFirstDayOfCalendarWeek } from "../../helpers";
-import { FormatHoursPipe } from "../../pipes/format-hours.pipe";
-import { IGroupEntry } from "../../pipes/group-activity-log-entries-by-id.pipe";
-import { PadNumberPipe } from "../../pipes/pad-number.pipe";
-import { IAttendanceWithTimes } from "../../redux/selectors";
+import { getFirstDayOfCalendarWeek } from "../../app/helpers";
+import { FormatHoursPipe } from "../../app/pipes/format-hours.pipe";
+import { IGroupEntry } from "../../app/pipes/group-activity-log-entries-by-id.pipe";
+import { PadNumberPipe } from "../../app/pipes/pad-number.pipe";
+import { IAttendanceWithTimes } from "../../app/redux/selectors";
 import {
     IAttendanceCorrection,
     IAttendanceEntry,
-} from "../../redux/states/attendance-state";
+} from "../../app/redux/states/attendance-state";
 
 interface IDayEntry {
     dayOfTheWeek: number;

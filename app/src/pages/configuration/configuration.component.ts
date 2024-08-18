@@ -2,9 +2,9 @@ import { Component, OnInit } from "@angular/core";
 
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-import { configurationActions } from "../../redux/actions/configuration.actions";
-import * as fromStore from "../../redux/selectors";
-import { ApplicationState } from "../../redux/states/application-state";
+import { configurationActions } from "../../app/redux/actions/configuration.actions";
+import * as fromStore from "../../app/redux/selectors";
+import { ApplicationState } from "../../app/redux/states/application-state";
 
 @Component({
     selector: "app-configuration",

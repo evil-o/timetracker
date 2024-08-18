@@ -2,13 +2,13 @@ import { Component, ElementRef, ViewChild } from "@angular/core";
 
 import { Store } from "@ngrx/store";
 
-import { IActivityType } from "../../models/interfaces";
+import { IActivityType } from "../../app/models/interfaces";
 import {
     IActivityLog,
     IActivityLogEntry,
-} from "../../redux/states/activity-log";
-import { IActivityTypes } from "../../redux/states/activity-types";
-import { ApplicationState } from "../../redux/states/application-state";
+} from "../../app/redux/states/activity-log";
+import { IActivityTypes } from "../../app/redux/states/activity-types";
+import { ApplicationState } from "../../app/redux/states/application-state";
 
 import { BsDatepickerDirective } from "ngx-bootstrap/datepicker";
 import {
@@ -20,12 +20,12 @@ import {
     timer,
     withLatestFrom,
 } from "rxjs";
-import { ActivityPickerComponent } from "../../components/activity-picker/activity-picker.component";
-import { HourBadgeComponent } from "../../components/hour-badge/hour-badge.component";
-import { TimeBadgeComponent } from "../../components/time-badge/time-badge.component";
-import { stringToDuration } from "../../helpers";
-import { activityLogActions } from "../../redux/actions/activity-log.actions";
-import * as fromStore from "../../redux/selectors";
+import { ActivityPickerComponent } from "../../app/components/activity-picker/activity-picker.component";
+import { HourBadgeComponent } from "../../app/components/hour-badge/hour-badge.component";
+import { TimeBadgeComponent } from "../../app/components/time-badge/time-badge.component";
+import { stringToDuration } from "../../app/helpers";
+import { activityLogActions } from "../../app/redux/actions/activity-log.actions";
+import * as fromStore from "../../app/redux/selectors";
 
 @Component({
     selector: "app-day",

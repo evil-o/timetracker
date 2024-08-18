@@ -1,17 +1,16 @@
 import { Component, TemplateRef } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { IActivityType } from "../../models/interfaces";
-import { ApplicationState } from "../../redux/states/application-state";
+import { IActivityType } from "../../app/models/interfaces";
+import { ApplicationState } from "../../app/redux/states/application-state";
 
 import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 import { map, Observable, Subject, withLatestFrom } from "rxjs";
-import { activityLogActions } from "../../redux/actions/activity-log.actions";
-import * as fromStore from "../../redux/selectors";
+import { activityLogActions } from "../../app/redux/actions/activity-log.actions";
+import * as fromStore from "../../app/redux/selectors";
 
 @Component({
     selector: "app-activities",
     templateUrl: "./activities.component.html",
-    styleUrls: ["./activities.component.css"],
 })
 export class ActivitiesComponent {
     public modalRef!: BsModalRef;

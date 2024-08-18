@@ -4,7 +4,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule } from "@angular/router";
 import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
 import { TabsModule } from "ngx-bootstrap/tabs";
-import { LegacyModule } from "../legacy.module";
+import { LegacyModule } from "../app/legacy.module";
 import { ActivitiesComponent } from "./activities/activities.component";
 import { ConfigurationComponent } from "./configuration/configuration.component";
 import { DayComponent } from "./day/day.component";

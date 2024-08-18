@@ -27,10 +27,10 @@ import { ModalModule } from "ngx-bootstrap/modal";
 import { TabsModule } from "ngx-bootstrap/tabs";
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
 
+import { PagesModule } from "../pages/pages.module";
 import { appRoutes } from "./app.routes";
 import { StopwatchComponent } from "./components/stopwatch/stopwatch.component";
 import { LegacyModule } from "./legacy.module";
-import { PagesModule } from "./pages/pages.module";
 
 @NgModule({
     declarations: [AppComponent, NavbarComponent, StopwatchComponent],
