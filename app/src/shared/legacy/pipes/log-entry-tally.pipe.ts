@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from "@angular/core";
-import { IActivityLogEntry } from "../../../app/redux/states/activity-log";
 import { IActivityTypes } from "../../../app/redux/states/activity-types";
+import { IActivityLogEntry } from "../../../entities/activity-log/activity-log.types";
 import { IGroupEntry } from "./group-activity-log-entries-by-id.pipe";
 
 @Pipe({

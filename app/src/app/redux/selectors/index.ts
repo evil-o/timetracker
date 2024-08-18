@@ -1,5 +1,5 @@
 import { createSelector } from "@ngrx/store";
-import { IActivityLogEntry } from "../states/activity-log";
+import { IActivityLogEntry } from "../../../entities/activity-log/activity-log.types";
 import { ApplicationState } from "../states/application-state";
 import { IAttendanceEntry } from "../states/attendance-state";
 

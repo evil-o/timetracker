@@ -1,4 +1,4 @@
-import { IActivityLog } from "./activity-log";
+import { IActivityLog } from "../../../entities/activity-log/activity-log.types";
 import { IActivityTypes } from "./activity-types";
 import { IAttendanceState } from "./attendance-state";
 import { IConfigurationState } from "./configuration";

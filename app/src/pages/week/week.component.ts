@@ -6,7 +6,6 @@ import { Store } from "@ngrx/store";
 import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 
 import * as fromStore from "../../app/redux/selectors";
-import { IActivityLogEntry } from "../../app/redux/states/activity-log";
 import { IActivityTypes } from "../../app/redux/states/activity-types";
 import { ApplicationState } from "../../app/redux/states/application-state";
 
@@ -25,6 +24,7 @@ import {
     IAttendanceCorrection,
     IAttendanceEntry,
 } from "../../app/redux/states/attendance-state";
+import { IActivityLogEntry } from "../../entities/activity-log/activity-log.types";
 import { getFirstDayOfCalendarWeek } from "../../shared/legacy/helpers";
 import { FormatHoursPipe } from "../../shared/legacy/pipes/format-hours.pipe";
 import { IGroupEntry } from "../../shared/legacy/pipes/group-activity-log-entries-by-id.pipe";

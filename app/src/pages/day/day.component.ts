@@ -3,10 +3,6 @@ import { Component, ElementRef, ViewChild } from "@angular/core";
 import { Store } from "@ngrx/store";
 
 import { IActivityType } from "../../app/models/interfaces";
-import {
-    IActivityLog,
-    IActivityLogEntry,
-} from "../../app/redux/states/activity-log";
 import { IActivityTypes } from "../../app/redux/states/activity-types";
 import { ApplicationState } from "../../app/redux/states/application-state";
 
@@ -22,6 +18,10 @@ import {
 } from "rxjs";
 import { activityLogActions } from "../../app/redux/actions/activity-log.actions";
 import * as fromStore from "../../app/redux/selectors";
+import {
+    IActivityLog,
+    IActivityLogEntry,
+} from "../../entities/activity-log/activity-log.types";
 import { ActivityPickerComponent } from "../../shared/legacy/activity-picker/activity-picker.component";
 import { stringToDuration } from "../../shared/legacy/helpers";
 import { HourBadgeComponent } from "../../shared/legacy/hour-badge/hour-badge.component";

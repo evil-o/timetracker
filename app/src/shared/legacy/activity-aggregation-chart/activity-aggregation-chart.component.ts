@@ -5,11 +5,11 @@ import { BaseChartDirective } from "ng2-charts";
 import { combineLatest, map, Observable } from "rxjs";
 import { activityColors } from "../../../app/models/activityColors";
 import { IColorSpec } from "../../../app/models/interfaces";
+import { IActivityTypes } from "../../../app/redux/states/activity-types";
 import {
     IActivityLog,
     IActivityLogEntry,
-} from "../../../app/redux/states/activity-log";
-import { IActivityTypes } from "../../../app/redux/states/activity-types";
+} from "../../../entities/activity-log/activity-log.types";
 
 export interface IAggregationData {
     hours: number;
