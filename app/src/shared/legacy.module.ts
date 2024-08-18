@@ -23,6 +23,7 @@ import { GroupActivityLogEntriesByIdPipe } from "./legacy/pipes/group-activity-l
 import { LogEntryTallyPipe } from "./legacy/pipes/log-entry-tally.pipe";
 import { PadNumberPipe } from "./legacy/pipes/pad-number.pipe";
 import { PrecisionPipe } from "./legacy/pipes/precision.pipe";
+import { StopwatchComponent } from "./legacy/stopwatch/stopwatch.component";
 import { TallyComponent } from "./legacy/tally/tally.component";
 import { TimeBadgeComponent } from "./legacy/time-badge/time-badge.component";
 
@@ -36,6 +37,7 @@ const legacyDeclarations = [
     DayAttendanceComponent,
     EditableLogEntryDescriptionComponent,
     EditableLogEntryHoursComponent,
+    StopwatchComponent,
     TallyComponent,
     TimeBadgeComponent,
     HourBadgeComponent,

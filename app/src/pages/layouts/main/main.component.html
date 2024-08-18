@@ -1,0 +1,18 @@
+<ng-template [ngIf]="storageUpdateComplete$ | async">
+    <app-navbar (createActivityEvent)="createActivityType($event)"></app-navbar>
+
+    <div class="container mt-5">
+        <router-outlet></router-outlet>
+    </div>
+</ng-template>
+
+<ng-template [ngIf]="(storageUpdateComplete$ | async) !== true">
+    <div class="container h-100 mt-5">
+        <div class="row h-100 align-center">
+            <div class="col text-center">
+                Hi, we're getting your data up to speed with our latest changes.
+                Please stand by.
+            </div>
+        </div>
+    </div>
+</ng-template>

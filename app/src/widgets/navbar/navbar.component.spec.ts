@@ -13,6 +13,10 @@ import { AccordionModule } from "ngx-bootstrap/accordion";
 import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
 import { TabsModule } from "ngx-bootstrap/tabs";
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
+import { appRoutes } from "../../app/app.routes";
+import { attendanceActions } from "../../app/redux/actions/attendance.actions";
+import { configurationActions } from "../../app/redux/actions/configuration.actions";
+import { ApplicationState } from "../../app/redux/states/application-state";
 import { WeekComponent } from "../../pages/week/week.component";
 import { WelcomeComponent } from "../../pages/welcome/welcome.component";
 import { ActivityColorPickerComponent } from "../../shared/legacy/activity-color-picker/activity-color-picker.component";
@@ -34,10 +38,6 @@ import { PadNumberPipe } from "../../shared/legacy/pipes/pad-number.pipe";
 import { PrecisionPipe } from "../../shared/legacy/pipes/precision.pipe";
 import { TallyComponent } from "../../shared/legacy/tally/tally.component";
 import { TimeBadgeComponent } from "../../shared/legacy/time-badge/time-badge.component";
-import { appRoutes } from "../app.routes";
-import { attendanceActions } from "../redux/actions/attendance.actions";
-import { configurationActions } from "../redux/actions/configuration.actions";
-import { ApplicationState } from "../redux/states/application-state";
 
 xdescribe("NavbarComponent", () => {
     let component: NavbarComponent;

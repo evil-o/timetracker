@@ -1,16 +1,15 @@
 import { Component } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { map, Observable, Subject, timer, withLatestFrom } from "rxjs";
-import { IActivityType } from "../../models/interfaces";
-import { activityTypeActions } from "../../redux/actions/activity-types.actions";
-import { stopWatchActions } from "../../redux/actions/stop-watch.actions";
-import { activityTypes, stopWatchState } from "../../redux/selectors";
-import { ApplicationState } from "../../redux/states/application-state";
+import { IActivityType } from "../../../app/models/interfaces";
+import { activityTypeActions } from "../../../app/redux/actions/activity-types.actions";
+import { stopWatchActions } from "../../../app/redux/actions/stop-watch.actions";
+import { activityTypes, stopWatchState } from "../../../app/redux/selectors";
+import { ApplicationState } from "../../../app/redux/states/application-state";
 
 @Component({
     selector: "app-stopwatch",
     templateUrl: "./stopwatch.component.html",
-    styleUrls: ["./stopwatch.component.css"],
 })
 export class StopwatchComponent {
     public static readonly UPDATE_INTERVAL_MS = 1000;

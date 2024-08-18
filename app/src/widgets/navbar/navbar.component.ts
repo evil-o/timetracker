@@ -7,12 +7,12 @@ import {
 } from "@angular/core";
 
 import { Store } from "@ngrx/store";
-import { IAttendanceWithTimes } from "../redux/selectors/index";
-import { ApplicationState } from "../redux/states/application-state";
+import { IAttendanceWithTimes } from "../../app/redux/selectors/index";
+import { ApplicationState } from "../../app/redux/states/application-state";
 
 import { Observable } from "rxjs";
-import { storageVersionActions } from "../redux/actions/storage-version.actions";
-import * as fromStore from "../redux/selectors";
+import { storageVersionActions } from "../../app/redux/actions/storage-version.actions";
+import * as fromStore from "../../app/redux/selectors";
 
 @Component({
     selector: "app-navbar",

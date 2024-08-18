@@ -5,7 +5,6 @@ import { RouterModule } from "@angular/router";
 import { FormsModule } from "@angular/forms";
 
 import { AppComponent } from "./app.component";
-import { NavbarComponent } from "./navbar/navbar.component";
 
 import { EffectsModule } from "@ngrx/effects";
 import { StoreModule } from "@ngrx/store";
@@ -30,10 +29,9 @@ import { TypeaheadModule } from "ngx-bootstrap/typeahead";
 import { PagesModule } from "../pages/pages.module";
 import { LegacyModule } from "../shared/legacy.module";
 import { appRoutes } from "./app.routes";
-import { StopwatchComponent } from "./components/stopwatch/stopwatch.component";
 
 @NgModule({
-    declarations: [AppComponent, NavbarComponent, StopwatchComponent],
+    declarations: [AppComponent],
     imports: [
         PagesModule,
         LegacyModule,
