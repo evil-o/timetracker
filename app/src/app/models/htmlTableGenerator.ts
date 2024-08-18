@@ -19,7 +19,7 @@ export class Cell implements ICell {
 
     public align?: "left" | "right";
 
-    public contents: string = "";
+    public contents = "";
 
     protected elementType = "td";
 
@@ -71,7 +71,10 @@ export class Row {
 export class RowCollection {
     public rows: Row[] = [];
 
-    private appendContents(contents: (string | ICell)[], constructor: any) {
+    private appendContents(
+        contents: (string | ICell)[],
+        constructor: () => Cell
+    ) {
         const row = new Row();
         for (const c of contents) {
             const cell = constructor();

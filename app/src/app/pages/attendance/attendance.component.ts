@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild } from "@angular/core";
 import { Store } from "@ngrx/store";
 
+import { BsDatepickerDirective } from "ngx-bootstrap/datepicker";
 import { BehaviorSubject } from "rxjs";
 import { ApplicationState } from "../../redux/states/application-state";
 
@@ -19,14 +20,14 @@ export class AttendanceComponent {
     private datePickerInput!: ElementRef;
 
     @ViewChild("datePicker")
-    private datePicker!: ElementRef;
+    private datePicker!: BsDatepickerDirective;
 
     constructor(public store: Store<ApplicationState>) {}
 
     startDatePicking() {
         this.pickingDate = true;
         this.datePickerInput.nativeElement.focus();
-        (this.datePicker as any).show();
+        this.datePicker.show();
     }
 
     endDatePicking() {

@@ -4,16 +4,23 @@ import { ChartData, ChartOptions } from "chart.js";
 import { BaseChartDirective } from "ng2-charts";
 import { combineLatest, map, Observable } from "rxjs";
 import { activityColors } from "../../models/activityColors";
+import { IColorSpec } from "../../models/interfaces";
 import {
     IActivityLog,
     IActivityLogEntry,
 } from "../../redux/states/activity-log";
 import { IActivityTypes } from "../../redux/states/activity-types";
 
-class Aggregation {
-    private aggregate: Record<any, any> = {};
+export interface IAggregationData {
+    hours: number;
+    color: IColorSpec;
+    colorId: string;
+}
 
-    public add(key: string, hours: number, color: any, colorId: string) {
+class Aggregation {
+    private aggregate: Record<string, IAggregationData> = {};
+
+    public add(key: string, hours: number, color: IColorSpec, colorId: string) {
         if (!(key in this.aggregate)) {
             this.aggregate[key] = { hours: 0, color, colorId };
         }
@@ -99,7 +106,7 @@ export class ActivityAggregationChartComponent implements OnInit {
     @Input()
     public types$?: Observable<IActivityTypes>;
 
-    public filteredChartColors: Array<any> = [];
+    public filteredChartColors: IColorSpec[] = [];
 
     ngOnInit() {
         if (!this.allActivities$) {
@@ -144,7 +151,7 @@ export class ActivityAggregationChartComponent implements OnInit {
                     prev.add(
                         type ? type.name : current.actvitiyId,
                         current.hours,
-                        color.color,
+                        color.color!,
                         type!.colorId || ""
                     );
                     return prev;

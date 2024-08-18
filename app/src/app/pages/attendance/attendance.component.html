@@ -1,9 +1,13 @@
 <div class="row mb-5">
     <div class="col">
         <h1 [class.d-none]="pickingDate">
-            <a (click)="startDatePicking()">
+            <button
+                class="btn"
+                (click)="startDatePicking()"
+                (keypress.enter)="startDatePicking()"
+            >
                 <i class="far fa-calendar"></i>
-            </a>
+            </button>
             {{ date$.value.toLocaleDateString() }}
         </h1>
         <h1 [class.d-none]="!pickingDate" class="form-inline">

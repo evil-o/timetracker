@@ -9,10 +9,7 @@
 ## Setup
 
 -   setup eslint + some basic code formatting rules
-    -   eslint setup
-    -   eslint in pipeline
     -   member ordering rule (public before private etc.)
-    -   Auto semicolon on save
     -   No "only" in Cypress
     -   No console.log
 -   commitizen + commit linting

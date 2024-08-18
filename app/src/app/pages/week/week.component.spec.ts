@@ -179,8 +179,7 @@ describe("WeekComponent", () => {
         component.attendances$.subscribe((attendances) => {
             expect(attendances.length).toBe(2);
             const expectedOvertimes = [-4, -5];
-            for (let i = 0; i < attendances.length; ++i) {
-                const attendance = attendances[i];
+            for (const attendance of attendances) {
                 const day_of_week =
                     (attendance.date.getTime() - weekDates[0].getTime()) /
                     (1000 * 60 * 60 * 24);

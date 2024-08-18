@@ -2,7 +2,6 @@ import {
     Component,
     ElementRef,
     EventEmitter,
-    OnInit,
     Output,
     ViewChild,
 } from "@angular/core";
@@ -20,7 +19,7 @@ import * as fromStore from "../redux/selectors";
     templateUrl: "./navbar.component.html",
     styleUrls: ["./navbar.component.css"],
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
     @ViewChild("importFileSelector")
     private importFileElement!: ElementRef;
 
@@ -55,8 +54,6 @@ export class NavbarComponent implements OnInit {
 
         this.overallAttendanceSum$ = this.store.select(fromStore.overtimeSum);
     }
-
-    ngOnInit() {}
 
     public createActivity(name: string) {
         this.createActivityEvent.emit(name);

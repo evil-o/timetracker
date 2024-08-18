@@ -1,6 +1,10 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { activityColors } from "../../models/activityColors";
-import { IActivityType, IActivityTypeColor } from "../../models/interfaces";
+import {
+    IActivityType,
+    IActivityTypeColor,
+    IUndefinedActivityTypeColor,
+} from "../../models/interfaces";
 
 @Component({
     selector: "app-activity-color-picker",
@@ -8,14 +12,16 @@ import { IActivityType, IActivityTypeColor } from "../../models/interfaces";
     styleUrls: ["./activity-color-picker.component.css"],
 })
 export class ActivityColorPickerComponent {
-    public colors: IActivityTypeColor[] = [
-        { id: undefined, styleClass: undefined } as any as IActivityTypeColor,
+    public colors: (IActivityTypeColor | IUndefinedActivityTypeColor)[] = [
+        { id: undefined, styleClass: undefined },
         ...activityColors,
     ];
 
     @Input() public set activityType(value: IActivityType) {
         this.currentColor = value.colorId
-            ? this.colors.find((c) => c.id === value.colorId)
+            ? (this.colors.find((c) => c.id === value.colorId) as
+                  | IActivityTypeColor
+                  | undefined)
             : undefined;
     }
 

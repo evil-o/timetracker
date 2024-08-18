@@ -89,7 +89,12 @@ export class StorageVersionEffects {
                     "TimeTracker-Export",
                     "json"
                 );
-                const exportObject: Record<any, any> = {};
+                const exportObject: Partial<
+                    Record<
+                        keyof ApplicationState,
+                        ApplicationState[keyof ApplicationState]
+                    >
+                > = {};
                 for (const key of Object.values(
                     rehydratedStorageKeys
                 ) as (keyof ApplicationState)[]) {

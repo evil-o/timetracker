@@ -1,4 +1,4 @@
-import { ActionReducer, MetaReducer } from "@ngrx/store";
+import { Action, ActionReducer, MetaReducer } from "@ngrx/store";
 import { localStorageSync } from "ngrx-store-localstorage";
 import { ApplicationState } from "./states/application-state";
 
@@ -12,12 +12,12 @@ export const rehydratedStorageKeys = [
 ] as (keyof ApplicationState)[];
 
 export function localStorageSyncReducer(
-    reducer: ActionReducer<any>
-): ActionReducer<any> {
+    reducer: ActionReducer<ApplicationState>
+): ActionReducer<ApplicationState> {
     return localStorageSync({ keys: rehydratedStorageKeys, rehydrate: true })(
         reducer
     );
 }
-export const metaReducers: Array<MetaReducer<any, any>> = [
+export const metaReducers: MetaReducer<ApplicationState, Action<string>>[] = [
     localStorageSyncReducer,
 ];

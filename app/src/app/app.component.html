@@ -6,7 +6,7 @@
     </div>
 </ng-template>
 
-<ng-template [ngIf]="!(storageUpdateComplete$ | async)">
+<ng-template [ngIf]="(storageUpdateComplete$ | async) !== true">
     <div class="container h-100 mt-5">
         <div class="row h-100 align-center">
             <div class="col text-center">

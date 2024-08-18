@@ -3,7 +3,6 @@ import {
     ElementRef,
     EventEmitter,
     Input,
-    OnInit,
     Output,
     ViewChild,
 } from "@angular/core";
@@ -15,7 +14,7 @@ import { ActivityLogEntry } from "../../redux/states/activity-log";
     templateUrl: "./editable-log-entry-hours.component.html",
     styleUrls: ["./editable-log-entry-hours.component.css"],
 })
-export class EditableLogEntryHoursComponent implements OnInit {
+export class EditableLogEntryHoursComponent {
     @Input()
     public entry!: ActivityLogEntry;
 
@@ -29,10 +28,6 @@ export class EditableLogEntryHoursComponent implements OnInit {
     public hoursInput!: ElementRef;
 
     public editing = false;
-
-    constructor() {}
-
-    ngOnInit() {}
 
     public setEditing(editing: boolean) {
         this.editing = editing;

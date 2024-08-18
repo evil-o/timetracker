@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from "@angular/core";
+import { Component, TemplateRef } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 
 import { Store } from "@ngrx/store";
@@ -57,7 +57,7 @@ interface IWeekAttendanceStats {
     selector: "app-week",
     templateUrl: "./week.component.html",
 })
-export class WeekComponent implements OnInit {
+export class WeekComponent {
     public activityLogEntries$: Observable<IActivityLogEntry[]>;
     public activityTypes$: Observable<IActivityTypes>;
 
@@ -287,13 +287,11 @@ export class WeekComponent implements OnInit {
             });
     }
 
-    ngOnInit() {}
-
-    openModal(template: TemplateRef<any>) {
+    openModal(template: TemplateRef<unknown>) {
         this.modalRef = this.modalService.show(template);
     }
 
-    openLargeModal(template: TemplateRef<any>) {
+    openLargeModal(template: TemplateRef<unknown>) {
         this.modalRef = this.modalService.show(template, {
             class: "modal-lg",
         });

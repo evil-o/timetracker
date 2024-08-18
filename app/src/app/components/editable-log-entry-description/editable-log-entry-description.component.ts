@@ -3,7 +3,6 @@ import {
     ElementRef,
     EventEmitter,
     Input,
-    OnInit,
     Output,
     ViewChild,
 } from "@angular/core";
@@ -14,7 +13,7 @@ import { ActivityLogEntry } from "../../redux/states/activity-log";
     templateUrl: "./editable-log-entry-description.component.html",
     styleUrls: ["./editable-log-entry-description.component.css"],
 })
-export class EditableLogEntryDescriptionComponent implements OnInit {
+export class EditableLogEntryDescriptionComponent {
     @Input()
     public entry!: ActivityLogEntry;
 
@@ -28,10 +27,6 @@ export class EditableLogEntryDescriptionComponent implements OnInit {
     public descriptionInput!: ElementRef;
 
     public editing = false;
-
-    constructor() {}
-
-    ngOnInit() {}
 
     public setEditing(editing: boolean) {
         this.editing = editing;
