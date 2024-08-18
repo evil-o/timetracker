@@ -1,13 +1,15 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { map, Observable } from "rxjs";
-import { IActivityType } from "../../../app/models/interfaces";
 import { activityTypeActions } from "../../../app/redux/actions/activity-types.actions";
 import { storageVersionActions } from "../../../app/redux/actions/storage-version.actions";
 import * as get from "../../../app/redux/selectors";
-import { IActivityTypes } from "../../../app/redux/states/activity-types";
 import { ApplicationState } from "../../../app/redux/states/application-state";
 import { IStorageVersion } from "../../../app/redux/states/storage-version";
+import {
+    IActivityType,
+    IActivityTypes,
+} from "../../../entities/activity-types/activity-types.types";
 
 @Component({
     selector: "app-main",

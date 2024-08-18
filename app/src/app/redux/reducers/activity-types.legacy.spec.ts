@@ -1,6 +1,8 @@
-import { IActivityType } from "../../models/interfaces";
+import {
+    IActivityType,
+    IActivityTypes,
+} from "../../../entities/activity-types/activity-types.types";
 import { activityLogActions } from "../actions/activity-log.actions";
-import { IActivityTypes } from "../states/activity-types";
 import { activityTypesReducer } from "./activity-types.reducer";
 
 describe("the activity types reducer", () => {

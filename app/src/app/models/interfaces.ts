@@ -17,18 +17,6 @@ export interface IUndefinedActivityTypeColor {
     styleClass: undefined;
 }
 
-export interface IActivityType {
-    name: string;
-
-    id: string;
-
-    isNonWorking: boolean;
-
-    isArchived: boolean;
-
-    colorId?: string;
-}
-
 export interface IEntry {
     activityTypeId: string;
     accumulatedSeconds: number;

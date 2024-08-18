@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core";
-import { IActivityTypes } from "../../../app/redux/states/activity-types";
 import { IActivityLogEntry } from "../../../entities/activity-log/activity-log.types";
+import { IActivityTypes } from "../../../entities/activity-types/activity-types.types";
 
 @Component({
     selector: "app-tally",

@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { activityColors } from "../../../app/models/activityColors";
 import {
-    IActivityType,
     IActivityTypeColor,
     IUndefinedActivityTypeColor,
 } from "../../../app/models/interfaces";
+import { IActivityType } from "../../../entities/activity-types/activity-types.types";
 
 @Component({
     selector: "app-activity-color-picker",

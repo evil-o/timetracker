@@ -1,5 +1,5 @@
+import { IActivityLog } from "../../../entities/activity-log/activity-log.types";
 import { activityLogActions } from "../actions/activity-log.actions";
-import { IActivityLog } from "../states/activity-log";
 import { activityLogReducer } from "./activity-log.reducer";
 
 describe("the activity log reducer", () => {

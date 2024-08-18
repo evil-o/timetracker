@@ -2,8 +2,6 @@ import { Component, ElementRef, ViewChild } from "@angular/core";
 
 import { Store } from "@ngrx/store";
 
-import { IActivityType } from "../../app/models/interfaces";
-import { IActivityTypes } from "../../app/redux/states/activity-types";
 import { ApplicationState } from "../../app/redux/states/application-state";
 
 import { BsDatepickerDirective } from "ngx-bootstrap/datepicker";
@@ -22,6 +20,10 @@ import {
     IActivityLog,
     IActivityLogEntry,
 } from "../../entities/activity-log/activity-log.types";
+import {
+    IActivityType,
+    IActivityTypes,
+} from "../../entities/activity-types/activity-types.types";
 import { ActivityPickerComponent } from "../../shared/legacy/activity-picker/activity-picker.component";
 import { stringToDuration } from "../../shared/legacy/helpers";
 import { HourBadgeComponent } from "../../shared/legacy/hour-badge/hour-badge.component";

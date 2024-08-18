@@ -1,11 +1,11 @@
 import { Component, Input } from "@angular/core";
 import { AccordionComponent } from "ngx-bootstrap/accordion";
 import { activityColors } from "../../../app/models/activityColors";
-import { IActivityTypes } from "../../../app/redux/states/activity-types";
 import { ApplicationState } from "../../../app/redux/states/application-state";
 
 import { Store } from "@ngrx/store";
 import { activityLogActions } from "../../../app/redux/actions/activity-log.actions";
+import { IActivityTypes } from "../../../entities/activity-types/activity-types.types";
 import { IGroupEntry } from "../pipes/group-activity-log-entries-by-id.pipe";
 
 @Component({
