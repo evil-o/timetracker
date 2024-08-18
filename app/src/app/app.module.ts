@@ -42,12 +42,12 @@ import { EditableLogEntryHoursComponent } from "./components/editable-log-entry-
 import { HourBadgeComponent } from "./components/hour-badge/hour-badge.component";
 import { NoActivityLogEntryPresentComponent } from "./components/no-activity-log-entry-present/no-activity-log-entry-present.component";
 import { OvertimeBadgeComponent } from "./components/overtime-badge/overtime-badge.component";
-import { StatisticsComponent } from "./components/statistics/statistics.component";
 import { StopwatchComponent } from "./components/stopwatch/stopwatch.component";
 import { TallyComponent } from "./components/tally/tally.component";
 import { TimeBadgeComponent } from "./components/time-badge/time-badge.component";
 import { ActivitiesComponent } from "./pages/activities/activities.component";
 import { ConfigurationComponent } from "./pages/configuration/configuration.component";
+import { StatisticsComponent } from "./pages/statistics/statistics.component";
 import { WeekComponent } from "./pages/week/week.component";
 import { WelcomeComponent } from "./pages/welcome/welcome.component";
 import { ActivityTypeIdToNamePipe } from "./pipes/activity-type-id-to-name.pipe";
