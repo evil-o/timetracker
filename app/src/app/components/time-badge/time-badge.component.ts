@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input } from "@angular/core";
 
 @Component({
     selector: "app-time-badge",
@@ -14,7 +14,7 @@ export class TimeBadgeComponent {
         }
     }
 
-    public dateDisplayString: string = "";
+    public dateDisplayString = "";
 
     zeroFill(numDigits: number, numberToShow: number) {
         const str = "" + numberToShow;

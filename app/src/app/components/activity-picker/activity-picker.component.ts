@@ -1,14 +1,14 @@
 import {
     Component,
-    EventEmitter,
     ElementRef,
+    EventEmitter,
     Input,
     Output,
     ViewChild,
 } from "@angular/core";
 
-import { IActivityType } from "../../models/interfaces";
 import { TypeaheadDirective } from "ngx-bootstrap/typeahead";
+import { IActivityType } from "../../models/interfaces";
 
 @Component({
     selector: "app-activity-picker",
@@ -39,7 +39,7 @@ export class ActivityPickerComponent {
 
     public id = "";
 
-    selected(selection: any) {
+    selected(selection: { item?: IActivityType }) {
         if (selection.item) {
             this.name = selection.item.name;
             this.id = selection.item.id;

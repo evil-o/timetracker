@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { IActivityType } from "../../models/interfaces";
 import { activityTypeActions } from "../../redux/actions/activity-types.actions";
@@ -9,7 +9,7 @@ import { ApplicationState } from "../../redux/states/application-state";
     templateUrl: "./activity-type-list.component.html",
     styleUrls: ["./activity-type-list.component.css"],
 })
-export class ActivityTypeListComponent implements OnInit {
+export class ActivityTypeListComponent {
     @Output() public mergeRequest = new EventEmitter<IActivityType>();
 
     _types?: IActivityType[];
@@ -26,8 +26,6 @@ export class ActivityTypeListComponent implements OnInit {
     sortedTypes?: IActivityType[];
 
     constructor(private store: Store<ApplicationState>) {}
-
-    ngOnInit() {}
 
     setArchived(id: string, value: boolean) {
         this.store.dispatch(

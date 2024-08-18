@@ -65,7 +65,7 @@ export const attendanceReducer = createReducer(
         attendanceActions.createCorrection,
         (draft, { year, month, day }) => {
             // TODO: this function is currently needlessly complex because otherwise, a bug appears where the corrections don't show up on the today page
-            let entryIndex = draft.entries.findIndex(
+            const entryIndex = draft.entries.findIndex(
                 (v) =>
                     v.date.getFullYear() === year &&
                     v.date.getMonth() === month &&
@@ -173,7 +173,6 @@ export const attendanceReducer = createReducer(
                 matchingEntry.corrections = entry.corrections;
             } else {
                 // add a new entry
-                // tslint:disable-next-line: no-console
                 console.info(
                     "Adding attendance entry for",
                     entry.date.toLocaleDateString()

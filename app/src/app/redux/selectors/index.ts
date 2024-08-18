@@ -13,7 +13,10 @@ export const activityLogEntries = createSelector(
 export const activityLogEntriesByDay = createSelector(
     activityLogEntries,
     (entries) => {
-        const byDay: Record<number, any> = {};
+        const byDay: Record<
+            number,
+            Record<number, Record<number, IActivityLogEntry[]>>
+        > = {};
         for (const entry of entries) {
             if (!(entry.year in byDay)) {
                 byDay[entry.year] = {};

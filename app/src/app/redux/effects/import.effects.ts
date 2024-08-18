@@ -17,7 +17,7 @@ function correctAttendance(state: Partial<ApplicationState>) {
             entry.corrections = entry.corrections
                 ? entry.corrections.map((c) => ({
                       ...c,
-                      hours: Number.parseFloat(c.hours as any),
+                      hours: Number.parseFloat(`${c.hours}`),
                   }))
                 : undefined;
         }
@@ -27,10 +27,10 @@ function correctAttendance(state: Partial<ApplicationState>) {
 function correctActivityEntries(state: Partial<ApplicationState>) {
     if (state.activityLog) {
         for (const entry of state.activityLog.entries) {
-            entry.year = Number.parseInt(entry.year as any);
-            entry.month = Number.parseInt(entry.month as any);
-            entry.day = Number.parseInt(entry.day as any);
-            entry.hours = Number.parseFloat(entry.hours as any);
+            entry.year = Number.parseInt(`${entry.year}`);
+            entry.month = Number.parseInt(`${entry.month}`);
+            entry.day = Number.parseInt(`${entry.day}`);
+            entry.hours = Number.parseFloat(`${entry.hours}`);
         }
     }
 }

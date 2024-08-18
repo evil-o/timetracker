@@ -25,7 +25,7 @@
     </button>
     <button
         class="btn btn-outline-secondary me-2"
-        [disabled]="!(this.isRunning$ | async)"
+        [disabled]="(this.isRunning$ | async) === false"
         (click)="pause()"
         title="Pause stop watch. Resume by clicking the start icon."
     >
@@ -33,7 +33,10 @@
     </button>
     <button
         class="btn btn-outline-danger ms-2 me-2"
-        [disabled]="!(this.isStarted$ | async) && !(this.isPaused$ | async)"
+        [disabled]="
+            (this.isStarted$ | async) === false &&
+            (this.isPaused$ | async) === false
+        "
         title="Reset stop watch to zero."
         (click)="reset()"
     >

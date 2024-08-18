@@ -80,12 +80,10 @@ export class ActivitiesComponent {
             });
     }
 
-    openMergeDialog(template: TemplateRef<any>, source: IActivityType) {
+    openMergeDialog(template: TemplateRef<unknown>, source: IActivityType) {
         this.mergeSource$.next(source);
         this.modalRef = this.modalService.show(template);
     }
-
-    merge() {}
 
     hideModal() {
         this.mergeSource$.next(undefined);

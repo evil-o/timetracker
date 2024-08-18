@@ -9,15 +9,13 @@
 ## Setup
 
 -   setup eslint + some basic code formatting rules
-    -   eslint setup
-    -   eslint in pipeline
     -   member ordering rule (public before private etc.)
-    -   Auto semicolon on save
     -   No "only" in Cypress
     -   No console.log
 -   commitizen + commit linting
 -   some way to run all cypress specs locally
 -   faker for Cypress specs
+-   add spectator + proper component mocking in tests
 
 ## Refactoring & Maintenance
 

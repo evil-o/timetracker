@@ -1,5 +1,5 @@
-import { IActivityTypeColor } from "./interfaces";
 import * as convert from "color-convert";
+import { IActivityTypeColor } from "./interfaces";
 
 /*function rgb(r: number, g: number, b: number) {
   return {
@@ -7,13 +7,13 @@ import * as convert from "color-convert";
   };
 }*/
 
-interface IColor {
+interface INamedColor {
     name: string;
     color: [number, number, number];
 }
 
 // defined base colors in RGB
-const baseColorsRgb: IColor[] = [
+const baseColorsRgb: INamedColor[] = [
     { name: "blue", color: [163, 186, 202] },
     { name: "yellow", color: [251, 234, 201] },
     { name: "red", color: [240, 204, 204] },
@@ -32,7 +32,7 @@ const baseColorsHsv = baseColorsRgb.map((c) => ({
 const variantsHSV = baseColorsHsv
     .map((c) => {
         // initialize with the base variant
-        const colorVariants: IColor[] = [c];
+        const colorVariants: INamedColor[] = [c];
         // decrease value by a bit
         let index = 2;
         for (const decrement of [10, 20, 30, 35]) {

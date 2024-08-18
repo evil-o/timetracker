@@ -3,6 +3,11 @@ import { produceOn } from "../../utils/ngrx";
 import { storageVersionActions } from "../actions/storage-version.actions";
 import { StorageVersion } from "../states/storage-version";
 
+interface IV3Storage {
+    storageIsUpdating?: boolean;
+    updateComplete?: boolean;
+}
+
 export const storageVersionReducer = createReducer(
     new StorageVersion(),
 
@@ -27,11 +32,12 @@ export const storageVersionReducer = createReducer(
         (draft, { currentVersion }) => {
             switch (currentVersion) {
                 case 3: {
-                    if ((draft as any).storageIsUpdating) {
-                        delete (draft as any).storageIsUpdating;
+                    const v3data = draft as unknown as IV3Storage;
+                    if (v3data.storageIsUpdating) {
+                        delete v3data.storageIsUpdating;
                     }
-                    if ((draft as any).updateComplete) {
-                        delete (draft as any).updateComplete;
+                    if (v3data.updateComplete) {
+                        delete v3data.updateComplete;
                     }
                     return;
                 }

@@ -8,7 +8,7 @@ export class FormatHoursPipe implements PipeTransform {
     transform(
         totalHours: number | undefined | null,
         format = "{h}h {m}m"
-    ): any {
+    ): string {
         if (totalHours === undefined || totalHours === null) {
             return "-";
         }

@@ -6,7 +6,7 @@ import { padNumber } from "../helpers";
     name: "padNumber",
 })
 export class PadNumberPipe implements PipeTransform {
-    transform(num: number, minLength = 2, padding = "0"): any {
+    transform(num: number, minLength = 2, padding = "0"): string {
         return padNumber(num, minLength || 2, padding);
     }
 }

@@ -1,5 +1,3 @@
-import * as uuid from "uuid";
-
 export interface IAttendanceCorrection {
     id: string;
     hours: number;

@@ -10,6 +10,7 @@ import {
 import { IActivityTypes } from "../../redux/states/activity-types";
 import { ApplicationState } from "../../redux/states/application-state";
 
+import { BsDatepickerDirective } from "ngx-bootstrap/datepicker";
 import {
     BehaviorSubject,
     combineLatest,
@@ -51,7 +52,7 @@ export class DayComponent {
     private datePickerInput!: ElementRef;
 
     @ViewChild("datePicker")
-    private datePicker!: ElementRef;
+    private datePicker!: BsDatepickerDirective;
 
     @ViewChild("totalHoursDisplay")
     public totalHoursDisplay!: HourBadgeComponent;
@@ -225,11 +226,10 @@ export class DayComponent {
     startDatePicking() {
         this.pickingDate = true;
         this.datePickerInput.nativeElement.focus();
-        (this.datePicker as any).show();
+        this.datePicker.show();
     }
 
     endDatePicking() {
-        const date = new Date(this.datePickerInput.nativeElement.value);
         this.pickingDate = false;
     }
 

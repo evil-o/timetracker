@@ -1,13 +1,20 @@
+export interface IColorSpec {
+    r: number;
+    g: number;
+    b: number;
+}
+
 export interface IActivityTypeColor {
     id: string;
 
     styleClass: string;
 
-    color?: {
-        r: number;
-        g: number;
-        b: number;
-    };
+    color?: IColorSpec;
+}
+
+export interface IUndefinedActivityTypeColor {
+    id: undefined;
+    styleClass: undefined;
 }
 
 export interface IActivityType {

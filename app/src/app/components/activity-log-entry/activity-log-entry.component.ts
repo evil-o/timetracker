@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { AccordionComponent } from "ngx-bootstrap/accordion";
 import { activityColors } from "../../models/activityColors";
 import { IGroupEntry } from "../../pipes/group-activity-log-entries-by-id.pipe";
@@ -14,7 +14,7 @@ import { activityLogActions } from "../../redux/actions/activity-log.actions";
     styleUrls: ["./activity-log-entry.component.css"],
     providers: [AccordionComponent],
 })
-export class ActivityLogEntryComponent implements OnInit {
+export class ActivityLogEntryComponent {
     private colors = activityColors;
 
     public _group!: IGroupEntry;
@@ -66,8 +66,6 @@ export class ActivityLogEntryComponent implements OnInit {
             })
         );
     }
-
-    ngOnInit() {}
 
     public deleteEntry(id: string) {
         if (this.confirmDelete === id) {

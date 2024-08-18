@@ -8,7 +8,7 @@ export interface IStorageVersion {
 
     upgradeComplete: boolean;
 
-    previousStateBackup?: any;
+    previousStateBackup?: unknown;
 
     pendingIncrementalBackups: StateType[];
 }
@@ -20,7 +20,7 @@ export class StorageVersion implements IStorageVersion {
 
     public upgradeComplete = false;
 
-    public previousStateBackup: IStorageVersion | null = null;
+    public previousStateBackup?: unknown = null;
 
     public pendingIncrementalBackups: StateType[] = [];
 }
