@@ -29,7 +29,6 @@ import { TallyComponent } from "../components/tally/tally.component";
 import { TimeBadgeComponent } from "../components/time-badge/time-badge.component";
 import { valueToTime } from "../helpers";
 import { ActivitiesComponent } from "../pages/activities/activities.component";
-import { AttendanceComponent } from "../pages/attendance/attendance.component";
 import { ConfigurationComponent } from "../pages/configuration/configuration.component";
 import { DayComponent } from "../pages/day/day.component";
 import { WeekComponent } from "../pages/week/week.component";
@@ -68,7 +67,6 @@ xdescribe("NavbarComponent", () => {
                 ActivityLogListComponent,
                 ActivityPickerComponent,
                 ActivityTypeIdToNamePipe,
-                AttendanceComponent,
                 ConfigurationComponent,
                 DayComponent,
                 DayAttendanceComponent,

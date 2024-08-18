@@ -47,7 +47,6 @@ import { StopwatchComponent } from "./components/stopwatch/stopwatch.component";
 import { TallyComponent } from "./components/tally/tally.component";
 import { TimeBadgeComponent } from "./components/time-badge/time-badge.component";
 import { ActivitiesComponent } from "./pages/activities/activities.component";
-import { AttendanceComponent } from "./pages/attendance/attendance.component";
 import { ConfigurationComponent } from "./pages/configuration/configuration.component";
 import { WeekComponent } from "./pages/week/week.component";
 import { WelcomeComponent } from "./pages/welcome/welcome.component";
@@ -77,7 +76,6 @@ import { PrecisionPipe } from "./pipes/precision.pipe";
         WelcomeComponent,
         HourBadgeComponent,
         TimeBadgeComponent,
-        AttendanceComponent,
         OvertimeBadgeComponent,
         PrecisionPipe,
         ActivitiesComponent,

@@ -24,7 +24,6 @@ import { TallyComponent } from "./components/tally/tally.component";
 import { TimeBadgeComponent } from "./components/time-badge/time-badge.component";
 import { NavbarComponent } from "./navbar/navbar.component";
 import { ActivitiesComponent } from "./pages/activities/activities.component";
-import { AttendanceComponent } from "./pages/attendance/attendance.component";
 import { ConfigurationComponent } from "./pages/configuration/configuration.component";
 import { DayComponent } from "./pages/day/day.component";
 import { WeekComponent } from "./pages/week/week.component";
@@ -49,7 +48,6 @@ describe("AppComponent", () => {
                 ActivityLogListComponent,
                 ActivityPickerComponent,
                 ActivityTypeListComponent,
-                AttendanceComponent,
                 AppComponent,
                 ConfigurationComponent,
                 DayComponent,

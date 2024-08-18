@@ -2,7 +2,6 @@ import { Routes } from "@angular/router";
 
 import { StatisticsComponent } from "./components/statistics/statistics.component";
 import { ActivitiesComponent } from "./pages/activities/activities.component";
-import { AttendanceComponent } from "./pages/attendance/attendance.component";
 import { ConfigurationComponent } from "./pages/configuration/configuration.component";
 import { DayComponent } from "./pages/day/day.component";
 import { WeekComponent } from "./pages/week/week.component";
@@ -24,10 +23,6 @@ export const appRoutes: Routes = [
     {
         path: "week",
         component: WeekComponent,
-    },
-    {
-        path: "attendance",
-        component: AttendanceComponent,
     },
     {
         path: "activities",

@@ -45,7 +45,6 @@ import { configurationActions } from "../../redux/actions/configuration.actions"
 import { effects } from "../../redux/effects";
 import { ApplicationState } from "../../redux/states/application-state";
 import { ActivitiesComponent } from "../activities/activities.component";
-import { AttendanceComponent } from "../attendance/attendance.component";
 import { ConfigurationComponent } from "../configuration/configuration.component";
 import { DayComponent } from "../day/day.component";
 import { WelcomeComponent } from "../welcome/welcome.component";
@@ -75,7 +74,6 @@ describe("WeekComponent", () => {
                 ActivityPickerComponent,
                 ActivityTypeIdToNamePipe,
                 ActivityTypeListComponent,
-                AttendanceComponent,
                 ConfigurationComponent,
                 DayComponent,
                 DayAttendanceComponent,
