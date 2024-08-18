@@ -3,8 +3,8 @@ import { Component, Input, OnInit } from "@angular/core";
 import { ChartData, ChartOptions } from "chart.js";
 import { BaseChartDirective } from "ng2-charts";
 import { combineLatest, map, Observable } from "rxjs";
-import { activityColors } from "../../../app/models/activityColors";
-import { IColorSpec } from "../../../app/models/interfaces";
+import { activityColors } from "../../../entities/activity-color/activity-color.models";
+import { IColorSpec } from "../../../entities/activity-color/activity-color.types";
 import {
     IActivityLog,
     IActivityLogEntry,

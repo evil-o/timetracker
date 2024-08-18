@@ -1,16 +1,8 @@
 import * as convert from "color-convert";
-import { IActivityTypeColor } from "./interfaces";
-
-/*function rgb(r: number, g: number, b: number) {
-  return {
-    r, g, b
-  };
-}*/
-
-interface INamedColor {
-    name: string;
-    color: [number, number, number];
-}
+import {
+    IActivityTypeColor,
+    INamedColor,
+} from "../../entities/activity-color/activity-color.types";
 
 // defined base colors in RGB
 const baseColorsRgb: INamedColor[] = [
@@ -56,52 +48,3 @@ export const activityColors: IActivityTypeColor[] = variantsRGB.map((c) => ({
     styleClass: `activity-${c.name}`,
     color: { r: c.color[0], g: c.color[1], b: c.color[2] },
 }));
-
-/*export const activityColors: IActivityTypeColor[] = [
-  {
-    id: 'blue',
-    styleClass: 'activity-blue',
-    color: { r: 163, g: 186, b: 202 },
-  },
-  {
-    id: 'blue-2',
-    styleClass: 'activity-blue-2',
-    color: rgb(142, 165, 182),
-  },
-  {
-    id: 'blue-3',
-    styleClass: 'activity-blue-3',
-    color: rgb(128, 150, 167),
-  },
-  {
-    id: 'blue-4',
-    styleClass: 'activity-blue-4',
-    color: rgb(100, 121, 138),
-  },
-  {
-    id: 'yellow',
-    styleClass: 'activity-yellow',
-    color: { r: 251, g: 234, b: 201 },
-  },
-  {
-    id: 'red',
-    styleClass: 'activity-red',
-    color: { r: 240, g: 204, b: 204 },
-  },
-  {
-    id: 'green',
-    styleClass: 'activity-green',
-    color: { r: 220, g: 255, b: 220 },
-  },
-  {
-    id: 'grey',
-    styleClass: 'activity-grey',
-    color: { r: 170, g: 170, b: 170 },
-  },
-  {
-    id: 'purple',
-    styleClass: 'activity-purple',
-    color: { r: 172, g: 161, b: 209 },
-  },
-];
-*/

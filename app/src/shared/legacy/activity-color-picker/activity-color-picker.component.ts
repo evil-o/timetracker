@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { activityColors } from "../../../app/models/activityColors";
+import { activityColors } from "../../../entities/activity-color/activity-color.models";
 import {
     IActivityTypeColor,
     IUndefinedActivityTypeColor,
-} from "../../../app/models/interfaces";
+} from "../../../entities/activity-color/activity-color.types";
 import { IActivityType } from "../../../entities/activity-types/activity-types.types";
 
 @Component({
