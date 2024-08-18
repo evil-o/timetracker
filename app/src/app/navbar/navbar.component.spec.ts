@@ -13,32 +13,28 @@ import { AccordionModule } from "ngx-bootstrap/accordion";
 import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
 import { TabsModule } from "ngx-bootstrap/tabs";
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
+import { WeekComponent } from "../../pages/week/week.component";
 import { WelcomeComponent } from "../../pages/welcome/welcome.component";
+import { ActivityColorPickerComponent } from "../../shared/legacy/activity-color-picker/activity-color-picker.component";
+import { ActivityLogEntryComponent } from "../../shared/legacy/activity-log-entry/activity-log-entry.component";
+import { ActivityPickerComponent } from "../../shared/legacy/activity-picker/activity-picker.component";
+import { ActivityTypeListComponent } from "../../shared/legacy/activity-type-list/activity-type-list.component";
+import { ActivityLogListComponent } from "../../shared/legacy/actvity-log-list/actvity-log-list.component";
+import { DayAttendanceComponent } from "../../shared/legacy/day-attendance/day-attendance.component";
+import { EditableLogEntryDescriptionComponent } from "../../shared/legacy/editable-log-entry-description/editable-log-entry-description.component";
+import { EditableLogEntryHoursComponent } from "../../shared/legacy/editable-log-entry-hours/editable-log-entry-hours.component";
+import { valueToTime } from "../../shared/legacy/helpers";
+import { HourBadgeComponent } from "../../shared/legacy/hour-badge/hour-badge.component";
+import { NoActivityLogEntryPresentComponent } from "../../shared/legacy/no-activity-log-entry-present/no-activity-log-entry-present.component";
+import { OvertimeBadgeComponent } from "../../shared/legacy/overtime-badge/overtime-badge.component";
+import { FormatHoursPipe } from "../../shared/legacy/pipes/format-hours.pipe";
+import { GroupActivityLogEntriesByIdPipe } from "../../shared/legacy/pipes/group-activity-log-entries-by-id.pipe";
+import { LogEntryTallyPipe } from "../../shared/legacy/pipes/log-entry-tally.pipe";
+import { PadNumberPipe } from "../../shared/legacy/pipes/pad-number.pipe";
+import { PrecisionPipe } from "../../shared/legacy/pipes/precision.pipe";
+import { TallyComponent } from "../../shared/legacy/tally/tally.component";
+import { TimeBadgeComponent } from "../../shared/legacy/time-badge/time-badge.component";
 import { appRoutes } from "../app.routes";
-import { ActivityColorPickerComponent } from "../components/activity-color-picker/activity-color-picker.component";
-import { ActivityLogEntryComponent } from "../components/activity-log-entry/activity-log-entry.component";
-import { ActivityPickerComponent } from "../components/activity-picker/activity-picker.component";
-import { ActivityTypeListComponent } from "../components/activity-type-list/activity-type-list.component";
-import { ActivityLogListComponent } from "../components/actvity-log-list/actvity-log-list.component";
-import { DayAttendanceComponent } from "../components/day-attendance/day-attendance.component";
-import { EditableLogEntryDescriptionComponent } from "../components/editable-log-entry-description/editable-log-entry-description.component";
-import { EditableLogEntryHoursComponent } from "../components/editable-log-entry-hours/editable-log-entry-hours.component";
-import { HourBadgeComponent } from "../components/hour-badge/hour-badge.component";
-import { NoActivityLogEntryPresentComponent } from "../components/no-activity-log-entry-present/no-activity-log-entry-present.component";
-import { OvertimeBadgeComponent } from "../components/overtime-badge/overtime-badge.component";
-import { TallyComponent } from "../components/tally/tally.component";
-import { TimeBadgeComponent } from "../components/time-badge/time-badge.component";
-import { valueToTime } from "../helpers";
-import { ActivitiesComponent } from "../pages/activities/activities.component";
-import { ConfigurationComponent } from "../pages/configuration/configuration.component";
-import { DayComponent } from "../pages/day/day.component";
-import { WeekComponent } from "../pages/week/week.component";
-import { ActivityTypeIdToNamePipe } from "../pipes/activity-type-id-to-name.pipe";
-import { FormatHoursPipe } from "../pipes/format-hours.pipe";
-import { GroupActivityLogEntriesByIdPipe } from "../pipes/group-activity-log-entries-by-id.pipe";
-import { LogEntryTallyPipe } from "../pipes/log-entry-tally.pipe";
-import { PadNumberPipe } from "../pipes/pad-number.pipe";
-import { PrecisionPipe } from "../pipes/precision.pipe";
 import { attendanceActions } from "../redux/actions/attendance.actions";
 import { configurationActions } from "../redux/actions/configuration.actions";
 import { ApplicationState } from "../redux/states/application-state";
@@ -60,15 +56,11 @@ xdescribe("NavbarComponent", () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [
-                ActivitiesComponent,
                 ActivityColorPickerComponent,
                 ActivityTypeListComponent,
                 ActivityLogEntryComponent,
                 ActivityLogListComponent,
                 ActivityPickerComponent,
-                ActivityTypeIdToNamePipe,
-                ConfigurationComponent,
-                DayComponent,
                 DayAttendanceComponent,
                 EditableLogEntryDescriptionComponent,
                 EditableLogEntryHoursComponent,

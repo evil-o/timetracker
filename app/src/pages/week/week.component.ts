@@ -20,15 +20,15 @@ import {
     Observable,
     withLatestFrom,
 } from "rxjs";
-import { getFirstDayOfCalendarWeek } from "../../app/helpers";
-import { FormatHoursPipe } from "../../app/pipes/format-hours.pipe";
-import { IGroupEntry } from "../../app/pipes/group-activity-log-entries-by-id.pipe";
-import { PadNumberPipe } from "../../app/pipes/pad-number.pipe";
 import { IAttendanceWithTimes } from "../../app/redux/selectors";
 import {
     IAttendanceCorrection,
     IAttendanceEntry,
 } from "../../app/redux/states/attendance-state";
+import { getFirstDayOfCalendarWeek } from "../../shared/legacy/helpers";
+import { FormatHoursPipe } from "../../shared/legacy/pipes/format-hours.pipe";
+import { IGroupEntry } from "../../shared/legacy/pipes/group-activity-log-entries-by-id.pipe";
+import { PadNumberPipe } from "../../shared/legacy/pipes/pad-number.pipe";
 
 interface IDayEntry {
     dayOfTheWeek: number;

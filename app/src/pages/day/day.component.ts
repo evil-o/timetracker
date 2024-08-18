@@ -20,12 +20,12 @@ import {
     timer,
     withLatestFrom,
 } from "rxjs";
-import { ActivityPickerComponent } from "../../app/components/activity-picker/activity-picker.component";
-import { HourBadgeComponent } from "../../app/components/hour-badge/hour-badge.component";
-import { TimeBadgeComponent } from "../../app/components/time-badge/time-badge.component";
-import { stringToDuration } from "../../app/helpers";
 import { activityLogActions } from "../../app/redux/actions/activity-log.actions";
 import * as fromStore from "../../app/redux/selectors";
+import { ActivityPickerComponent } from "../../shared/legacy/activity-picker/activity-picker.component";
+import { stringToDuration } from "../../shared/legacy/helpers";
+import { HourBadgeComponent } from "../../shared/legacy/hour-badge/hour-badge.component";
+import { TimeBadgeComponent } from "../../shared/legacy/time-badge/time-badge.component";
 
 @Component({
     selector: "app-day",

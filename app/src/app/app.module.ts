@@ -28,9 +28,9 @@ import { TabsModule } from "ngx-bootstrap/tabs";
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
 
 import { PagesModule } from "../pages/pages.module";
+import { LegacyModule } from "../shared/legacy.module";
 import { appRoutes } from "./app.routes";
 import { StopwatchComponent } from "./components/stopwatch/stopwatch.component";
-import { LegacyModule } from "./legacy.module";
 
 @NgModule({
     declarations: [AppComponent, NavbarComponent, StopwatchComponent],
