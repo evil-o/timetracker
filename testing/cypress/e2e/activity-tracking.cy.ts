@@ -1,51 +1,26 @@
 import { ActivitiesPage } from "../pages/activities.page";
 import { GlobalPage } from "../pages/global.page";
 import { TodayPage } from "../pages/today.page.cy";
-
-type HourString = `${number | ""}${number}`;
-type MinuteString = `${number}${number}`;
+import { DayPageWorkflows } from "../support/today.workflows";
 
 describe("Activity tracking", () => {
     let today: TodayPage;
     let activities: ActivitiesPage;
     let globalPage: GlobalPage;
+    let dayWorkflows: DayPageWorkflows;
 
-    const defaultActivityType = "e2e test activity";
-    const defaultDescription = "e2e test activity description";
-    const defaultHours: HourString = "3";
-    const defaultMinutes: MinuteString = "45";
-
-    function enterLogEntry(
-        activityType: string = defaultActivityType,
-        description: string = defaultDescription,
-        hours: HourString = defaultHours,
-        minutes: MinuteString = defaultMinutes
+    function expandLogEntry(
+        activityType: string = DayPageWorkflows.defaultActivityType
     ): void {
-        cy.log("create log entry");
-        today.addActivity.activityInput.type(activityType);
-        today.addActivity.activityDescription.type(description);
-        today.addActivity.activityDudation.type(`${hours}:${minutes}`);
-        today.addActivity.logActivityButton.click();
-    }
-
-    function expandLogEntry(activityType: string = defaultActivityType): void {
         cy.log("expand log entry");
         today.actvityLogList.entries.contains(activityType).click();
-    }
-
-    function expectEntryTime(
-        hours: HourString = defaultHours,
-        minutes: MinuteString = defaultMinutes
-    ): void {
-        today.actvityLogList.entryDurationBadges
-            .first()
-            .should("contain.text", `${hours}h ${minutes}m`);
     }
 
     beforeEach(() => {
         today = new TodayPage();
         globalPage = new GlobalPage();
         activities = new ActivitiesPage();
+        dayWorkflows = new DayPageWorkflows(today);
         today.navigateFromHome();
     });
 
@@ -53,11 +28,16 @@ describe("Activity tracking", () => {
         const hours = "2";
         const minutes = "34";
 
-        enterLogEntry(defaultActivityType, defaultDescription, hours, minutes);
+        dayWorkflows.enterLogEntry(
+            DayPageWorkflows.defaultActivityType,
+            DayPageWorkflows.defaultDescription,
+            hours,
+            minutes
+        );
 
         today.actvityLogList.entries.should(
             "contain.text",
-            defaultActivityType
+            DayPageWorkflows.defaultActivityType
         );
         today.actvityLogList.entries.should(
             "contain.text",
@@ -69,7 +49,10 @@ describe("Activity tracking", () => {
         const activityTypeDescriptionBefore = "e2e test activity before";
         const activityTypeDescriptionAfter = "e2e test activity after";
 
-        enterLogEntry(defaultActivityType, activityTypeDescriptionBefore);
+        dayWorkflows.enterLogEntry(
+            DayPageWorkflows.defaultActivityType,
+            activityTypeDescriptionBefore
+        );
 
         expandLogEntry();
 
@@ -106,7 +89,7 @@ describe("Activity tracking", () => {
                 .type(`${newHours}:${newMinutes}`);
         };
 
-        enterLogEntry(defaultActivityType);
+        dayWorkflows.enterLogEntry(DayPageWorkflows.defaultActivityType);
 
         expandLogEntry();
 
@@ -118,18 +101,22 @@ describe("Activity tracking", () => {
         enterNewHours();
         today.actvityLogList.confirmDurationChange.click();
 
-        expectEntryTime(newHours, newMinutes);
+        dayWorkflows.expectEntryTime(
+            DayPageWorkflows.defaultActivityType,
+            newHours,
+            newMinutes
+        );
     });
 
     it("deletes log entries", () => {
-        enterLogEntry();
-        expectEntryTime();
+        dayWorkflows.enterLogEntry();
+        dayWorkflows.expectEntryTime();
 
         cy.log("cancel delete");
         expandLogEntry();
         today.actvityLogList.deleteLogEntryButton.click();
         today.actvityLogList.cancelDeleteLogEntryButton.click();
-        expectEntryTime();
+        dayWorkflows.expectEntryTime();
 
         cy.log("confirm delete");
         today.actvityLogList.deleteLogEntryButton.click();

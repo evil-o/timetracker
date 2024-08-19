@@ -1,6 +1,10 @@
 export class TodayPage {
     public navigateFromHome(): void {
         cy.visit("");
+        this.visitViaNav();
+    }
+
+    public visitViaNav(): void {
         cy.byTestId("today").click();
     }
 
