@@ -1,7 +1,7 @@
 import { createReducer } from "@ngrx/store";
 import { v4 as uuid } from "uuid";
-import { storageVersionActions } from "../../app/redux/actions/storage-version.actions";
 import { produceOn } from "../../app/utils/ngrx";
+import { storageVersionActions } from "../storage-version/storage-version.actions";
 import { activityLogActions } from "./activity-log.actions";
 import { ActivityLog, ActivityLogEntry } from "./activity-log.state";
 

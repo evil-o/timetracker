@@ -1,8 +1,8 @@
 import { createReducer } from "@ngrx/store";
 import { v4 as uuid } from "uuid";
-import { storageVersionActions } from "../../app/redux/actions/storage-version.actions";
 import { produceOn } from "../../app/utils/ngrx";
 import { activityLogActions } from "../activity-log/activity-log.actions";
+import { storageVersionActions } from "../storage-version/storage-version.actions";
 import { activityTypeActions } from "./activity-types.actions";
 import { ActivityTypes } from "./activity-types.state";
 import { IActivityType, IActivityTypes } from "./activity-types.types";

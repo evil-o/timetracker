@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps, props } from "@ngrx/store";
-import { StateType } from "../states/storage-version";
+import { StateType } from "./storage-version.state";
 
 export const storageVersionActions = createActionGroup({
     source: "Storage Version",

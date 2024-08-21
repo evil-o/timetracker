@@ -2,14 +2,13 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 
-import { ApplicationState } from "../states/application-state";
-import { StorageVersion } from "../states/storage-version";
-
 import { filter, map, withLatestFrom } from "rxjs";
-import { downloadDataAsFile } from "../../utils/download-data-as-file";
-import { makeTimestampedFileName } from "../../utils/file-name";
-import { storageVersionActions } from "../actions/storage-version.actions";
-import { rehydratedStorageKeys } from "../metaReducers.legacy";
+import { rehydratedStorageKeys } from "../../app/redux/metaReducers.legacy";
+import { ApplicationState } from "../../app/redux/states/application-state";
+import { downloadDataAsFile } from "../../app/utils/download-data-as-file";
+import { makeTimestampedFileName } from "../../app/utils/file-name";
+import { storageVersionActions } from "./storage-version.actions";
+import { StorageVersion } from "./storage-version.state";
 
 @Injectable()
 export class StorageVersionEffects {

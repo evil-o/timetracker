@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 
 import { map } from "rxjs";
-import { storageVersionActions } from "../../app/redux/actions/storage-version.actions";
 import { activityLogActions } from "../activity-log/activity-log.actions";
+import { storageVersionActions } from "../storage-version/storage-version.actions";
 import { activityTypeActions } from "./activity-types.actions";
 
 @Injectable()

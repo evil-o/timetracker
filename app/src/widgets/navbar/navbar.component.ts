@@ -11,8 +11,8 @@ import { IAttendanceWithTimes } from "../../app/redux/selectors/index";
 import { ApplicationState } from "../../app/redux/states/application-state";
 
 import { Observable } from "rxjs";
-import { storageVersionActions } from "../../app/redux/actions/storage-version.actions";
 import * as fromStore from "../../app/redux/selectors";
+import { storageVersionActions } from "../../entities/storage-version/storage-version.actions";
 
 @Component({
     selector: "app-navbar",

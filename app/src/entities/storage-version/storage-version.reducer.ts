@@ -1,7 +1,7 @@
 import { createReducer, on } from "@ngrx/store";
-import { produceOn } from "../../utils/ngrx";
-import { storageVersionActions } from "../actions/storage-version.actions";
-import { StorageVersion } from "../states/storage-version";
+import { produceOn } from "../../app/utils/ngrx";
+import { storageVersionActions } from "./storage-version.actions";
+import { StorageVersion } from "./storage-version.state";
 
 interface IV3Storage {
     storageIsUpdating?: boolean;

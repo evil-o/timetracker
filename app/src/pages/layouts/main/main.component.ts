@@ -1,15 +1,15 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { map, Observable } from "rxjs";
-import { storageVersionActions } from "../../../app/redux/actions/storage-version.actions";
 import * as get from "../../../app/redux/selectors";
 import { ApplicationState } from "../../../app/redux/states/application-state";
-import { IStorageVersion } from "../../../app/redux/states/storage-version";
 import { activityTypeActions } from "../../../entities/activity-types/activity-types.actions";
 import {
     IActivityType,
     IActivityTypes,
 } from "../../../entities/activity-types/activity-types.types";
+import { storageVersionActions } from "../../../entities/storage-version/storage-version.actions";
+import { IStorageVersion } from "../../../entities/storage-version/storage-version.state";
 
 @Component({
     selector: "app-main",
@@ -35,6 +35,7 @@ export class MainComponent implements OnInit {
             map((types) => types.activities)
         );
 
+        // TODO: move to effects / app init
         this.store.dispatch(storageVersionActions.checkStorageVersion());
     }
 
