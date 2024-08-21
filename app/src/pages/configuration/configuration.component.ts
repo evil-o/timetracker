@@ -2,9 +2,9 @@ import { Component, OnInit } from "@angular/core";
 
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-import * as fromStore from "../../app/redux/selectors";
 import { ApplicationState } from "../../entities/application/application.model";
 import { configurationActions } from "../../entities/configuration/configuration.actions";
+import { fromConfiguration } from "../../entities/configuration/configuration.selectors";
 
 @Component({
     selector: "app-configuration",
@@ -24,10 +24,10 @@ export class ConfigurationComponent implements OnInit {
 
     ngOnInit() {
         this.workingHoursPerWeek$ = this.store.select(
-            fromStore.weeklyWorkingHours
+            fromConfiguration.weeklyWorkingHours
         );
         this.workingDaysPerWeek$ = this.store.select(
-            fromStore.weeklyWorkingDays
+            fromConfiguration.weeklyWorkingDays
         );
     }
 
