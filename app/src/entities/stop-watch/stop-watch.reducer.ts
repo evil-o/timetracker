@@ -1,7 +1,7 @@
 import { createReducer } from "@ngrx/store";
-import { produceOn } from "../../utils/ngrx";
-import { stopWatchActions } from "../actions/stop-watch.actions";
-import { StopWatch } from "../states/stopwatch-state";
+import { produceOn } from "../../app/utils/ngrx";
+import { stopWatchActions } from "./stop-watch.actions";
+import { StopWatch } from "./stop-watch.state";
 
 export const stopWatchReducer = createReducer(
     new StopWatch(),
