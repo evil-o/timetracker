@@ -19,6 +19,7 @@ import {
     withLatestFrom,
 } from "rxjs";
 import { IAttendanceWithTimes } from "../../app/redux/selectors";
+import { fromActivityLog } from "../../entities/activity-log/activity-log.selectors";
 import { IActivityLogEntry } from "../../entities/activity-log/activity-log.types";
 import { IActivityTypes } from "../../entities/activity-types/activity-types.types";
 import {
@@ -116,7 +117,7 @@ export class WeekComponent {
 
         this.activityTypes$ = this.store.select(fromStore.activityTypes);
         this.activityLogEntries$ = this.store.select(
-            fromStore.activityLogEntries
+            fromActivityLog.activityLogEntries
         );
 
         this.previousWeek$ = this.week$.pipe(

@@ -1,40 +1,10 @@
 import { createSelector } from "@ngrx/store";
+import { fromActivityLog } from "../../../entities/activity-log/activity-log.selectors";
 import { IActivityLogEntry } from "../../../entities/activity-log/activity-log.types";
 import { ApplicationState } from "../../../entities/application/application.model";
 import { IAttendanceEntry } from "../../../entities/attendance/attendance.state";
 
 export const activityTypes = (state: ApplicationState) => state.activityTypes;
-
-export const activityLog = (state: ApplicationState) => state.activityLog;
-export const activityLogEntries = createSelector(
-    activityLog,
-    (state) => state?.entries
-);
-export const activityLogEntriesByDay = createSelector(
-    activityLogEntries,
-    (entries) => {
-        const byDay: Record<
-            number,
-            Record<number, Record<number, IActivityLogEntry[]>>
-        > = {};
-        for (const entry of entries) {
-            if (!(entry.year in byDay)) {
-                byDay[entry.year] = {};
-            }
-
-            if (!(entry.month in byDay[entry.year])) {
-                byDay[entry.year][entry.month] = {};
-            }
-
-            if (!(entry.day in byDay[entry.year][entry.month])) {
-                byDay[entry.year][entry.month][entry.day] = [entry];
-            } else {
-                byDay[entry.year][entry.month][entry.day].push(entry);
-            }
-        }
-        return byDay;
-    }
-);
 
 export const storageVersion = (state: ApplicationState) => state.storageVersion;
 
@@ -66,7 +36,7 @@ export interface IAttendanceWithTimes extends IAttendanceEntry {
 
 export const attendanceEntriesWithOvertime = createSelector(
     attendanceEntries,
-    activityLogEntriesByDay,
+    fromActivityLog.activityLogEntriesByDay,
     activityTypes,
     configurationState,
     (attendances, entries, types, configuration) => {

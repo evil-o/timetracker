@@ -1,7 +1,8 @@
 import { Component } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { BehaviorSubject, Observable } from "rxjs";
-import { activityLog, activityTypes } from "../../app/redux/selectors";
+import { activityTypes } from "../../app/redux/selectors";
+import { fromActivityLog } from "../../entities/activity-log/activity-log.selectors";
 import { IActivityLog } from "../../entities/activity-log/activity-log.types";
 import { IActivityTypes } from "../../entities/activity-types/activity-types.types";
 import { ApplicationState } from "../../entities/application/application.model";
@@ -41,7 +42,7 @@ export class StatisticsComponent {
     public types$: Observable<IActivityTypes>;
 
     constructor(store: Store<ApplicationState>) {
-        this.allActivities$ = store.select(activityLog);
+        this.allActivities$ = store.select(fromActivityLog.allActivities);
         this.types$ = store.select(activityTypes);
 
         const now = new Date();

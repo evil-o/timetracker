@@ -16,6 +16,7 @@ import {
 } from "rxjs";
 import * as fromStore from "../../app/redux/selectors";
 import { activityLogActions } from "../../entities/activity-log/activity-log.actions";
+import { fromActivityLog } from "../../entities/activity-log/activity-log.selectors";
 import {
     IActivityLog,
     IActivityLogEntry,
@@ -98,7 +99,7 @@ export class DayComponent {
         this.activities$ = this.activityTypes$.pipe(
             map((types) => types.activities)
         );
-        this.activityLog$ = this.store.select(fromStore.activityLog);
+        this.activityLog$ = this.store.select(fromActivityLog.allActivities);
         this.activityLogEntries$ = combineLatest([
             this.activityLog$,
             this.date$,
