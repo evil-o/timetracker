@@ -19,12 +19,12 @@ import {
     withLatestFrom,
 } from "rxjs";
 import { IAttendanceWithTimes } from "../../app/redux/selectors";
+import { IActivityLogEntry } from "../../entities/activity-log/activity-log.types";
+import { IActivityTypes } from "../../entities/activity-types/activity-types.types";
 import {
     IAttendanceCorrection,
     IAttendanceEntry,
-} from "../../app/redux/states/attendance-state";
-import { IActivityLogEntry } from "../../entities/activity-log/activity-log.types";
-import { IActivityTypes } from "../../entities/activity-types/activity-types.types";
+} from "../../entities/attendance/attendance.state";
 import { getFirstDayOfCalendarWeek } from "../../shared/legacy/helpers";
 import { FormatHoursPipe } from "../../shared/legacy/pipes/format-hours.pipe";
 import { IGroupEntry } from "../../shared/legacy/pipes/group-activity-log-entries-by-id.pipe";

@@ -1,5 +1,5 @@
 import { createActionGroup, props } from "@ngrx/store";
-import { IAttendanceState } from "../states/attendance-state";
+import { IAttendanceState } from "./attendance.state";
 
 export const attendanceActions = createActionGroup({
     source: "Attendance",

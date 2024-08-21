@@ -1,6 +1,6 @@
 import { IActivityLog } from "../../../entities/activity-log/activity-log.types";
 import { IActivityTypes } from "../../../entities/activity-types/activity-types.types";
-import { IAttendanceState } from "./attendance-state";
+import { IAttendanceState } from "../../../entities/attendance/attendance.state";
 import { IConfigurationState } from "./configuration";
 import { IStopWatch } from "./stopwatch-state";
 import { IStorageVersion } from "./storage-version";

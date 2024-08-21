@@ -1,13 +1,13 @@
 import { v4 as uuid } from "uuid";
 
 import { createReducer } from "@ngrx/store";
-import { produceOn } from "../../utils/ngrx";
-import { attendanceActions } from "../actions/attendance.actions";
+import { produceOn } from "../../app/utils/ngrx";
+import { attendanceActions } from "./attendance.actions";
 import {
     AttendanceEntry,
     AttendanceState,
     IAttendanceEntry,
-} from "../states/attendance-state";
+} from "./attendance.state";
 
 function findEntry(
     forDate: Date,
