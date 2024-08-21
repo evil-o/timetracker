@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { map, Observable } from "rxjs";
-import * as get from "../../../app/redux/selectors";
 import { activityTypeActions } from "../../../entities/activity-types/activity-types.actions";
 import { fromActivityTypes } from "../../../entities/activity-types/activity-types.selectors";
 import {
@@ -10,6 +9,7 @@ import {
 } from "../../../entities/activity-types/activity-types.types";
 import { ApplicationState } from "../../../entities/application/application.model";
 import { storageVersionActions } from "../../../entities/storage-version/storage-version.actions";
+import { fromStorageVersion } from "../../../entities/storage-version/storage-version.selector";
 import { IStorageVersion } from "../../../entities/storage-version/storage-version.state";
 
 @Component({
@@ -25,7 +25,7 @@ export class MainComponent implements OnInit {
 
     constructor(private store: Store<ApplicationState>) {
         this.activityTypes$ = this.store.select(fromActivityTypes.getState);
-        this.storageVersion$ = this.store.select(get.storageVersion);
+        this.storageVersion$ = this.store.select(fromStorageVersion.getState);
         this.storageUpdateComplete$ = this.storageVersion$.pipe(
             map((version) => version.upgradeComplete)
         );
