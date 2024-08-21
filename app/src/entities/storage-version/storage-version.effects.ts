@@ -3,10 +3,10 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 
 import { filter, map, withLatestFrom } from "rxjs";
-import { rehydratedStorageKeys } from "../../app/redux/metaReducers.legacy";
 import { downloadDataAsFile } from "../../app/utils/download-data-as-file";
 import { makeTimestampedFileName } from "../../app/utils/file-name";
 import { ApplicationState } from "../application/application.model";
+import { rehydratedStorageKeys } from "../application/meta-reducers";
 import { storageVersionActions } from "./storage-version.actions";
 import { StorageVersion } from "./storage-version.state";
 

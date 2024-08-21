@@ -12,9 +12,9 @@ import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 
 import { environment } from "../environments/environment";
 
-import { effects } from "./redux/effects/index";
-import { metaReducers } from "./redux/metaReducers.legacy";
-import { reducers } from "./redux/reducers/index";
+import { effects } from "../entities/application/effects";
+import { metaReducers } from "../entities/application/meta-reducers";
+import { reducers } from "../entities/application/reducers";
 
 import { CommonModule } from "@angular/common";
 import { BrowserModule } from "@angular/platform-browser";

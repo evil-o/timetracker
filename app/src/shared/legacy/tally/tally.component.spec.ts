@@ -9,8 +9,8 @@ import { NoActivityLogEntryPresentComponent } from "../no-activity-log-entry-pre
 import { TallyComponent } from "./tally.component";
 
 import { AccordionModule } from "ngx-bootstrap/accordion";
-import { metaReducers } from "../../../app/redux/metaReducers.legacy";
-import { reducers } from "../../../app/redux/reducers";
+import { metaReducers } from "../../../entities/application/meta-reducers";
+import { reducers } from "../../../entities/application/reducers";
 import { ActivityTypeIdToNamePipe } from "../pipes/activity-type-id-to-name.pipe";
 import { FormatHoursPipe } from "../pipes/format-hours.pipe";
 import { LogEntryTallyPipe } from "../pipes/log-entry-tally.pipe";
