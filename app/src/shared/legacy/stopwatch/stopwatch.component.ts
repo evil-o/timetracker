@@ -1,12 +1,12 @@
 import { Component } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { map, Observable, Subject, timer, withLatestFrom } from "rxjs";
-import { stopWatchState } from "../../../app/redux/selectors";
 import { activityTypeActions } from "../../../entities/activity-types/activity-types.actions";
 import { fromActivityTypes } from "../../../entities/activity-types/activity-types.selectors";
 import { IActivityType } from "../../../entities/activity-types/activity-types.types";
 import { ApplicationState } from "../../../entities/application/application.model";
 import { stopWatchActions } from "../../../entities/stop-watch/stop-watch.actions";
+import { fromStopWatch } from "../../../entities/stop-watch/stop-watch.selectors";
 
 @Component({
     selector: "app-stopwatch",
@@ -26,7 +26,7 @@ export class StopwatchComponent {
     public logClick$ = new Subject<string>();
 
     constructor(private store: Store<ApplicationState>) {
-        const state$ = this.store.select(stopWatchState);
+        const state$ = this.store.select(fromStopWatch.getState);
         this.isStarted$ = state$.pipe(map((v) => v.startedAt !== undefined));
         this.isRunning$ = state$.pipe(
             map((v) => v.startedAt !== undefined && !v.isPaused)
