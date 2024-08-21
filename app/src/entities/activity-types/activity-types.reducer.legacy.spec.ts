@@ -1,9 +1,6 @@
-import {
-    IActivityType,
-    IActivityTypes,
-} from "../../../entities/activity-types/activity-types.types";
-import { activityLogActions } from "../actions/activity-log.actions";
+import { activityLogActions } from "../activity-log/activity-log.actions";
 import { activityTypesReducer } from "./activity-types.reducer";
+import { IActivityType, IActivityTypes } from "./activity-types.types";
 
 describe("the activity types reducer", () => {
     it("should remove merged activity types", () => {

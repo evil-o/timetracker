@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { activityTypeActions } from "../../../app/redux/actions/activity-types.actions";
 import { ApplicationState } from "../../../app/redux/states/application-state";
+import { activityTypeActions } from "../../../entities/activity-types/activity-types.actions";
 import { IActivityType } from "../../../entities/activity-types/activity-types.types";
 
 @Component({

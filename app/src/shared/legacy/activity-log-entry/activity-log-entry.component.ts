@@ -3,8 +3,8 @@ import { AccordionComponent } from "ngx-bootstrap/accordion";
 import { ApplicationState } from "../../../app/redux/states/application-state";
 
 import { Store } from "@ngrx/store";
-import { activityLogActions } from "../../../app/redux/actions/activity-log.actions";
 import { activityColors } from "../../../entities/activity-color/activity-color.models";
+import { activityLogActions } from "../../../entities/activity-log/activity-log.actions";
 import { IActivityTypes } from "../../../entities/activity-types/activity-types.types";
 import { IGroupEntry } from "../pipes/group-activity-log-entries-by-id.pipe";
 

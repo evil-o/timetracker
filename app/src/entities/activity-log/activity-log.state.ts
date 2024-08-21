@@ -1,8 +1,5 @@
 import { v4 as uuid } from "uuid";
-import {
-    IActivityLog,
-    IActivityLogEntry,
-} from "../../../entities/activity-log/activity-log.types";
+import { IActivityLog, IActivityLogEntry } from "./activity-log.types";
 
 export class ActivityLogEntry implements IActivityLogEntry {
     public id!: string;

@@ -6,7 +6,7 @@ import {
     Output,
     ViewChild,
 } from "@angular/core";
-import { ActivityLogEntry } from "../../../app/redux/states/activity-log";
+import { ActivityLogEntry } from "../../../entities/activity-log/activity-log.state";
 import { stringToDuration } from "../helpers";
 
 @Component({

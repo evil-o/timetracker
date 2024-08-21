@@ -1,9 +1,9 @@
 import { createReducer } from "@ngrx/store";
 import { v4 as uuid } from "uuid";
-import { produceOn } from "../../utils/ngrx";
-import { activityLogActions } from "../actions/activity-log.actions";
-import { storageVersionActions } from "../actions/storage-version.actions";
-import { ActivityLog, ActivityLogEntry } from "../states/activity-log";
+import { storageVersionActions } from "../../app/redux/actions/storage-version.actions";
+import { produceOn } from "../../app/utils/ngrx";
+import { activityLogActions } from "./activity-log.actions";
+import { ActivityLog, ActivityLogEntry } from "./activity-log.state";
 
 export const activityLogReducer = createReducer(
     new ActivityLog(),

@@ -3,10 +3,10 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 
 import { map, withLatestFrom } from "rxjs";
-import { activityLogActions } from "../actions/activity-log.actions";
-import { activityTypeActions } from "../actions/activity-types.actions";
-import { storageVersionActions } from "../actions/storage-version.actions";
-import { ApplicationState } from "../states/application-state";
+import { storageVersionActions } from "../../app/redux/actions/storage-version.actions";
+import { ApplicationState } from "../../app/redux/states/application-state";
+import { activityTypeActions } from "../activity-types/activity-types.actions";
+import { activityLogActions } from "./activity-log.actions";
 
 @Injectable()
 export class ActivityLogEffects {

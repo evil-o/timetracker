@@ -6,7 +6,7 @@ import {
     Output,
     ViewChild,
 } from "@angular/core";
-import { ActivityLogEntry } from "../../../app/redux/states/activity-log";
+import { ActivityLogEntry } from "../../../entities/activity-log/activity-log.state";
 
 @Component({
     selector: "app-editable-log-entry-description",

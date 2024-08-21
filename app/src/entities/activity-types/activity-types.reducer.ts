@@ -1,14 +1,11 @@
 import { createReducer } from "@ngrx/store";
 import { v4 as uuid } from "uuid";
-import {
-    IActivityType,
-    IActivityTypes,
-} from "../../../entities/activity-types/activity-types.types";
-import { produceOn } from "../../utils/ngrx";
-import { activityLogActions } from "../actions/activity-log.actions";
-import { activityTypeActions } from "../actions/activity-types.actions";
-import { storageVersionActions } from "../actions/storage-version.actions";
-import { ActivityTypes } from "../states/activity-types";
+import { storageVersionActions } from "../../app/redux/actions/storage-version.actions";
+import { produceOn } from "../../app/utils/ngrx";
+import { activityLogActions } from "../activity-log/activity-log.actions";
+import { activityTypeActions } from "./activity-types.actions";
+import { ActivityTypes } from "./activity-types.state";
+import { IActivityType, IActivityTypes } from "./activity-types.types";
 
 function getStateAndEntryForEditing(
     state: IActivityTypes,

@@ -1,5 +1,5 @@
 import { createActionGroup, props } from "@ngrx/store";
-import { IActivityTypes } from "../../../entities/activity-types/activity-types.types";
+import { IActivityTypes } from "./activity-types.types";
 
 export const activityTypeActions = createActionGroup({
     source: "Activity Types",

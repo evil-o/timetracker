@@ -14,8 +14,8 @@ import {
     timer,
     withLatestFrom,
 } from "rxjs";
-import { activityLogActions } from "../../app/redux/actions/activity-log.actions";
 import * as fromStore from "../../app/redux/selectors";
+import { activityLogActions } from "../../entities/activity-log/activity-log.actions";
 import {
     IActivityLog,
     IActivityLogEntry,

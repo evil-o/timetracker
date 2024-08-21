@@ -1,6 +1,6 @@
-import { IActivityLog } from "../../../entities/activity-log/activity-log.types";
-import { activityLogActions } from "../actions/activity-log.actions";
+import { activityLogActions } from "./activity-log.actions";
 import { activityLogReducer } from "./activity-log.reducer";
+import { IActivityLog } from "./activity-log.types";
 
 describe("the activity log reducer", () => {
     it("should properly merge all entries belonging to an activity id", () => {
