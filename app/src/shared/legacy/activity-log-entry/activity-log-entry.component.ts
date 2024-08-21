@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { AccordionComponent } from "ngx-bootstrap/accordion";
-import { ApplicationState } from "../../../app/redux/states/application-state";
+import { ApplicationState } from "../../../entities/application/application.model";
 
 import { Store } from "@ngrx/store";
 import { activityColors } from "../../../entities/activity-color/activity-color.models";

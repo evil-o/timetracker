@@ -2,7 +2,7 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { combineLatest, map, Observable, Subject, withLatestFrom } from "rxjs";
 import * as get from "../../../app/redux/selectors";
-import { ApplicationState } from "../../../app/redux/states/application-state";
+import { ApplicationState } from "../../../entities/application/application.model";
 import { attendanceActions } from "../../../entities/attendance/attendance.actions";
 import {
     AttendanceEntry,

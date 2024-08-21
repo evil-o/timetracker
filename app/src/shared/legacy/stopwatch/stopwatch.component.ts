@@ -2,9 +2,9 @@ import { Component } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { map, Observable, Subject, timer, withLatestFrom } from "rxjs";
 import { activityTypes, stopWatchState } from "../../../app/redux/selectors";
-import { ApplicationState } from "../../../app/redux/states/application-state";
 import { activityTypeActions } from "../../../entities/activity-types/activity-types.actions";
 import { IActivityType } from "../../../entities/activity-types/activity-types.types";
+import { ApplicationState } from "../../../entities/application/application.model";
 import { stopWatchActions } from "../../../entities/stop-watch/stop-watch.actions";
 
 @Component({

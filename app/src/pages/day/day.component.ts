@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild } from "@angular/core";
 
 import { Store } from "@ngrx/store";
 
-import { ApplicationState } from "../../app/redux/states/application-state";
+import { ApplicationState } from "../../entities/application/application.model";
 
 import { BsDatepickerDirective } from "ngx-bootstrap/datepicker";
 import {

@@ -4,9 +4,9 @@ import { Store } from "@ngrx/store";
 
 import { filter, map, withLatestFrom } from "rxjs";
 import { rehydratedStorageKeys } from "../../app/redux/metaReducers.legacy";
-import { ApplicationState } from "../../app/redux/states/application-state";
 import { downloadDataAsFile } from "../../app/utils/download-data-as-file";
 import { makeTimestampedFileName } from "../../app/utils/file-name";
+import { ApplicationState } from "../application/application.model";
 import { storageVersionActions } from "./storage-version.actions";
 import { StorageVersion } from "./storage-version.state";
 

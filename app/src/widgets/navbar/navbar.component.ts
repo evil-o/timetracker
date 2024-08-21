@@ -8,7 +8,7 @@ import {
 
 import { Store } from "@ngrx/store";
 import { IAttendanceWithTimes } from "../../app/redux/selectors/index";
-import { ApplicationState } from "../../app/redux/states/application-state";
+import { ApplicationState } from "../../entities/application/application.model";
 
 import { Observable } from "rxjs";
 import * as fromStore from "../../app/redux/selectors";

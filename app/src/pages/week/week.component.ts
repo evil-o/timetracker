@@ -6,7 +6,7 @@ import { Store } from "@ngrx/store";
 import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 
 import * as fromStore from "../../app/redux/selectors";
-import { ApplicationState } from "../../app/redux/states/application-state";
+import { ApplicationState } from "../../entities/application/application.model";
 
 import { HtmlTableGenerator } from "../../app/models/htmlTableGenerator";
 

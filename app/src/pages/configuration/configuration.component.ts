@@ -3,7 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import * as fromStore from "../../app/redux/selectors";
-import { ApplicationState } from "../../app/redux/states/application-state";
+import { ApplicationState } from "../../entities/application/application.model";
 import { configurationActions } from "../../entities/configuration/configuration.actions";
 
 @Component({

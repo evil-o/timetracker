@@ -14,7 +14,7 @@ import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
 import { TabsModule } from "ngx-bootstrap/tabs";
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
 import { appRoutes } from "../../app/app.routes";
-import { ApplicationState } from "../../app/redux/states/application-state";
+import { ApplicationState } from "../../entities/application/application.model";
 import { attendanceActions } from "../../entities/attendance/attendance.actions";
 import { configurationActions } from "../../entities/configuration/configuration.actions";
 import { WeekComponent } from "../../pages/week/week.component";
