@@ -1,7 +1,8 @@
 import { createSelector } from "@ngrx/store";
-import { activityTypes, attendanceEntries } from "../../app/redux/selectors";
+import { attendanceEntries } from "../../app/redux/selectors";
 import { fromActivityLog } from "../activity-log/activity-log.selectors";
 import { IActivityLogEntry } from "../activity-log/activity-log.types";
+import { fromActivityTypes } from "../activity-types/activity-types.selectors";
 import { IAttendanceEntry } from "../attendance/attendance.state";
 import { fromConfiguration } from "../configuration/configuration.selectors";
 
@@ -17,7 +18,7 @@ export interface IAttendanceWithTimes extends IAttendanceEntry {
 const attendanceEntriesWithOvertime = createSelector(
     attendanceEntries,
     fromActivityLog.activityLogEntriesByDay,
-    activityTypes,
+    fromActivityTypes.getState,
     fromConfiguration.getState,
     (attendances, entries, types, configuration) => {
         const nonWorkingIds: string[] = [];

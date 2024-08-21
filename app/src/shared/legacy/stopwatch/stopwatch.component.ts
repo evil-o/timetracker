@@ -1,8 +1,9 @@
 import { Component } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { map, Observable, Subject, timer, withLatestFrom } from "rxjs";
-import { activityTypes, stopWatchState } from "../../../app/redux/selectors";
+import { stopWatchState } from "../../../app/redux/selectors";
 import { activityTypeActions } from "../../../entities/activity-types/activity-types.actions";
+import { fromActivityTypes } from "../../../entities/activity-types/activity-types.selectors";
 import { IActivityType } from "../../../entities/activity-types/activity-types.types";
 import { ApplicationState } from "../../../entities/application/application.model";
 import { stopWatchActions } from "../../../entities/stop-watch/stop-watch.actions";
@@ -56,7 +57,7 @@ export class StopwatchComponent {
         );
 
         this.activities$ = this.store
-            .select(activityTypes)
+            .select(fromActivityTypes.getState)
             .pipe(map((v) => v.activities));
 
         this.logClick$

@@ -4,8 +4,8 @@ import { ApplicationState } from "../../entities/application/application.model";
 
 import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 import { map, Observable, Subject, withLatestFrom } from "rxjs";
-import * as fromStore from "../../app/redux/selectors";
 import { activityLogActions } from "../../entities/activity-log/activity-log.actions";
+import { fromActivityTypes } from "../../entities/activity-types/activity-types.selectors";
 import { IActivityType } from "../../entities/activity-types/activity-types.types";
 
 @Component({
@@ -30,7 +30,7 @@ export class ActivitiesComponent {
         private modalService: BsModalService
     ) {
         this.activities$ = store
-            .select(fromStore.activityTypes)
+            .select(fromActivityTypes.getState)
             .pipe(map((types) => types.activities));
         this.mergeSource$.subscribe((source) => {
             if (!source) {

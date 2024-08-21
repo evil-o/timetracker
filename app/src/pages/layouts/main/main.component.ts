@@ -3,6 +3,7 @@ import { Store } from "@ngrx/store";
 import { map, Observable } from "rxjs";
 import * as get from "../../../app/redux/selectors";
 import { activityTypeActions } from "../../../entities/activity-types/activity-types.actions";
+import { fromActivityTypes } from "../../../entities/activity-types/activity-types.selectors";
 import {
     IActivityType,
     IActivityTypes,
@@ -23,7 +24,7 @@ export class MainComponent implements OnInit {
     public storageUpdateComplete$: Observable<boolean>;
 
     constructor(private store: Store<ApplicationState>) {
-        this.activityTypes$ = this.store.select(get.activityTypes);
+        this.activityTypes$ = this.store.select(fromActivityTypes.getState);
         this.storageVersion$ = this.store.select(get.storageVersion);
         this.storageUpdateComplete$ = this.storageVersion$.pipe(
             map((version) => version.upgradeComplete)

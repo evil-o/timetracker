@@ -1,8 +1,6 @@
 import { createSelector } from "@ngrx/store";
 import { ApplicationState } from "../../../entities/application/application.model";
 
-export const activityTypes = (state: ApplicationState) => state.activityTypes;
-
 export const storageVersion = (state: ApplicationState) => state.storageVersion;
 
 export const attendanceState = (state: ApplicationState) =>

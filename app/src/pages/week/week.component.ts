@@ -5,7 +5,6 @@ import { Store } from "@ngrx/store";
 
 import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 
-import * as fromStore from "../../app/redux/selectors";
 import { ApplicationState } from "../../entities/application/application.model";
 
 import { HtmlTableGenerator } from "../../app/models/htmlTableGenerator";
@@ -20,6 +19,7 @@ import {
 } from "rxjs";
 import { fromActivityLog } from "../../entities/activity-log/activity-log.selectors";
 import { IActivityLogEntry } from "../../entities/activity-log/activity-log.types";
+import { fromActivityTypes } from "../../entities/activity-types/activity-types.selectors";
 import { IActivityTypes } from "../../entities/activity-types/activity-types.types";
 import {
     fromApplication,
@@ -118,7 +118,7 @@ export class WeekComponent {
 
         this.week$.subscribe((week) => (this.week = week));
 
-        this.activityTypes$ = this.store.select(fromStore.activityTypes);
+        this.activityTypes$ = this.store.select(fromActivityTypes.getState);
         this.activityLogEntries$ = this.store.select(
             fromActivityLog.activityLogEntries
         );

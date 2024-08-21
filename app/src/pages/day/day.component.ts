@@ -21,6 +21,7 @@ import {
     IActivityLog,
     IActivityLogEntry,
 } from "../../entities/activity-log/activity-log.types";
+import { fromActivityTypes } from "../../entities/activity-types/activity-types.selectors";
 import {
     IActivityType,
     IActivityTypes,
@@ -95,7 +96,7 @@ export class DayComponent {
         );
         this.dateDayStart$ = this.dateDayRange$.pipe(map((range) => range[0]));
         this.dateDayEnd$ = this.dateDayRange$.pipe(map((range) => range[1]));
-        this.activityTypes$ = this.store.select(fromStore.activityTypes);
+        this.activityTypes$ = this.store.select(fromActivityTypes.getState);
         this.activities$ = this.activityTypes$.pipe(
             map((types) => types.activities)
         );
