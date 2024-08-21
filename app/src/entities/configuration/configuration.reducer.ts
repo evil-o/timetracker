@@ -1,7 +1,7 @@
 import { createReducer } from "@ngrx/store";
-import { produceOn } from "../../utils/ngrx";
-import { configurationActions } from "../actions/configuration.actions";
-import { ConfigurationState } from "../states/configuration";
+import { produceOn } from "../../app/utils/ngrx";
+import { configurationActions } from "./configuration.actions";
+import { ConfigurationState } from "./configuration.state";
 
 export const configurationReducer = createReducer(
     new ConfigurationState(),
