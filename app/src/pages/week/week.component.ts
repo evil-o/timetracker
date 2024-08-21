@@ -18,10 +18,13 @@ import {
     Observable,
     withLatestFrom,
 } from "rxjs";
-import { IAttendanceWithTimes } from "../../app/redux/selectors";
 import { fromActivityLog } from "../../entities/activity-log/activity-log.selectors";
 import { IActivityLogEntry } from "../../entities/activity-log/activity-log.types";
 import { IActivityTypes } from "../../entities/activity-types/activity-types.types";
+import {
+    fromApplication,
+    IAttendanceWithTimes,
+} from "../../entities/application/application.selectors";
 import {
     IAttendanceCorrection,
     IAttendanceEntry,
@@ -224,13 +227,15 @@ export class WeekComponent {
             map((v) => v.reduce((prev, curr) => prev + curr, 0))
         );
 
-        this.overallAttendanceSum$ = this.store.select(fromStore.overtimeSum);
+        this.overallAttendanceSum$ = this.store.select(
+            fromApplication.overtimeSum
+        );
         this.overallAttendanceSum$.subscribe(
             (sum) => (this.overallAttendanceSum = sum)
         );
 
         this.attendances$ = combineLatest([
-            this.store.select(fromStore.attendanceEntriesWithOvertime),
+            this.store.select(fromApplication.attendanceEntriesWithOvertime),
             this.week$,
         ]).pipe(
             map(([entries, week]) =>

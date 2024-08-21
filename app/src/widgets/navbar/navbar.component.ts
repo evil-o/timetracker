@@ -7,11 +7,13 @@ import {
 } from "@angular/core";
 
 import { Store } from "@ngrx/store";
-import { IAttendanceWithTimes } from "../../app/redux/selectors/index";
 import { ApplicationState } from "../../entities/application/application.model";
 
 import { Observable } from "rxjs";
-import * as fromStore from "../../app/redux/selectors";
+import {
+    fromApplication,
+    IAttendanceWithTimes,
+} from "../../entities/application/application.selectors";
 import { storageVersionActions } from "../../entities/storage-version/storage-version.actions";
 
 @Component({
@@ -49,10 +51,12 @@ export class NavbarComponent {
 
     constructor(private store: Store<ApplicationState>) {
         this.attendances$ = this.store.select(
-            fromStore.attendanceEntriesWithOvertime
+            fromApplication.attendanceEntriesWithOvertime
         );
 
-        this.overallAttendanceSum$ = this.store.select(fromStore.overtimeSum);
+        this.overallAttendanceSum$ = this.store.select(
+            fromApplication.overtimeSum
+        );
     }
 
     public createActivity(name: string) {
