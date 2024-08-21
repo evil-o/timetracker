@@ -14,7 +14,6 @@ import {
     timer,
     withLatestFrom,
 } from "rxjs";
-import * as fromStore from "../../app/redux/selectors";
 import { activityLogActions } from "../../entities/activity-log/activity-log.actions";
 import { fromActivityLog } from "../../entities/activity-log/activity-log.selectors";
 import {
@@ -26,6 +25,7 @@ import {
     IActivityType,
     IActivityTypes,
 } from "../../entities/activity-types/activity-types.types";
+import { fromAttendance } from "../../entities/attendance/attendance.selectors";
 import { ActivityPickerComponent } from "../../shared/legacy/activity-picker/activity-picker.component";
 import { stringToDuration } from "../../shared/legacy/helpers";
 import { HourBadgeComponent } from "../../shared/legacy/hour-badge/hour-badge.component";
@@ -138,7 +138,7 @@ export class DayComponent {
             )
         );
 
-        this.singInTime$ = this.store.select(fromStore.attendanceEntries).pipe(
+        this.singInTime$ = this.store.select(fromAttendance.getEntries).pipe(
             withLatestFrom(this.date$),
             map(([entries, date]) => {
                 const entry = entries.find(

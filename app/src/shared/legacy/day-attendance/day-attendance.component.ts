@@ -1,9 +1,9 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { combineLatest, map, Observable, Subject, withLatestFrom } from "rxjs";
-import * as get from "../../../app/redux/selectors";
 import { ApplicationState } from "../../../entities/application/application.model";
 import { attendanceActions } from "../../../entities/attendance/attendance.actions";
+import { fromAttendance } from "../../../entities/attendance/attendance.selectors";
 import {
     AttendanceEntry,
     IAttendanceCorrection,
@@ -65,7 +65,7 @@ export class DayAttendanceComponent implements OnInit {
                 );
             });
 
-        this.entries$ = this.store.select(get.attendanceEntries);
+        this.entries$ = this.store.select(fromAttendance.getEntries);
         this.entry$ = combineLatest([this.entries$, this.date$]).pipe(
             map(([v, date]) =>
                 v.find((e) => AttendanceEntry.equalsDate(e, date))
