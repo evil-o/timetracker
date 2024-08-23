@@ -1,8 +1,5 @@
 import * as convert from "color-convert";
-import {
-    IActivityTypeColor,
-    INamedColor,
-} from "../../entities/activity-color/activity-color.types";
+import { IActivityTypeColor, INamedColor } from "./activity-color.types";
 
 // defined base colors in RGB
 const baseColorsRgb: INamedColor[] = [

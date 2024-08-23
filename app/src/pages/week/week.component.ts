@@ -5,7 +5,7 @@ import { Store } from "@ngrx/store";
 
 import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 
-import { ApplicationState } from "../../entities/application/application.model";
+import { ApplicationState } from "../../entities/application/models/application.model";
 
 import { HtmlTableGenerator } from "../../app/models/htmlTableGenerator";
 
@@ -17,18 +17,18 @@ import {
     Observable,
     withLatestFrom,
 } from "rxjs";
-import { fromActivityLog } from "../../entities/activity-log/activity-log.selectors";
-import { IActivityLogEntry } from "../../entities/activity-log/activity-log.types";
-import { fromActivityTypes } from "../../entities/activity-types/activity-types.selectors";
-import { IActivityTypes } from "../../entities/activity-types/activity-types.types";
+import { fromActivityLog } from "../../entities/activity-log/models/activity-log.selectors";
+import { IActivityLogEntry } from "../../entities/activity-log/models/activity-log.types";
+import { fromActivityTypes } from "../../entities/activity-types/models/activity-types.selectors";
+import { IActivityTypes } from "../../entities/activity-types/models/activity-types.types";
 import {
     fromApplication,
     IAttendanceWithTimes,
-} from "../../entities/application/application.selectors";
+} from "../../entities/application/models/application.selectors";
 import {
     IAttendanceCorrection,
     IAttendanceEntry,
-} from "../../entities/attendance/attendance.state";
+} from "../../entities/attendance/models/attendance.state";
 import { getFirstDayOfCalendarWeek } from "../../shared/legacy/helpers";
 import { FormatHoursPipe } from "../../shared/legacy/pipes/format-hours.pipe";
 import { IGroupEntry } from "../../shared/legacy/pipes/group-activity-log-entries-by-id.pipe";

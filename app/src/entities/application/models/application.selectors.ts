@@ -1,10 +1,10 @@
 import { createSelector } from "@ngrx/store";
-import { fromActivityLog } from "../activity-log/activity-log.selectors";
-import { IActivityLogEntry } from "../activity-log/activity-log.types";
-import { fromActivityTypes } from "../activity-types/activity-types.selectors";
-import { fromAttendance } from "../attendance/attendance.selectors";
-import { IAttendanceEntry } from "../attendance/attendance.state";
-import { fromConfiguration } from "../configuration/configuration.selectors";
+import { fromActivityLog } from "../../activity-log/models/activity-log.selectors";
+import { IActivityLogEntry } from "../../activity-log/models/activity-log.types";
+import { fromActivityTypes } from "../../activity-types/models/activity-types.selectors";
+import { fromAttendance } from "../../attendance/models/attendance.selectors";
+import { IAttendanceEntry } from "../../attendance/models/attendance.state";
+import { fromConfiguration } from "../../configuration/models/configuration.selectors";
 
 // TODO: move to models?
 export interface IAttendanceWithTimes extends IAttendanceEntry {

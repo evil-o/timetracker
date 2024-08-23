@@ -8,7 +8,7 @@ import {
 } from "@angular/core";
 
 import { TypeaheadDirective } from "ngx-bootstrap/typeahead";
-import { IActivityType } from "../../../entities/activity-types/activity-types.types";
+import { IActivityType } from "../../../entities/activity-types/models/activity-types.types";
 
 @Component({
     selector: "app-activity-picker",

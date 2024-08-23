@@ -1,4 +1,4 @@
-import { ApplicationState } from "../application/application.model";
+import { ApplicationState } from "../../application/models/application.model";
 
 const getState = (state: ApplicationState) => state.storageVersion;
 

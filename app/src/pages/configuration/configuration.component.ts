@@ -2,9 +2,9 @@ import { Component, OnInit } from "@angular/core";
 
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-import { ApplicationState } from "../../entities/application/application.model";
-import { configurationActions } from "../../entities/configuration/configuration.actions";
-import { fromConfiguration } from "../../entities/configuration/configuration.selectors";
+import { ApplicationState } from "../../entities/application/models/application.model";
+import { configurationActions } from "../../entities/configuration/models/configuration.actions";
+import { fromConfiguration } from "../../entities/configuration/models/configuration.selectors";
 
 @Component({
     selector: "app-configuration",

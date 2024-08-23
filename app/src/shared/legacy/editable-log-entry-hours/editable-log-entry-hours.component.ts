@@ -6,7 +6,7 @@ import {
     Output,
     ViewChild,
 } from "@angular/core";
-import { ActivityLogEntry } from "../../../entities/activity-log/activity-log.state";
+import { ActivityLogEntry } from "../../../entities/activity-log/models/activity-log.state";
 import { stringToDuration } from "../helpers";
 
 @Component({

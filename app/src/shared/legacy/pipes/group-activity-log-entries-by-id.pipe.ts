@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from "@angular/core";
 import { map, Observable } from "rxjs";
-import { IActivityLogEntry } from "../../../entities/activity-log/activity-log.types";
+import { IActivityLogEntry } from "../../../entities/activity-log/models/activity-log.types";
 
 export interface IGroupEntry {
     activityId: string;

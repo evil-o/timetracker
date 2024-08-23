@@ -1,14 +1,14 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { combineLatest, map, Observable, Subject, withLatestFrom } from "rxjs";
-import { ApplicationState } from "../../../entities/application/application.model";
-import { attendanceActions } from "../../../entities/attendance/attendance.actions";
-import { fromAttendance } from "../../../entities/attendance/attendance.selectors";
+import { ApplicationState } from "../../../entities/application/models/application.model";
+import { attendanceActions } from "../../../entities/attendance/models/attendance.actions";
+import { fromAttendance } from "../../../entities/attendance/models/attendance.selectors";
 import {
     AttendanceEntry,
     IAttendanceCorrection,
     IAttendanceEntry,
-} from "../../../entities/attendance/attendance.state";
+} from "../../../entities/attendance/models/attendance.state";
 import {
     dateToTimeInputValue,
     stringToDuration,

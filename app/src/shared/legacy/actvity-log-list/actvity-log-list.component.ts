@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { combineLatest, map, Observable } from "rxjs";
-import { IActivityLogEntry } from "../../../entities/activity-log/activity-log.types";
+import { IActivityLogEntry } from "../../../entities/activity-log/models/activity-log.types";
 import {
     IActivityType,
     IActivityTypes,
-} from "../../../entities/activity-types/activity-types.types";
+} from "../../../entities/activity-types/models/activity-types.types";
 
 interface IGroupEntry {
     activityId: string;

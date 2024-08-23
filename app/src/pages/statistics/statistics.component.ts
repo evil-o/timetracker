@@ -1,11 +1,11 @@
 import { Component } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { BehaviorSubject, Observable } from "rxjs";
-import { fromActivityLog } from "../../entities/activity-log/activity-log.selectors";
-import { IActivityLog } from "../../entities/activity-log/activity-log.types";
-import { fromActivityTypes } from "../../entities/activity-types/activity-types.selectors";
-import { IActivityTypes } from "../../entities/activity-types/activity-types.types";
-import { ApplicationState } from "../../entities/application/application.model";
+import { fromActivityLog } from "../../entities/activity-log/models/activity-log.selectors";
+import { IActivityLog } from "../../entities/activity-log/models/activity-log.types";
+import { fromActivityTypes } from "../../entities/activity-types/models/activity-types.selectors";
+import { IActivityTypes } from "../../entities/activity-types/models/activity-types.types";
+import { ApplicationState } from "../../entities/application/models/application.model";
 
 function getMonthDateRange(year: number, month: number) {
     const start = new Date(year, month, 1);

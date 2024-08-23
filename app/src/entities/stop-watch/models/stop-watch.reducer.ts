@@ -1,5 +1,5 @@
 import { createReducer } from "@ngrx/store";
-import { produceOn } from "../../app/utils/ngrx";
+import { produceOn } from "../../../app/utils/ngrx";
 import { stopWatchActions } from "./stop-watch.actions";
 import { StopWatch } from "./stop-watch.state";
 

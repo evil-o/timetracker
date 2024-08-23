@@ -1,12 +1,12 @@
 import { Component, TemplateRef } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { ApplicationState } from "../../entities/application/application.model";
+import { ApplicationState } from "../../entities/application/models/application.model";
 
 import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 import { map, Observable, Subject, withLatestFrom } from "rxjs";
-import { activityLogActions } from "../../entities/activity-log/activity-log.actions";
-import { fromActivityTypes } from "../../entities/activity-types/activity-types.selectors";
-import { IActivityType } from "../../entities/activity-types/activity-types.types";
+import { activityLogActions } from "../../entities/activity-log/models/activity-log.actions";
+import { fromActivityTypes } from "../../entities/activity-types/models/activity-types.selectors";
+import { IActivityType } from "../../entities/activity-types/models/activity-types.types";
 
 @Component({
     selector: "app-activities",

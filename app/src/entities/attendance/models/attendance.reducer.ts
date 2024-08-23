@@ -1,7 +1,7 @@
 import { v4 as uuid } from "uuid";
 
 import { createReducer } from "@ngrx/store";
-import { produceOn } from "../../app/utils/ngrx";
+import { produceOn } from "../../../app/utils/ngrx";
 import { attendanceActions } from "./attendance.actions";
 import {
     AttendanceEntry,

@@ -1,5 +1,5 @@
 import { createSelector } from "@ngrx/store";
-import { ApplicationState } from "../application/application.model";
+import { ApplicationState } from "../../application/models/application.model";
 import { IActivityLogEntry } from "./activity-log.types";
 
 const allActivities = (state: ApplicationState) => state.activityLog;

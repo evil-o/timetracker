@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild } from "@angular/core";
 
 import { Store } from "@ngrx/store";
 
-import { ApplicationState } from "../../entities/application/application.model";
+import { ApplicationState } from "../../entities/application/models/application.model";
 
 import { BsDatepickerDirective } from "ngx-bootstrap/datepicker";
 import {
@@ -14,18 +14,18 @@ import {
     timer,
     withLatestFrom,
 } from "rxjs";
-import { activityLogActions } from "../../entities/activity-log/activity-log.actions";
-import { fromActivityLog } from "../../entities/activity-log/activity-log.selectors";
+import { activityLogActions } from "../../entities/activity-log/models/activity-log.actions";
+import { fromActivityLog } from "../../entities/activity-log/models/activity-log.selectors";
 import {
     IActivityLog,
     IActivityLogEntry,
-} from "../../entities/activity-log/activity-log.types";
-import { fromActivityTypes } from "../../entities/activity-types/activity-types.selectors";
+} from "../../entities/activity-log/models/activity-log.types";
+import { fromActivityTypes } from "../../entities/activity-types/models/activity-types.selectors";
 import {
     IActivityType,
     IActivityTypes,
-} from "../../entities/activity-types/activity-types.types";
-import { fromAttendance } from "../../entities/attendance/attendance.selectors";
+} from "../../entities/activity-types/models/activity-types.types";
+import { fromAttendance } from "../../entities/attendance/models/attendance.selectors";
 import { ActivityPickerComponent } from "../../shared/legacy/activity-picker/activity-picker.component";
 import { stringToDuration } from "../../shared/legacy/helpers";
 import { HourBadgeComponent } from "../../shared/legacy/hour-badge/hour-badge.component";

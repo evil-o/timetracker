@@ -11,7 +11,7 @@ import { FormsModule } from "@angular/forms";
 import { By } from "@angular/platform-browser";
 import { TypeaheadDirective, TypeaheadModule } from "ngx-bootstrap/typeahead";
 import { of } from "rxjs";
-import { IActivityType } from "../../../entities/activity-types/activity-types.types";
+import { IActivityType } from "../../../entities/activity-types/models/activity-types.types";
 import { ActivityPickerComponent } from "./activity-picker.component";
 
 @Component({
