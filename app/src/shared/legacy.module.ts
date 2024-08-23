@@ -21,7 +21,6 @@ import { ActivityTypeIdToNamePipe } from "./legacy/pipes/activity-type-id-to-nam
 import { FormatHoursPipe } from "./legacy/pipes/format-hours.pipe";
 import { GroupActivityLogEntriesByIdPipe } from "./legacy/pipes/group-activity-log-entries-by-id.pipe";
 import { LogEntryTallyPipe } from "./legacy/pipes/log-entry-tally.pipe";
-import { PadNumberPipe } from "./legacy/pipes/pad-number.pipe";
 import { PrecisionPipe } from "./legacy/pipes/precision.pipe";
 import { StopwatchComponent } from "./legacy/stopwatch/stopwatch.component";
 import { TallyComponent } from "./legacy/tally/tally.component";
@@ -47,7 +46,6 @@ const legacyDeclarations = [
     // pipes
     ActivityTypeIdToNamePipe,
     PrecisionPipe,
-    PadNumberPipe,
     LogEntryTallyPipe,
     FormatHoursPipe,
     GroupActivityLogEntriesByIdPipe,

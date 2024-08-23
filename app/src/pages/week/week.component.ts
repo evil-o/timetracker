@@ -32,7 +32,7 @@ import {
 import { getFirstDayOfCalendarWeek } from "../../shared/legacy/helpers";
 import { FormatHoursPipe } from "../../shared/legacy/pipes/format-hours.pipe";
 import { IGroupEntry } from "../../shared/legacy/pipes/group-activity-log-entries-by-id.pipe";
-import { PadNumberPipe } from "../../shared/legacy/pipes/pad-number.pipe";
+import { PadNumberPipe } from "../../shared/lib";
 
 interface IDayEntry {
     dayOfTheWeek: number;

@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from "@angular/core";
 
-import { padNumber } from "../helpers";
+import { padNumber } from "./pad-number";
 
 @Pipe({
     name: "padNumber",

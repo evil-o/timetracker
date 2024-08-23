@@ -1,4 +1,4 @@
-import { padNumber } from "../../shared/legacy/helpers";
+import { padNumber } from "../../../shared/lib";
 
 export function makeTimestampedFileName(
     baseFileName: string,

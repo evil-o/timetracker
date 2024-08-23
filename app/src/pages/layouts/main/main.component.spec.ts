@@ -25,10 +25,10 @@ import { ActivityTypeIdToNamePipe } from "../../../shared/legacy/pipes/activity-
 import { FormatHoursPipe } from "../../../shared/legacy/pipes/format-hours.pipe";
 import { GroupActivityLogEntriesByIdPipe } from "../../../shared/legacy/pipes/group-activity-log-entries-by-id.pipe";
 import { LogEntryTallyPipe } from "../../../shared/legacy/pipes/log-entry-tally.pipe";
-import { PadNumberPipe } from "../../../shared/legacy/pipes/pad-number.pipe";
 import { PrecisionPipe } from "../../../shared/legacy/pipes/precision.pipe";
 import { TallyComponent } from "../../../shared/legacy/tally/tally.component";
 import { TimeBadgeComponent } from "../../../shared/legacy/time-badge/time-badge.component";
+import { SharedModule } from "../../../shared/shared.module";
 import { NavbarComponent } from "../../../widgets/navbar/navbar.component";
 import { ActivitiesComponent } from "../../activities/activities.component";
 import { ConfigurationComponent } from "../../configuration/configuration.component";
@@ -61,7 +61,6 @@ describe(MainComponent.name, () => {
                 NavbarComponent,
                 NoActivityLogEntryPresentComponent,
                 OvertimeBadgeComponent,
-                PadNumberPipe,
                 PrecisionPipe,
                 TallyComponent,
                 TimeBadgeComponent,
@@ -76,6 +75,7 @@ describe(MainComponent.name, () => {
                 TabsModule,
                 TypeaheadModule.forRoot(),
                 RouterTestingModule.withRoutes(appRoutes),
+                SharedModule,
             ],
         }).compileComponents();
     });
