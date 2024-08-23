@@ -7,8 +7,6 @@ import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 
 import { ApplicationState } from "../../entities/application/models/application.model";
 
-import { HtmlTableGenerator } from "../../app/models/htmlTableGenerator";
-
 import currentWeekNumber from "current-week-number";
 import {
     BehaviorSubject,
@@ -33,6 +31,7 @@ import { getFirstDayOfCalendarWeek } from "../../shared/legacy/helpers";
 import { FormatHoursPipe } from "../../shared/legacy/pipes/format-hours.pipe";
 import { IGroupEntry } from "../../shared/legacy/pipes/group-activity-log-entries-by-id.pipe";
 import { PadNumberPipe } from "../../shared/lib";
+import { HtmlTableGenerator } from "../../shared/models";
 
 interface IDayEntry {
     dayOfTheWeek: number;
