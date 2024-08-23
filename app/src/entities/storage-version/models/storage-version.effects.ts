@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 
 import { filter, map, withLatestFrom } from "rxjs";
-import { downloadDataAsFile } from "../../../app/utils/download-data-as-file";
+import { downloadDataAsFile } from "../../../shared/lib";
 import { rehydratedStorageKeys } from "../../application/meta-reducers";
 import { ApplicationState } from "../../application/models/application.model";
 import { makeTimestampedFileName } from "../lib/file-name";
