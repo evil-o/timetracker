@@ -1,5 +1,5 @@
 import { createReducer } from "@ngrx/store";
-import { produceOn } from "../../../app/utils/ngrx";
+import { produceOn } from "../../../shared/lib";
 import { configurationActions } from "./configuration.actions";
 import { ConfigurationState } from "./configuration.state";
 

@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { produceOn } from "../../../app/utils/ngrx";
+import { produceOn } from "../../../shared/lib";
 import { storageVersionActions } from "./storage-version.actions";
 import { StorageVersion } from "./storage-version.state";
 

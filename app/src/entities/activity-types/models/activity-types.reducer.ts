@@ -1,6 +1,6 @@
 import { createReducer } from "@ngrx/store";
 import { v4 as uuid } from "uuid";
-import { produceOn } from "../../../app/utils/ngrx";
+import { produceOn } from "../../../shared/lib";
 import { activityLogActions } from "../../activity-log/models/activity-log.actions";
 import { storageVersionActions } from "../../storage-version/models/storage-version.actions";
 import { activityTypeActions } from "./activity-types.actions";
