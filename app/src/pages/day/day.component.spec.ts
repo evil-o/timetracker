@@ -14,10 +14,10 @@ import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
 import { activityLogActions } from "../../entities/activity-log/models/activity-log.actions";
 import { ActivityLogEntry } from "../../entities/activity-log/models/activity-log.state";
+import { ActivityTypesModule } from "../../entities/activity-types/activity-types.module";
 import { ApplicationState } from "../../entities/application/models/application.model";
 import { ActivityColorPickerComponent } from "../../shared/legacy/activity-color-picker/activity-color-picker.component";
 import { ActivityLogEntryComponent } from "../../shared/legacy/activity-log-entry/activity-log-entry.component";
-import { ActivityPickerComponent } from "../../shared/legacy/activity-picker/activity-picker.component";
 import { ActivityLogListComponent } from "../../shared/legacy/actvity-log-list/actvity-log-list.component";
 import { DayAttendanceComponent } from "../../shared/legacy/day-attendance/day-attendance.component";
 import { EditableLogEntryDescriptionComponent } from "../../shared/legacy/editable-log-entry-description/editable-log-entry-description.component";
@@ -65,7 +65,6 @@ describe("DayComponent", () => {
                 ActivityLogEntryComponent,
                 ActivityLogListComponent,
                 ActivityTypeIdToNamePipe,
-                ActivityPickerComponent,
                 DayComponent,
                 DayAttendanceComponent,
                 EditableLogEntryDescriptionComponent,
@@ -82,6 +81,7 @@ describe("DayComponent", () => {
                 FormsModule,
                 StoreModule.forRoot(),
                 TypeaheadModule.forRoot(),
+                ActivityTypesModule,
             ],
             providers: [provideNoopAnimations()],
             schemas: [NO_ERRORS_SCHEMA],

@@ -25,8 +25,8 @@ import {
     IActivityType,
     IActivityTypes,
 } from "../../entities/activity-types/models/activity-types.types";
+import { ActivityPickerComponent } from "../../entities/activity-types/ui";
 import { fromAttendance } from "../../entities/attendance/models/attendance.selectors";
-import { ActivityPickerComponent } from "../../shared/legacy/activity-picker/activity-picker.component";
 import { stringToDuration } from "../../shared/legacy/helpers";
 import { HourBadgeComponent } from "../../shared/legacy/hour-badge/hour-badge.component";
 import { TimeBadgeComponent } from "../../shared/legacy/time-badge/time-badge.component";

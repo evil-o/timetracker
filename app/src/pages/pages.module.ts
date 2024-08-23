@@ -4,6 +4,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule } from "@angular/router";
 import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
 import { TabsModule } from "ngx-bootstrap/tabs";
+import { ActivityTypesModule } from "../entities/activity-types/activity-types.module";
 import { LegacyModule } from "../shared/legacy.module";
 import { WidgetsModule } from "../widgets/widgets.module";
 import { ActivitiesComponent } from "./activities/activities.component";
@@ -37,6 +38,9 @@ const pages = [
         LegacyModule,
         TabsModule,
         RouterModule,
+
+        // entities
+        ActivityTypesModule,
     ],
 })
 export class PagesModule {}

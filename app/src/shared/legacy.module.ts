@@ -5,10 +5,10 @@ import { BrowserModule } from "@angular/platform-browser";
 import { AccordionModule } from "ngx-bootstrap/accordion";
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
 
+import { ActivityTypesModule } from "../entities/activity-types/activity-types.module";
 import { ActivityAggregationChartComponent } from "./legacy/activity-aggregation-chart/activity-aggregation-chart.component";
 import { ActivityColorPickerComponent } from "./legacy/activity-color-picker/activity-color-picker.component";
 import { ActivityLogEntryComponent } from "./legacy/activity-log-entry/activity-log-entry.component";
-import { ActivityPickerComponent } from "./legacy/activity-picker/activity-picker.component";
 import { ActivityTypeListComponent } from "./legacy/activity-type-list/activity-type-list.component";
 import { ActivityLogListComponent } from "./legacy/actvity-log-list/actvity-log-list.component";
 import { DayAttendanceComponent } from "./legacy/day-attendance/day-attendance.component";
@@ -32,7 +32,6 @@ const legacyDeclarations = [
     ActivityLogEntryComponent,
     ActivityLogListComponent,
     ActivityTypeListComponent,
-    ActivityPickerComponent,
     DayAttendanceComponent,
     EditableLogEntryDescriptionComponent,
     EditableLogEntryHoursComponent,
@@ -62,6 +61,9 @@ const standaloneImports = [ActivityAggregationChartComponent];
         FormsModule,
         AccordionModule,
         TypeaheadModule,
+
+        // temporary workarounds:
+        ActivityTypesModule,
     ],
     declarations: [...legacyDeclarations],
     exports: [...legacyDeclarations, standaloneImports],

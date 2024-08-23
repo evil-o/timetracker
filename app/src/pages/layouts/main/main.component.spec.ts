@@ -8,11 +8,11 @@ import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
 import { TabsModule } from "ngx-bootstrap/tabs";
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
 import { appRoutes } from "../../../app/app.routes";
+import { ActivityTypesModule } from "../../../entities/activity-types/activity-types.module";
 import { metaReducers } from "../../../entities/application/meta-reducers";
 import { reducers } from "../../../entities/application/reducers";
 import { ActivityColorPickerComponent } from "../../../shared/legacy/activity-color-picker/activity-color-picker.component";
 import { ActivityLogEntryComponent } from "../../../shared/legacy/activity-log-entry/activity-log-entry.component";
-import { ActivityPickerComponent } from "../../../shared/legacy/activity-picker/activity-picker.component";
 import { ActivityTypeListComponent } from "../../../shared/legacy/activity-type-list/activity-type-list.component";
 import { ActivityLogListComponent } from "../../../shared/legacy/actvity-log-list/actvity-log-list.component";
 import { DayAttendanceComponent } from "../../../shared/legacy/day-attendance/day-attendance.component";
@@ -46,7 +46,6 @@ describe(MainComponent.name, () => {
                 ActivityTypeIdToNamePipe,
                 ActivityLogEntryComponent,
                 ActivityLogListComponent,
-                ActivityPickerComponent,
                 ActivityTypeListComponent,
                 MainComponent,
                 ConfigurationComponent,
@@ -69,6 +68,7 @@ describe(MainComponent.name, () => {
             ],
             imports: [
                 AccordionModule,
+                ActivityTypesModule,
                 BsDatepickerModule.forRoot(),
                 FormsModule,
                 StoreModule.forRoot(reducers, { metaReducers }),
