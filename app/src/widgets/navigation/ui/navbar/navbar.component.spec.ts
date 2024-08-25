@@ -33,10 +33,10 @@ import { OvertimeBadgeComponent } from "../../../../shared/legacy/overtime-badge
 import { GroupActivityLogEntriesByIdPipe } from "../../../../shared/legacy/pipes/group-activity-log-entries-by-id.pipe";
 import { LogEntryTallyPipe } from "../../../../shared/legacy/pipes/log-entry-tally.pipe";
 import { PrecisionPipe } from "../../../../shared/legacy/pipes/precision.pipe";
-import { TallyComponent } from "../../../../shared/legacy/tally/tally.component";
 import { TimeBadgeComponent } from "../../../../shared/legacy/time-badge/time-badge.component";
 import { PadNumberPipe } from "../../../../shared/lib";
 import { ActivityLogListComponent } from "../../../activity-log/ui/activity-log-list/actvity-log-list.component";
+import { TallyComponent } from "../../../activity-log/ui/tally/tally.component";
 
 xdescribe("NavbarComponent", () => {
     let component: NavbarComponent;

@@ -43,9 +43,9 @@ import { ActivityTypeIdToNamePipe } from "../../shared/legacy/pipes/activity-typ
 import { GroupActivityLogEntriesByIdPipe } from "../../shared/legacy/pipes/group-activity-log-entries-by-id.pipe";
 import { LogEntryTallyPipe } from "../../shared/legacy/pipes/log-entry-tally.pipe";
 import { PrecisionPipe } from "../../shared/legacy/pipes/precision.pipe";
-import { TallyComponent } from "../../shared/legacy/tally/tally.component";
 import { TimeBadgeComponent } from "../../shared/legacy/time-badge/time-badge.component";
 import { ActivityLogListComponent } from "../../widgets/activity-log/ui/activity-log-list/actvity-log-list.component";
+import { TallyComponent } from "../../widgets/activity-log/ui/tally/tally.component";
 import { NavigationWidgetsModule } from "../../widgets/navigation/navigation-widgets.module";
 import { ActivitiesComponent } from "../activities/activities.component";
 import { ConfigurationComponent } from "../configuration/configuration.component";
