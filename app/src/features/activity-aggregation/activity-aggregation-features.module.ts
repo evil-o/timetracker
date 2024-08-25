@@ -1,3 +1,4 @@
+import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { SharedModule } from "../../shared/shared.module";
 import { ActivityAggregationChartComponent } from "./ui/activity-aggregation-chart/activity-aggregation-chart.component";
@@ -7,7 +8,7 @@ const standaloneComponents = [ActivityAggregationChartComponent];
 const components = [OvertimeBadgeComponent];
 
 @NgModule({
-    imports: [...standaloneComponents, SharedModule],
+    imports: [...standaloneComponents, CommonModule, SharedModule],
     declarations: [...components],
     exports: [...components, ...standaloneComponents],
 })

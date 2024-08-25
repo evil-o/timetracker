@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { EditableLogEntryDescriptionComponent } from "../../../../entities/activity-log/ui/editable-log-entry-description/editable-log-entry-description.component";
 import { EditableLogEntryHoursComponent } from "../../../../entities/activity-log/ui/editable-log-entry-hours/editable-log-entry-hours.component";
-import { HourBadgeComponent } from "../../../../shared/legacy/hour-badge/hour-badge.component";
+import { HourBadgeComponent } from "../../../../shared/ui/hour-badge/hour-badge.component";
 import { ActivityLogEntryComponent } from "./activity-log-entry.component";
 
 import { provideNoopAnimations } from "@angular/platform-browser/animations";

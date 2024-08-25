@@ -7,7 +7,6 @@ import { TypeaheadModule } from "ngx-bootstrap/typeahead";
 
 import { ActivityTypeEntitiesModule } from "../entities/activity-type/activity-type-entities.module";
 import { DayAttendanceComponent } from "./legacy/day-attendance/day-attendance.component";
-import { HourBadgeComponent } from "./legacy/hour-badge/hour-badge.component";
 import { NoActivityLogEntryPresentComponent } from "./legacy/no-activity-log-entry-present/no-activity-log-entry-present.component";
 import { StopwatchComponent } from "./legacy/stopwatch/stopwatch.component";
 import { SharedModule } from "./shared.module";
@@ -16,7 +15,6 @@ const legacyDeclarations = [
     // components
     DayAttendanceComponent,
     StopwatchComponent,
-    HourBadgeComponent,
     NoActivityLogEntryPresentComponent,
 ];
 
