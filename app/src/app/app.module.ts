@@ -27,14 +27,12 @@ import { TabsModule } from "ngx-bootstrap/tabs";
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
 
 import { PagesModule } from "../pages/pages.module";
-import { LegacyModule } from "../shared/legacy.module";
 import { appRoutes } from "./app.routes";
 
 @NgModule({
     declarations: [AppComponent],
     imports: [
         PagesModule,
-        LegacyModule,
         BrowserModule,
         CommonModule,
         FormsModule,

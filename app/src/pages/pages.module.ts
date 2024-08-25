@@ -8,7 +8,6 @@ import { ActivityLogEntitiesModule } from "../entities/activity-log/activity-log
 import { ActivityTypeEntitiesModule } from "../entities/activity-type/activity-type-entities.module";
 import { ActivityAggregationFeaturesModule } from "../features/activity-aggregation/activity-aggregation-features.module";
 import { AcivityColorFeaturesModule } from "../features/activity-color/activity-color-features.module";
-import { LegacyModule } from "../shared/legacy.module";
 import { SharedModule } from "../shared/shared.module";
 import { ActivityLogWidgetsModule } from "../widgets/activity-log/activity-log-widgets.module";
 import { ActivityTypesListWidgetsModule } from "../widgets/activity-types-list/activity-types-list-widgets.module";
@@ -50,7 +49,6 @@ const pages = [
         BrowserModule,
         BsDatepickerModule,
         CommonModule,
-        LegacyModule,
         TabsModule,
         RouterModule,
     ],
