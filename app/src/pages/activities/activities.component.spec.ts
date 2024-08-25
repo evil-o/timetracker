@@ -7,7 +7,7 @@ import { TypeaheadModule } from "ngx-bootstrap/typeahead";
 import { ActivityPickerComponent } from "../../entities/activity-types/ui";
 import { ActivityColorPickerComponent } from "../../features/activity-color";
 import { AcivityColorFeaturesModule } from "../../features/activity-color/activity-color-features.module";
-import { WidgetsModule } from "../../widgets/widgets.module";
+import { ActivityTypesListWidgetsModule } from "../../widgets/activity-types-list/activity-types-list-widgets.module";
 import { ActivitiesComponent } from "./activities.component";
 
 describe(ActivitiesComponent.name, () => {
@@ -28,7 +28,7 @@ describe(ActivitiesComponent.name, () => {
                 TypeaheadModule.forRoot(),
 
                 AcivityColorFeaturesModule,
-                WidgetsModule,
+                ActivityTypesListWidgetsModule,
             ],
         }).compileComponents();
     });
