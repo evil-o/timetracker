@@ -28,7 +28,7 @@ import { PrecisionPipe } from "../../../shared/legacy/pipes/precision.pipe";
 import { TallyComponent } from "../../../shared/legacy/tally/tally.component";
 import { TimeBadgeComponent } from "../../../shared/legacy/time-badge/time-badge.component";
 import { SharedModule } from "../../../shared/shared.module";
-import { NavbarComponent } from "../../../widgets";
+import { NavbarComponent } from "../../../widgets/navigation";
 import { ActivitiesComponent } from "../../activities/activities.component";
 import { ConfigurationComponent } from "../../configuration/configuration.component";
 import { DayComponent } from "../../day/day.component";

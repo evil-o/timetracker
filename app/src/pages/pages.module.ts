@@ -8,7 +8,7 @@ import { ActivityTypesModule } from "../entities/activity-types/activity-types.m
 import { AcivityColorFeaturesModule } from "../features/activity-color/activity-color-features.module";
 import { LegacyModule } from "../shared/legacy.module";
 import { ActivityTypesListWidgetsModule } from "../widgets/activity-types-list/activity-types-list-widgets.module";
-import { WidgetsModule } from "../widgets/widgets.module";
+import { NavigationWidgetsModule } from "../widgets/navigation/navigation-widgets.module";
 import { ActivitiesComponent } from "./activities/activities.component";
 import { ConfigurationComponent } from "./configuration/configuration.component";
 import { DayComponent } from "./day/day.component";
@@ -31,7 +31,7 @@ const pages = [
     declarations: [...pages],
     exports: [...pages],
     imports: [
-        WidgetsModule,
+        NavigationWidgetsModule,
         ActivityTypesListWidgetsModule,
         AcivityColorFeaturesModule,
 

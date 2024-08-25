@@ -46,7 +46,7 @@ import { LogEntryTallyPipe } from "../../shared/legacy/pipes/log-entry-tally.pip
 import { PrecisionPipe } from "../../shared/legacy/pipes/precision.pipe";
 import { TallyComponent } from "../../shared/legacy/tally/tally.component";
 import { TimeBadgeComponent } from "../../shared/legacy/time-badge/time-badge.component";
-import { WidgetsModule } from "../../widgets/widgets.module";
+import { NavigationWidgetsModule } from "../../widgets/navigation/navigation-widgets.module";
 import { ActivitiesComponent } from "../activities/activities.component";
 import { ConfigurationComponent } from "../configuration/configuration.component";
 import { DayComponent } from "../day/day.component";
@@ -102,7 +102,7 @@ describe("WeekComponent", () => {
                 TabsModule.forRoot(),
                 TypeaheadModule.forRoot(),
                 AcivityColorFeaturesModule,
-                WidgetsModule,
+                NavigationWidgetsModule,
             ],
             providers: [
                 { provide: APP_BASE_HREF, useValue: "/" },
