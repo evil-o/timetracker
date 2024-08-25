@@ -16,13 +16,13 @@ import { ActivityTypeEntitiesModule } from "../../../entities/activity-type/acti
 import { ActivityTypeIdToNamePipe } from "../../../entities/activity-type/lib/activity-type-id-to-name.pipe";
 import { metaReducers } from "../../../entities/application/meta-reducers";
 import { reducers } from "../../../entities/application/reducers";
+import { OvertimeBadgeComponent } from "../../../features/activity-aggregation/ui/overtime-badge/overtime-badge.component";
 import { AcivityColorFeaturesModule } from "../../../features/activity-color/activity-color-features.module";
 import { ActivityLogEntryComponent } from "../../../features/activity-log/ui/activity-log-entry/activity-log-entry.component";
 import { FormatHoursPipe } from "../../../shared";
 import { DayAttendanceComponent } from "../../../shared/legacy/day-attendance/day-attendance.component";
 import { HourBadgeComponent } from "../../../shared/legacy/hour-badge/hour-badge.component";
 import { NoActivityLogEntryPresentComponent } from "../../../shared/legacy/no-activity-log-entry-present/no-activity-log-entry-present.component";
-import { OvertimeBadgeComponent } from "../../../shared/legacy/overtime-badge/overtime-badge.component";
 import { PrecisionPipe } from "../../../shared/lib/precision.pipe";
 import { SharedModule } from "../../../shared/shared.module";
 import { TimeBadgeComponent } from "../../../shared/ui/time-badge/time-badge.component";

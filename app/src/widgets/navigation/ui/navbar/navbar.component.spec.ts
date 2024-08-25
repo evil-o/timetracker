@@ -22,6 +22,7 @@ import { ActivityPickerComponent } from "../../../../entities/activity-type/ui";
 import { ApplicationState } from "../../../../entities/application/models/application.model";
 import { attendanceActions } from "../../../../entities/attendance/models/attendance.actions";
 import { configurationActions } from "../../../../entities/configuration/models/configuration.actions";
+import { OvertimeBadgeComponent } from "../../../../features/activity-aggregation/ui/overtime-badge/overtime-badge.component";
 import { AcivityColorFeaturesModule } from "../../../../features/activity-color/activity-color-features.module";
 import { ActivityLogEntryComponent } from "../../../../features/activity-log/ui/activity-log-entry/activity-log-entry.component";
 import { WeekComponent } from "../../../../pages/week/week.component";
@@ -31,7 +32,6 @@ import { DayAttendanceComponent } from "../../../../shared/legacy/day-attendance
 import { valueToTime } from "../../../../shared/legacy/helpers";
 import { HourBadgeComponent } from "../../../../shared/legacy/hour-badge/hour-badge.component";
 import { NoActivityLogEntryPresentComponent } from "../../../../shared/legacy/no-activity-log-entry-present/no-activity-log-entry-present.component";
-import { OvertimeBadgeComponent } from "../../../../shared/legacy/overtime-badge/overtime-badge.component";
 import { PadNumberPipe } from "../../../../shared/lib";
 import { PrecisionPipe } from "../../../../shared/lib/precision.pipe";
 import { TimeBadgeComponent } from "../../../../shared/ui/time-badge/time-badge.component";

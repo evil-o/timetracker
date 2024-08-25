@@ -31,6 +31,7 @@ import { effects } from "../../entities/application/effects";
 import { ApplicationState } from "../../entities/application/models/application.model";
 import { attendanceActions } from "../../entities/attendance/models/attendance.actions";
 import { configurationActions } from "../../entities/configuration/models/configuration.actions";
+import { OvertimeBadgeComponent } from "../../features/activity-aggregation/ui/overtime-badge/overtime-badge.component";
 import { AcivityColorFeaturesModule } from "../../features/activity-color/activity-color-features.module";
 import { ActivityLogEntryComponent } from "../../features/activity-log/ui/activity-log-entry/activity-log-entry.component";
 import { FormatHoursPipe } from "../../shared";
@@ -41,7 +42,6 @@ import {
 } from "../../shared/legacy/helpers";
 import { HourBadgeComponent } from "../../shared/legacy/hour-badge/hour-badge.component";
 import { NoActivityLogEntryPresentComponent } from "../../shared/legacy/no-activity-log-entry-present/no-activity-log-entry-present.component";
-import { OvertimeBadgeComponent } from "../../shared/legacy/overtime-badge/overtime-badge.component";
 import { PrecisionPipe } from "../../shared/lib/precision.pipe";
 import { TimeBadgeComponent } from "../../shared/ui/time-badge/time-badge.component";
 import { ActivityLogListComponent } from "../../widgets/activity-log/ui/activity-log-list/actvity-log-list.component";
