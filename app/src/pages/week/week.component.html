@@ -16,8 +16,14 @@
         style="max-height: 500pt; overflow-y: scroll"
     ></div>
     <div class="modal-footer">
-        <button class="btn btn-primary" (click)="savePrint()">Save</button>
-        <button class="btn btn-secondary" (click)="modalRef.hide()">
+        <button type="button" class="btn btn-primary" (click)="savePrint()">
+            Save
+        </button>
+        <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="modalRef.hide()"
+        >
             Cancel
         </button>
     </div>
@@ -94,6 +100,7 @@
         </li>
         <li class="nav-item ms-auto">
             <button
+                type="button"
                 class="btn btn-secondary"
                 (click)="openLargeModal(printPreview)"
             >

@@ -27,6 +27,7 @@
     </div>
     <div class="modal-footer">
         <button
+            type="button"
             class="btn btn-danger"
             data-testid="confirm-merge"
             [disabled]="!mergeSource || !moveTarget.name"
@@ -44,7 +45,9 @@
         >
             Merge and delete source
         </button>
-        <button class="btn btn-default" (click)="hideModal()">Cancel</button>
+        <button type="button" class="btn btn-default" (click)="hideModal()">
+            Cancel
+        </button>
     </div>
 </ng-template>
 

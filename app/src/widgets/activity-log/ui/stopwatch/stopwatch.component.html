@@ -16,6 +16,7 @@
         <span class="navbar-text me-3"> --:-- </span>
     </ng-template>
     <button
+        type="button"
         class="btn btn-outline-success me-1"
         [disabled]="this.isRunning$ | async"
         (click)="start()"
@@ -24,6 +25,7 @@
         <i class="fa fa-play"></i>
     </button>
     <button
+        type="button"
         class="btn btn-outline-secondary me-2"
         [disabled]="(this.isRunning$ | async) === false"
         (click)="pause()"
@@ -32,6 +34,7 @@
         <i class="fa fa-pause"></i>
     </button>
     <button
+        type="button"
         class="btn btn-outline-danger ms-2 me-2"
         [disabled]="
             (this.isStarted$ | async) === false &&
@@ -49,6 +52,7 @@
         [activities]="(this.activities$ | async) ?? undefined"
     ></app-activity-picker>
     <button
+        type="button"
         class="btn btn-outline-success"
         (click)="logClick$.next(picker.name)"
     >
