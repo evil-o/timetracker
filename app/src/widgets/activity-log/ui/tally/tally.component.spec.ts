@@ -9,7 +9,6 @@ import { HourBadgeComponent } from "../../../../shared/ui/hour-badge/hour-badge.
 import { TallyComponent } from "./tally.component";
 
 import { AccordionModule } from "ngx-bootstrap/accordion";
-import { LogEntryTallyPipe } from "../../../../entities/activity-log";
 import { ActivityTypeIdToNamePipe } from "../../../../entities/activity-type/lib/activity-type-id-to-name.pipe";
 import { metaReducers } from "../../../../entities/application/meta-reducers";
 import { reducers } from "../../../../entities/application/reducers";
@@ -29,7 +28,6 @@ describe("TallyComponent", () => {
                 FormatHoursPipe,
                 HourBadgeComponent,
                 TallyComponent,
-                LogEntryTallyPipe,
                 NoActivityLogEntryPresentComponent,
             ],
             imports: [

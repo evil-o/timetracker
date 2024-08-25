@@ -18,7 +18,6 @@ import { BsModalService } from "ngx-bootstrap/modal";
 import { TabsModule } from "ngx-bootstrap/tabs";
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
 import { of } from "rxjs";
-import { LogEntryTallyPipe } from "../../entities/activity-log";
 import { GroupActivityLogEntriesByIdPipe } from "../../entities/activity-log/lib/group-activity-log-entries-by-id.pipe";
 import { activityLogActions } from "../../entities/activity-log/models/activity-log.actions";
 import { EditableLogEntryDescriptionComponent } from "../../entities/activity-log/ui/editable-log-entry-description/editable-log-entry-description.component";
@@ -81,7 +80,6 @@ describe("WeekComponent", () => {
                 FormatHoursPipe,
                 GroupActivityLogEntriesByIdPipe,
                 HourBadgeComponent,
-                LogEntryTallyPipe,
                 NoActivityLogEntryPresentComponent,
                 OvertimeBadgeComponent,
                 PrecisionPipe,

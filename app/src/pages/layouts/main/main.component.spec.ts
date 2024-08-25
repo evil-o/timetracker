@@ -7,7 +7,6 @@ import { AccordionModule } from "ngx-bootstrap/accordion";
 import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
 import { TabsModule } from "ngx-bootstrap/tabs";
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
-import { LogEntryTallyPipe } from "../../../entities/activity-log";
 import { GroupActivityLogEntriesByIdPipe } from "../../../entities/activity-log/lib/group-activity-log-entries-by-id.pipe";
 import { EditableLogEntryDescriptionComponent } from "../../../entities/activity-log/ui/editable-log-entry-description/editable-log-entry-description.component";
 import { EditableLogEntryHoursComponent } from "../../../entities/activity-log/ui/editable-log-entry-hours/editable-log-entry-hours.component";
@@ -53,7 +52,6 @@ describe(MainComponent.name, () => {
                 FormatHoursPipe,
                 GroupActivityLogEntriesByIdPipe,
                 HourBadgeComponent,
-                LogEntryTallyPipe,
                 NavbarComponent,
                 NoActivityLogEntryPresentComponent,
                 OvertimeBadgeComponent,
