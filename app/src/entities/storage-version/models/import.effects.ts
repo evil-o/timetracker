@@ -2,10 +2,10 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Action } from "@ngrx/store";
 import { map, switchMap } from "rxjs";
-import { activityLogActions } from "../../activity-log/models/activity-log.actions";
-import { activityTypeActions } from "../../activity-type/models/activity-types.actions";
-import { ApplicationState } from "../../application/models/application.model";
-import { attendanceActions } from "../../attendance/models/attendance.actions";
+import { activityLogActions } from "../../activity-log";
+import { activityTypeActions } from "../../activity-type";
+import { ApplicationState } from "../../application";
+import { attendanceActions } from "../../attendance";
 import { storageVersionActions } from "./storage-version.actions";
 
 function correctAttendance(state: Partial<ApplicationState>) {

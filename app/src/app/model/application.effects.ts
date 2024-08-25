@@ -2,9 +2,9 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 import { map, withLatestFrom } from "rxjs";
-import { activityLogActions } from "../../entities/activity-log/models/activity-log.actions";
-import { activityTypeActions } from "../../entities/activity-type/models/activity-types.actions";
-import { ApplicationState } from "../../entities/application/models/application.model";
+import { activityLogActions } from "../../entities/activity-log";
+import { activityTypeActions } from "../../entities/activity-type";
+import { ApplicationState } from "../../entities/application";
 
 @Injectable()
 export class ApplicatioEffects {

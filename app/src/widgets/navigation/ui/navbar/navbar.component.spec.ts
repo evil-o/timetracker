@@ -13,30 +13,33 @@ import { AccordionModule } from "ngx-bootstrap/accordion";
 import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
 import { TabsModule } from "ngx-bootstrap/tabs";
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
-import { GroupActivityLogEntriesByIdPipe } from "../../../../entities/activity-log/lib/group-activity-log-entries-by-id.pipe";
-import { EditableLogEntryDescriptionComponent } from "../../../../entities/activity-log/ui/editable-log-entry-description/editable-log-entry-description.component";
-import { EditableLogEntryHoursComponent } from "../../../../entities/activity-log/ui/editable-log-entry-hours/editable-log-entry-hours.component";
-import { NoActivityLogEntryPresentComponent } from "../../../../entities/activity-log/ui/no-activity-log-entry-present/no-activity-log-entry-present.component";
-import { ActivityPickerComponent } from "../../../../entities/activity-type/ui";
+import {
+    EditableLogEntryDescriptionComponent,
+    EditableLogEntryHoursComponent,
+    GroupActivityLogEntriesByIdPipe,
+    NoActivityLogEntryPresentComponent,
+} from "../../../../entities/activity-log";
+import { ActivityPickerComponent } from "../../../../entities/activity-type";
 import { ApplicationState } from "../../../../entities/application/models/application.model";
 import { attendanceActions } from "../../../../entities/attendance/models/attendance.actions";
 import { configurationActions } from "../../../../entities/configuration/models/configuration.actions";
-import { OvertimeBadgeComponent } from "../../../../features/activity-aggregation/ui/overtime-badge/overtime-badge.component";
-import { AcivityColorFeaturesModule } from "../../../../features/activity-color/activity-color-features.module";
-import { ActivityLogEntryComponent } from "../../../../features/activity-log/ui/activity-log-entry/activity-log-entry.component";
+import { OvertimeBadgeComponent } from "../../../../features/activity-aggregation";
+import { AcivityColorFeaturesModule } from "../../../../features/activity-color";
+import { ActivityLogEntryComponent } from "../../../../features/activity-log";
 import { WeekComponent } from "../../../../pages/week/week.component";
 import { WelcomeComponent } from "../../../../pages/welcome/welcome.component";
 import {
     FormatHoursPipe,
     PadNumberPipe,
+    PrecisionPipe,
     valueToTime,
 } from "../../../../shared/lib";
-import { PrecisionPipe } from "../../../../shared/lib/precision.pipe";
-import { HourBadgeComponent } from "../../../../shared/ui/hour-badge/hour-badge.component";
-import { TimeBadgeComponent } from "../../../../shared/ui/time-badge/time-badge.component";
-import { ActivityLogListComponent } from "../../../activity-log/ui/activity-log-list/actvity-log-list.component";
-import { TallyComponent } from "../../../activity-log/ui/tally/tally.component";
-import { DayAttendanceComponent } from "../../../attendance/ui/day-attendance/day-attendance.component";
+import { HourBadgeComponent, TimeBadgeComponent } from "../../../../shared/ui";
+import {
+    ActivityLogListComponent,
+    TallyComponent,
+} from "../../../activity-log";
+import { DayAttendanceComponent } from "../../../attendance";
 
 xdescribe("NavbarComponent", () => {
     let component: NavbarComponent;

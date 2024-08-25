@@ -14,7 +14,7 @@ import {
     fromApplication,
     IAttendanceWithTimes,
 } from "../../../../entities/application/models/application.selectors";
-import { storageVersionActions } from "../../../../entities/storage-version/models/storage-version.actions";
+import { storageVersionActions } from "../../../../entities/storage-version";
 
 @Component({
     selector: "app-navbar",

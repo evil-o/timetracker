@@ -3,13 +3,15 @@ import { Component, Input, OnInit } from "@angular/core";
 import { ChartData, ChartOptions } from "chart.js";
 import { BaseChartDirective } from "ng2-charts";
 import { combineLatest, map, Observable } from "rxjs";
-import { activityColors } from "../../../../entities/activity-color/models/activity-color.models";
-import { IColorSpec } from "../../../../entities/activity-color/models/activity-color.types";
+import {
+    activityColors,
+    IColorSpec,
+} from "../../../../entities/activity-color";
 import {
     IActivityLog,
     IActivityLogEntry,
-} from "../../../../entities/activity-log/models/activity-log.types";
-import { IActivityTypes } from "../../../../entities/activity-type/models/activity-types.types";
+} from "../../../../entities/activity-log";
+import { IActivityTypes } from "../../../../entities/activity-type";
 
 export interface IAggregationData {
     hours: number;

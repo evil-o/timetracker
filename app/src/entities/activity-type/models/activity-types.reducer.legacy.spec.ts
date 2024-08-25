@@ -1,4 +1,4 @@
-import { activityLogActions } from "../../activity-log/models/activity-log.actions";
+import { activityLogActions } from "../../activity-log";
 import { activityTypesReducer } from "./activity-types.reducer";
 import { IActivityType, IActivityTypes } from "./activity-types.types";
 

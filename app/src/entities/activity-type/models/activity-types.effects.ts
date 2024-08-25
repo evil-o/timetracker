@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 
 import { map } from "rxjs";
-import { storageVersionActions } from "../../storage-version/models/storage-version.actions";
+import { storageVersionActions } from "../../storage-version";
 
 @Injectable()
 export class ActivityTypesEffects {

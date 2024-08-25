@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-
-import { EditableLogEntryDescriptionComponent } from "../../../../entities/activity-log/ui/editable-log-entry-description/editable-log-entry-description.component";
-import { EditableLogEntryHoursComponent } from "../../../../entities/activity-log/ui/editable-log-entry-hours/editable-log-entry-hours.component";
-import { HourBadgeComponent } from "../../../../shared/ui/hour-badge/hour-badge.component";
-import { ActivityLogEntryComponent } from "./activity-log-entry.component";
-
 import { provideNoopAnimations } from "@angular/platform-browser/animations";
 import { StoreModule } from "@ngrx/store";
 import { AccordionModule } from "ngx-bootstrap/accordion";
-import { ActivityTypeIdToNamePipe } from "../../../../entities/activity-type/lib/activity-type-id-to-name.pipe";
+import {
+    EditableLogEntryDescriptionComponent,
+    EditableLogEntryHoursComponent,
+} from "../../../../entities/activity-log";
+import { ActivityTypeIdToNamePipe } from "../../../../entities/activity-type";
 import { metaReducers } from "../../../../entities/application/meta-reducers";
 import { reducers } from "../../../../entities/application/reducers";
 import { FormatHoursPipe } from "../../../../shared/lib";
+import { HourBadgeComponent } from "../../../../shared/ui";
+import { ActivityLogEntryComponent } from "./activity-log-entry.component";
 
 describe("ActivityLogEntryComponent", () => {
     let component: ActivityLogEntryComponent;

@@ -1,9 +1,9 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { AccordionModule } from "ngx-bootstrap/accordion";
-import { ActivityLogEntitiesModule } from "../../entities/activity-log/activity-log-entities.module";
-import { ActivityTypeEntitiesModule } from "../../entities/activity-type/activity-type-entities.module";
-import { ActivityLogFeaturesModule } from "../../features/activity-log/activity-log-features.module";
+import { ActivityLogEntitiesModule } from "../../entities/activity-log";
+import { ActivityTypeEntitiesModule } from "../../entities/activity-type";
+import { ActivityLogFeaturesModule } from "../../features/activity-log";
 import { SharedModule } from "../../shared/shared.module";
 import { ActivityLogListComponent } from "./ui/activity-log-list/actvity-log-list.component";
 import { StopwatchComponent } from "./ui/stopwatch/stopwatch.component";

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { StoreModule } from "@ngrx/store";
-import { AcivityColorFeaturesModule } from "../../../../features/activity-color/activity-color-features.module";
+import { AcivityColorFeaturesModule } from "../../../../features/activity-color";
 import { ActivityTypeListComponent } from "./activity-type-list.component";
 
 describe("ActivityTypeListComponent", () => {

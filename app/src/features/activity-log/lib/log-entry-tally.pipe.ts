@@ -1,7 +1,6 @@
 import { Pipe, PipeTransform } from "@angular/core";
-import { IGroupEntry } from "../../../entities/activity-log/lib/group-activity-log-entries-by-id.pipe";
-import { IActivityLogEntry } from "../../../entities/activity-log/models/activity-log.types";
-import { IActivityTypes } from "../../../entities/activity-type/models/activity-types.types";
+import { IActivityLogEntry, IGroupEntry } from "../../../entities/activity-log";
+import { IActivityTypes } from "../../../entities/activity-type";
 
 @Pipe({
     name: "logEntryTally",

@@ -1,8 +1,10 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { IActivityType } from "../../../../entities/activity-type";
-import { activityTypeActions } from "../../../../entities/activity-type/models/activity-types.actions";
-import { ApplicationState } from "../../../../entities/application/models/application.model";
+import {
+    activityTypeActions,
+    IActivityType,
+} from "../../../../entities/activity-type";
+import { ApplicationState } from "../../../../entities/application";
 
 @Component({
     selector: "app-activity-type-list",

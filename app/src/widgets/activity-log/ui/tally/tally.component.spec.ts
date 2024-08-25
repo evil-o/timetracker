@@ -1,18 +1,19 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { StoreModule } from "@ngrx/store";
-import { EditableLogEntryDescriptionComponent } from "../../../../entities/activity-log/ui/editable-log-entry-description/editable-log-entry-description.component";
-import { EditableLogEntryHoursComponent } from "../../../../entities/activity-log/ui/editable-log-entry-hours/editable-log-entry-hours.component";
-import { NoActivityLogEntryPresentComponent } from "../../../../entities/activity-log/ui/no-activity-log-entry-present/no-activity-log-entry-present.component";
-import { ActivityLogEntryComponent } from "../../../../features/activity-log/ui/activity-log-entry/activity-log-entry.component";
-import { HourBadgeComponent } from "../../../../shared/ui/hour-badge/hour-badge.component";
-import { TallyComponent } from "./tally.component";
-
 import { AccordionModule } from "ngx-bootstrap/accordion";
-import { ActivityTypeIdToNamePipe } from "../../../../entities/activity-type/lib/activity-type-id-to-name.pipe";
+import {
+    EditableLogEntryDescriptionComponent,
+    EditableLogEntryHoursComponent,
+    NoActivityLogEntryPresentComponent,
+} from "../../../../entities/activity-log";
+import { ActivityTypeIdToNamePipe } from "../../../../entities/activity-type";
 import { metaReducers } from "../../../../entities/application/meta-reducers";
 import { reducers } from "../../../../entities/application/reducers";
+import { ActivityLogEntryComponent } from "../../../../features/activity-log";
 import { FormatHoursPipe } from "../../../../shared/lib";
+import { HourBadgeComponent } from "../../../../shared/ui";
+import { TallyComponent } from "./tally.component";
 
 describe("TallyComponent", () => {
     let component: TallyComponent;

@@ -1,10 +1,12 @@
 import { Component } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { map, Observable, Subject, timer, withLatestFrom } from "rxjs";
-import { activityTypeActions } from "../../../../entities/activity-type/models/activity-types.actions";
-import { fromActivityTypes } from "../../../../entities/activity-type/models/activity-types.selectors";
-import { IActivityType } from "../../../../entities/activity-type/models/activity-types.types";
-import { ApplicationState } from "../../../../entities/application/models/application.model";
+import {
+    activityTypeActions,
+    fromActivityTypes,
+    IActivityType,
+} from "../../../../entities/activity-type";
+import { ApplicationState } from "../../../../entities/application";
 import { stopWatchActions } from "../../../../entities/stop-watch/models/stop-watch.actions";
 import { fromStopWatch } from "../../../../entities/stop-watch/models/stop-watch.selectors";
 

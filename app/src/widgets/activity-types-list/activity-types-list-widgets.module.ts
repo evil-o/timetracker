@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-import { AcivityColorFeaturesModule } from "../../features/activity-color/activity-color-features.module";
+import { AcivityColorFeaturesModule } from "../../features/activity-color";
 import { ActivityTypeListComponent } from "./ui/activity-type-list/activity-type-list.component";
 
 const declarations = [ActivityTypeListComponent];
