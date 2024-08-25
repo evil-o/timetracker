@@ -12,6 +12,7 @@ import { LogEntryTallyPipe } from "../../../entities/activity-log";
 import { GroupActivityLogEntriesByIdPipe } from "../../../entities/activity-log/lib/group-activity-log-entries-by-id.pipe";
 import { EditableLogEntryDescriptionComponent } from "../../../entities/activity-log/ui/editable-log-entry-description/editable-log-entry-description.component";
 import { EditableLogEntryHoursComponent } from "../../../entities/activity-log/ui/editable-log-entry-hours/editable-log-entry-hours.component";
+import { NoActivityLogEntryPresentComponent } from "../../../entities/activity-log/ui/no-activity-log-entry-present/no-activity-log-entry-present.component";
 import { ActivityTypeEntitiesModule } from "../../../entities/activity-type/activity-type-entities.module";
 import { ActivityTypeIdToNamePipe } from "../../../entities/activity-type/lib/activity-type-id-to-name.pipe";
 import { metaReducers } from "../../../entities/application/meta-reducers";
@@ -21,7 +22,6 @@ import { AcivityColorFeaturesModule } from "../../../features/activity-color/act
 import { ActivityLogEntryComponent } from "../../../features/activity-log/ui/activity-log-entry/activity-log-entry.component";
 import { FormatHoursPipe } from "../../../shared";
 import { DayAttendanceComponent } from "../../../shared/legacy/day-attendance/day-attendance.component";
-import { NoActivityLogEntryPresentComponent } from "../../../shared/legacy/no-activity-log-entry-present/no-activity-log-entry-present.component";
 import { PrecisionPipe } from "../../../shared/lib/precision.pipe";
 import { SharedModule } from "../../../shared/shared.module";
 import { HourBadgeComponent } from "../../../shared/ui/hour-badge/hour-badge.component";

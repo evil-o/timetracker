@@ -25,6 +25,7 @@ import { GroupActivityLogEntriesByIdPipe } from "../../entities/activity-log/lib
 import { activityLogActions } from "../../entities/activity-log/models/activity-log.actions";
 import { EditableLogEntryDescriptionComponent } from "../../entities/activity-log/ui/editable-log-entry-description/editable-log-entry-description.component";
 import { EditableLogEntryHoursComponent } from "../../entities/activity-log/ui/editable-log-entry-hours/editable-log-entry-hours.component";
+import { NoActivityLogEntryPresentComponent } from "../../entities/activity-log/ui/no-activity-log-entry-present/no-activity-log-entry-present.component";
 import { ActivityTypeIdToNamePipe } from "../../entities/activity-type/lib/activity-type-id-to-name.pipe";
 import { ActivityPickerComponent } from "../../entities/activity-type/ui";
 import { effects } from "../../entities/application/effects";
@@ -40,7 +41,6 @@ import {
     getFirstDayOfCalendarWeek,
     valueToTime,
 } from "../../shared/legacy/helpers";
-import { NoActivityLogEntryPresentComponent } from "../../shared/legacy/no-activity-log-entry-present/no-activity-log-entry-present.component";
 import { PrecisionPipe } from "../../shared/lib/precision.pipe";
 import { HourBadgeComponent } from "../../shared/ui/hour-badge/hour-badge.component";
 import { TimeBadgeComponent } from "../../shared/ui/time-badge/time-badge.component";

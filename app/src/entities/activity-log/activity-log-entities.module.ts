@@ -5,10 +5,12 @@ import { GroupActivityLogEntriesByIdPipe } from "./lib/group-activity-log-entrie
 import { LogEntryTallyPipe } from "./lib/log-entry-tally.pipe";
 import { EditableLogEntryDescriptionComponent } from "./ui/editable-log-entry-description/editable-log-entry-description.component";
 import { EditableLogEntryHoursComponent } from "./ui/editable-log-entry-hours/editable-log-entry-hours.component";
+import { NoActivityLogEntryPresentComponent } from "./ui/no-activity-log-entry-present/no-activity-log-entry-present.component";
 
 const components = [
     EditableLogEntryDescriptionComponent,
     EditableLogEntryHoursComponent,
+    NoActivityLogEntryPresentComponent,
 ];
 
 const pipes = [GroupActivityLogEntriesByIdPipe, LogEntryTallyPipe];
