@@ -2,7 +2,7 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { LegacyModule } from "../shared/legacy.module";
-import { NavbarComponent } from "./navbar/navbar.component";
+import { NavbarComponent } from "./ui/navbar/navbar.component";
 
 const declarations = [NavbarComponent];
 

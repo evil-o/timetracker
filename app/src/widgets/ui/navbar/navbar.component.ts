@@ -7,14 +7,14 @@ import {
 } from "@angular/core";
 
 import { Store } from "@ngrx/store";
-import { ApplicationState } from "../../entities/application/models/application.model";
+import { ApplicationState } from "../../../entities/application/models/application.model";
 
 import { Observable } from "rxjs";
 import {
     fromApplication,
     IAttendanceWithTimes,
-} from "../../entities/application/models/application.selectors";
-import { storageVersionActions } from "../../entities/storage-version/models/storage-version.actions";
+} from "../../../entities/application/models/application.selectors";
+import { storageVersionActions } from "../../../entities/storage-version/models/storage-version.actions";
 
 @Component({
     selector: "app-navbar",
