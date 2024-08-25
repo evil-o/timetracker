@@ -12,6 +12,7 @@ import { LegacyModule } from "../shared/legacy.module";
 import { SharedModule } from "../shared/shared.module";
 import { ActivityLogWidgetsModule } from "../widgets/activity-log/activity-log-widgets.module";
 import { ActivityTypesListWidgetsModule } from "../widgets/activity-types-list/activity-types-list-widgets.module";
+import { AttendanceWidgetsModule } from "../widgets/attendance/attendance-widgets.module";
 import { NavigationWidgetsModule } from "../widgets/navigation/navigation-widgets.module";
 import { ActivitiesComponent } from "./activities/activities.component";
 import { ConfigurationComponent } from "./configuration/configuration.component";
@@ -35,6 +36,7 @@ const pages = [
     declarations: [...pages],
     exports: [...pages],
     imports: [
+        AttendanceWidgetsModule,
         NavigationWidgetsModule,
         ActivityTypesListWidgetsModule,
         AcivityColorFeaturesModule,

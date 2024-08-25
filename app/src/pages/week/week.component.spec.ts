@@ -36,7 +36,6 @@ import { OvertimeBadgeComponent } from "../../features/activity-aggregation/ui/o
 import { AcivityColorFeaturesModule } from "../../features/activity-color/activity-color-features.module";
 import { ActivityLogEntryComponent } from "../../features/activity-log/ui/activity-log-entry/activity-log-entry.component";
 import { FormatHoursPipe } from "../../shared";
-import { DayAttendanceComponent } from "../../shared/legacy/day-attendance/day-attendance.component";
 import {
     getFirstDayOfCalendarWeek,
     valueToTime,
@@ -46,6 +45,7 @@ import { HourBadgeComponent } from "../../shared/ui/hour-badge/hour-badge.compon
 import { TimeBadgeComponent } from "../../shared/ui/time-badge/time-badge.component";
 import { ActivityLogListComponent } from "../../widgets/activity-log/ui/activity-log-list/actvity-log-list.component";
 import { TallyComponent } from "../../widgets/activity-log/ui/tally/tally.component";
+import { DayAttendanceComponent } from "../../widgets/attendance/ui/day-attendance/day-attendance.component";
 import { NavigationWidgetsModule } from "../../widgets/navigation/navigation-widgets.module";
 import { ActivitiesComponent } from "../activities/activities.component";
 import { ConfigurationComponent } from "../configuration/configuration.component";

@@ -1,19 +1,19 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { combineLatest, map, Observable, Subject, withLatestFrom } from "rxjs";
-import { ApplicationState } from "../../../entities/application/models/application.model";
-import { attendanceActions } from "../../../entities/attendance/models/attendance.actions";
-import { fromAttendance } from "../../../entities/attendance/models/attendance.selectors";
+import { ApplicationState } from "../../../../entities/application/models/application.model";
+import { attendanceActions } from "../../../../entities/attendance/models/attendance.actions";
+import { fromAttendance } from "../../../../entities/attendance/models/attendance.selectors";
 import {
     AttendanceEntry,
     IAttendanceCorrection,
     IAttendanceEntry,
-} from "../../../entities/attendance/models/attendance.state";
+} from "../../../../entities/attendance/models/attendance.state";
 import {
     dateToTimeInputValue,
     stringToDuration,
     valueToTime,
-} from "../helpers";
+} from "../../../../shared/legacy/helpers";
 
 @Component({
     selector: "app-day-attendance",

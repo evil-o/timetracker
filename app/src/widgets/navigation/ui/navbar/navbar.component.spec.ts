@@ -29,7 +29,6 @@ import { ActivityLogEntryComponent } from "../../../../features/activity-log/ui/
 import { WeekComponent } from "../../../../pages/week/week.component";
 import { WelcomeComponent } from "../../../../pages/welcome/welcome.component";
 import { FormatHoursPipe } from "../../../../shared";
-import { DayAttendanceComponent } from "../../../../shared/legacy/day-attendance/day-attendance.component";
 import { valueToTime } from "../../../../shared/legacy/helpers";
 import { PadNumberPipe } from "../../../../shared/lib";
 import { PrecisionPipe } from "../../../../shared/lib/precision.pipe";
@@ -37,6 +36,7 @@ import { HourBadgeComponent } from "../../../../shared/ui/hour-badge/hour-badge.
 import { TimeBadgeComponent } from "../../../../shared/ui/time-badge/time-badge.component";
 import { ActivityLogListComponent } from "../../../activity-log/ui/activity-log-list/actvity-log-list.component";
 import { TallyComponent } from "../../../activity-log/ui/tally/tally.component";
+import { DayAttendanceComponent } from "../../../attendance/ui/day-attendance/day-attendance.component";
 
 xdescribe("NavbarComponent", () => {
     let component: NavbarComponent;

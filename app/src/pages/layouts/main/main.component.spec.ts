@@ -21,13 +21,13 @@ import { OvertimeBadgeComponent } from "../../../features/activity-aggregation/u
 import { AcivityColorFeaturesModule } from "../../../features/activity-color/activity-color-features.module";
 import { ActivityLogEntryComponent } from "../../../features/activity-log/ui/activity-log-entry/activity-log-entry.component";
 import { FormatHoursPipe } from "../../../shared";
-import { DayAttendanceComponent } from "../../../shared/legacy/day-attendance/day-attendance.component";
 import { PrecisionPipe } from "../../../shared/lib/precision.pipe";
 import { SharedModule } from "../../../shared/shared.module";
 import { HourBadgeComponent } from "../../../shared/ui/hour-badge/hour-badge.component";
 import { TimeBadgeComponent } from "../../../shared/ui/time-badge/time-badge.component";
 import { ActivityLogListComponent } from "../../../widgets/activity-log/ui/activity-log-list/actvity-log-list.component";
 import { TallyComponent } from "../../../widgets/activity-log/ui/tally/tally.component";
+import { DayAttendanceComponent } from "../../../widgets/attendance/ui/day-attendance/day-attendance.component";
 import { NavbarComponent } from "../../../widgets/navigation";
 import { ActivitiesComponent } from "../../activities/activities.component";
 import { ConfigurationComponent } from "../../configuration/configuration.component";
