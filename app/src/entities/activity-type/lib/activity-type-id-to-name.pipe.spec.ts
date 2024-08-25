@@ -1,4 +1,4 @@
-import { ActivityTypeIdToNamePipe } from "./activity-type-id-to-name.pipe";
+import { ActivityTypeIdToNamePipe } from "../../../entities/activity-type/lib/activity-type-id-to-name.pipe";
 
 describe("ActivityTypeIdToNamePipe", () => {
     it("create an instance", () => {

@@ -4,7 +4,8 @@ import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule } from "@angular/router";
 import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
 import { TabsModule } from "ngx-bootstrap/tabs";
-import { ActivityTypesModule } from "../entities/activity-type/activity-types.module";
+import { ActivityLogEntitiesModule } from "../entities/activity-log/activity-log-entities.module";
+import { ActivityTypeEntitiesModule } from "../entities/activity-type/activity-type-entities.module";
 import { ActivityAggregationFeaturesModule } from "../features/activity-aggregation/activity-aggregation-features.module";
 import { AcivityColorFeaturesModule } from "../features/activity-color/activity-color-features.module";
 import { LegacyModule } from "../shared/legacy.module";
@@ -40,6 +41,8 @@ const pages = [
         ActivityLogWidgetsModule,
         ActivityAggregationFeaturesModule,
         SharedModule,
+        ActivityLogEntitiesModule,
+        ActivityTypeEntitiesModule,
 
         // external dependencies
         BrowserModule,
@@ -48,9 +51,6 @@ const pages = [
         LegacyModule,
         TabsModule,
         RouterModule,
-
-        // entities
-        ActivityTypesModule,
     ],
 })
 export class PagesModule {}

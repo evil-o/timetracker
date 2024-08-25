@@ -4,9 +4,9 @@ import { ApplicationState } from "../../../../entities/application/models/applic
 
 import { Store } from "@ngrx/store";
 import { activityColors } from "../../../../entities/activity-color/models/activity-color.models";
+import { IGroupEntry } from "../../../../entities/activity-log/lib/group-activity-log-entries-by-id.pipe";
 import { activityLogActions } from "../../../../entities/activity-log/models/activity-log.actions";
 import { IActivityTypes } from "../../../../entities/activity-type/models/activity-types.types";
-import { IGroupEntry } from "../../../../shared/legacy/pipes/group-activity-log-entries-by-id.pipe";
 
 @Component({
     selector: "app-activity-log-entry",

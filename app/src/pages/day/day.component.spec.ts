@@ -12,11 +12,13 @@ import { Store, StoreModule } from "@ngrx/store";
 import { AccordionModule } from "ngx-bootstrap/accordion";
 import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
+import { GroupActivityLogEntriesByIdPipe } from "../../entities/activity-log/lib/group-activity-log-entries-by-id.pipe";
 import { activityLogActions } from "../../entities/activity-log/models/activity-log.actions";
 import { ActivityLogEntry } from "../../entities/activity-log/models/activity-log.state";
 import { EditableLogEntryDescriptionComponent } from "../../entities/activity-log/ui/editable-log-entry-description/editable-log-entry-description.component";
 import { EditableLogEntryHoursComponent } from "../../entities/activity-log/ui/editable-log-entry-hours/editable-log-entry-hours.component";
-import { ActivityTypesModule } from "../../entities/activity-type/activity-types.module";
+import { ActivityTypeEntitiesModule } from "../../entities/activity-type/activity-type-entities.module";
+import { ActivityTypeIdToNamePipe } from "../../entities/activity-type/lib/activity-type-id-to-name.pipe";
 import { ApplicationState } from "../../entities/application/models/application.model";
 import { AcivityColorFeaturesModule } from "../../features/activity-color/activity-color-features.module";
 import { ActivityLogEntryComponent } from "../../features/activity-log/ui/activity-log-entry/activity-log-entry.component";
@@ -24,8 +26,6 @@ import { FormatHoursPipe } from "../../shared";
 import { DayAttendanceComponent } from "../../shared/legacy/day-attendance/day-attendance.component";
 import { HourBadgeComponent } from "../../shared/legacy/hour-badge/hour-badge.component";
 import { NoActivityLogEntryPresentComponent } from "../../shared/legacy/no-activity-log-entry-present/no-activity-log-entry-present.component";
-import { ActivityTypeIdToNamePipe } from "../../shared/legacy/pipes/activity-type-id-to-name.pipe";
-import { GroupActivityLogEntriesByIdPipe } from "../../shared/legacy/pipes/group-activity-log-entries-by-id.pipe";
 import { TimeBadgeComponent } from "../../shared/legacy/time-badge/time-badge.component";
 import { ActivityLogListComponent } from "../../widgets/activity-log/ui/activity-log-list/actvity-log-list.component";
 import { DayComponent } from "./day.component";
@@ -80,7 +80,7 @@ describe("DayComponent", () => {
                 FormsModule,
                 StoreModule.forRoot(),
                 TypeaheadModule.forRoot(),
-                ActivityTypesModule,
+                ActivityTypeEntitiesModule,
                 AcivityColorFeaturesModule,
             ],
             providers: [provideNoopAnimations()],

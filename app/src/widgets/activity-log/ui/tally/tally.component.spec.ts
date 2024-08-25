@@ -9,11 +9,11 @@ import { NoActivityLogEntryPresentComponent } from "../../../../shared/legacy/no
 import { TallyComponent } from "./tally.component";
 
 import { AccordionModule } from "ngx-bootstrap/accordion";
+import { LogEntryTallyPipe } from "../../../../entities/activity-log";
+import { ActivityTypeIdToNamePipe } from "../../../../entities/activity-type/lib/activity-type-id-to-name.pipe";
 import { metaReducers } from "../../../../entities/application/meta-reducers";
 import { reducers } from "../../../../entities/application/reducers";
 import { FormatHoursPipe } from "../../../../shared";
-import { ActivityTypeIdToNamePipe } from "../../../../shared/legacy/pipes/activity-type-id-to-name.pipe";
-import { LogEntryTallyPipe } from "../../../../shared/legacy/pipes/log-entry-tally.pipe";
 
 describe("TallyComponent", () => {
     let component: TallyComponent;

@@ -15,6 +15,7 @@ import {
     Observable,
     withLatestFrom,
 } from "rxjs";
+import { IGroupEntry } from "../../entities/activity-log/lib/group-activity-log-entries-by-id.pipe";
 import { fromActivityLog } from "../../entities/activity-log/models/activity-log.selectors";
 import { IActivityLogEntry } from "../../entities/activity-log/models/activity-log.types";
 import { fromActivityTypes } from "../../entities/activity-type/models/activity-types.selectors";
@@ -29,7 +30,6 @@ import {
 } from "../../entities/attendance/models/attendance.state";
 import { FormatHoursPipe } from "../../shared";
 import { getFirstDayOfCalendarWeek } from "../../shared/legacy/helpers";
-import { IGroupEntry } from "../../shared/legacy/pipes/group-activity-log-entries-by-id.pipe";
 import { PadNumberPipe } from "../../shared/lib";
 import { HtmlTableGenerator } from "../../shared/models";
 

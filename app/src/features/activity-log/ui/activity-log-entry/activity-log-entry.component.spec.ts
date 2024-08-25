@@ -8,10 +8,10 @@ import { ActivityLogEntryComponent } from "./activity-log-entry.component";
 import { provideNoopAnimations } from "@angular/platform-browser/animations";
 import { StoreModule } from "@ngrx/store";
 import { AccordionModule } from "ngx-bootstrap/accordion";
+import { ActivityTypeIdToNamePipe } from "../../../../entities/activity-type/lib/activity-type-id-to-name.pipe";
 import { metaReducers } from "../../../../entities/application/meta-reducers";
 import { reducers } from "../../../../entities/application/reducers";
 import { FormatHoursPipe } from "../../../../shared";
-import { ActivityTypeIdToNamePipe } from "../../../../shared/legacy/pipes/activity-type-id-to-name.pipe";
 
 describe("ActivityLogEntryComponent", () => {
     let component: ActivityLogEntryComponent;

@@ -8,9 +8,12 @@ import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
 import { TabsModule } from "ngx-bootstrap/tabs";
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
 import { appRoutes } from "../../../app/app.routes";
+import { LogEntryTallyPipe } from "../../../entities/activity-log";
+import { GroupActivityLogEntriesByIdPipe } from "../../../entities/activity-log/lib/group-activity-log-entries-by-id.pipe";
 import { EditableLogEntryDescriptionComponent } from "../../../entities/activity-log/ui/editable-log-entry-description/editable-log-entry-description.component";
 import { EditableLogEntryHoursComponent } from "../../../entities/activity-log/ui/editable-log-entry-hours/editable-log-entry-hours.component";
-import { ActivityTypesModule } from "../../../entities/activity-type/activity-types.module";
+import { ActivityTypeEntitiesModule } from "../../../entities/activity-type/activity-type-entities.module";
+import { ActivityTypeIdToNamePipe } from "../../../entities/activity-type/lib/activity-type-id-to-name.pipe";
 import { metaReducers } from "../../../entities/application/meta-reducers";
 import { reducers } from "../../../entities/application/reducers";
 import { AcivityColorFeaturesModule } from "../../../features/activity-color/activity-color-features.module";
@@ -20,11 +23,8 @@ import { DayAttendanceComponent } from "../../../shared/legacy/day-attendance/da
 import { HourBadgeComponent } from "../../../shared/legacy/hour-badge/hour-badge.component";
 import { NoActivityLogEntryPresentComponent } from "../../../shared/legacy/no-activity-log-entry-present/no-activity-log-entry-present.component";
 import { OvertimeBadgeComponent } from "../../../shared/legacy/overtime-badge/overtime-badge.component";
-import { ActivityTypeIdToNamePipe } from "../../../shared/legacy/pipes/activity-type-id-to-name.pipe";
-import { GroupActivityLogEntriesByIdPipe } from "../../../shared/legacy/pipes/group-activity-log-entries-by-id.pipe";
-import { LogEntryTallyPipe } from "../../../shared/legacy/pipes/log-entry-tally.pipe";
-import { PrecisionPipe } from "../../../shared/legacy/pipes/precision.pipe";
 import { TimeBadgeComponent } from "../../../shared/legacy/time-badge/time-badge.component";
+import { PrecisionPipe } from "../../../shared/lib/precision.pipe";
 import { SharedModule } from "../../../shared/shared.module";
 import { ActivityLogListComponent } from "../../../widgets/activity-log/ui/activity-log-list/actvity-log-list.component";
 import { TallyComponent } from "../../../widgets/activity-log/ui/tally/tally.component";
@@ -65,7 +65,7 @@ describe(MainComponent.name, () => {
             ],
             imports: [
                 AccordionModule,
-                ActivityTypesModule,
+                ActivityTypeEntitiesModule,
                 AcivityColorFeaturesModule,
                 BsDatepickerModule.forRoot(),
                 FormsModule,
