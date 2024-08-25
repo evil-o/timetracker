@@ -4,7 +4,7 @@ import { RouterModule } from "@angular/router";
 
 import { FormsModule } from "@angular/forms";
 
-import { AppComponent } from "./app.component";
+import { AppComponent } from "./ui/app.component";
 
 import { EffectsModule } from "@ngrx/effects";
 import { StoreModule } from "@ngrx/store";
