@@ -18,7 +18,6 @@ import {
 @Component({
     selector: "app-day-attendance",
     templateUrl: "./day-attendance.component.html",
-    styleUrls: ["./day-attendance.component.css"],
 })
 export class DayAttendanceComponent implements OnInit {
     @Input()

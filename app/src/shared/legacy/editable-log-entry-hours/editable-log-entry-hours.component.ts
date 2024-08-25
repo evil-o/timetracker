@@ -12,7 +12,6 @@ import { stringToDuration } from "../helpers";
 @Component({
     selector: "app-editable-log-entry-hours",
     templateUrl: "./editable-log-entry-hours.component.html",
-    styleUrls: ["./editable-log-entry-hours.component.css"],
 })
 export class EditableLogEntryHoursComponent {
     @Input()

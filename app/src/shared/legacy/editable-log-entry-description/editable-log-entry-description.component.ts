@@ -11,7 +11,6 @@ import { ActivityLogEntry } from "../../../entities/activity-log/models/activity
 @Component({
     selector: "app-editable-log-entry-description",
     templateUrl: "./editable-log-entry-description.component.html",
-    styleUrls: ["./editable-log-entry-description.component.css"],
 })
 export class EditableLogEntryDescriptionComponent {
     @Input()

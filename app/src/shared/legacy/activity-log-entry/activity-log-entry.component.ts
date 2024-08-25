@@ -11,7 +11,6 @@ import { IGroupEntry } from "../pipes/group-activity-log-entries-by-id.pipe";
 @Component({
     selector: "app-activity-log-entry",
     templateUrl: "./activity-log-entry.component.html",
-    styleUrls: ["./activity-log-entry.component.css"],
     providers: [AccordionComponent],
 })
 export class ActivityLogEntryComponent {
