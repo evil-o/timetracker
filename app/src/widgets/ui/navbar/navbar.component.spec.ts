@@ -18,11 +18,10 @@ import { ActivityPickerComponent } from "../../../entities/activity-types/ui";
 import { ApplicationState } from "../../../entities/application/models/application.model";
 import { attendanceActions } from "../../../entities/attendance/models/attendance.actions";
 import { configurationActions } from "../../../entities/configuration/models/configuration.actions";
-import { ActivityColorFeatureModule } from "../../../features/activity-color/activity-color-feature.module";
+import { FeaturesModule } from "../../../features/features.module";
 import { WeekComponent } from "../../../pages/week/week.component";
 import { WelcomeComponent } from "../../../pages/welcome/welcome.component";
 import { ActivityLogEntryComponent } from "../../../shared/legacy/activity-log-entry/activity-log-entry.component";
-import { ActivityTypeListComponent } from "../../../shared/legacy/activity-type-list/activity-type-list.component";
 import { ActivityLogListComponent } from "../../../shared/legacy/actvity-log-list/actvity-log-list.component";
 import { DayAttendanceComponent } from "../../../shared/legacy/day-attendance/day-attendance.component";
 import { EditableLogEntryDescriptionComponent } from "../../../shared/legacy/editable-log-entry-description/editable-log-entry-description.component";
@@ -56,7 +55,6 @@ xdescribe("NavbarComponent", () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [
-                ActivityTypeListComponent,
                 ActivityLogEntryComponent,
                 ActivityLogListComponent,
                 ActivityPickerComponent,
@@ -85,7 +83,7 @@ xdescribe("NavbarComponent", () => {
                 TabsModule.forRoot(),
                 TypeaheadModule.forRoot(),
                 RouterModule.forRoot(appRoutes),
-                ActivityColorFeatureModule,
+                FeaturesModule,
             ],
             providers: [{ provide: APP_BASE_HREF, useValue: "/" }],
             schemas: [NO_ERRORS_SCHEMA],

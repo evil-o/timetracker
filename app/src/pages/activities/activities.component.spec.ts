@@ -6,10 +6,11 @@ import { ModalModule } from "ngx-bootstrap/modal";
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
 import { ActivityPickerComponent } from "../../entities/activity-types/ui";
 import { ActivityColorPickerComponent } from "../../features/activity-color";
-import { ActivityTypeListComponent } from "../../shared/legacy/activity-type-list/activity-type-list.component";
+import { FeaturesModule } from "../../features/features.module";
+import { WidgetsModule } from "../../widgets/widgets.module";
 import { ActivitiesComponent } from "./activities.component";
 
-describe("ActivitiesComponent", () => {
+describe(ActivitiesComponent.name, () => {
     let component: ActivitiesComponent;
     let fixture: ComponentFixture<ActivitiesComponent>;
 
@@ -19,13 +20,15 @@ describe("ActivitiesComponent", () => {
                 ActivityColorPickerComponent,
                 ActivityPickerComponent,
                 ActivitiesComponent,
-                ActivityTypeListComponent,
             ],
             imports: [
                 FormsModule,
                 ModalModule.forRoot(),
                 StoreModule.forRoot(),
                 TypeaheadModule.forRoot(),
+
+                FeaturesModule,
+                WidgetsModule,
             ],
         }).compileComponents();
     });

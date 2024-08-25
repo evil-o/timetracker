@@ -26,9 +26,8 @@ import { effects } from "../../entities/application/effects";
 import { ApplicationState } from "../../entities/application/models/application.model";
 import { attendanceActions } from "../../entities/attendance/models/attendance.actions";
 import { configurationActions } from "../../entities/configuration/models/configuration.actions";
-import { ActivityColorFeatureModule } from "../../features/activity-color/activity-color-feature.module";
+import { FeaturesModule } from "../../features/features.module";
 import { ActivityLogEntryComponent } from "../../shared/legacy/activity-log-entry/activity-log-entry.component";
-import { ActivityTypeListComponent } from "../../shared/legacy/activity-type-list/activity-type-list.component";
 import { ActivityLogListComponent } from "../../shared/legacy/actvity-log-list/actvity-log-list.component";
 import { DayAttendanceComponent } from "../../shared/legacy/day-attendance/day-attendance.component";
 import { EditableLogEntryDescriptionComponent } from "../../shared/legacy/editable-log-entry-description/editable-log-entry-description.component";
@@ -47,6 +46,7 @@ import { LogEntryTallyPipe } from "../../shared/legacy/pipes/log-entry-tally.pip
 import { PrecisionPipe } from "../../shared/legacy/pipes/precision.pipe";
 import { TallyComponent } from "../../shared/legacy/tally/tally.component";
 import { TimeBadgeComponent } from "../../shared/legacy/time-badge/time-badge.component";
+import { WidgetsModule } from "../../widgets/widgets.module";
 import { ActivitiesComponent } from "../activities/activities.component";
 import { ConfigurationComponent } from "../configuration/configuration.component";
 import { DayComponent } from "../day/day.component";
@@ -75,7 +75,6 @@ describe("WeekComponent", () => {
                 ActivityLogListComponent,
                 ActivityPickerComponent,
                 ActivityTypeIdToNamePipe,
-                ActivityTypeListComponent,
                 ConfigurationComponent,
                 DayComponent,
                 DayAttendanceComponent,
@@ -102,7 +101,8 @@ describe("WeekComponent", () => {
                 EffectsModule.forRoot(effects),
                 TabsModule.forRoot(),
                 TypeaheadModule.forRoot(),
-                ActivityColorFeatureModule,
+                FeaturesModule,
+                WidgetsModule,
             ],
             providers: [
                 { provide: APP_BASE_HREF, useValue: "/" },

@@ -1,13 +1,12 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { activityTypeActions } from "../../../entities/activity-types/models/activity-types.actions";
-import { IActivityType } from "../../../entities/activity-types/models/activity-types.types";
-import { ApplicationState } from "../../../entities/application/models/application.model";
+import { IActivityType } from "../../../../entities/activity-types";
+import { activityTypeActions } from "../../../../entities/activity-types/models/activity-types.actions";
+import { ApplicationState } from "../../../../entities/application/models/application.model";
 
 @Component({
     selector: "app-activity-type-list",
     templateUrl: "./activity-type-list.component.html",
-    styleUrls: ["./activity-type-list.component.css"],
 })
 export class ActivityTypeListComponent {
     @Output() public mergeRequest = new EventEmitter<IActivityType>();

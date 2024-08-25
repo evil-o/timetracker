@@ -16,7 +16,7 @@ import { activityLogActions } from "../../entities/activity-log/models/activity-
 import { ActivityLogEntry } from "../../entities/activity-log/models/activity-log.state";
 import { ActivityTypesModule } from "../../entities/activity-types/activity-types.module";
 import { ApplicationState } from "../../entities/application/models/application.model";
-import { ActivityColorFeatureModule } from "../../features/activity-color/activity-color-feature.module";
+import { FeaturesModule } from "../../features/features.module";
 import { ActivityLogEntryComponent } from "../../shared/legacy/activity-log-entry/activity-log-entry.component";
 import { ActivityLogListComponent } from "../../shared/legacy/actvity-log-list/actvity-log-list.component";
 import { DayAttendanceComponent } from "../../shared/legacy/day-attendance/day-attendance.component";
@@ -81,7 +81,7 @@ describe("DayComponent", () => {
                 StoreModule.forRoot(),
                 TypeaheadModule.forRoot(),
                 ActivityTypesModule,
-                ActivityColorFeatureModule,
+                FeaturesModule,
             ],
             providers: [provideNoopAnimations()],
             schemas: [NO_ERRORS_SCHEMA],
