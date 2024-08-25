@@ -1,3 +1,4 @@
+import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { AccordionModule } from "ngx-bootstrap/accordion";
 import { ActivityLogEntitiesModule } from "../../entities/activity-log/activity-log-entities.module";
@@ -9,6 +10,11 @@ const components = [ActivityLogEntryComponent];
 @NgModule({
     declarations: [...components],
     exports: [...components],
-    imports: [AccordionModule, ActivityLogEntitiesModule, LegacyModule],
+    imports: [
+        AccordionModule,
+        ActivityLogEntitiesModule,
+        LegacyModule,
+        CommonModule,
+    ],
 })
 export class ActivityLogFeaturesModule {}

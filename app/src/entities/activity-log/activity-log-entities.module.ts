@@ -1,3 +1,4 @@
+import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { SharedModule } from "../../shared/shared.module";
 import { EditableLogEntryDescriptionComponent } from "./ui/editable-log-entry-description/editable-log-entry-description.component";
@@ -11,6 +12,6 @@ const components = [
 @NgModule({
     declarations: [...components],
     exports: [...components],
-    imports: [SharedModule],
+    imports: [CommonModule, SharedModule],
 })
 export class ActivityLogEntitiesModule {}
