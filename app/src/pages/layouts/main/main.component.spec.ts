@@ -23,9 +23,9 @@ import { DayAttendanceComponent } from "../../../shared/legacy/day-attendance/da
 import { HourBadgeComponent } from "../../../shared/legacy/hour-badge/hour-badge.component";
 import { NoActivityLogEntryPresentComponent } from "../../../shared/legacy/no-activity-log-entry-present/no-activity-log-entry-present.component";
 import { OvertimeBadgeComponent } from "../../../shared/legacy/overtime-badge/overtime-badge.component";
-import { TimeBadgeComponent } from "../../../shared/legacy/time-badge/time-badge.component";
 import { PrecisionPipe } from "../../../shared/lib/precision.pipe";
 import { SharedModule } from "../../../shared/shared.module";
+import { TimeBadgeComponent } from "../../../shared/ui/time-badge/time-badge.component";
 import { ActivityLogListComponent } from "../../../widgets/activity-log/ui/activity-log-list/actvity-log-list.component";
 import { TallyComponent } from "../../../widgets/activity-log/ui/tally/tally.component";
 import { NavbarComponent } from "../../../widgets/navigation";

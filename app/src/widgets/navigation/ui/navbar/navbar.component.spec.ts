@@ -32,9 +32,9 @@ import { valueToTime } from "../../../../shared/legacy/helpers";
 import { HourBadgeComponent } from "../../../../shared/legacy/hour-badge/hour-badge.component";
 import { NoActivityLogEntryPresentComponent } from "../../../../shared/legacy/no-activity-log-entry-present/no-activity-log-entry-present.component";
 import { OvertimeBadgeComponent } from "../../../../shared/legacy/overtime-badge/overtime-badge.component";
-import { TimeBadgeComponent } from "../../../../shared/legacy/time-badge/time-badge.component";
 import { PadNumberPipe } from "../../../../shared/lib";
 import { PrecisionPipe } from "../../../../shared/lib/precision.pipe";
+import { TimeBadgeComponent } from "../../../../shared/ui/time-badge/time-badge.component";
 import { ActivityLogListComponent } from "../../../activity-log/ui/activity-log-list/actvity-log-list.component";
 import { TallyComponent } from "../../../activity-log/ui/tally/tally.component";
 
