@@ -5,7 +5,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { AccordionModule } from "ngx-bootstrap/accordion";
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
 
-import { ActivityTypesModule } from "../entities/activity-types/activity-types.module";
+import { ActivityTypesModule } from "../entities/activity-type/activity-types.module";
 import { ActivityAggregationChartComponent } from "./legacy/activity-aggregation-chart/activity-aggregation-chart.component";
 import { ActivityLogEntryComponent } from "./legacy/activity-log-entry/activity-log-entry.component";
 import { DayAttendanceComponent } from "./legacy/day-attendance/day-attendance.component";

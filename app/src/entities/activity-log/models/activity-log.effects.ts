@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 
 import { map, withLatestFrom } from "rxjs";
-import { activityTypeActions } from "../../activity-types/models/activity-types.actions";
+import { activityTypeActions } from "../../activity-type/models/activity-types.actions";
 import { ApplicationState } from "../../application/models/application.model";
 import { storageVersionActions } from "../../storage-version/models/storage-version.actions";
 import { activityLogActions } from "./activity-log.actions";

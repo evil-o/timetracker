@@ -4,7 +4,7 @@ import {
     IActivityTypeColor,
     IUndefinedActivityTypeColor,
 } from "../../../../entities/activity-color";
-import { IActivityType } from "../../../../entities/activity-types";
+import { IActivityType } from "../../../../entities/activity-type";
 
 @Component({
     selector: "app-activity-color-picker",

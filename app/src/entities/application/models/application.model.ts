@@ -1,5 +1,5 @@
 import { IActivityLog } from "../../activity-log/models/activity-log.types";
-import { IActivityTypes } from "../../activity-types/models/activity-types.types";
+import { IActivityTypes } from "../../activity-type/models/activity-types.types";
 import { IAttendanceState } from "../../attendance/models/attendance.state";
 import { IConfigurationState } from "../../configuration/models/configuration.state";
 import { IStopWatch } from "../../stop-watch/models/stop-watch.state";

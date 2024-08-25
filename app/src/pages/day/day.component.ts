@@ -20,12 +20,12 @@ import {
     IActivityLog,
     IActivityLogEntry,
 } from "../../entities/activity-log/models/activity-log.types";
-import { fromActivityTypes } from "../../entities/activity-types/models/activity-types.selectors";
+import { fromActivityTypes } from "../../entities/activity-type/models/activity-types.selectors";
 import {
     IActivityType,
     IActivityTypes,
-} from "../../entities/activity-types/models/activity-types.types";
-import { ActivityPickerComponent } from "../../entities/activity-types/ui";
+} from "../../entities/activity-type/models/activity-types.types";
+import { ActivityPickerComponent } from "../../entities/activity-type/ui";
 import { fromAttendance } from "../../entities/attendance/models/attendance.selectors";
 import { stringToDuration } from "../../shared/legacy/helpers";
 import { HourBadgeComponent } from "../../shared/legacy/hour-badge/hour-badge.component";

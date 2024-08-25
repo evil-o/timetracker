@@ -14,7 +14,7 @@ import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
 import { TabsModule } from "ngx-bootstrap/tabs";
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
 import { appRoutes } from "../../../../app/app.routes";
-import { ActivityPickerComponent } from "../../../../entities/activity-types/ui";
+import { ActivityPickerComponent } from "../../../../entities/activity-type/ui";
 import { ApplicationState } from "../../../../entities/application/models/application.model";
 import { attendanceActions } from "../../../../entities/attendance/models/attendance.actions";
 import { configurationActions } from "../../../../entities/configuration/models/configuration.actions";

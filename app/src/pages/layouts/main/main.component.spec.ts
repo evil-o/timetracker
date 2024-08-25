@@ -8,7 +8,7 @@ import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
 import { TabsModule } from "ngx-bootstrap/tabs";
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
 import { appRoutes } from "../../../app/app.routes";
-import { ActivityTypesModule } from "../../../entities/activity-types/activity-types.module";
+import { ActivityTypesModule } from "../../../entities/activity-type/activity-types.module";
 import { metaReducers } from "../../../entities/application/meta-reducers";
 import { reducers } from "../../../entities/application/reducers";
 import { AcivityColorFeaturesModule } from "../../../features/activity-color/activity-color-features.module";

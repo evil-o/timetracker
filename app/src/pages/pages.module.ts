@@ -4,7 +4,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule } from "@angular/router";
 import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
 import { TabsModule } from "ngx-bootstrap/tabs";
-import { ActivityTypesModule } from "../entities/activity-types/activity-types.module";
+import { ActivityTypesModule } from "../entities/activity-type/activity-types.module";
 import { AcivityColorFeaturesModule } from "../features/activity-color/activity-color-features.module";
 import { LegacyModule } from "../shared/legacy.module";
 import { ActivityLogWidgetsModule } from "../widgets/activity-log/activity-log-widgets.module";

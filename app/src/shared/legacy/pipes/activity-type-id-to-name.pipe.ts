@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from "@angular/core";
-import { ActivityTypes } from "../../../entities/activity-types/models/activity-types.state";
-import { IActivityTypes } from "../../../entities/activity-types/models/activity-types.types";
+import { ActivityTypes } from "../../../entities/activity-type/models/activity-types.state";
+import { IActivityTypes } from "../../../entities/activity-type/models/activity-types.types";
 
 @Pipe({
     name: "activityTypeIdToName",

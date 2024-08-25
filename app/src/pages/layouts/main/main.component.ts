@@ -1,12 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { map, Observable } from "rxjs";
-import { activityTypeActions } from "../../../entities/activity-types/models/activity-types.actions";
-import { fromActivityTypes } from "../../../entities/activity-types/models/activity-types.selectors";
+import { activityTypeActions } from "../../../entities/activity-type/models/activity-types.actions";
+import { fromActivityTypes } from "../../../entities/activity-type/models/activity-types.selectors";
 import {
     IActivityType,
     IActivityTypes,
-} from "../../../entities/activity-types/models/activity-types.types";
+} from "../../../entities/activity-type/models/activity-types.types";
 import { ApplicationState } from "../../../entities/application/models/application.model";
 import { storageVersionActions } from "../../../entities/storage-version/models/storage-version.actions";
 import { fromStorageVersion } from "../../../entities/storage-version/models/storage-version.selector";

@@ -4,7 +4,7 @@ import { IActivityLogEntry } from "../../../../entities/activity-log/models/acti
 import {
     IActivityType,
     IActivityTypes,
-} from "../../../../entities/activity-types/models/activity-types.types";
+} from "../../../../entities/activity-type/models/activity-types.types";
 
 interface IGroupEntry {
     activityId: string;

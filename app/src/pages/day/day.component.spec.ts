@@ -14,7 +14,7 @@ import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
 import { activityLogActions } from "../../entities/activity-log/models/activity-log.actions";
 import { ActivityLogEntry } from "../../entities/activity-log/models/activity-log.state";
-import { ActivityTypesModule } from "../../entities/activity-types/activity-types.module";
+import { ActivityTypesModule } from "../../entities/activity-type/activity-types.module";
 import { ApplicationState } from "../../entities/application/models/application.model";
 import { AcivityColorFeaturesModule } from "../../features/activity-color/activity-color-features.module";
 import { ActivityLogEntryComponent } from "../../shared/legacy/activity-log-entry/activity-log-entry.component";

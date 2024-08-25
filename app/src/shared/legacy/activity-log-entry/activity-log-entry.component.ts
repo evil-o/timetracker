@@ -5,7 +5,7 @@ import { ApplicationState } from "../../../entities/application/models/applicati
 import { Store } from "@ngrx/store";
 import { activityColors } from "../../../entities/activity-color/models/activity-color.models";
 import { activityLogActions } from "../../../entities/activity-log/models/activity-log.actions";
-import { IActivityTypes } from "../../../entities/activity-types/models/activity-types.types";
+import { IActivityTypes } from "../../../entities/activity-type/models/activity-types.types";
 import { IGroupEntry } from "../pipes/group-activity-log-entries-by-id.pipe";
 
 @Component({

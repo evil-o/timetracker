@@ -4,7 +4,7 @@ import { FormsModule } from "@angular/forms";
 import { StoreModule } from "@ngrx/store";
 import { ModalModule } from "ngx-bootstrap/modal";
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
-import { ActivityPickerComponent } from "../../entities/activity-types/ui";
+import { ActivityPickerComponent } from "../../entities/activity-type/ui";
 import { ActivityColorPickerComponent } from "../../features/activity-color";
 import { AcivityColorFeaturesModule } from "../../features/activity-color/activity-color-features.module";
 import { ActivityTypesListWidgetsModule } from "../../widgets/activity-types-list/activity-types-list-widgets.module";

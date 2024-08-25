@@ -21,7 +21,7 @@ import { TabsModule } from "ngx-bootstrap/tabs";
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
 import { of } from "rxjs";
 import { activityLogActions } from "../../entities/activity-log/models/activity-log.actions";
-import { ActivityPickerComponent } from "../../entities/activity-types/ui";
+import { ActivityPickerComponent } from "../../entities/activity-type/ui";
 import { effects } from "../../entities/application/effects";
 import { ApplicationState } from "../../entities/application/models/application.model";
 import { attendanceActions } from "../../entities/attendance/models/attendance.actions";
