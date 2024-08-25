@@ -8,6 +8,7 @@ import { ActivityTypesModule } from "../entities/activity-type/activity-types.mo
 import { ActivityAggregationFeaturesModule } from "../features/activity-aggregation/activity-aggregation-features.module";
 import { AcivityColorFeaturesModule } from "../features/activity-color/activity-color-features.module";
 import { LegacyModule } from "../shared/legacy.module";
+import { SharedModule } from "../shared/shared.module";
 import { ActivityLogWidgetsModule } from "../widgets/activity-log/activity-log-widgets.module";
 import { ActivityTypesListWidgetsModule } from "../widgets/activity-types-list/activity-types-list-widgets.module";
 import { NavigationWidgetsModule } from "../widgets/navigation/navigation-widgets.module";
@@ -38,6 +39,7 @@ const pages = [
         AcivityColorFeaturesModule,
         ActivityLogWidgetsModule,
         ActivityAggregationFeaturesModule,
+        SharedModule,
 
         // external dependencies
         BrowserModule,

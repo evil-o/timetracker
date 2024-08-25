@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { FormatHoursPipe } from "../pipes/format-hours.pipe";
+import { FormatHoursPipe } from "../../lib/format-hours.pipe";
 import { HourBadgeComponent } from "./hour-badge.component";
 
 describe("HourBadgeComponent", () => {

@@ -1,6 +1,6 @@
-import { padNumber } from "../../lib";
-import { stringToDuration } from "../helpers";
+import { stringToDuration } from "../legacy/helpers";
 import { FormatHoursPipe } from "./format-hours.pipe";
+import { padNumber } from "./pad-number";
 
 describe("FormatHoursPipe", () => {
     it("should create an instance", () => {

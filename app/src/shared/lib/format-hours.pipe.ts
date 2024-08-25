@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from "@angular/core";
-import { padNumber } from "../../lib";
+import { padNumber } from "./pad-number";
 
 @Pipe({
     name: "formatHours",

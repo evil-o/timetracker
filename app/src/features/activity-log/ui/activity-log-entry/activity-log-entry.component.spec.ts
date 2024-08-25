@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { EditableLogEntryDescriptionComponent } from "../editable-log-entry-description/editable-log-entry-description.component";
-import { EditableLogEntryHoursComponent } from "../editable-log-entry-hours/editable-log-entry-hours.component";
-import { HourBadgeComponent } from "../hour-badge/hour-badge.component";
+import { EditableLogEntryDescriptionComponent } from "../../../../entities/activity-log/ui/editable-log-entry-description/editable-log-entry-description.component";
+import { EditableLogEntryHoursComponent } from "../../../../entities/activity-log/ui/editable-log-entry-hours/editable-log-entry-hours.component";
+import { HourBadgeComponent } from "../../../../shared/legacy/hour-badge/hour-badge.component";
 import { ActivityLogEntryComponent } from "./activity-log-entry.component";
 
 import { provideNoopAnimations } from "@angular/platform-browser/animations";
 import { StoreModule } from "@ngrx/store";
 import { AccordionModule } from "ngx-bootstrap/accordion";
-import { metaReducers } from "../../../entities/application/meta-reducers";
-import { reducers } from "../../../entities/application/reducers";
-import { ActivityTypeIdToNamePipe } from "../pipes/activity-type-id-to-name.pipe";
-import { FormatHoursPipe } from "../pipes/format-hours.pipe";
+import { metaReducers } from "../../../../entities/application/meta-reducers";
+import { reducers } from "../../../../entities/application/reducers";
+import { FormatHoursPipe } from "../../../../shared";
+import { ActivityTypeIdToNamePipe } from "../../../../shared/legacy/pipes/activity-type-id-to-name.pipe";
 
 describe("ActivityLogEntryComponent", () => {
     let component: ActivityLogEntryComponent;

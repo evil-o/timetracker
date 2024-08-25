@@ -6,8 +6,8 @@ import {
     Output,
     ViewChild,
 } from "@angular/core";
-import { ActivityLogEntry } from "../../../entities/activity-log/models/activity-log.state";
-import { stringToDuration } from "../helpers";
+import { stringToDuration } from "../../../../shared/legacy/helpers";
+import { ActivityLogEntry } from "../../models/activity-log.state";
 
 @Component({
     selector: "app-editable-log-entry-hours",

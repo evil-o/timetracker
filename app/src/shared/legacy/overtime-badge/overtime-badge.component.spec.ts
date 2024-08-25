@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { DebugElement } from "@angular/core";
 import { By } from "@angular/platform-browser";
-import { FormatHoursPipe } from "../pipes/format-hours.pipe";
+import { FormatHoursPipe } from "../../lib/format-hours.pipe";
 import { PrecisionPipe } from "../pipes/precision.pipe";
 import { OvertimeBadgeComponent } from "./overtime-badge.component";
 

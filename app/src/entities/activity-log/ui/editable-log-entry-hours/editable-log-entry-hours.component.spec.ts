@@ -5,8 +5,7 @@ import {
     fakeAsync,
     tick,
 } from "@angular/core/testing";
-
-import { FormatHoursPipe } from "../pipes/format-hours.pipe";
+import { FormatHoursPipe } from "../../../../shared";
 import { EditableLogEntryHoursComponent } from "./editable-log-entry-hours.component";
 
 @Component({
@@ -18,7 +17,7 @@ class TestHostComponent {
     public component!: EditableLogEntryHoursComponent;
 }
 
-xdescribe("EditableLogEntryHoursComponent", () => {
+xdescribe(EditableLogEntryHoursComponent.name, () => {
     let host: TestHostComponent;
     let fixture: ComponentFixture<TestHostComponent>;
 

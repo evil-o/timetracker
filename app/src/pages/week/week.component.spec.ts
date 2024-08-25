@@ -21,16 +21,17 @@ import { TabsModule } from "ngx-bootstrap/tabs";
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
 import { of } from "rxjs";
 import { activityLogActions } from "../../entities/activity-log/models/activity-log.actions";
+import { EditableLogEntryDescriptionComponent } from "../../entities/activity-log/ui/editable-log-entry-description/editable-log-entry-description.component";
+import { EditableLogEntryHoursComponent } from "../../entities/activity-log/ui/editable-log-entry-hours/editable-log-entry-hours.component";
 import { ActivityPickerComponent } from "../../entities/activity-type/ui";
 import { effects } from "../../entities/application/effects";
 import { ApplicationState } from "../../entities/application/models/application.model";
 import { attendanceActions } from "../../entities/attendance/models/attendance.actions";
 import { configurationActions } from "../../entities/configuration/models/configuration.actions";
 import { AcivityColorFeaturesModule } from "../../features/activity-color/activity-color-features.module";
-import { ActivityLogEntryComponent } from "../../shared/legacy/activity-log-entry/activity-log-entry.component";
+import { ActivityLogEntryComponent } from "../../features/activity-log/ui/activity-log-entry/activity-log-entry.component";
+import { FormatHoursPipe } from "../../shared";
 import { DayAttendanceComponent } from "../../shared/legacy/day-attendance/day-attendance.component";
-import { EditableLogEntryDescriptionComponent } from "../../shared/legacy/editable-log-entry-description/editable-log-entry-description.component";
-import { EditableLogEntryHoursComponent } from "../../shared/legacy/editable-log-entry-hours/editable-log-entry-hours.component";
 import {
     getFirstDayOfCalendarWeek,
     valueToTime,
@@ -39,7 +40,6 @@ import { HourBadgeComponent } from "../../shared/legacy/hour-badge/hour-badge.co
 import { NoActivityLogEntryPresentComponent } from "../../shared/legacy/no-activity-log-entry-present/no-activity-log-entry-present.component";
 import { OvertimeBadgeComponent } from "../../shared/legacy/overtime-badge/overtime-badge.component";
 import { ActivityTypeIdToNamePipe } from "../../shared/legacy/pipes/activity-type-id-to-name.pipe";
-import { FormatHoursPipe } from "../../shared/legacy/pipes/format-hours.pipe";
 import { GroupActivityLogEntriesByIdPipe } from "../../shared/legacy/pipes/group-activity-log-entries-by-id.pipe";
 import { LogEntryTallyPipe } from "../../shared/legacy/pipes/log-entry-tally.pipe";
 import { PrecisionPipe } from "../../shared/legacy/pipes/precision.pipe";
