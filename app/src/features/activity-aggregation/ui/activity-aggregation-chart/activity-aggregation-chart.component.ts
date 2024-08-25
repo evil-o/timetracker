@@ -4,14 +4,14 @@ import { ChartData, ChartOptions } from "chart.js";
 import { BaseChartDirective } from "ng2-charts";
 import { combineLatest, map, Observable } from "rxjs";
 import {
-    activityColors,
-    IColorSpec,
-} from "../../../../entities/activity-color";
-import {
     IActivityLog,
     IActivityLogEntry,
 } from "../../../../entities/activity-log";
-import { IActivityTypes } from "../../../../entities/activity-type";
+import {
+    activityColors,
+    IActivityTypes,
+    IColorSpec,
+} from "../../../../entities/activity-type";
 
 export interface IAggregationData {
     hours: number;

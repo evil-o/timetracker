@@ -3,12 +3,14 @@ import { AccordionComponent } from "ngx-bootstrap/accordion";
 import { ApplicationState } from "../../../../entities/application/models/application.model";
 
 import { Store } from "@ngrx/store";
-import { activityColors } from "../../../../entities/activity-color";
 import {
     activityLogActions,
     IGroupEntry,
 } from "../../../../entities/activity-log";
-import { IActivityTypes } from "../../../../entities/activity-type";
+import {
+    activityColors,
+    IActivityTypes,
+} from "../../../../entities/activity-type";
 
 @Component({
     selector: "app-activity-log-entry",
