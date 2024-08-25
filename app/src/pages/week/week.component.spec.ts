@@ -28,7 +28,6 @@ import { attendanceActions } from "../../entities/attendance/models/attendance.a
 import { configurationActions } from "../../entities/configuration/models/configuration.actions";
 import { AcivityColorFeaturesModule } from "../../features/activity-color/activity-color-features.module";
 import { ActivityLogEntryComponent } from "../../shared/legacy/activity-log-entry/activity-log-entry.component";
-import { ActivityLogListComponent } from "../../shared/legacy/actvity-log-list/actvity-log-list.component";
 import { DayAttendanceComponent } from "../../shared/legacy/day-attendance/day-attendance.component";
 import { EditableLogEntryDescriptionComponent } from "../../shared/legacy/editable-log-entry-description/editable-log-entry-description.component";
 import { EditableLogEntryHoursComponent } from "../../shared/legacy/editable-log-entry-hours/editable-log-entry-hours.component";
@@ -46,6 +45,7 @@ import { LogEntryTallyPipe } from "../../shared/legacy/pipes/log-entry-tally.pip
 import { PrecisionPipe } from "../../shared/legacy/pipes/precision.pipe";
 import { TallyComponent } from "../../shared/legacy/tally/tally.component";
 import { TimeBadgeComponent } from "../../shared/legacy/time-badge/time-badge.component";
+import { ActivityLogListComponent } from "../../widgets/activity-log/ui/activity-log-list/actvity-log-list.component";
 import { NavigationWidgetsModule } from "../../widgets/navigation/navigation-widgets.module";
 import { ActivitiesComponent } from "../activities/activities.component";
 import { ConfigurationComponent } from "../configuration/configuration.component";

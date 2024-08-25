@@ -8,7 +8,6 @@ import { TypeaheadModule } from "ngx-bootstrap/typeahead";
 import { ActivityTypesModule } from "../entities/activity-types/activity-types.module";
 import { ActivityAggregationChartComponent } from "./legacy/activity-aggregation-chart/activity-aggregation-chart.component";
 import { ActivityLogEntryComponent } from "./legacy/activity-log-entry/activity-log-entry.component";
-import { ActivityLogListComponent } from "./legacy/actvity-log-list/actvity-log-list.component";
 import { DayAttendanceComponent } from "./legacy/day-attendance/day-attendance.component";
 import { EditableLogEntryDescriptionComponent } from "./legacy/editable-log-entry-description/editable-log-entry-description.component";
 import { EditableLogEntryHoursComponent } from "./legacy/editable-log-entry-hours/editable-log-entry-hours.component";
@@ -27,7 +26,6 @@ import { TimeBadgeComponent } from "./legacy/time-badge/time-badge.component";
 const legacyDeclarations = [
     // components
     ActivityLogEntryComponent,
-    ActivityLogListComponent,
     DayAttendanceComponent,
     EditableLogEntryDescriptionComponent,
     EditableLogEntryHoursComponent,

@@ -22,7 +22,6 @@ import { AcivityColorFeaturesModule } from "../../../../features/activity-color/
 import { WeekComponent } from "../../../../pages/week/week.component";
 import { WelcomeComponent } from "../../../../pages/welcome/welcome.component";
 import { ActivityLogEntryComponent } from "../../../../shared/legacy/activity-log-entry/activity-log-entry.component";
-import { ActivityLogListComponent } from "../../../../shared/legacy/actvity-log-list/actvity-log-list.component";
 import { DayAttendanceComponent } from "../../../../shared/legacy/day-attendance/day-attendance.component";
 import { EditableLogEntryDescriptionComponent } from "../../../../shared/legacy/editable-log-entry-description/editable-log-entry-description.component";
 import { EditableLogEntryHoursComponent } from "../../../../shared/legacy/editable-log-entry-hours/editable-log-entry-hours.component";
@@ -37,6 +36,7 @@ import { PrecisionPipe } from "../../../../shared/legacy/pipes/precision.pipe";
 import { TallyComponent } from "../../../../shared/legacy/tally/tally.component";
 import { TimeBadgeComponent } from "../../../../shared/legacy/time-badge/time-badge.component";
 import { PadNumberPipe } from "../../../../shared/lib";
+import { ActivityLogListComponent } from "../../../activity-log/ui/activity-log-list/actvity-log-list.component";
 
 xdescribe("NavbarComponent", () => {
     let component: NavbarComponent;

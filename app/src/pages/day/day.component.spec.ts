@@ -18,7 +18,6 @@ import { ActivityTypesModule } from "../../entities/activity-types/activity-type
 import { ApplicationState } from "../../entities/application/models/application.model";
 import { AcivityColorFeaturesModule } from "../../features/activity-color/activity-color-features.module";
 import { ActivityLogEntryComponent } from "../../shared/legacy/activity-log-entry/activity-log-entry.component";
-import { ActivityLogListComponent } from "../../shared/legacy/actvity-log-list/actvity-log-list.component";
 import { DayAttendanceComponent } from "../../shared/legacy/day-attendance/day-attendance.component";
 import { EditableLogEntryDescriptionComponent } from "../../shared/legacy/editable-log-entry-description/editable-log-entry-description.component";
 import { EditableLogEntryHoursComponent } from "../../shared/legacy/editable-log-entry-hours/editable-log-entry-hours.component";
@@ -28,6 +27,7 @@ import { ActivityTypeIdToNamePipe } from "../../shared/legacy/pipes/activity-typ
 import { FormatHoursPipe } from "../../shared/legacy/pipes/format-hours.pipe";
 import { GroupActivityLogEntriesByIdPipe } from "../../shared/legacy/pipes/group-activity-log-entries-by-id.pipe";
 import { TimeBadgeComponent } from "../../shared/legacy/time-badge/time-badge.component";
+import { ActivityLogListComponent } from "../../widgets/activity-log/ui/activity-log-list/actvity-log-list.component";
 import { DayComponent } from "./day.component";
 
 describe("DayComponent", () => {

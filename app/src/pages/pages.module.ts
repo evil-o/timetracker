@@ -7,6 +7,7 @@ import { TabsModule } from "ngx-bootstrap/tabs";
 import { ActivityTypesModule } from "../entities/activity-types/activity-types.module";
 import { AcivityColorFeaturesModule } from "../features/activity-color/activity-color-features.module";
 import { LegacyModule } from "../shared/legacy.module";
+import { ActivityLogWidgetsModule } from "../widgets/activity-log/activity-log-widgets.module";
 import { ActivityTypesListWidgetsModule } from "../widgets/activity-types-list/activity-types-list-widgets.module";
 import { NavigationWidgetsModule } from "../widgets/navigation/navigation-widgets.module";
 import { ActivitiesComponent } from "./activities/activities.component";
@@ -34,6 +35,7 @@ const pages = [
         NavigationWidgetsModule,
         ActivityTypesListWidgetsModule,
         AcivityColorFeaturesModule,
+        ActivityLogWidgetsModule,
 
         // external dependencies
         BrowserModule,

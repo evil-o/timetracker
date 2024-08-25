@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { combineLatest, map, Observable } from "rxjs";
-import { IActivityLogEntry } from "../../../entities/activity-log/models/activity-log.types";
+import { IActivityLogEntry } from "../../../../entities/activity-log/models/activity-log.types";
 import {
     IActivityType,
     IActivityTypes,
-} from "../../../entities/activity-types/models/activity-types.types";
+} from "../../../../entities/activity-types/models/activity-types.types";
 
 interface IGroupEntry {
     activityId: string;
@@ -15,7 +15,6 @@ interface IGroupEntry {
 @Component({
     selector: "app-actvity-log-list",
     templateUrl: "./actvity-log-list.component.html",
-    styleUrls: ["./actvity-log-list.component.css"],
 })
 export class ActivityLogListComponent implements OnInit {
     @Input()
