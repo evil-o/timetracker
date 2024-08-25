@@ -1,6 +1,7 @@
 ## Cypress specs
 
 -   week tally shows the right log entries
+-   changes start + end time for a day (after it has been set)
 -   stopwatch logs time
 
 ## Unit tests
