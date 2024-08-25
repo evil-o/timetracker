@@ -4,7 +4,7 @@ import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { StoreModule } from "@ngrx/store";
 import { StopwatchComponent } from "./stopwatch.component";
 
-describe("StopwatchComponent", () => {
+describe(StopwatchComponent.name, () => {
     let component: StopwatchComponent;
     let fixture: ComponentFixture<StopwatchComponent>;
 

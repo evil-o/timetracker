@@ -6,13 +6,7 @@ import { AccordionModule } from "ngx-bootstrap/accordion";
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
 
 import { ActivityTypeEntitiesModule } from "../entities/activity-type/activity-type-entities.module";
-import { StopwatchComponent } from "./legacy/stopwatch/stopwatch.component";
 import { SharedModule } from "./shared.module";
-
-const legacyDeclarations = [
-    // components
-    StopwatchComponent,
-];
 
 // all things not yet ported to FSD, for import in the various modules, to ease the transition
 @NgModule({
@@ -27,7 +21,7 @@ const legacyDeclarations = [
         // temporary workarounds:
         ActivityTypeEntitiesModule,
     ],
-    declarations: [...legacyDeclarations],
-    exports: [...legacyDeclarations],
+    declarations: [],
+    exports: [],
 })
 export class LegacyModule {}
