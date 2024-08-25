@@ -23,7 +23,7 @@ import { ActivityTypeIdToNamePipe } from "../../entities/activity-type/lib/activ
 import { ApplicationState } from "../../entities/application/models/application.model";
 import { AcivityColorFeaturesModule } from "../../features/activity-color/activity-color-features.module";
 import { ActivityLogEntryComponent } from "../../features/activity-log/ui/activity-log-entry/activity-log-entry.component";
-import { FormatHoursPipe } from "../../shared";
+import { FormatHoursPipe } from "../../shared/lib";
 import { HourBadgeComponent } from "../../shared/ui/hour-badge/hour-badge.component";
 import { TimeBadgeComponent } from "../../shared/ui/time-badge/time-badge.component";
 import { ActivityLogListComponent } from "../../widgets/activity-log/ui/activity-log-list/actvity-log-list.component";

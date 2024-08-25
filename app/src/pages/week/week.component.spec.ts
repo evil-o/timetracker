@@ -39,7 +39,7 @@ import {
     FormatHoursPipe,
     getFirstDayOfCalendarWeek,
     valueToTime,
-} from "../../shared";
+} from "../../shared/lib";
 import { PrecisionPipe } from "../../shared/lib/precision.pipe";
 import { HourBadgeComponent } from "../../shared/ui/hour-badge/hour-badge.component";
 import { TimeBadgeComponent } from "../../shared/ui/time-badge/time-badge.component";

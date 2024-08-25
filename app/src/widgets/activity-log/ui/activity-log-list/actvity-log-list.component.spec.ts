@@ -7,7 +7,7 @@ import { EditableLogEntryHoursComponent } from "../../../../entities/activity-lo
 import { NoActivityLogEntryPresentComponent } from "../../../../entities/activity-log/ui/no-activity-log-entry-present/no-activity-log-entry-present.component";
 import { ActivityTypeIdToNamePipe } from "../../../../entities/activity-type/lib/activity-type-id-to-name.pipe";
 import { ActivityLogEntryComponent } from "../../../../features/activity-log/ui/activity-log-entry/activity-log-entry.component";
-import { FormatHoursPipe } from "../../../../shared";
+import { FormatHoursPipe } from "../../../../shared/lib";
 import { HourBadgeComponent } from "../../../../shared/ui/hour-badge/hour-badge.component";
 import { ActivityLogListComponent } from "./actvity-log-list.component";
 

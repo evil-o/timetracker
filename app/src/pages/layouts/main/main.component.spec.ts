@@ -20,7 +20,7 @@ import { reducers } from "../../../entities/application/reducers";
 import { OvertimeBadgeComponent } from "../../../features/activity-aggregation/ui/overtime-badge/overtime-badge.component";
 import { AcivityColorFeaturesModule } from "../../../features/activity-color/activity-color-features.module";
 import { ActivityLogEntryComponent } from "../../../features/activity-log/ui/activity-log-entry/activity-log-entry.component";
-import { FormatHoursPipe } from "../../../shared";
+import { FormatHoursPipe } from "../../../shared/lib";
 import { PrecisionPipe } from "../../../shared/lib/precision.pipe";
 import { SharedModule } from "../../../shared/shared.module";
 import { HourBadgeComponent } from "../../../shared/ui/hour-badge/hour-badge.component";

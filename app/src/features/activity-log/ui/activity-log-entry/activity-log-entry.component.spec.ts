@@ -11,7 +11,7 @@ import { AccordionModule } from "ngx-bootstrap/accordion";
 import { ActivityTypeIdToNamePipe } from "../../../../entities/activity-type/lib/activity-type-id-to-name.pipe";
 import { metaReducers } from "../../../../entities/application/meta-reducers";
 import { reducers } from "../../../../entities/application/reducers";
-import { FormatHoursPipe } from "../../../../shared";
+import { FormatHoursPipe } from "../../../../shared/lib";
 
 describe("ActivityLogEntryComponent", () => {
     let component: ActivityLogEntryComponent;

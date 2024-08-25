@@ -27,7 +27,7 @@ import {
 } from "../../entities/activity-type/models/activity-types.types";
 import { ActivityPickerComponent } from "../../entities/activity-type/ui";
 import { fromAttendance } from "../../entities/attendance/models/attendance.selectors";
-import { stringToDuration } from "../../shared";
+import { stringToDuration } from "../../shared/lib";
 import { HourBadgeComponent } from "../../shared/ui/hour-badge/hour-badge.component";
 import { TimeBadgeComponent } from "../../shared/ui/time-badge/time-badge.component";
 

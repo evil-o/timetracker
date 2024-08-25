@@ -6,7 +6,7 @@ import {
     Output,
     ViewChild,
 } from "@angular/core";
-import { stringToDuration } from "../../../../shared";
+import { stringToDuration } from "../../../../shared/lib";
 import { ActivityLogEntry } from "../../models/activity-log.state";
 
 @Component({

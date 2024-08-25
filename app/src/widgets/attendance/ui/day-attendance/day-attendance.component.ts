@@ -13,7 +13,7 @@ import {
     dateToTimeInputValue,
     stringToDuration,
     valueToTime,
-} from "../../../../shared";
+} from "../../../../shared/lib";
 
 @Component({
     selector: "app-day-attendance",

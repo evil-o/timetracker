@@ -5,7 +5,7 @@ import {
     fakeAsync,
     tick,
 } from "@angular/core/testing";
-import { FormatHoursPipe } from "../../../../shared";
+import { FormatHoursPipe } from "../../../../shared/lib";
 import { EditableLogEntryHoursComponent } from "./editable-log-entry-hours.component";
 
 @Component({

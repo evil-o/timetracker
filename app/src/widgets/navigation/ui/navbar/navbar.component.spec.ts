@@ -28,8 +28,11 @@ import { AcivityColorFeaturesModule } from "../../../../features/activity-color/
 import { ActivityLogEntryComponent } from "../../../../features/activity-log/ui/activity-log-entry/activity-log-entry.component";
 import { WeekComponent } from "../../../../pages/week/week.component";
 import { WelcomeComponent } from "../../../../pages/welcome/welcome.component";
-import { FormatHoursPipe, valueToTime } from "../../../../shared";
-import { PadNumberPipe } from "../../../../shared/lib";
+import {
+    FormatHoursPipe,
+    PadNumberPipe,
+    valueToTime,
+} from "../../../../shared/lib";
 import { PrecisionPipe } from "../../../../shared/lib/precision.pipe";
 import { HourBadgeComponent } from "../../../../shared/ui/hour-badge/hour-badge.component";
 import { TimeBadgeComponent } from "../../../../shared/ui/time-badge/time-badge.component";
