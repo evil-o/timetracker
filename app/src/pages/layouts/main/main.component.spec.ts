@@ -11,7 +11,7 @@ import { appRoutes } from "../../../app/app.routes";
 import { ActivityTypesModule } from "../../../entities/activity-types/activity-types.module";
 import { metaReducers } from "../../../entities/application/meta-reducers";
 import { reducers } from "../../../entities/application/reducers";
-import { ActivityColorPickerComponent } from "../../../shared/legacy/activity-color-picker/activity-color-picker.component";
+import { ActivityColorFeatureModule } from "../../../features/activity-color/activity-color-feature.module";
 import { ActivityLogEntryComponent } from "../../../shared/legacy/activity-log-entry/activity-log-entry.component";
 import { ActivityTypeListComponent } from "../../../shared/legacy/activity-type-list/activity-type-list.component";
 import { ActivityLogListComponent } from "../../../shared/legacy/actvity-log-list/actvity-log-list.component";
@@ -42,7 +42,6 @@ describe(MainComponent.name, () => {
         TestBed.configureTestingModule({
             declarations: [
                 ActivitiesComponent,
-                ActivityColorPickerComponent,
                 ActivityTypeIdToNamePipe,
                 ActivityLogEntryComponent,
                 ActivityLogListComponent,
@@ -69,6 +68,7 @@ describe(MainComponent.name, () => {
             imports: [
                 AccordionModule,
                 ActivityTypesModule,
+                ActivityColorFeatureModule,
                 BsDatepickerModule.forRoot(),
                 FormsModule,
                 StoreModule.forRoot(reducers, { metaReducers }),

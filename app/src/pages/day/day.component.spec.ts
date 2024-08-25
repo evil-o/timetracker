@@ -16,7 +16,7 @@ import { activityLogActions } from "../../entities/activity-log/models/activity-
 import { ActivityLogEntry } from "../../entities/activity-log/models/activity-log.state";
 import { ActivityTypesModule } from "../../entities/activity-types/activity-types.module";
 import { ApplicationState } from "../../entities/application/models/application.model";
-import { ActivityColorPickerComponent } from "../../shared/legacy/activity-color-picker/activity-color-picker.component";
+import { ActivityColorFeatureModule } from "../../features/activity-color/activity-color-feature.module";
 import { ActivityLogEntryComponent } from "../../shared/legacy/activity-log-entry/activity-log-entry.component";
 import { ActivityLogListComponent } from "../../shared/legacy/actvity-log-list/actvity-log-list.component";
 import { DayAttendanceComponent } from "../../shared/legacy/day-attendance/day-attendance.component";
@@ -61,7 +61,6 @@ describe("DayComponent", () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [
-                ActivityColorPickerComponent,
                 ActivityLogEntryComponent,
                 ActivityLogListComponent,
                 ActivityTypeIdToNamePipe,
@@ -82,6 +81,7 @@ describe("DayComponent", () => {
                 StoreModule.forRoot(),
                 TypeaheadModule.forRoot(),
                 ActivityTypesModule,
+                ActivityColorFeatureModule,
             ],
             providers: [provideNoopAnimations()],
             schemas: [NO_ERRORS_SCHEMA],

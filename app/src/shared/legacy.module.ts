@@ -7,7 +7,6 @@ import { TypeaheadModule } from "ngx-bootstrap/typeahead";
 
 import { ActivityTypesModule } from "../entities/activity-types/activity-types.module";
 import { ActivityAggregationChartComponent } from "./legacy/activity-aggregation-chart/activity-aggregation-chart.component";
-import { ActivityColorPickerComponent } from "./legacy/activity-color-picker/activity-color-picker.component";
 import { ActivityLogEntryComponent } from "./legacy/activity-log-entry/activity-log-entry.component";
 import { ActivityTypeListComponent } from "./legacy/activity-type-list/activity-type-list.component";
 import { ActivityLogListComponent } from "./legacy/actvity-log-list/actvity-log-list.component";
@@ -28,7 +27,6 @@ import { TimeBadgeComponent } from "./legacy/time-badge/time-badge.component";
 
 const legacyDeclarations = [
     // components
-    ActivityColorPickerComponent,
     ActivityLogEntryComponent,
     ActivityLogListComponent,
     ActivityTypeListComponent,

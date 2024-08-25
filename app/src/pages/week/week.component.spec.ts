@@ -26,7 +26,7 @@ import { effects } from "../../entities/application/effects";
 import { ApplicationState } from "../../entities/application/models/application.model";
 import { attendanceActions } from "../../entities/attendance/models/attendance.actions";
 import { configurationActions } from "../../entities/configuration/models/configuration.actions";
-import { ActivityColorPickerComponent } from "../../shared/legacy/activity-color-picker/activity-color-picker.component";
+import { ActivityColorFeatureModule } from "../../features/activity-color/activity-color-feature.module";
 import { ActivityLogEntryComponent } from "../../shared/legacy/activity-log-entry/activity-log-entry.component";
 import { ActivityTypeListComponent } from "../../shared/legacy/activity-type-list/activity-type-list.component";
 import { ActivityLogListComponent } from "../../shared/legacy/actvity-log-list/actvity-log-list.component";
@@ -71,7 +71,6 @@ describe("WeekComponent", () => {
         TestBed.configureTestingModule({
             declarations: [
                 ActivitiesComponent,
-                ActivityColorPickerComponent,
                 ActivityLogEntryComponent,
                 ActivityLogListComponent,
                 ActivityPickerComponent,
@@ -103,6 +102,7 @@ describe("WeekComponent", () => {
                 EffectsModule.forRoot(effects),
                 TabsModule.forRoot(),
                 TypeaheadModule.forRoot(),
+                ActivityColorFeatureModule,
             ],
             providers: [
                 { provide: APP_BASE_HREF, useValue: "/" },

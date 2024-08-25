@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { StoreModule } from "@ngrx/store";
-import { ActivityColorPickerComponent } from "../activity-color-picker/activity-color-picker.component";
+import { ActivityColorFeatureModule } from "../../../features/activity-color/activity-color-feature.module";
 import { ActivityTypeListComponent } from "./activity-type-list.component";
 
 describe("ActivityTypeListComponent", () => {
@@ -10,11 +10,8 @@ describe("ActivityTypeListComponent", () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [
-                ActivityColorPickerComponent,
-                ActivityTypeListComponent,
-            ],
-            imports: [StoreModule.forRoot()],
+            declarations: [ActivityTypeListComponent],
+            imports: [StoreModule.forRoot(), ActivityColorFeatureModule],
         }).compileComponents();
     });
 
