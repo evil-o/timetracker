@@ -12,7 +12,7 @@ import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 
 import { environment } from "../environments/environment";
 
-import { effects } from "../entities/application/effects";
+import { entityEffects } from "../entities/application/effects";
 import { metaReducers } from "../entities/application/meta-reducers";
 import { reducers } from "../entities/application/reducers";
 
@@ -26,8 +26,10 @@ import { ModalModule } from "ngx-bootstrap/modal";
 import { TabsModule } from "ngx-bootstrap/tabs";
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
 
+import { ActivityLogFeaturesEffects } from "../features/activity-log/model/activity-log-features.effects";
 import { PagesModule } from "../pages/pages.module";
 import { routes } from "../pages/pages.routes";
+import { ApplicatioEffects } from "./model/application.effects";
 
 @NgModule({
     declarations: [AppComponent],
@@ -48,7 +50,11 @@ import { routes } from "../pages/pages.routes";
                   maxAge: 25, // Retains last 25 states
               })
             : [],
-        EffectsModule.forRoot(effects),
+        EffectsModule.forRoot([
+            ...entityEffects,
+            ApplicatioEffects,
+            ActivityLogFeaturesEffects,
+        ]),
         RouterModule.forRoot(routes),
     ],
     providers: [provideCharts(withDefaultRegisterables()), provideAnimations()],

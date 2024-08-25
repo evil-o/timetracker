@@ -1,15 +1,13 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
-
 import { map, withLatestFrom } from "rxjs";
-import { activityTypeActions } from "../../activity-type/models/activity-types.actions";
-import { ApplicationState } from "../../application/models/application.model";
-import { storageVersionActions } from "../../storage-version/models/storage-version.actions";
-import { activityLogActions } from "./activity-log.actions";
+import { activityLogActions } from "../../entities/activity-log/models/activity-log.actions";
+import { activityTypeActions } from "../../entities/activity-type/models/activity-types.actions";
+import { ApplicationState } from "../../entities/application/models/application.model";
 
 @Injectable()
-export class ActivityLogEffects {
+export class ApplicatioEffects {
     newActivityTypeLogged$ = createEffect(() =>
         this.actions$.pipe(
             ofType(activityLogActions.fetchOrCreateIdAndLogTime),
@@ -38,12 +36,15 @@ export class ActivityLogEffects {
         )
     );
 
-    incrementalMigrationComplete$ = createEffect(() =>
+    createAndLogTime$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(storageVersionActions.incrementalMigration),
-            map(() =>
-                storageVersionActions.incrementalMigrationSuccess({
-                    updatedState: "ActivityLogState",
+            ofType(activityTypeActions.createAndLogTime),
+            map((action) =>
+                activityLogActions.fetchOrCreateIdAndLogTime({
+                    name: action.name,
+                    hoursToLog: action.hours,
+                    date: action.date,
+                    description: action.description,
                 })
             )
         )

@@ -2,16 +2,16 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 
 import { map } from "rxjs";
-import { storageVersionActions } from "../../storage-version/models/storage-version.actions";
+import { storageVersionActions } from "../../../entities/storage-version";
 
 @Injectable()
-export class ActivityTypesEffects {
+export class ActivityLogFeaturesEffects {
     incrementalMigrationComplete$ = createEffect(() =>
         this.actions$.pipe(
             ofType(storageVersionActions.incrementalMigration),
             map(() =>
                 storageVersionActions.incrementalMigrationSuccess({
-                    updatedState: "ActivityTypesState",
+                    updatedState: "ActivityLogState",
                 })
             )
         )

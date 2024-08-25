@@ -25,7 +25,7 @@ import { EditableLogEntryHoursComponent } from "../../entities/activity-log/ui/e
 import { NoActivityLogEntryPresentComponent } from "../../entities/activity-log/ui/no-activity-log-entry-present/no-activity-log-entry-present.component";
 import { ActivityTypeIdToNamePipe } from "../../entities/activity-type/lib/activity-type-id-to-name.pipe";
 import { ActivityPickerComponent } from "../../entities/activity-type/ui";
-import { effects } from "../../entities/application/effects";
+import { entityEffects } from "../../entities/application/effects";
 import { ApplicationState } from "../../entities/application/models/application.model";
 import { attendanceActions } from "../../entities/attendance/models/attendance.actions";
 import { configurationActions } from "../../entities/configuration/models/configuration.actions";
@@ -94,7 +94,7 @@ describe("WeekComponent", () => {
                 FormsModule,
                 RouterModule.forRoot([]),
                 StoreModule.forRoot(),
-                EffectsModule.forRoot(effects),
+                EffectsModule.forRoot(entityEffects),
                 TabsModule.forRoot(),
                 TypeaheadModule.forRoot(),
                 AcivityColorFeaturesModule,
