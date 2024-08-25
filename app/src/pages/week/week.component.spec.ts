@@ -11,8 +11,6 @@ import { ActivatedRoute, RouterModule } from "@angular/router";
 
 import { Store, StoreModule } from "@ngrx/store";
 
-import { appRoutes } from "../../app/app.routes";
-
 import { EffectsModule } from "@ngrx/effects";
 import { AccordionModule } from "ngx-bootstrap/accordion";
 import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
@@ -96,7 +94,7 @@ describe("WeekComponent", () => {
                 AccordionModule.forRoot(),
                 BsDatepickerModule.forRoot(),
                 FormsModule,
-                RouterModule.forRoot(appRoutes),
+                RouterModule.forRoot([]),
                 StoreModule.forRoot(),
                 EffectsModule.forRoot(effects),
                 TabsModule.forRoot(),

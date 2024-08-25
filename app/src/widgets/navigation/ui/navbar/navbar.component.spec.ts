@@ -13,7 +13,6 @@ import { AccordionModule } from "ngx-bootstrap/accordion";
 import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
 import { TabsModule } from "ngx-bootstrap/tabs";
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
-import { appRoutes } from "../../../../app/app.routes";
 import { LogEntryTallyPipe } from "../../../../entities/activity-log";
 import { GroupActivityLogEntriesByIdPipe } from "../../../../entities/activity-log/lib/group-activity-log-entries-by-id.pipe";
 import { EditableLogEntryDescriptionComponent } from "../../../../entities/activity-log/ui/editable-log-entry-description/editable-log-entry-description.component";
@@ -84,7 +83,7 @@ xdescribe("NavbarComponent", () => {
                 StoreModule.forRoot(),
                 TabsModule.forRoot(),
                 TypeaheadModule.forRoot(),
-                RouterModule.forRoot(appRoutes),
+                RouterModule.forRoot([]),
                 AcivityColorFeaturesModule,
             ],
             providers: [{ provide: APP_BASE_HREF, useValue: "/" }],

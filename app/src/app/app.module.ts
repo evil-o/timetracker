@@ -27,7 +27,7 @@ import { TabsModule } from "ngx-bootstrap/tabs";
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
 
 import { PagesModule } from "../pages/pages.module";
-import { appRoutes } from "./app.routes";
+import { routes } from "../pages/pages.routes";
 
 @NgModule({
     declarations: [AppComponent],
@@ -49,7 +49,7 @@ import { appRoutes } from "./app.routes";
               })
             : [],
         EffectsModule.forRoot(effects),
-        RouterModule.forRoot(appRoutes),
+        RouterModule.forRoot(routes),
     ],
     providers: [provideCharts(withDefaultRegisterables()), provideAnimations()],
     bootstrap: [AppComponent],

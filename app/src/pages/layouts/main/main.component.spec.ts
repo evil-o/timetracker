@@ -7,7 +7,6 @@ import { AccordionModule } from "ngx-bootstrap/accordion";
 import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
 import { TabsModule } from "ngx-bootstrap/tabs";
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
-import { appRoutes } from "../../../app/app.routes";
 import { LogEntryTallyPipe } from "../../../entities/activity-log";
 import { GroupActivityLogEntriesByIdPipe } from "../../../entities/activity-log/lib/group-activity-log-entries-by-id.pipe";
 import { EditableLogEntryDescriptionComponent } from "../../../entities/activity-log/ui/editable-log-entry-description/editable-log-entry-description.component";
@@ -32,6 +31,7 @@ import { NavbarComponent } from "../../../widgets/navigation";
 import { ActivitiesComponent } from "../../activities/activities.component";
 import { ConfigurationComponent } from "../../configuration/configuration.component";
 import { DayComponent } from "../../day/day.component";
+import { routes } from "../../pages.routes";
 import { WeekComponent } from "../../week/week.component";
 import { WelcomeComponent } from "../../welcome/welcome.component";
 import { MainComponent } from "./main.component";
@@ -72,7 +72,7 @@ describe(MainComponent.name, () => {
                 StoreModule.forRoot(reducers, { metaReducers }),
                 TabsModule,
                 TypeaheadModule.forRoot(),
-                RouterTestingModule.withRoutes(appRoutes),
+                RouterTestingModule.withRoutes(routes),
                 SharedModule,
             ],
         }).compileComponents();
