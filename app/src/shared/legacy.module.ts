@@ -6,7 +6,6 @@ import { AccordionModule } from "ngx-bootstrap/accordion";
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
 
 import { ActivityTypesModule } from "../entities/activity-type/activity-types.module";
-import { ActivityAggregationChartComponent } from "./legacy/activity-aggregation-chart/activity-aggregation-chart.component";
 import { ActivityLogEntryComponent } from "./legacy/activity-log-entry/activity-log-entry.component";
 import { DayAttendanceComponent } from "./legacy/day-attendance/day-attendance.component";
 import { EditableLogEntryDescriptionComponent } from "./legacy/editable-log-entry-description/editable-log-entry-description.component";
@@ -44,12 +43,9 @@ const legacyDeclarations = [
     GroupActivityLogEntriesByIdPipe,
 ];
 
-const standaloneImports = [ActivityAggregationChartComponent];
-
 // all things not yet ported to FSD, for import in the various modules, to ease the transition
 @NgModule({
     imports: [
-        ...standaloneImports,
         CommonModule,
         BrowserModule,
         FormsModule,
@@ -60,6 +56,6 @@ const standaloneImports = [ActivityAggregationChartComponent];
         ActivityTypesModule,
     ],
     declarations: [...legacyDeclarations],
-    exports: [...legacyDeclarations, standaloneImports],
+    exports: [...legacyDeclarations],
 })
 export class LegacyModule {}

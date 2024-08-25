@@ -1,8 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-
 import { ActivityAggregationChartComponent } from "./activity-aggregation-chart.component";
 
-describe("ActivityAggregationChartComponent", () => {
+describe(ActivityAggregationChartComponent.name, () => {
     let component: ActivityAggregationChartComponent;
     let fixture: ComponentFixture<ActivityAggregationChartComponent>;
 
