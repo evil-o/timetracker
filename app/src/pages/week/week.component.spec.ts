@@ -35,11 +35,11 @@ import { configurationActions } from "../../entities/configuration/models/config
 import { OvertimeBadgeComponent } from "../../features/activity-aggregation/ui/overtime-badge/overtime-badge.component";
 import { AcivityColorFeaturesModule } from "../../features/activity-color/activity-color-features.module";
 import { ActivityLogEntryComponent } from "../../features/activity-log/ui/activity-log-entry/activity-log-entry.component";
-import { FormatHoursPipe } from "../../shared";
 import {
+    FormatHoursPipe,
     getFirstDayOfCalendarWeek,
     valueToTime,
-} from "../../shared/legacy/helpers";
+} from "../../shared";
 import { PrecisionPipe } from "../../shared/lib/precision.pipe";
 import { HourBadgeComponent } from "../../shared/ui/hour-badge/hour-badge.component";
 import { TimeBadgeComponent } from "../../shared/ui/time-badge/time-badge.component";

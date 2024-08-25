@@ -28,8 +28,7 @@ import {
     IAttendanceCorrection,
     IAttendanceEntry,
 } from "../../entities/attendance/models/attendance.state";
-import { FormatHoursPipe } from "../../shared";
-import { getFirstDayOfCalendarWeek } from "../../shared/legacy/helpers";
+import { FormatHoursPipe, getFirstDayOfCalendarWeek } from "../../shared";
 import { PadNumberPipe } from "../../shared/lib";
 import { HtmlTableGenerator } from "../../shared/models";
 
