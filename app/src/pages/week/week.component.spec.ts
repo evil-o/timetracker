@@ -26,7 +26,7 @@ import { effects } from "../../entities/application/effects";
 import { ApplicationState } from "../../entities/application/models/application.model";
 import { attendanceActions } from "../../entities/attendance/models/attendance.actions";
 import { configurationActions } from "../../entities/configuration/models/configuration.actions";
-import { FeaturesModule } from "../../features/features.module";
+import { AcivityColorFeaturesModule } from "../../features/activity-color/activity-color-features.module";
 import { ActivityLogEntryComponent } from "../../shared/legacy/activity-log-entry/activity-log-entry.component";
 import { ActivityLogListComponent } from "../../shared/legacy/actvity-log-list/actvity-log-list.component";
 import { DayAttendanceComponent } from "../../shared/legacy/day-attendance/day-attendance.component";
@@ -101,7 +101,7 @@ describe("WeekComponent", () => {
                 EffectsModule.forRoot(effects),
                 TabsModule.forRoot(),
                 TypeaheadModule.forRoot(),
-                FeaturesModule,
+                AcivityColorFeaturesModule,
                 WidgetsModule,
             ],
             providers: [

@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { ActivityColorPickerComponent } from "./activity-color";
+import { ActivityColorPickerComponent } from ".";
 
 const components = [ActivityColorPickerComponent];
 
@@ -7,4 +7,4 @@ const components = [ActivityColorPickerComponent];
     declarations: [...components],
     exports: [...components],
 })
-export class FeaturesModule {}
+export class AcivityColorFeaturesModule {}

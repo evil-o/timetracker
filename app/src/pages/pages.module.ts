@@ -5,7 +5,7 @@ import { RouterModule } from "@angular/router";
 import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
 import { TabsModule } from "ngx-bootstrap/tabs";
 import { ActivityTypesModule } from "../entities/activity-types/activity-types.module";
-import { FeaturesModule } from "../features/features.module";
+import { AcivityColorFeaturesModule } from "../features/activity-color/activity-color-features.module";
 import { LegacyModule } from "../shared/legacy.module";
 import { WidgetsModule } from "../widgets/widgets.module";
 import { ActivitiesComponent } from "./activities/activities.component";
@@ -31,7 +31,7 @@ const pages = [
     exports: [...pages],
     imports: [
         WidgetsModule,
-        FeaturesModule,
+        AcivityColorFeaturesModule,
 
         // external dependencies
         BrowserModule,

@@ -18,7 +18,7 @@ import { ActivityPickerComponent } from "../../../entities/activity-types/ui";
 import { ApplicationState } from "../../../entities/application/models/application.model";
 import { attendanceActions } from "../../../entities/attendance/models/attendance.actions";
 import { configurationActions } from "../../../entities/configuration/models/configuration.actions";
-import { FeaturesModule } from "../../../features/features.module";
+import { AcivityColorFeaturesModule } from "../../../features/activity-color/activity-color-features.module";
 import { WeekComponent } from "../../../pages/week/week.component";
 import { WelcomeComponent } from "../../../pages/welcome/welcome.component";
 import { ActivityLogEntryComponent } from "../../../shared/legacy/activity-log-entry/activity-log-entry.component";
@@ -83,7 +83,7 @@ xdescribe("NavbarComponent", () => {
                 TabsModule.forRoot(),
                 TypeaheadModule.forRoot(),
                 RouterModule.forRoot(appRoutes),
-                FeaturesModule,
+                AcivityColorFeaturesModule,
             ],
             providers: [{ provide: APP_BASE_HREF, useValue: "/" }],
             schemas: [NO_ERRORS_SCHEMA],

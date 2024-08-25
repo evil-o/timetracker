@@ -11,7 +11,7 @@ import { appRoutes } from "../../../app/app.routes";
 import { ActivityTypesModule } from "../../../entities/activity-types/activity-types.module";
 import { metaReducers } from "../../../entities/application/meta-reducers";
 import { reducers } from "../../../entities/application/reducers";
-import { FeaturesModule } from "../../../features/features.module";
+import { AcivityColorFeaturesModule } from "../../../features/activity-color/activity-color-features.module";
 import { ActivityLogEntryComponent } from "../../../shared/legacy/activity-log-entry/activity-log-entry.component";
 import { ActivityLogListComponent } from "../../../shared/legacy/actvity-log-list/actvity-log-list.component";
 import { DayAttendanceComponent } from "../../../shared/legacy/day-attendance/day-attendance.component";
@@ -66,7 +66,7 @@ describe(MainComponent.name, () => {
             imports: [
                 AccordionModule,
                 ActivityTypesModule,
-                FeaturesModule,
+                AcivityColorFeaturesModule,
                 BsDatepickerModule.forRoot(),
                 FormsModule,
                 StoreModule.forRoot(reducers, { metaReducers }),
