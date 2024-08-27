@@ -34,7 +34,6 @@ import { TimeBadgeComponent } from "../../shared/ui/time-badge/time-badge.compon
 @Component({
     selector: "app-day",
     templateUrl: "./day.component.html",
-    styleUrls: ["./day.component.css"],
 })
 export class DayComponent {
     public activityLog$: Observable<IActivityLog>;
