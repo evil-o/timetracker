@@ -8,7 +8,7 @@
         "cy:ci": "cypress run"
     },
     "dependencies": {
-        "cypress": "13.13.3"
+        "cypress": "13.14.0"
     },
     "devDependencies": {
         "cypress-delete-downloads-folder": "0.0.6",
