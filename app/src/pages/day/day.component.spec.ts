@@ -1,124 +1,90 @@
-import { NO_ERRORS_SCHEMA } from "@angular/core";
+import { discardPeriodicTasks, fakeAsync, tick } from "@angular/core/testing";
+import { byTestId, createComponentFactory, Spectator } from "@ngneat/spectator";
+import { Store } from "@ngrx/store";
+import { MockStore, provideMockStore } from "@ngrx/store/testing";
+import { MockComponent, MockDirective, MockPipe } from "ng-mocks";
+import { BsDatepickerDirective } from "ngx-bootstrap/datepicker";
+import { GroupActivityLogEntriesByIdPipe } from "../../entities/activity-log";
+import { createActivityLogEntry } from "../../entities/activity-log/models/activity-log-entry.faker";
 import {
-    ComponentFixture,
-    discardPeriodicTasks,
-    fakeAsync,
-    TestBed,
-    tick,
-} from "@angular/core/testing";
-import { FormsModule } from "@angular/forms";
-import { provideNoopAnimations } from "@angular/platform-browser/animations";
-import { Store, StoreModule } from "@ngrx/store";
-import { AccordionModule } from "ngx-bootstrap/accordion";
-import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
-import { TypeaheadModule } from "ngx-bootstrap/typeahead";
-import { GroupActivityLogEntriesByIdPipe } from "../../entities/activity-log/lib/group-activity-log-entries-by-id.pipe";
-import { activityLogActions } from "../../entities/activity-log/models/activity-log.actions";
-import { ActivityLogEntry } from "../../entities/activity-log/models/activity-log.state";
-import { EditableLogEntryDescriptionComponent } from "../../entities/activity-log/ui/editable-log-entry-description/editable-log-entry-description.component";
-import { EditableLogEntryHoursComponent } from "../../entities/activity-log/ui/editable-log-entry-hours/editable-log-entry-hours.component";
-import { NoActivityLogEntryPresentComponent } from "../../entities/activity-log/ui/no-activity-log-entry-present/no-activity-log-entry-present.component";
-import { ActivityTypeEntitiesModule } from "../../entities/activity-type/activity-type-entities.module";
-import { ActivityTypeIdToNamePipe } from "../../entities/activity-type/lib/activity-type-id-to-name.pipe";
-import { ApplicationState } from "../../entities/application/models/application.model";
-import { AcivityColorFeaturesModule } from "../../features/activity-color/activity-color-features.module";
-import { ActivityLogEntryComponent } from "../../features/activity-log/ui/activity-log-entry/activity-log-entry.component";
-import { FormatHoursPipe } from "../../shared/lib";
-import { HourBadgeComponent } from "../../shared/ui/hour-badge/hour-badge.component";
-import { TimeBadgeComponent } from "../../shared/ui/time-badge/time-badge.component";
-import { ActivityLogListComponent } from "../../widgets/activity-log/ui/activity-log-list/actvity-log-list.component";
-import { DayAttendanceComponent } from "../../widgets/attendance/ui/day-attendance/day-attendance.component";
+    ActivityLog,
+    ActivityLogEntry,
+} from "../../entities/activity-log/models/activity-log.state";
+import { ActivityTypes } from "../../entities/activity-type/models/activity-types.state";
+import { ApplicationState } from "../../entities/application";
+import { AttendanceState } from "../../entities/attendance/models/attendance.state";
+import { ActivityTypeListComponent } from "../../widgets/activity-types-list";
 import { DayComponent } from "./day.component";
 
-describe("DayComponent", () => {
-    let component: DayComponent;
-    let fixture: ComponentFixture<DayComponent>;
+const defaultState = {
+    activityTypes: new ActivityTypes(),
+    activityLog: new ActivityLog(),
+    attendanceState: new AttendanceState(),
+};
 
-    const now = new Date();
-    const testEntries: ActivityLogEntry[] = [
-        {
-            actvitiyId: "testActivity",
-            day: now.getDate(),
-            month: now.getMonth(),
-            year: now.getFullYear(),
-            description: "test description",
-            hours: 6,
-            id: "testEntryId1",
-        },
-        {
-            actvitiyId: "testActivity",
-            day: now.getDate(),
-            month: now.getMonth(),
-            year: now.getFullYear(),
-            description: "test description",
-            hours: 0.25,
-            id: "testEntryId2",
-        },
-    ];
-
-    let store: Store<ApplicationState>;
-
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                ActivityLogEntryComponent,
-                ActivityLogListComponent,
-                ActivityTypeIdToNamePipe,
-                DayComponent,
-                DayAttendanceComponent,
-                EditableLogEntryDescriptionComponent,
-                EditableLogEntryHoursComponent,
-                FormatHoursPipe,
-                GroupActivityLogEntriesByIdPipe,
-                HourBadgeComponent,
-                NoActivityLogEntryPresentComponent,
-                TimeBadgeComponent,
-            ],
-            imports: [
-                AccordionModule.forRoot(),
-                BsDatepickerModule.forRoot(),
-                FormsModule,
-                StoreModule.forRoot(),
-                TypeaheadModule.forRoot(),
-                ActivityTypeEntitiesModule,
-                AcivityColorFeaturesModule,
-            ],
-            providers: [provideNoopAnimations()],
-            schemas: [NO_ERRORS_SCHEMA],
-        }).compileComponents();
+describe(DayComponent.name, () => {
+    const create = createComponentFactory({
+        component: DayComponent,
+        shallow: true,
+        declarations: [
+            MockComponent(ActivityTypeListComponent),
+            MockPipe(GroupActivityLogEntriesByIdPipe),
+            MockDirective(BsDatepickerDirective),
+        ],
+        providers: [
+            provideMockStore<Partial<ApplicationState>>({
+                initialState: defaultState,
+            }),
+        ],
     });
+    let spectator: Spectator<DayComponent>;
+    let component: DayComponent;
+
+    let store: MockStore<Partial<ApplicationState>>;
+
+    let testEntries: ActivityLogEntry[];
 
     beforeEach(() => {
-        store = TestBed.get(Store);
-        fixture = TestBed.createComponent(DayComponent);
-        component = fixture.componentInstance;
+        spectator = create();
+        component = spectator.component;
 
-        // populate store
-        for (const entry of testEntries) {
-            store.dispatch(
-                activityLogActions.logTime({
-                    id: entry.actvitiyId,
-                    hoursToLog: entry.hours,
-                    date: new Date(entry.year, entry.month, entry.day),
-                })
-            );
-        }
+        store = spectator.inject(
+            Store
+        ) as unknown as MockStore<ApplicationState>;
 
-        fixture.detectChanges();
+        const now = new Date();
+        testEntries = [
+            createActivityLogEntry({ date: now }),
+            createActivityLogEntry({ date: now }),
+        ];
+
+        store.setState({
+            ...defaultState,
+            activityLog: { entries: testEntries },
+        });
+        spectator.component.date$.next(now);
+        spectator.detectChanges();
     });
 
     it("should create", () => {
         expect(component).toBeTruthy();
     });
 
-    xit("should properly tally the overall time", fakeAsync(() => {
-        expect(component.totalHoursDisplay).toBeDefined();
-        expect(component.totalHoursDisplay.hours).toBe(6.25);
+    it("should properly tally the overall time", fakeAsync(() => {
+        tick();
+
+        const sum = testEntries
+            .map((e) => e.hours)
+            .reduce((prev, cur) => prev + cur, 0);
+
+        const hours = spectator.query(byTestId("total-hours-display"));
+        expect(hours).toBeDefined();
+        expect(hours).toHaveProperty("hours", sum as unknown as string);
 
         discardPeriodicTasks();
     }));
 
-    xit("should properly display the start time", fakeAsync(() => {
+    it("should properly display the start time", fakeAsync(() => {
         const n = new Date();
 
         tick();

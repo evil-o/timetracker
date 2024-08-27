@@ -28,7 +28,6 @@ import {
 import { ActivityPickerComponent } from "../../entities/activity-type/ui";
 import { fromAttendance } from "../../entities/attendance/models/attendance.selectors";
 import { stringToDuration } from "../../shared/lib";
-import { HourBadgeComponent } from "../../shared/ui/hour-badge/hour-badge.component";
 import { TimeBadgeComponent } from "../../shared/ui/time-badge/time-badge.component";
 
 @Component({
@@ -56,9 +55,6 @@ export class DayComponent {
 
     @ViewChild("datePicker")
     private datePicker!: BsDatepickerDirective;
-
-    @ViewChild("totalHoursDisplay")
-    public totalHoursDisplay!: HourBadgeComponent;
 
     @ViewChild("startTimeDisplay")
     public startTimeDisplay!: TimeBadgeComponent;
@@ -182,7 +178,6 @@ export class DayComponent {
                     ).getTime();
                 }
                 const diff = (startTime.getTime() - signin) / (1000 * 60 * 60);
-                // console.log('signin: ' + signin + ', start: ' + startTime.getTime() + ', diff: ' + diff);
                 if (diff < 0) {
                     return 0;
                 } else {

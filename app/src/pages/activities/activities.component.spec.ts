@@ -7,6 +7,7 @@ import { ActivitiesComponent } from "./activities.component";
 describe(ActivitiesComponent.name, () => {
     const create = createComponentFactory({
         component: ActivitiesComponent,
+        shallow: true,
         providers: [
             provideMockStore({ initialState: { activityTypes: [] } }),
             MockProvider(BsModalService),

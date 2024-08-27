@@ -35,8 +35,7 @@ describe("PadNumberPipe", () => {
             const padding = expectation.p;
             const expectedResult = expectation.r;
             const padded = pipe.transform(value, minLength, padding);
-            expect(padded).toBe(expectedResult);
-            console.log(`Padded ${value} to ${padded}.`);
+            expect(padded).withContext(`In: ${value}`).toBe(expectedResult);
         }
     });
 });
