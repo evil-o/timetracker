@@ -13,7 +13,7 @@ import { ActivityLogEntry } from "../../models/activity-log.state";
     templateUrl: "./editable-log-entry-description.component.html",
 })
 export class EditableLogEntryDescriptionComponent {
-    @Input()
+    @Input({ required: true })
     public entry!: ActivityLogEntry;
 
     @Output()

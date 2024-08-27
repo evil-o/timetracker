@@ -23,7 +23,6 @@
 ## Refactoring & Maintenance
 
 -   enable router input binding
--   refactor components, maybe with FSD?
 -   Add a quick way to output a daily message
 -   Custom 404 page to better solve the redirects (use a query parameter, let the app understand it and reroute)
 -   Sift through all layouts and fix the many smaller issues
