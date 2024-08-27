@@ -65,7 +65,11 @@ export class DayAttendanceComponent implements OnInit {
             });
 
         this.entries$ = this.store.select(fromAttendance.getEntries);
-        this.entry$ = combineLatest([this.entries$, this.date$]).pipe(
+        this.entry$ = combineLatest([
+            this.entries$,
+            this.date$,
+            this.timeValues$,
+        ]).pipe(
             map(([v, date]) =>
                 v.find((e) => AttendanceEntry.equalsDate(e, date))
             )

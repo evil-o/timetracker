@@ -14,13 +14,25 @@ describe("The time tracker", () => {
         today.navigateFromHome();
     });
 
-    it("track start and end time", () => {
+    it("tracks start and end time", () => {
         today.startTimeInput.type("08:00");
         today.endTimeInput.type("12:00");
         today.submitAttendance.click();
         today.startTimeInput.should("have.class", "is-valid");
         today.endTimeInput.should("have.class", "is-valid");
         globalPage.expectOvertime("-4", "00");
+
+        cy.log("change start time");
+        today.startTimeInput.type("07:00");
+        today.submitAttendance.click();
+        today.startTimeInput.should("have.class", "is-valid");
+        globalPage.expectOvertime("-3", "00");
+
+        cy.log("change end time");
+        today.endTimeInput.type("13:00");
+        today.submitAttendance.click();
+        today.endTimeInput.should("have.class", "is-valid");
+        globalPage.expectOvertime("-2", "00");
     });
 
     it("tracks extra bookings", () => {
