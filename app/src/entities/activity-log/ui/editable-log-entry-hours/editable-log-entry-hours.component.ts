@@ -26,18 +26,7 @@ export class EditableLogEntryHoursComponent {
     @ViewChild("hoursInput")
     public hoursInput!: ElementRef;
 
-    public editing = false;
-
-    public setEditing(editing: boolean) {
-        this.editing = editing;
-
-        if (this.editing) {
-            setTimeout(() => {
-                this.hoursInput.nativeElement.focus();
-                this.hoursInput.nativeElement.select();
-            }, 0);
-        }
-    }
+    protected editing = false;
 
     public submit() {
         this.emitChangeHours(this.hoursInput.nativeElement.value);
@@ -56,6 +45,17 @@ export class EditableLogEntryHoursComponent {
                 entryId: this.entry.id,
                 newHours: hoursNumber,
             });
+        }
+    }
+
+    protected setEditing(editing: boolean) {
+        this.editing = editing;
+
+        if (this.editing) {
+            setTimeout(() => {
+                this.hoursInput.nativeElement.focus();
+                this.hoursInput.nativeElement.select();
+            }, 0);
         }
     }
 }

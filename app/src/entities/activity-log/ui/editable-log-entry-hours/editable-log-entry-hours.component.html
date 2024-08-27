@@ -2,6 +2,7 @@
     <div
         *ngIf="!editing"
         (dblclick)="setEditing(true)"
+        data-testid="hours-input-group"
         class="input-group noselect"
     >
         <div *ngIf="!entry.hours" class="text text-muted text-italic">

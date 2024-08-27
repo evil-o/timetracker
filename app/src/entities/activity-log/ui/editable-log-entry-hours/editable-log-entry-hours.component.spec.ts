@@ -1,145 +1,129 @@
-import { Component, ViewChild } from "@angular/core";
-import {
-    ComponentFixture,
-    TestBed,
-    fakeAsync,
-    tick,
-} from "@angular/core/testing";
+import { fakeAsync, tick } from "@angular/core/testing";
+import { byTestId, createComponentFactory, Spectator } from "@ngneat/spectator";
+import { MockPipe } from "ng-mocks";
 import { FormatHoursPipe } from "../../../../shared/lib";
+import { createActivityLogEntry } from "../../models/activity-log-entry.faker";
 import { EditableLogEntryHoursComponent } from "./editable-log-entry-hours.component";
 
-@Component({
-    selector: `app-test-host-component`,
-    template: `<app-editable-log-entry-hours></app-editable-log-entry-hours>`,
-})
-class TestHostComponent {
-    @ViewChild(EditableLogEntryHoursComponent)
-    public component!: EditableLogEntryHoursComponent;
-}
-
-xdescribe(EditableLogEntryHoursComponent.name, () => {
-    let host: TestHostComponent;
-    let fixture: ComponentFixture<TestHostComponent>;
-
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                EditableLogEntryHoursComponent,
-                FormatHoursPipe,
-                TestHostComponent,
-            ],
-        }).compileComponents();
+describe(EditableLogEntryHoursComponent.name, () => {
+    const create = createComponentFactory({
+        component: EditableLogEntryHoursComponent,
+        shallow: true,
+        declarations: [MockPipe(FormatHoursPipe)],
     });
 
-    beforeEach(() => {
-        fixture = TestBed.createComponent(TestHostComponent);
-        host = fixture.componentInstance;
-        host.component.entry = {
-            actvitiyId: "testActivity",
-            day: 13,
-            month: 0,
-            year: 2018,
-            description: "test description",
-            hours: 6,
-            id: "testId",
-        };
+    let spectator: Spectator<EditableLogEntryHoursComponent>;
+    let entry;
+    let editGroup: HTMLElement;
 
-        fixture.detectChanges();
+    function startEditing(): void {
+        spectator.dispatchMouseEvent(editGroup, "dblclick");
+    }
+
+    beforeEach(() => {
+        entry = createActivityLogEntry();
+        spectator = create({ props: { entry } });
+
+        editGroup = spectator.query(
+            byTestId("hours-input-group")
+        ) as HTMLElement;
     });
 
     it("should create", () => {
-        expect(host).toBeTruthy();
+        expect(spectator.component).toBeTruthy();
     });
 
     it("should reject invalid strings", fakeAsync(() => {
-        host.component.setEditing(true);
-        fixture.detectChanges();
+        startEditing();
 
-        spyOn(host.component.changeEntryHours, "emit");
-        host.component.emitChangeHours("not a number");
+        spyOn(spectator.component.changeEntryHours, "emit");
+        spectator.component.emitChangeHours("not a number");
         tick();
-        expect(host.component.changeEntryHours.emit).not.toHaveBeenCalled();
+        expect(
+            spectator.component.changeEntryHours.emit
+        ).not.toHaveBeenCalled();
 
-        host.component.emitChangeHours("not: a number");
+        spectator.component.emitChangeHours("not: a number");
         tick();
-        expect(host.component.changeEntryHours.emit).not.toHaveBeenCalled();
+        expect(
+            spectator.component.changeEntryHours.emit
+        ).not.toHaveBeenCalled();
 
-        host.component.emitChangeHours("not: 0");
+        spectator.component.emitChangeHours("not: 0");
         tick();
-        expect(host.component.changeEntryHours.emit).not.toHaveBeenCalled();
+        expect(
+            spectator.component.changeEntryHours.emit
+        ).not.toHaveBeenCalled();
 
-        host.component.emitChangeHours("1: not a number either");
+        spectator.component.emitChangeHours("1: not a number either");
         tick();
-        expect(host.component.changeEntryHours.emit).not.toHaveBeenCalled();
+        expect(
+            spectator.component.changeEntryHours.emit
+        ).not.toHaveBeenCalled();
     }));
 
     it('should send hours for "," decimal separator', fakeAsync(() => {
-        host.component.setEditing(true);
-        fixture.detectChanges();
+        startEditing();
 
-        spyOn(host.component.changeEntryHours, "emit");
-        host.component.changeEntryHours.subscribe((v) => {
+        spyOn(spectator.component.changeEntryHours, "emit");
+        spectator.component.changeEntryHours.subscribe((v) => {
             expect(v.newHours).toBe(1.25);
         });
 
-        host.component.emitChangeHours("1,25");
+        spectator.component.emitChangeHours("1,25");
         tick();
-        expect(host.component.changeEntryHours.emit).toHaveBeenCalled();
+        expect(spectator.component.changeEntryHours.emit).toHaveBeenCalled();
     }));
 
     it('should send hours for "." decimal separator', fakeAsync(() => {
-        host.component.setEditing(true);
-        fixture.detectChanges();
+        startEditing();
 
-        spyOn(host.component.changeEntryHours, "emit");
-        host.component.changeEntryHours.subscribe((v) => {
+        spyOn(spectator.component.changeEntryHours, "emit");
+        spectator.component.changeEntryHours.subscribe((v) => {
             expect(v.newHours).toBe(1.25);
         });
 
-        host.component.emitChangeHours("1.25");
+        spectator.component.emitChangeHours("1.25");
         tick();
-        expect(host.component.changeEntryHours.emit).toHaveBeenCalled();
+        expect(spectator.component.changeEntryHours.emit).toHaveBeenCalled();
     }));
 
     it('should send hours for strings starting with "."', fakeAsync(() => {
-        host.component.setEditing(true);
-        fixture.detectChanges();
+        startEditing();
 
-        spyOn(host.component.changeEntryHours, "emit");
-        host.component.changeEntryHours.subscribe((v) => {
+        spyOn(spectator.component.changeEntryHours, "emit");
+        spectator.component.changeEntryHours.subscribe((v) => {
             expect(v.newHours).toBe(0.25);
         });
 
-        host.component.emitChangeHours(".25");
+        spectator.component.emitChangeHours(".25");
         tick();
-        expect(host.component.changeEntryHours.emit).toHaveBeenCalled();
+        expect(spectator.component.changeEntryHours.emit).toHaveBeenCalled();
     }));
 
     it('should support "h:m" input format', fakeAsync(() => {
-        host.component.setEditing(true);
-        fixture.detectChanges();
+        startEditing();
 
-        spyOn(host.component.changeEntryHours, "emit");
-        host.component.changeEntryHours.subscribe((v) => {
+        spyOn(spectator.component.changeEntryHours, "emit");
+        spectator.component.changeEntryHours.subscribe((v) => {
             expect(v.newHours).toBe(0.25);
         });
 
-        host.component.emitChangeHours("0:15");
+        spectator.component.emitChangeHours("0:15");
         tick();
-        expect(host.component.changeEntryHours.emit).toHaveBeenCalled();
+        expect(spectator.component.changeEntryHours.emit).toHaveBeenCalled();
     }));
 
     it('should support ":m" input format', fakeAsync(() => {
-        host.component.setEditing(true);
-        fixture.detectChanges();
+        startEditing();
 
-        spyOn(host.component.changeEntryHours, "emit");
-        host.component.changeEntryHours.subscribe((v) => {
+        spyOn(spectator.component.changeEntryHours, "emit");
+        spectator.component.changeEntryHours.subscribe((v) => {
             expect(v.newHours).toBe(0.5);
         });
 
-        host.component.emitChangeHours(":30");
+        spectator.component.emitChangeHours(":30");
         tick();
-        expect(host.component.changeEntryHours.emit).toHaveBeenCalled();
+        expect(spectator.component.changeEntryHours.emit).toHaveBeenCalled();
     }));
 });
