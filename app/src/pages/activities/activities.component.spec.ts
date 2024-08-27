@@ -1,45 +1,26 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-
-import { FormsModule } from "@angular/forms";
-import { StoreModule } from "@ngrx/store";
-import { ModalModule } from "ngx-bootstrap/modal";
-import { TypeaheadModule } from "ngx-bootstrap/typeahead";
-import { ActivityPickerComponent } from "../../entities/activity-type/ui";
-import { ActivityColorPickerComponent } from "../../features/activity-color";
-import { AcivityColorFeaturesModule } from "../../features/activity-color/activity-color-features.module";
-import { ActivityTypesListWidgetsModule } from "../../widgets/activity-types-list/activity-types-list-widgets.module";
+import { createComponentFactory, Spectator } from "@ngneat/spectator";
+import { provideMockStore } from "@ngrx/store/testing";
+import { MockProvider } from "ng-mocks";
+import { BsModalService } from "ngx-bootstrap/modal";
 import { ActivitiesComponent } from "./activities.component";
 
 describe(ActivitiesComponent.name, () => {
+    const create = createComponentFactory({
+        component: ActivitiesComponent,
+        providers: [
+            provideMockStore({ initialState: { activityTypes: [] } }),
+            MockProvider(BsModalService),
+        ],
+    });
+    let spectator: Spectator<ActivitiesComponent>;
     let component: ActivitiesComponent;
-    let fixture: ComponentFixture<ActivitiesComponent>;
 
     beforeEach(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                ActivityColorPickerComponent,
-                ActivityPickerComponent,
-                ActivitiesComponent,
-            ],
-            imports: [
-                FormsModule,
-                ModalModule.forRoot(),
-                StoreModule.forRoot(),
-                TypeaheadModule.forRoot(),
-
-                AcivityColorFeaturesModule,
-                ActivityTypesListWidgetsModule,
-            ],
-        }).compileComponents();
+        spectator = create();
+        component = spectator.component;
     });
 
-    beforeEach(() => {
-        fixture = TestBed.createComponent(ActivitiesComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    });
-
-    it("should create", () => {
+    it("creates", () => {
         expect(component).toBeTruthy();
     });
 });
