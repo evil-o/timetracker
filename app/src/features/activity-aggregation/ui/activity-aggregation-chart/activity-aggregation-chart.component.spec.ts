@@ -1,20 +1,16 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { createComponentFactory, Spectator } from "@ngneat/spectator";
 import { ActivityAggregationChartComponent } from "./activity-aggregation-chart.component";
 
 describe(ActivityAggregationChartComponent.name, () => {
-    let component: ActivityAggregationChartComponent;
-    let fixture: ComponentFixture<ActivityAggregationChartComponent>;
-
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            imports: [ActivityAggregationChartComponent],
-        }).compileComponents();
+    const create = createComponentFactory({
+        component: ActivityAggregationChartComponent,
     });
+    let spectator: Spectator<ActivityAggregationChartComponent>;
+    let component: ActivityAggregationChartComponent;
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(ActivityAggregationChartComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
+        spectator = create();
+        component = spectator.component;
     });
 
     it("should create", () => {

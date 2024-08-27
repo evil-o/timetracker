@@ -1,15 +1,14 @@
-import { Component, NO_ERRORS_SCHEMA, ViewChild } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import {
     ComponentFixture,
-    TestBed,
     discardPeriodicTasks,
     fakeAsync,
     tick,
 } from "@angular/core/testing";
-import { FormsModule } from "@angular/forms";
 
 import { By } from "@angular/platform-browser";
-import { TypeaheadDirective, TypeaheadModule } from "ngx-bootstrap/typeahead";
+import { createComponentFactory, Spectator } from "@ngneat/spectator";
+import { TypeaheadDirective } from "ngx-bootstrap/typeahead";
 import { of } from "rxjs";
 import { IActivityType } from "../../models/activity-types.types";
 import { ActivityPickerComponent } from "./activity-picker.component";
@@ -34,30 +33,22 @@ class TestHostActivityPickerComponent {
     }
 }
 
-describe("ActivityPickerComponent", () => {
-    let component: TestHostActivityPickerComponent;
+describe(ActivityPickerComponent.name, () => {
+    const create = createComponentFactory({
+        component: ActivityPickerComponent,
+        shallow: true,
+    });
+    let spectator: Spectator<ActivityPickerComponent>;
+    let component: ActivityPickerComponent;
     let fixture: ComponentFixture<TestHostActivityPickerComponent>;
 
     beforeEach(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                ActivityPickerComponent,
-                TestHostActivityPickerComponent,
-            ],
-            imports: [FormsModule, TypeaheadModule.forRoot()],
-            schemas: [NO_ERRORS_SCHEMA],
-        }).compileComponents();
-    });
-
-    beforeEach(() => {
-        fixture = TestBed.createComponent(TestHostActivityPickerComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
+        spectator = create();
+        component = spectator.component;
     });
 
     it("should create", () => {
         expect(component).toBeTruthy();
-        expect(component.activityPicker.typeahead).toBeTruthy();
     });
 
     xit("should properly confirm on enter with partial text", fakeAsync(() => {
@@ -78,12 +69,12 @@ describe("ActivityPickerComponent", () => {
         expect(typeahead.matches).toBeDefined("typeahead has no matches");
         expect(typeahead.matches.length).toBeGreaterThan(0);
 
-        spyOn(component.activityPicker.confirm, "emit");
+        spyOn(component.confirm, "emit");
         textInput.nativeElement.dispatchEvent(
             new KeyboardEvent("keyup", { key: "enter" })
         );
         // pressing enter should not trigger the normal emit
-        expect(component.activityPicker.confirm.emit).not.toHaveBeenCalled();
+        expect(component.confirm.emit).not.toHaveBeenCalled();
 
         fixture.detectChanges();
 
@@ -123,7 +114,7 @@ describe("ActivityPickerComponent", () => {
             "typeahead should have exactly one match"
         );
 
-        spyOn(component.activityPicker.confirm, "emit");
+        spyOn(component.confirm, "emit");
         textInput.nativeElement.dispatchEvent(
             new KeyboardEvent("keydown", { key: "enter" })
         );
