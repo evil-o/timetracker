@@ -1,46 +1,22 @@
-import { Component, ViewChild } from "@angular/core";
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { createComponentFactory, Spectator } from "@ngneat/spectator";
 
+import { createActivityLogEntry } from "../../models/activity-log-entry.faker";
 import { EditableLogEntryDescriptionComponent } from "./editable-log-entry-description.component";
 
-@Component({
-    selector: `app-test-host-component`,
-    template: `<app-editable-log-entry-description></app-editable-log-entry-description>`,
-})
-class TestHostComponent {
-    @ViewChild(EditableLogEntryDescriptionComponent)
-    public component!: EditableLogEntryDescriptionComponent;
-}
-
-describe("EditableLogEntryDescriptionComponent", () => {
-    let host: TestHostComponent;
-    let fixture: ComponentFixture<TestHostComponent>;
-
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                EditableLogEntryDescriptionComponent,
-                TestHostComponent,
-            ],
-        }).compileComponents();
+describe(EditableLogEntryDescriptionComponent.name, () => {
+    const create = createComponentFactory({
+        component: EditableLogEntryDescriptionComponent,
     });
 
-    beforeEach(() => {
-        fixture = TestBed.createComponent(TestHostComponent);
-        host = fixture.componentInstance;
-        host.component.entry = {
-            actvitiyId: "testActivity",
-            day: 13,
-            month: 0,
-            year: 2018,
-            description: "test description",
-            hours: 6,
-            id: "testId",
-        };
-        fixture.detectChanges();
-    });
+    let spectator: Spectator<EditableLogEntryDescriptionComponent>;
 
-    xit("should create", () => {
-        expect(host).toBeTruthy();
+    const setup = () => {
+        spectator = create({ props: { entry: createActivityLogEntry() } });
+    };
+
+    it("should create", () => {
+        setup();
+
+        expect(spectator.component).toBeTruthy();
     });
 });

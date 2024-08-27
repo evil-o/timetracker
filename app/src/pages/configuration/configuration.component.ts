@@ -9,7 +9,6 @@ import { fromConfiguration } from "../../entities/configuration/models/configura
 @Component({
     selector: "app-configuration",
     templateUrl: "./configuration.component.html",
-    styleUrls: ["./configuration.component.css"],
 })
 export class ConfigurationComponent implements OnInit {
     public workingHoursPerWeek$!: Observable<number>;

@@ -110,7 +110,7 @@
     <div class="col-sm-1">Total:</div>
     <div class="col-sm-2">
         <app-hour-badge
-            #totalHoursDisplay
+            data-testid="total-hours-display"
             [hours]="totalHours$ | async"
         ></app-hour-badge>
     </div>

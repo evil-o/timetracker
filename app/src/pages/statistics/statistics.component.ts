@@ -22,7 +22,6 @@ function getYearDateRange(year: number) {
 @Component({
     selector: "app-statistics",
     templateUrl: "./statistics.component.html",
-    styleUrls: ["./statistics.component.css"],
 })
 export class StatisticsComponent {
     public startDateCurrentMonth$: BehaviorSubject<Date>;

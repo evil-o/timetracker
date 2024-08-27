@@ -1,82 +1,65 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-
-import { DebugElement } from "@angular/core";
-import { By } from "@angular/platform-browser";
+import { createComponentFactory, Spectator } from "@ngneat/spectator";
 import { FormatHoursPipe, PrecisionPipe } from "../../../../shared/lib";
 import { OvertimeBadgeComponent } from "./overtime-badge.component";
 
-describe("OvertimeBadgeComponent", () => {
-    let component: OvertimeBadgeComponent;
-    let fixture: ComponentFixture<OvertimeBadgeComponent>;
-    let span: DebugElement;
-
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                FormatHoursPipe,
-                OvertimeBadgeComponent,
-                PrecisionPipe,
-            ],
-        }).compileComponents();
+describe(OvertimeBadgeComponent.name, () => {
+    const create = createComponentFactory({
+        component: OvertimeBadgeComponent,
+        // TODO: don't depend on the pipes directly here
+        declarations: [PrecisionPipe, FormatHoursPipe],
     });
+    let spectator: Spectator<OvertimeBadgeComponent>;
+    let component: OvertimeBadgeComponent;
+    let span: HTMLElement;
+
+    function reQuery(): void {
+        spectator.detectChanges();
+
+        span = spectator.query("span") as HTMLElement;
+    }
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(OvertimeBadgeComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
+        spectator = create();
+        component = spectator.component;
+        reQuery();
     });
 
     it("should create", () => {
         expect(component).toBeTruthy();
     });
 
-    it("should contain a success badge for positive hours", () => {
+    it("contains a success badge for positive hours", () => {
         component.hours = 1;
+        reQuery();
 
-        fixture.detectChanges();
-        span = fixture.debugElement.query(By.css(".badge"));
-        expect(span).toBeTruthy();
-        span = fixture.debugElement.query(By.css(".bg-success"));
-
-        expect(span).toBeTruthy();
-        expect(span.nativeElement.innerText).toContain("+1");
+        expect(span).toHaveClass("badge");
+        expect(span).toHaveClass("bg-success");
+        expect(span).toContainText("+1");
     });
 
-    it("should contain a danger badge for negative hours", () => {
+    it("contains a danger badge for negative hours", () => {
         component.hours = -1;
+        reQuery();
 
-        fixture.detectChanges();
-        span = fixture.debugElement.query(By.css(".badge"));
-        expect(span).toBeTruthy();
-        span = fixture.debugElement.query(By.css(".bg-danger"));
-
-        expect(span).toBeTruthy();
-        expect(span.nativeElement.innerText).toContain("-1");
+        expect(span).toHaveClass("badge");
+        expect(span).toHaveClass("bg-danger");
+        expect(span).toContainText("-1");
     });
 
-    it('should show "-" for undefined hours', () => {
+    it('shows "-" for undefined hours', () => {
         component.hours = undefined;
+        reQuery();
 
-        fixture.detectChanges();
-        span = fixture.debugElement.query(By.css(".badge"));
-        expect(span).toBeFalsy();
-
-        span = fixture.debugElement.query(By.css("span"));
-        expect(span).toBeTruthy();
-
-        expect(span.nativeElement.innerText).toContain("-");
+        expect(span).not.toHaveClass("badge");
+        expect(span).toContainText("-");
     });
 
-    it("should contain a neutral badge for near-zero hours", () => {
+    it("contains a neutral badge for near-zero hours", () => {
         component.hours = 0.000001;
+        reQuery();
 
-        fixture.detectChanges();
-        span = fixture.debugElement.query(By.css(".badge"));
-        expect(span).toBeTruthy();
-
-        span = fixture.debugElement.query(By.css(".bg-secondary"));
-        expect(span).toBeTruthy();
-
-        expect(span.nativeElement.innerText).toContain("0");
+        expect(span).toHaveClass("badge");
+        expect(span).toHaveClass("bg-secondary");
+        expect(span).toContainText("0");
     });
 });
