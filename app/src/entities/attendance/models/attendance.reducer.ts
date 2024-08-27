@@ -1,6 +1,7 @@
 import { v4 as uuid } from "uuid";
 
 import { createReducer } from "@ngrx/store";
+import { WritableDraft } from "immer";
 import { produceOn } from "../../../shared/lib";
 import { attendanceActions } from "./attendance.actions";
 import {
@@ -20,38 +21,53 @@ function findEntryIndex(forDate: Date, entries: IAttendanceEntry[]): number {
     return entries.findIndex((e) => AttendanceEntry.equalsDate(e, forDate));
 }
 
+function updateStartEndTimeInDraft(
+    draft: WritableDraft<AttendanceState>,
+    date: Date,
+    newStart?: Date,
+    newEnd?: Date
+): void {
+    const entryIndex = findEntryIndex(date, draft.entries);
+    if (entryIndex < 0) {
+        const newEntry = new AttendanceEntry(date);
+        if (newStart) {
+            newEntry.start = newStart;
+        }
+        if (newEnd) {
+            newEntry.end = newEnd;
+        }
+        draft.entries.push(newEntry);
+    } else {
+        const existingEntry = draft.entries[entryIndex];
+        if (newStart) {
+            existingEntry.start = newStart;
+        }
+        if (newEnd) {
+            existingEntry.end = newEnd;
+        }
+        // to trigger all relevant updates, we need to copy the entry, pending a better fix
+        draft.entries[entryIndex] = {
+            ...existingEntry,
+        };
+    }
+}
+
 export const attendanceReducer = createReducer(
     new AttendanceState(),
 
     produceOn(
         attendanceActions.setStartAndEndTime,
         (draft, { date, start, end }) => {
-            let entry = findEntry(date, draft.entries);
-            if (!entry) {
-                entry = new AttendanceEntry(date);
-                draft.entries.push(entry);
-            }
-            entry.start = start;
-            entry.end = end;
+            updateStartEndTimeInDraft(draft, date, start, end);
         }
     ),
 
     produceOn(attendanceActions.setStartTime, (draft, { date, start }) => {
-        let entry = findEntry(date, draft.entries);
-        if (!entry) {
-            entry = new AttendanceEntry(date);
-            draft.entries.push(entry);
-        }
-        entry.start = start;
+        updateStartEndTimeInDraft(draft, date, start);
     }),
 
     produceOn(attendanceActions.setEndTime, (draft, { date, end }) => {
-        let entry = findEntry(date, draft.entries);
-        if (!entry) {
-            entry = new AttendanceEntry(date);
-            draft.entries.push(entry);
-        }
-        entry.end = end;
+        updateStartEndTimeInDraft(draft, date, undefined, end);
     }),
 
     produceOn(attendanceActions.deleteEntry, (draft, { date }) => {
