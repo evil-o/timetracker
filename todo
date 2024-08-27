@@ -18,6 +18,7 @@
 -   some way to run all cypress specs locally
 -   faker for Cypress specs
 -   add spectator + proper component mocking in tests
+-   set up dependabot
 
 ## Refactoring & Maintenance
 
