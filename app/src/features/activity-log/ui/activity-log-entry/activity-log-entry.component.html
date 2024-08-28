@@ -1,8 +1,4 @@
-<accordion-group
-    class="container-fluid my-1"
-    [panelClass]="customColorClass"
-    *ngIf="group"
->
+<accordion-group class="my-1" [panelClass]="customColorClass" *ngIf="group">
     <div accordion-heading class="clearfix">
         {{ group.activityId | activityTypeIdToName: activityTypes }}
         <app-hour-badge
