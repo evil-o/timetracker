@@ -16,7 +16,6 @@
 -   commitizen + commit linting
 -   faker for Cypress specs
 -   add spectator + proper component mocking in tests
--   set up dependabot
 
 ## Refactoring & Maintenance
 
