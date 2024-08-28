@@ -82,4 +82,20 @@ describe("Week overview", () => {
             )
         );
     });
+
+    it("shows today's attendance on the week overview", () => {
+        cy.log("Create attendance on today page");
+
+        today.navigateFromHome();
+
+        today.startTimeInput.type("07:30");
+        today.endTimeInput.type("16:15");
+        today.submitAttendance.click();
+
+        cy.log("Check attendance on week page");
+        week.visitViaNav();
+
+        week.attendance.tabHeader.click();
+        week.attendance.sumTotalOvertimeBadge.should("contain.text", "+0h 45m");
+    });
 });

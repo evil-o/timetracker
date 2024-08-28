@@ -10,4 +10,14 @@ export class WeekPage {
     public get totalHours(): Cypress.Chainable<JQuery<HTMLElement>> {
         return cy.byTestId("total-week-hours");
     }
+
+    public attendance = {
+        get tabHeader(): Cypress.Chainable<JQuery<HTMLElement>> {
+            return cy.get(".nav-item").contains("Attendance");
+        },
+
+        get sumTotalOvertimeBadge(): Cypress.Chainable<JQuery<HTMLElement>> {
+            return cy.byTestId("sum-total-overtime");
+        },
+    };
 }
