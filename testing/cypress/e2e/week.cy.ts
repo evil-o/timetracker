@@ -1,5 +1,3 @@
-import { ActivitiesPage } from "../pages/activities.page";
-import { GlobalPage } from "../pages/global.page";
 import { TodayPage } from "../pages/today.page.cy";
 import { WeekPage } from "../pages/week.page";
 import { DayPageWorkflows } from "../support/today.workflows";
@@ -8,8 +6,6 @@ import { faker } from "@faker-js/faker";
 
 describe("Week overview", () => {
     let today: TodayPage;
-    let activities: ActivitiesPage;
-    let globalPage: GlobalPage;
     let week: WeekPage;
     let dayWorkflows: DayPageWorkflows;
 
@@ -28,8 +24,6 @@ describe("Week overview", () => {
     beforeEach(() => {
         today = new TodayPage();
         week = new WeekPage();
-        globalPage = new GlobalPage();
-        activities = new ActivitiesPage();
         dayWorkflows = new DayPageWorkflows(today);
     });
 
