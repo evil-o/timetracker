@@ -14,8 +14,8 @@ export class DayPageWorkflows {
     public enterLogEntry(
         activityType: string = DayPageWorkflows.defaultActivityType,
         description: string = DayPageWorkflows.defaultDescription,
-        hours: HourString = DayPageWorkflows.defaultHours,
-        minutes: MinuteString = DayPageWorkflows.defaultMinutes
+        hours: HourString | number = DayPageWorkflows.defaultHours,
+        minutes: MinuteString | number = DayPageWorkflows.defaultMinutes
     ): void {
         cy.log("create log entry");
         this.today.addActivity.activityInput.clear().type(activityType);

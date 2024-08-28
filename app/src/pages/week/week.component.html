@@ -125,6 +125,7 @@
                 <div class="card-header text-right">
                     Total:
                     <app-hour-badge
+                        data-testid="total-week-hours"
                         class="me-2"
                         [hours]="loggedSum$ | async"
                     ></app-hour-badge>
@@ -231,6 +232,7 @@
                             <td class="text-right">
                                 <b>
                                     <app-overtime-badge
+                                        data-testid="sum-total-overtime"
                                         class="me-1"
                                         [hours]="
                                             (attendanceStats$ | async)
