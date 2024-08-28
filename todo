@@ -21,8 +21,10 @@ None for now.
 -   enable router input binding
 -   Add a quick way to output a daily message
 -   Custom 404 page to better solve the redirects (use a query parameter, let the app understand it and reroute)
--   Sift through all layouts and fix the many smaller issues
 -   Unify ngx bootstrap vs. @ng-bootstrap use
+-   split activity entering out of day component into its own component
+-   split tabs out of week component into their own components
+-   split dialog out of acitvities component into its own component
 
 ## Fetures
 
@@ -35,6 +37,7 @@ None for now.
 ## Bugs
 
 -   Various subscriptions are not canceled
+-   Cannot add extra booking without setting start and end time, needs a Cypress spec too
 
 ## Fixes
 
