@@ -125,6 +125,7 @@
                 <div class="card-header text-right">
                     Total:
                     <app-hour-badge
+                        data-testid="total-week-hours"
                         class="me-2"
                         [hours]="loggedSum$ | async"
                     ></app-hour-badge>
