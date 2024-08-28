@@ -25,6 +25,7 @@ None for now.
 -   Unify ngx bootstrap vs. @ng-bootstrap use
 -   split activity entering out of day component into its own component
 -   split tabs out of week component into their own components
+-   split dialog out of acitvities component into its own component
 
 ## Fetures
 
