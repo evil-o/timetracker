@@ -38,6 +38,7 @@ None for now.
 
 -   Various subscriptions are not canceled
 -   Cannot add extra booking without setting start and end time, needs a Cypress spec too
+-   Layout bug: heading on today page is not properly aligned
 
 ## Fixes
 

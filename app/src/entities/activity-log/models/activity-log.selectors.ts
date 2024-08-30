@@ -1,8 +1,7 @@
-import { createSelector } from "@ngrx/store";
-import { ApplicationState } from "../../application/models/application.model";
-import { IActivityLogEntry } from "./activity-log.types";
+import { createFeatureSelector, createSelector } from "@ngrx/store";
+import { IActivityLog, IActivityLogEntry } from "./activity-log.types";
 
-const allActivities = (state: ApplicationState) => state.activityLog;
+const allActivities = createFeatureSelector<IActivityLog>("activityLog");
 const activityLogEntries = createSelector(
     allActivities,
     (state) => state?.entries
