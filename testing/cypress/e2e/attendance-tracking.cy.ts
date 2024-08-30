@@ -69,4 +69,18 @@ describe("The time tracker", () => {
 
         globalPage.expectOvertime("-7", "45");
     });
+
+    it("renders preexisting attendance times on the today page", () => {
+        const startTime = "01:23";
+        const endTime = "12:34";
+        today.startTimeInput.type(startTime);
+        today.endTimeInput.type(endTime);
+        today.submitAttendance.click();
+
+        cy.reload();
+
+        today.navigateFromHome();
+        today.startTimeInput.should("have.value", startTime);
+        today.endTimeInput.should("have.value", endTime);
+    });
 });
