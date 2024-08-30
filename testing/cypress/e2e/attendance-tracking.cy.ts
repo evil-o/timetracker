@@ -8,6 +8,7 @@ describe("The time tracker", () => {
     let globalPage: GlobalPage;
 
     beforeEach(() => {
+        cy.clearAllLocalStorage();
         today = new TodayPage();
         globalPage = new GlobalPage();
         activities = new ActivitiesPage();
@@ -46,6 +47,15 @@ describe("The time tracker", () => {
         today.extraBookings.hours.first().clear().type("1:23");
         today.extraBookings.confirms.first().click();
         globalPage.expectOvertime("-2", "37");
+    });
+
+    it("tracks extra bookings without start and end time", () => {
+        today.extraBookings.accordion.click();
+        today.extraBookings.add.click();
+        today.extraBookings.descriptions.first().type("e2e extra booking");
+        today.extraBookings.hours.first().clear().type("1:23");
+        today.extraBookings.confirms.first().click();
+        globalPage.expectOvertime("-6", "37");
     });
 
     it("tracks breaks", () => {
