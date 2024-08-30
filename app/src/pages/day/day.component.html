@@ -1,24 +1,25 @@
 <div class="row">
     <div class="col">
-        <input
-            #datePickerInput
-            #datePicker="bsDatepicker"
-            class="invisible form-control border-0"
-            placeholder="Pick a date"
-            bsDatepicker
-            [bsValue]="date$.value"
-            (blur)="endDatePicking()"
-            [bsConfig]="{ containerClass: 'theme-default' }"
-            (onHidden)="endDatePicking()"
-        />
         <div class="d-flex align-items-center">
             <button
                 type="button"
                 class="btn btn-light me-2"
-                (click)="startDatePicking()"
+                (click)="datePicker.show()"
             >
                 <i class="far fa-calendar-alt"></i>
             </button>
+            <input
+                #datePickerInput
+                #datePicker="bsDatepicker"
+                style="width: 0%"
+                class="invisible form-control border-0 p-0"
+                placement="bottom"
+                placeholder="Pick a date"
+                bsDatepicker
+                [bsValue]="date$.value"
+                [bsConfig]="{ containerClass: 'theme-default' }"
+                (bsValueChange)="datePicked($event)"
+            />
             <button
                 type="button"
                 class="btn btn-light me-2"

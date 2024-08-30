@@ -4,7 +4,6 @@ import { Store } from "@ngrx/store";
 
 import { ApplicationState } from "../../entities/application/models/application.model";
 
-import { BsDatepickerDirective } from "ngx-bootstrap/datepicker";
 import {
     BehaviorSubject,
     combineLatest,
@@ -48,13 +47,6 @@ export class DayComponent {
     public dateDayRange$: Observable<[Date, Date]>;
     public dateDayStart$: Observable<Date>;
     public dateDayEnd$: Observable<Date>;
-
-    public pickingDate = false;
-    @ViewChild("datePickerInput")
-    private datePickerInput!: ElementRef;
-
-    @ViewChild("datePicker")
-    private datePicker!: BsDatepickerDirective;
 
     @ViewChild("startTimeDisplay")
     public startTimeDisplay!: TimeBadgeComponent;
@@ -221,16 +213,6 @@ export class DayComponent {
         this.hourLog$.next({ hours: numHours, activityName, description });
     }
 
-    startDatePicking() {
-        this.pickingDate = true;
-        this.datePickerInput.nativeElement.focus();
-        this.datePicker.show();
-    }
-
-    endDatePicking() {
-        this.pickingDate = false;
-    }
-
     pickToday() {
         this.date$.next(new Date());
     }
@@ -252,5 +234,9 @@ export class DayComponent {
                 current.getDate() + days
             )
         );
+    }
+
+    protected datePicked(value: Date): void {
+        this.date$.next(value);
     }
 }
