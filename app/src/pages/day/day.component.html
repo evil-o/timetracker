@@ -1,45 +1,58 @@
 <div class="row">
-    <h1 class="col">
-        <input
-            #datePickerInput
-            #datePicker="bsDatepicker"
-            class="invisible form-control border-0"
-            placeholder="Pick a date"
-            bsDatepicker
-            [bsValue]="date$.value"
-            (blur)="endDatePicking()"
-            [bsConfig]="{ containerClass: 'theme-default' }"
-            (onHidden)="endDatePicking()"
-        />
-        <button
-            type="button"
-            class="btn btn-light me-2"
-            (click)="startDatePicking()"
-        >
-            <i class="far fa-calendar-alt"></i>
-        </button>
-        <button
-            type="button"
-            class="btn btn-light me-2"
-            data-testid="previous-day"
-            (click)="pickPreviousDay()"
-        >
-            <i class="fa fa-chevron-left"></i>
-        </button>
-        <button type="button" class="btn btn-light me-2" (click)="pickToday()">
-            <i class="far fa-calendar-minus"></i>
-        </button>
-        <button
-            type="button"
-            class="btn btn-light"
-            data-testid="next-day"
-            (click)="pickNextDay()"
-        >
-            <i class="fa fa-chevron-right"></i>
-        </button>
-        {{ (date$ | async)?.toLocaleDateString("en-us", { weekday: "long" }) }},
-        {{ (date$ | async)?.toLocaleDateString() }}
-    </h1>
+    <div class="col">
+        <div class="d-flex align-items-center">
+            <button
+                type="button"
+                class="btn btn-light me-2"
+                (click)="datePicker.show()"
+            >
+                <i class="far fa-calendar-alt"></i>
+            </button>
+            <input
+                #datePickerInput
+                #datePicker="bsDatepicker"
+                style="width: 0%"
+                class="invisible form-control border-0 p-0"
+                placement="bottom"
+                placeholder="Pick a date"
+                bsDatepicker
+                [bsValue]="date$.value"
+                [bsConfig]="{ containerClass: 'theme-default' }"
+                (bsValueChange)="datePicked($event)"
+            />
+            <button
+                type="button"
+                class="btn btn-light me-2"
+                data-testid="previous-day"
+                (click)="pickPreviousDay()"
+            >
+                <i class="fa fa-chevron-left"></i>
+            </button>
+            <button
+                type="button"
+                class="btn btn-light me-2"
+                (click)="pickToday()"
+            >
+                <i class="far fa-calendar-minus"></i>
+            </button>
+            <button
+                type="button"
+                class="btn btn-light"
+                data-testid="next-day"
+                (click)="pickNextDay()"
+            >
+                <i class="fa fa-chevron-right"></i>
+            </button>
+            <h1 class="d-inline-block ms-3">
+                {{
+                    (date$ | async)?.toLocaleDateString("en-us", {
+                        weekday: "long",
+                    })
+                }},
+                {{ (date$ | async)?.toLocaleDateString() }}
+            </h1>
+        </div>
+    </div>
 </div>
 
 <div class="row">

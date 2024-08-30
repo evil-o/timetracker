@@ -8,6 +8,7 @@ describe("The time tracker", () => {
     let globalPage: GlobalPage;
 
     beforeEach(() => {
+        cy.clearAllLocalStorage();
         today = new TodayPage();
         globalPage = new GlobalPage();
         activities = new ActivitiesPage();
@@ -48,6 +49,15 @@ describe("The time tracker", () => {
         globalPage.expectOvertime("-2", "37");
     });
 
+    it("tracks extra bookings without start and end time", () => {
+        today.extraBookings.accordion.click();
+        today.extraBookings.add.click();
+        today.extraBookings.descriptions.first().type("e2e extra booking");
+        today.extraBookings.hours.first().clear().type("1:23");
+        today.extraBookings.confirms.first().click();
+        globalPage.expectOvertime("-6", "37");
+    });
+
     it("tracks breaks", () => {
         today.startTimeInput.type("08:00");
         today.endTimeInput.type("12:00");
@@ -68,5 +78,19 @@ describe("The time tracker", () => {
         activities.activityList.nonWorkingCheckBoxes.first().click();
 
         globalPage.expectOvertime("-7", "45");
+    });
+
+    it("renders preexisting attendance times on the today page", () => {
+        const startTime = "01:23";
+        const endTime = "12:34";
+        today.startTimeInput.type(startTime);
+        today.endTimeInput.type(endTime);
+        today.submitAttendance.click();
+
+        cy.reload();
+
+        today.navigateFromHome();
+        today.startTimeInput.should("have.value", startTime);
+        today.endTimeInput.should("have.value", endTime);
     });
 });

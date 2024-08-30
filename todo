@@ -37,7 +37,6 @@ None for now.
 ## Bugs
 
 -   Various subscriptions are not canceled
--   Cannot add extra booking without setting start and end time, needs a Cypress spec too
 
 ## Fixes
 

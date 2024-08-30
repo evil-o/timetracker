@@ -1,7 +1,7 @@
-import { createSelector } from "@ngrx/store";
-import { ApplicationState } from "../../application/models/application.model";
+import { createFeatureSelector, createSelector } from "@ngrx/store";
+import { IAttendanceState } from "./attendance.state";
 
-const getState = (state: ApplicationState) => state.attendanceState;
+const getState = createFeatureSelector<IAttendanceState>("attendanceState");
 
 const getEntries = createSelector(getState, (state) => state?.entries);
 
