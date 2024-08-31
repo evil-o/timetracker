@@ -1,6 +1,11 @@
 <form>
-    <div class="row my-3">
-        <h3>Attendance</h3>
+    <div class="d-flex my-3">
+        <span class="h3 lh-1 my-1"> Attendance</span>
+        <app-overtime-badge
+            data-testid="day-overtime"
+            class="align-content-center ms-2"
+            [hours]="(overtime$ | async) ?? undefined"
+        ></app-overtime-badge>
     </div>
     <div class="row">
         <div class="col-4">

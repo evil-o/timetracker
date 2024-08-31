@@ -1,7 +1,10 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { combineLatest, map, Observable, Subject, withLatestFrom } from "rxjs";
-import { ApplicationState } from "../../../../entities/application";
+import {
+    ApplicationState,
+    fromApplication,
+} from "../../../../entities/application";
 import {
     attendanceActions,
     AttendanceEntry,
@@ -10,6 +13,7 @@ import {
     IAttendanceEntry,
 } from "../../../../entities/attendance";
 import {
+    compareDateDays,
     dateToTimeInputValue,
     stringToDuration,
     valueToTime,
@@ -28,6 +32,8 @@ export class DayAttendanceComponent implements OnInit {
 
     @ViewChild("dayEnd")
     public endInput!: ElementRef;
+
+    protected overtime$!: Observable<number | undefined>;
 
     protected timeValues$ = new Subject<{ start: string; end: string }>();
 
@@ -56,6 +62,17 @@ export class DayAttendanceComponent implements OnInit {
     public constructor(public store: Store<ApplicationState>) {}
 
     public ngOnInit() {
+        this.overtime$ = combineLatest([
+            this.date$,
+            this.store.select(fromApplication.attendanceEntriesWithOvertime),
+        ]).pipe(
+            map(
+                ([date, overtimes]) =>
+                    overtimes.find((o) => compareDateDays(o.date, date))
+                        ?.overtime
+            )
+        );
+
         this.timeValues$
             .pipe(withLatestFrom(this.date$))
             .subscribe(([values, date]) => {

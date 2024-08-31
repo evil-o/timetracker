@@ -2,7 +2,7 @@ import { v4 as uuid } from "uuid";
 
 import { createReducer } from "@ngrx/store";
 import { WritableDraft } from "immer";
-import { produceOn } from "../../../shared/lib";
+import { compareDatesWithDayReference, produceOn } from "../../../shared/lib";
 import { attendanceActions } from "./attendance.actions";
 import {
     AttendanceEntry,
@@ -81,11 +81,8 @@ export const attendanceReducer = createReducer(
         attendanceActions.createCorrection,
         (draft, { year, month, day }) => {
             // TODO: this function is currently needlessly complex because otherwise, a bug appears where the corrections don't show up on the today page
-            const entryIndex = draft.entries.findIndex(
-                (v) =>
-                    v.date.getFullYear() === year &&
-                    v.date.getMonth() === month &&
-                    v.date.getDate() === day
+            const entryIndex = draft.entries.findIndex((v) =>
+                compareDatesWithDayReference(v.date, { year, month, day })
             );
             let entry: IAttendanceEntry;
             if (entryIndex >= 0) {
@@ -115,11 +112,8 @@ export const attendanceReducer = createReducer(
     produceOn(
         attendanceActions.updateCorrection,
         (draft, { year, month, day, id, newHours, newDescription }) => {
-            const entry = draft.entries.find(
-                (v) =>
-                    v.date.getFullYear() === year &&
-                    v.date.getMonth() === month &&
-                    v.date.getDate() === day
+            const entry = draft.entries.find((v) =>
+                compareDatesWithDayReference(v.date, { year, month, day })
             );
             if (!entry) {
                 console.warn(
@@ -147,11 +141,8 @@ export const attendanceReducer = createReducer(
     produceOn(
         attendanceActions.deleteCorrection,
         (draft, { year, month, day, id }) => {
-            const entry = draft.entries.find(
-                (v) =>
-                    v.date.getFullYear() === year &&
-                    v.date.getMonth() === month &&
-                    v.date.getDate() === day
+            const entry = draft.entries.find((v) =>
+                compareDatesWithDayReference(v.date, { year, month, day })
             );
             if (!entry) {
                 console.warn(
