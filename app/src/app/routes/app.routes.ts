@@ -4,7 +4,7 @@ import { ActivitiesComponent } from "../../pages/activities";
 import { ConfigurationComponent } from "../../pages/configuration";
 import { DayComponent } from "../../pages/day";
 import { StatisticsComponent } from "../../pages/statistics";
-import { WeekComponent } from "../../pages/week/week.component";
+import { WeekComponent } from "../../pages/week";
 import { WelcomeComponent } from "../../pages/welcome/welcome.component";
 
 export const routes: Routes = [

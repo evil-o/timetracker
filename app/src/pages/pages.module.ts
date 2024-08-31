@@ -17,7 +17,7 @@ import { ConfigurationComponent } from "./configuration";
 import { DayComponent } from "./day";
 import { MainComponent } from "./layouts/main/main.component";
 import { StatisticsComponent } from "./statistics";
-import { WeekComponent } from "./week/week.component";
+import { WeekComponent } from "./week";
 import { WelcomeComponent } from "./welcome/welcome.component";
 
 const pages = [

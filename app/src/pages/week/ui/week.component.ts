@@ -5,7 +5,7 @@ import { Store } from "@ngrx/store";
 
 import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 
-import { ApplicationState } from "../../entities/application/models/application.model";
+import { ApplicationState } from "../../../entities/application";
 
 import currentWeekNumber from "current-week-number";
 import {
@@ -15,25 +15,29 @@ import {
     Observable,
     withLatestFrom,
 } from "rxjs";
-import { IGroupEntry } from "../../entities/activity-log/lib/group-activity-log-entries-by-id.pipe";
-import { fromActivityLog } from "../../entities/activity-log/models/activity-log.selectors";
-import { IActivityLogEntry } from "../../entities/activity-log/models/activity-log.types";
-import { fromActivityTypes } from "../../entities/activity-type/models/activity-types.selectors";
-import { IActivityTypes } from "../../entities/activity-type/models/activity-types.types";
+import {
+    fromActivityLog,
+    IActivityLogEntry,
+    IGroupEntry,
+} from "../../../entities/activity-log";
+import {
+    fromActivityTypes,
+    IActivityTypes,
+} from "../../../entities/activity-type";
 import {
     fromApplication,
     IAttendanceWithTimes,
-} from "../../entities/application/models/application.selectors";
+} from "../../../entities/application";
 import {
     IAttendanceCorrection,
     IAttendanceEntry,
-} from "../../entities/attendance/models/attendance.state";
+} from "../../../entities/attendance";
 import {
     FormatHoursPipe,
     getFirstDayOfCalendarWeek,
     PadNumberPipe,
-} from "../../shared/lib";
-import { HtmlTableGenerator } from "../../shared/models";
+} from "../../../shared/lib";
+import { HtmlTableGenerator } from "../../../shared/models";
 
 interface IDayEntry {
     dayOfTheWeek: number;

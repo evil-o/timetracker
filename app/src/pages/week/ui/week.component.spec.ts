@@ -10,20 +10,24 @@ import { BsModalService } from "ngx-bootstrap/modal";
 import { of } from "rxjs";
 import {
     ActivityLog,
+    activityLogActions,
     GroupActivityLogEntriesByIdPipe,
-} from "../../entities/activity-log";
-import { activityLogActions } from "../../entities/activity-log/models/activity-log.actions";
-import { ActivityTypes } from "../../entities/activity-type";
-import { ApplicationState } from "../../entities/application/models/application.model";
-import { AttendanceState } from "../../entities/attendance";
-import { attendanceActions } from "../../entities/attendance/models/attendance.actions";
-import { ConfigurationState } from "../../entities/configuration";
-import { configurationActions } from "../../entities/configuration/models/configuration.actions";
+} from "../../../entities/activity-log";
+import { ActivityTypes } from "../../../entities/activity-type";
+import { ApplicationState } from "../../../entities/application";
+import {
+    attendanceActions,
+    AttendanceState,
+} from "../../../entities/attendance";
+import {
+    configurationActions,
+    ConfigurationState,
+} from "../../../entities/configuration";
 import {
     FormatHoursPipe,
     getFirstDayOfCalendarWeek,
     valueToTime,
-} from "../../shared/lib";
+} from "../../../shared/lib";
 import { WeekComponent } from "./week.component";
 
 describe(WeekComponent.name, () => {

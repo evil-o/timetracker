@@ -26,7 +26,7 @@ import { configurationActions } from "../../../../entities/configuration/models/
 import { OvertimeBadgeComponent } from "../../../../features/activity-aggregation";
 import { AcivityColorFeaturesModule } from "../../../../features/activity-color";
 import { ActivityLogEntryComponent } from "../../../../features/activity-log";
-import { WeekComponent } from "../../../../pages/week/week.component";
+import { WeekComponent } from "../../../../pages/week";
 import { WelcomeComponent } from "../../../../pages/welcome/welcome.component";
 import {
     FormatHoursPipe,
