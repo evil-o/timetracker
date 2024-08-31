@@ -13,7 +13,6 @@ export const storageVersionActions = createActionGroup({
         storageUpgradeFinished: emptyProps(),
         exportStorage: emptyProps(),
         exportStorageSuccess: emptyProps(),
-        importStorageFile: props<{ fileContent: string }>(),
         importStorageSuccess: emptyProps(),
     },
 });

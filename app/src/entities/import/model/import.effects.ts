@@ -8,7 +8,7 @@ import {
     IActivityTypesStateSlice,
 } from "../../activity-type";
 import { attendanceActions, IAttendanceStateSlice } from "../../attendance";
-import { storageVersionActions } from "./storage-version.actions";
+import { importActions } from "./import.actions";
 
 function correctAttendance(state: Partial<IAttendanceStateSlice>) {
     if (state.attendanceState) {
@@ -54,7 +54,7 @@ function correctStateTypes(
 export class ImportStorageEffects {
     importFile$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(storageVersionActions.importStorageFile),
+            ofType(importActions.fromFile),
             map(({ fileContent }) =>
                 correctStateTypes(JSON.parse(fileContent))
             ),

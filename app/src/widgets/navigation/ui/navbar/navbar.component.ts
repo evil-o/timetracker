@@ -14,6 +14,7 @@ import {
     fromApplication,
     IAttendanceWithTimes,
 } from "../../../../entities/application/models/application.selectors";
+import { importActions } from "../../../../entities/import";
 import { storageVersionActions } from "../../../../entities/storage-version";
 
 @Component({
@@ -82,7 +83,7 @@ export class NavbarComponent {
                 throw new Error(`File content is empty: ${content}`);
             }
             this.store.dispatch(
-                storageVersionActions.importStorageFile({
+                importActions.fromFile({
                     fileContent: content.toString(),
                 })
             );
