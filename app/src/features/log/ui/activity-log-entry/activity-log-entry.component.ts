@@ -18,19 +18,28 @@ import {
     providers: [AccordionComponent],
 })
 export class ActivityLogEntryComponent {
-    private colors = activityColors;
+    public customColorClass = "";
+
+    public confirmDelete?: string;
 
     public _group!: IGroupEntry;
+
+    private colors = activityColors;
+
+    private _activityTypes!: IActivityTypes;
+
+    constructor(public store: Store<ApplicationState>) {}
+
     @Input()
     public set group(value: IGroupEntry) {
         this._group = value;
         this.updateCustomClass();
     }
+    // eslint-disable-next-line @typescript-eslint/member-ordering
     public get group(): IGroupEntry {
         return this._group;
     }
 
-    private _activityTypes!: IActivityTypes;
     @Input()
     public set activityTypes(value: IActivityTypes | undefined) {
         if (!value) {
@@ -39,15 +48,10 @@ export class ActivityLogEntryComponent {
         this._activityTypes = value;
         this.updateCustomClass();
     }
+    // eslint-disable-next-line @typescript-eslint/member-ordering
     public get activityTypes(): IActivityTypes {
         return this._activityTypes;
     }
-
-    public customColorClass = "";
-
-    public confirmDelete?: string;
-
-    constructor(public store: Store<ApplicationState>) {}
 
     public changeEntryDescription(params: {
         entryId: string;

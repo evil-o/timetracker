@@ -16,11 +16,6 @@ import { IActivityType } from "../../models/activity-types.types";
 })
 export class ActivityPickerComponent {
     @Input()
-    public set activities(activities: IActivityType[] | undefined) {
-        this.items = activities ? activities.filter((v) => !v.isArchived) : [];
-    }
-
-    @Input()
     public placeholder = "What are you doing?";
 
     @Output()
@@ -37,6 +32,11 @@ export class ActivityPickerComponent {
     public name = "";
 
     public id = "";
+
+    @Input()
+    public set activities(activities: IActivityType[] | undefined) {
+        this.items = activities ? activities.filter((v) => !v.isArchived) : [];
+    }
 
     selected(selection: { item?: IActivityType }) {
         if (selection.item) {

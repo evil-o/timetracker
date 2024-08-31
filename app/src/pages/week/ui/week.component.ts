@@ -95,12 +95,13 @@ export class WeekComponent {
 
     public attendanceStats$: Observable<IWeekAttendanceStats>;
 
-    private attendances: IAttendanceWithTimes[] = [];
-    private attendanceStats!: IWeekAttendanceStats;
-
     public selectedTab: "tally" | "daily" | "attendance" = "tally";
 
     public overallAttendanceSum$: Observable<number | undefined>;
+
+    private attendances: IAttendanceWithTimes[] = [];
+    private attendanceStats!: IWeekAttendanceStats;
+
     private overallAttendanceSum?: number;
 
     constructor(
@@ -453,13 +454,6 @@ export class WeekComponent {
         this.printPreviewContents = root.innerHTML;
     }
 
-    private attendanceTimeStr(hours?: Date) {
-        const padNumber = new PadNumberPipe();
-        return hours
-            ? hours.getHours() + ":" + padNumber.transform(hours.getMinutes())
-            : "-";
-    }
-
     attendanceStartTimeStr(attendance: IAttendanceEntry) {
         return this.attendanceTimeStr(attendance.start);
     }
@@ -502,5 +496,12 @@ export class WeekComponent {
         a.click();
 
         this.modalRef.hide();
+    }
+
+    private attendanceTimeStr(hours?: Date) {
+        const padNumber = new PadNumberPipe();
+        return hours
+            ? hours.getHours() + ":" + padNumber.transform(hours.getMinutes())
+            : "-";
     }
 }

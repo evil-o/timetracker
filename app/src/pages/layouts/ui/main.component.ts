@@ -19,11 +19,11 @@ import {
     templateUrl: "./main.component.html",
 })
 export class MainComponent implements OnInit {
-    private activityTypes$: Observable<IActivityTypes>;
     public activities$!: Observable<IActivityType[]>;
-    private storageVersion$: Observable<IStorageVersion>;
-
     public storageUpdateComplete$: Observable<boolean>;
+
+    private activityTypes$: Observable<IActivityTypes>;
+    private storageVersion$: Observable<IStorageVersion>;
 
     constructor(private store: Store<ApplicationState>) {
         this.activityTypes$ = this.store.select(fromActivityTypes.getState);

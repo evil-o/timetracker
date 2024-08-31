@@ -20,10 +20,10 @@ import { ActivityPickerComponent } from "./activity-picker.component";
     ></app-activity-picker>`,
 })
 class TestHostActivityPickerComponent {
-    public activities$;
-
     @ViewChild(ActivityPickerComponent)
     public activityPicker!: ActivityPickerComponent;
+
+    public activities$;
 
     constructor() {
         this.activities$ = of([

@@ -22,6 +22,9 @@ import { storageVersionActions } from "../../../../entities/storage-version";
     templateUrl: "./navbar.component.html",
 })
 export class NavbarComponent {
+    @Output()
+    public createActivityEvent = new EventEmitter<string>();
+
     @ViewChild("importFileSelector")
     private importFileElement!: ElementRef;
 
@@ -41,9 +44,6 @@ export class NavbarComponent {
             id: "statistics",
         },
     ];
-
-    @Output()
-    public createActivityEvent = new EventEmitter<string>();
 
     public attendances$: Observable<IAttendanceWithTimes[]>;
 

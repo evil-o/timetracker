@@ -13,20 +13,22 @@ import { ApplicationState } from "../../../../entities/application";
 export class ActivityTypeListComponent {
     @Output() public mergeRequest = new EventEmitter<IActivityType>();
 
+    sortedTypes?: IActivityType[];
+
     _types?: IActivityType[];
+
+    public constructor(private store: Store<ApplicationState>) {}
+
+    get types(): IActivityType[] | undefined {
+        return this._types;
+    }
+
     @Input() set types(value: IActivityType[] | undefined | null) {
         this._types = value ? [...value] : undefined;
         this.sortedTypes = this._types?.sort((a, b) =>
             a.name.localeCompare(b.name)
         );
     }
-    get types(): IActivityType[] | undefined {
-        return this._types;
-    }
-
-    sortedTypes?: IActivityType[];
-
-    constructor(private store: Store<ApplicationState>) {}
 
     setArchived(id: string, value: boolean) {
         this.store.dispatch(

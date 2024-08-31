@@ -39,10 +39,6 @@ export class DayAttendanceComponent implements OnInit {
     protected startValid$!: Observable<boolean>;
     protected endValid$!: Observable<boolean>;
 
-    private entries$!: Observable<IAttendanceEntry[]>;
-
-    private entry$!: Observable<IAttendanceEntry | undefined>;
-
     protected corrections$!: Observable<IAttendanceCorrection[]>;
 
     protected correctionCreation$ = new Subject<void>();
@@ -50,6 +46,10 @@ export class DayAttendanceComponent implements OnInit {
     protected correctionsToUpdate$ = new Subject<IAttendanceCorrection>();
 
     protected correctionsToDelete$ = new Subject<IAttendanceCorrection>();
+
+    private entries$!: Observable<IAttendanceEntry[]>;
+
+    private entry$!: Observable<IAttendanceEntry | undefined>;
 
     constructor(public store: Store<ApplicationState>) {}
 
