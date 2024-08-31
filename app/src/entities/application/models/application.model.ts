@@ -3,15 +3,14 @@ import { IActivityTypesStateSlice } from "../../activity-type/models/activity-ty
 import { IAttendanceStateSlice } from "../../attendance/model/attendance.state";
 import { IConfigurationState } from "../../configuration/model/configuration.state";
 import { IStopWatch } from "../../stop-watch/model/stop-watch.state";
-import { IStorageVersion } from "../../storage-version/models/storage-version.state";
+import { IStorageVersionStateSlice } from "../../storage-version/models/storage-version.state";
 
 type Slices = IAttendanceStateSlice &
     IActivityLogStateSlice &
-    IActivityTypesStateSlice;
+    IActivityTypesStateSlice &
+    IStorageVersionStateSlice;
 
 export interface ApplicationState extends Slices {
-    storageVersion: IStorageVersion;
-
     configuration: IConfigurationState;
 
     stopWatch: IStopWatch;
