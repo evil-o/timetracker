@@ -10,7 +10,6 @@ None for now.
 
 -   setup eslint + some basic code formatting rules
     -   all members must have a visibility
-    -   space between class members
     -   property decorators on a separate line
 -   commitizen + commit linting
 -   faker for Cypress specs

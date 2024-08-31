@@ -26,15 +26,19 @@ function getYearDateRange(year: number) {
 })
 export class StatisticsComponent {
     public startDateCurrentMonth$: BehaviorSubject<Date>;
+
     public endDateCurrentMonth$: BehaviorSubject<Date>;
 
     public startDateLastMonth$: BehaviorSubject<Date>;
+
     public endDateLastMonth$: BehaviorSubject<Date>;
 
     public startDateCurrentYear$: BehaviorSubject<Date>;
+
     public endDateCurrentYear$: BehaviorSubject<Date>;
 
     public startDateLastYear$: BehaviorSubject<Date>;
+
     public endDateLastYear$: BehaviorSubject<Date>;
 
     public allActivities$: Observable<IActivityLog>;

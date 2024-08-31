@@ -25,7 +25,9 @@ export interface IAttendanceStateSlice {
 
 export class AttendanceEntry implements IAttendanceEntry {
     public start?: Date;
+
     public end?: Date;
+
     public corrections?: IAttendanceCorrection[];
 
     constructor(public date: Date) {}

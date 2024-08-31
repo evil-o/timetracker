@@ -92,6 +92,7 @@ export class ActivityAggregationChartComponent implements OnInit {
     public filteredChartColors: IColorSpec[] = [];
 
     protected chartData?: ChartData<"doughnut">;
+
     protected doughnutChartType = "doughnut" as const;
 
     @Input()

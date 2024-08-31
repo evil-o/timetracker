@@ -20,7 +20,9 @@ export class StopwatchComponent {
     public static readonly UPDATE_INTERVAL_MS = 1000;
 
     public isRunning$: Observable<boolean>;
+
     public isStarted$: Observable<boolean>;
+
     public isPaused$: Observable<boolean>;
 
     public activities$: Observable<IActivityType[]>;

@@ -68,18 +68,22 @@ interface IWeekAttendanceStats {
 })
 export class WeekComponent {
     public activityLogEntries$: Observable<IActivityLogEntry[]>;
+
     public activityTypes$: Observable<IActivityTypes>;
 
     // log entries, filtered to only contain the ones that are in this week
     public filteredLogEntries$: Observable<IActivityLogEntry[]>;
 
     public nextWeek$: Observable<IWeekDate>;
+
     public nextWeek?: IWeekDate;
 
     public week$: Observable<IWeekDate>;
+
     public week?: IWeekDate;
 
     public previousWeek$: Observable<IWeekDate>;
+
     public previousWeek?: IWeekDate;
 
     public days$: Observable<IDayEntry[]>;
@@ -91,6 +95,7 @@ export class WeekComponent {
     public printPreviewContents?: string;
 
     public attendances$: Observable<IAttendanceWithTimes[]>;
+
     public attendanceCorrections$: Observable<IAttendanceCorrection[]>;
 
     public attendanceStats$: Observable<IWeekAttendanceStats>;
@@ -100,6 +105,7 @@ export class WeekComponent {
     public overallAttendanceSum$: Observable<number | undefined>;
 
     private attendances: IAttendanceWithTimes[] = [];
+
     private attendanceStats!: IWeekAttendanceStats;
 
     private overallAttendanceSum?: number;

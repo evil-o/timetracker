@@ -20,9 +20,11 @@ import {
 })
 export class MainComponent implements OnInit {
     public activities$!: Observable<IActivityType[]>;
+
     public storageUpdateComplete$: Observable<boolean>;
 
     private activityTypes$: Observable<IActivityTypes>;
+
     private storageVersion$: Observable<IStorageVersion>;
 
     constructor(private store: Store<ApplicationState>) {

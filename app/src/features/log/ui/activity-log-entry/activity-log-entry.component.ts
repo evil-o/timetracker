@@ -35,6 +35,7 @@ export class ActivityLogEntryComponent {
         this._group = value;
         this.updateCustomClass();
     }
+
     // eslint-disable-next-line @typescript-eslint/member-ordering
     public get group(): IGroupEntry {
         return this._group;
@@ -48,6 +49,7 @@ export class ActivityLogEntryComponent {
         this._activityTypes = value;
         this.updateCustomClass();
     }
+
     // eslint-disable-next-line @typescript-eslint/member-ordering
     public get activityTypes(): IActivityTypes {
         return this._activityTypes;

@@ -34,9 +34,11 @@ export class DayAttendanceComponent implements OnInit {
     protected timeInputsChaged$ = new Subject<void>();
 
     protected start$!: Observable<string>;
+
     protected end$!: Observable<string>;
 
     protected startValid$!: Observable<boolean>;
+
     protected endValid$!: Observable<boolean>;
 
     protected corrections$!: Observable<IAttendanceCorrection[]>;

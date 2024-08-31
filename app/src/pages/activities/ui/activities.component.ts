@@ -16,7 +16,9 @@ import {
 })
 export class ActivitiesComponent {
     public modalRef!: BsModalRef;
+
     public activities$: Observable<IActivityType[]>;
+
     public activitiesWithoutSource!: IActivityType[];
 
     public confirmMerge$ = new Subject<{
@@ -25,6 +27,7 @@ export class ActivitiesComponent {
     }>();
 
     public mergeSource!: IActivityType;
+
     public mergeSource$ = new Subject<IActivityType | undefined>();
 
     constructor(
