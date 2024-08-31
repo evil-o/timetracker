@@ -142,7 +142,6 @@ export class DayComponent {
                 const minutes = (hoursFraction - hours) * 60.0;
                 start.setHours(start.getHours() - hours);
                 start.setMinutes(start.getMinutes() - minutes);
-                console.log("Setting start time to", start);
                 return start;
             })
         );

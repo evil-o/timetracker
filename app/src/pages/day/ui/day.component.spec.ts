@@ -112,8 +112,6 @@ describe(DayComponent.name, () => {
     it("should properly display the start time", fakeAsync(() => {
         const n = new Date();
 
-        console.log(startTimeBadge);
-
         component.startTime$.subscribe((value) => {
             expect(value.getHours()).toBe(n.getHours() - 6);
             expect(value.getMinutes()).toBe(
