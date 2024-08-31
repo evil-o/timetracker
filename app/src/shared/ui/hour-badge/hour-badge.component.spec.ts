@@ -1,25 +1,21 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-
-import { FormatHoursPipe } from "../../lib/format-hours.pipe";
+import { createComponentFactory, Spectator } from "@ngneat/spectator";
+import { MockPipes } from "ng-mocks";
+import { FormatHoursPipe } from "../../lib";
 import { HourBadgeComponent } from "./hour-badge.component";
 
-describe("HourBadgeComponent", () => {
-    let component: HourBadgeComponent;
-    let fixture: ComponentFixture<HourBadgeComponent>;
-
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            declarations: [FormatHoursPipe, HourBadgeComponent],
-        }).compileComponents();
+describe(HourBadgeComponent.name, () => {
+    const create = createComponentFactory({
+        component: HourBadgeComponent,
+        shallow: true,
+        declarations: [MockPipes(FormatHoursPipe)],
     });
+    let spectator: Spectator<HourBadgeComponent>;
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(HourBadgeComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
+        spectator = create();
     });
 
     it("should create", () => {
-        expect(component).toBeTruthy();
+        expect(spectator.component).toBeTruthy();
     });
 });

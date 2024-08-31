@@ -1,28 +1,37 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-
-import { NO_ERRORS_SCHEMA } from "@angular/core";
-import { StoreModule } from "@ngrx/store";
+import { createComponentFactory, Spectator } from "@ngneat/spectator";
+import { provideMockStore } from "@ngrx/store/testing";
+import {
+    ActivityTypes,
+    IActivityTypesStateSlice,
+} from "../../../../entities/activity-type";
+import {
+    IStopWatchStateSlice,
+    StopWatch,
+} from "../../../../entities/stop-watch";
 import { StopwatchComponent } from "./stopwatch.component";
 
+type StateSlice = IStopWatchStateSlice & IActivityTypesStateSlice;
+
 describe(StopwatchComponent.name, () => {
-    let component: StopwatchComponent;
-    let fixture: ComponentFixture<StopwatchComponent>;
-
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            declarations: [StopwatchComponent],
-            imports: [StoreModule.forRoot()],
-            schemas: [NO_ERRORS_SCHEMA],
-        }).compileComponents();
+    const create = createComponentFactory({
+        component: StopwatchComponent,
+        shallow: true,
+        providers: [
+            provideMockStore<StateSlice>({
+                initialState: {
+                    stopWatch: new StopWatch(),
+                    activityTypes: new ActivityTypes(),
+                },
+            }),
+        ],
     });
+    let spectator: Spectator<StopwatchComponent>;
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(StopwatchComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
+        spectator = create();
     });
 
     it("should create", () => {
-        expect(component).toBeTruthy();
+        expect(spectator.component).toBeTruthy();
     });
 });

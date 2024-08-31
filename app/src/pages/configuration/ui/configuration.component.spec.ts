@@ -1,26 +1,30 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-
-import { StoreModule } from "@ngrx/store";
+import { createComponentFactory, Spectator } from "@ngneat/spectator";
+import { provideMockStore } from "@ngrx/store/testing";
+import {
+    ConfigurationState,
+    IConfigurationStateSlice,
+} from "../../../entities/configuration";
 import { ConfigurationComponent } from "./configuration.component";
 
-describe("ConfigurationComponent", () => {
-    let component: ConfigurationComponent;
-    let fixture: ComponentFixture<ConfigurationComponent>;
+type StateSlice = IConfigurationStateSlice;
 
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            declarations: [ConfigurationComponent],
-            imports: [StoreModule.forRoot()],
-        }).compileComponents();
+describe(ConfigurationComponent.name, () => {
+    const create = createComponentFactory({
+        component: ConfigurationComponent,
+        shallow: true,
+        providers: [
+            provideMockStore<StateSlice>({
+                initialState: { configuration: new ConfigurationState() },
+            }),
+        ],
     });
+    let specatator: Spectator<ConfigurationComponent>;
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(ConfigurationComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
+        specatator = create();
     });
 
     it("should create", () => {
-        expect(component).toBeTruthy();
+        expect(specatator.component).toBeTruthy();
     });
 });
