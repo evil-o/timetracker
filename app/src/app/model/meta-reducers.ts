@@ -1,15 +1,7 @@
 import { Action, ActionReducer, MetaReducer } from "@ngrx/store";
 import { localStorageSync } from "ngrx-store-localstorage";
-import { ApplicationState } from "./model/application.model";
-
-export const rehydratedStorageKeys = [
-    "activityTypes",
-    "activityLog",
-    "attendanceState",
-    "storageVersion",
-    "configuration",
-    "stopWatch",
-] as (keyof ApplicationState)[];
+import { ApplicationState } from "../../entities/application";
+import { rehydratedStorageKeys } from "../../shared/config";
 
 export function localStorageSyncReducer(
     reducer: ActionReducer<ApplicationState>

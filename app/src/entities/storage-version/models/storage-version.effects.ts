@@ -3,8 +3,8 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 
 import { filter, map, withLatestFrom } from "rxjs";
+import { rehydratedStorageKeys } from "../../../shared/config";
 import { downloadDataAsFile } from "../../../shared/lib";
-import { rehydratedStorageKeys } from "../../application";
 import { makeTimestampedFileName } from "../lib/file-name";
 import { storageVersionActions } from "./storage-version.actions";
 import {
