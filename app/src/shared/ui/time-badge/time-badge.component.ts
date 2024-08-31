@@ -15,7 +15,7 @@ export class TimeBadgeComponent {
         }
     }
 
-    zeroFill(numDigits: number, numberToShow: number) {
+    private zeroFill(numDigits: number, numberToShow: number) {
         const str = "" + numberToShow;
         if (str.length >= numDigits) {
             return str;

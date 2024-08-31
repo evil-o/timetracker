@@ -5,7 +5,7 @@ import { padNumber } from "./pad-number";
     name: "formatHours",
 })
 export class FormatHoursPipe implements PipeTransform {
-    transform(
+    public transform(
         totalHours: number | undefined | null,
         format = "{h}h {m}m"
     ): string {

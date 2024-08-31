@@ -25,7 +25,7 @@ export class ActivityLogListComponent implements OnInit {
 
     public sortedGroups$!: Observable<IGroupEntry[]>;
 
-    ngOnInit() {
+    public ngOnInit() {
         this.sortedGroups$ = combineLatest([
             this.groups$,
             this.activityTypes$,

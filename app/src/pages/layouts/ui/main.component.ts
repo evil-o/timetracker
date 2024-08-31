@@ -27,7 +27,7 @@ export class MainComponent implements OnInit {
 
     private storageVersion$: Observable<IStorageVersion>;
 
-    constructor(private store: Store<ApplicationState>) {
+    public constructor(private store: Store<ApplicationState>) {
         this.activityTypes$ = this.store.select(fromActivityTypes.getState);
         this.storageVersion$ = this.store.select(fromStorageVersion.getState);
         this.storageUpdateComplete$ = this.storageVersion$.pipe(

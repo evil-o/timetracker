@@ -49,7 +49,7 @@ export class NavbarComponent {
 
     public overallAttendanceSum$: Observable<number | undefined>;
 
-    constructor(private store: Store<ApplicationState>) {
+    public constructor(private store: Store<ApplicationState>) {
         this.attendances$ = this.store.select(
             fromApplication.attendanceEntriesWithOvertime
         );
@@ -63,11 +63,11 @@ export class NavbarComponent {
         this.createActivityEvent.emit(name);
     }
 
-    downloadStorage() {
+    protected downloadStorage() {
         this.store.dispatch(storageVersionActions.exportStorage());
     }
 
-    importStorage() {
+    protected importStorage() {
         const element = this.importFileElement
             .nativeElement as HTMLInputElement;
         const files = element!.files!;
@@ -91,7 +91,7 @@ export class NavbarComponent {
         reader.readAsText(file, "utf-8");
     }
 
-    importStorageOpenFile() {
+    protected importStorageOpenFile() {
         this.importFileElement.nativeElement.click();
     }
 }

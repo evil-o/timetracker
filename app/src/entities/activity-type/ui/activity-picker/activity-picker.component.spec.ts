@@ -25,7 +25,7 @@ class TestHostActivityPickerComponent {
 
     public activities$;
 
-    constructor() {
+    public constructor() {
         this.activities$ = of([
             { id: "test1", name: "test", isNonWorking: false },
             { id: "test2", name: "anothertest", isNonWorking: false },

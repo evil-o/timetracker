@@ -12,7 +12,7 @@ export interface IGroupEntry {
     name: "groupActivityLogEntriesById",
 })
 export class GroupActivityLogEntriesByIdPipe implements PipeTransform {
-    transform(
+    public transform(
         entries$: Observable<IActivityLogEntry[]>
     ): Observable<IGroupEntry[]> {
         return entries$.pipe(

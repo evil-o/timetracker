@@ -30,7 +30,7 @@ export class ActivitiesComponent {
 
     public mergeSource$ = new Subject<IActivityType | undefined>();
 
-    constructor(
+    public constructor(
         public store: Store<ApplicationState>,
         private modalService: BsModalService
     ) {
@@ -83,12 +83,15 @@ export class ActivitiesComponent {
             });
     }
 
-    openMergeDialog(template: TemplateRef<unknown>, source: IActivityType) {
+    protected openMergeDialog(
+        template: TemplateRef<unknown>,
+        source: IActivityType
+    ) {
         this.mergeSource$.next(source);
         this.modalRef = this.modalService.show(template);
     }
 
-    hideModal() {
+    protected hideModal() {
         this.mergeSource$.next(undefined);
         this.modalRef.hide();
     }

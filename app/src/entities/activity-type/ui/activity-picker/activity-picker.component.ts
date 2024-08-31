@@ -38,7 +38,11 @@ export class ActivityPickerComponent {
         this.items = activities ? activities.filter((v) => !v.isArchived) : [];
     }
 
-    selected(selection: { item?: IActivityType }) {
+    public focus() {
+        this.textInput.nativeElement.focus();
+    }
+
+    protected selected(selection: { item?: IActivityType }) {
         if (selection.item) {
             this.name = selection.item.name;
             this.id = selection.item.id;
@@ -47,9 +51,5 @@ export class ActivityPickerComponent {
             this.id = "";
         }
         this.confirm.emit();
-    }
-
-    focus() {
-        this.textInput.nativeElement.focus();
     }
 }

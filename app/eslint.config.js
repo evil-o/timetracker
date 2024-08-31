@@ -37,6 +37,7 @@ module.exports = tseslint.config(
                 },
             ],
             "@typescript-eslint/member-ordering": ["warn"],
+            "@typescript-eslint/explicit-member-accessibility": ["warn"],
             "no-console": ["warn", { allow: ["warn", "error"] }],
             "lines-between-class-members": ["warn"],
         },

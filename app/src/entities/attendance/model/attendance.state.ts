@@ -30,7 +30,7 @@ export class AttendanceEntry implements IAttendanceEntry {
 
     public corrections?: IAttendanceCorrection[];
 
-    constructor(public date: Date) {}
+    public constructor(public date: Date) {}
 
     public static equals(a: IAttendanceEntry, b: IAttendanceEntry): boolean {
         return AttendanceEntry.equalsDate(a, b.date);

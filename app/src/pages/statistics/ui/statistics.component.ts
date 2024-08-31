@@ -45,7 +45,7 @@ export class StatisticsComponent {
 
     public types$: Observable<IActivityTypes>;
 
-    constructor(store: Store<ApplicationState>) {
+    public constructor(store: Store<ApplicationState>) {
         this.allActivities$ = store.select(fromActivityLog.allActivities);
         this.types$ = store.select(fromActivityTypes.getState);
 

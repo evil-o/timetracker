@@ -28,7 +28,7 @@ export class ActivityLogEntryComponent {
 
     private _activityTypes!: IActivityTypes;
 
-    constructor(public store: Store<ApplicationState>) {}
+    public constructor(public store: Store<ApplicationState>) {}
 
     @Input()
     public set group(value: IGroupEntry) {

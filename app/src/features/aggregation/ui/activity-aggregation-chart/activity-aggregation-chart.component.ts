@@ -104,7 +104,7 @@ export class ActivityAggregationChartComponent implements OnInit {
         // this.chartOptions.plugins.legend.labels.display = display;
     }
 
-    ngOnInit() {
+    public ngOnInit() {
         if (!this.allActivities$) {
             return;
         }

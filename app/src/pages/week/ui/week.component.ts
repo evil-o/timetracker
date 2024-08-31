@@ -110,7 +110,7 @@ export class WeekComponent {
 
     private overallAttendanceSum?: number;
 
-    constructor(
+    public constructor(
         private store: Store<ApplicationState>,
         public activatedRoute: ActivatedRoute,
         private modalService: BsModalService
@@ -305,17 +305,17 @@ export class WeekComponent {
             });
     }
 
-    openModal(template: TemplateRef<unknown>) {
+    protected openModal(template: TemplateRef<unknown>) {
         this.modalRef = this.modalService.show(template);
     }
 
-    openLargeModal(template: TemplateRef<unknown>) {
+    protected openLargeModal(template: TemplateRef<unknown>) {
         this.modalRef = this.modalService.show(template, {
             class: "modal-lg",
         });
     }
 
-    refreshPrintPreviewContents(
+    protected refreshPrintPreviewContents(
         days: IDayEntry[],
         types: IActivityTypes,
         corrections: IAttendanceCorrection[]
@@ -460,15 +460,17 @@ export class WeekComponent {
         this.printPreviewContents = root.innerHTML;
     }
 
-    attendanceStartTimeStr(attendance: IAttendanceEntry) {
+    protected attendanceStartTimeStr(attendance: IAttendanceEntry) {
         return this.attendanceTimeStr(attendance.start);
     }
 
-    attendanceEndTimeStr(attendance: IAttendanceEntry) {
+    protected attendanceEndTimeStr(attendance: IAttendanceEntry) {
         return this.attendanceTimeStr(attendance.end);
     }
 
-    attendanceNonWorkingStr(attendance: IAttendanceWithTimes): string {
+    protected attendanceNonWorkingStr(
+        attendance: IAttendanceWithTimes
+    ): string {
         return attendance.nonWorkingHours !== undefined
             ? new FormatHoursPipe().transform(
                   attendance.nonWorkingHours,
@@ -477,7 +479,7 @@ export class WeekComponent {
             : "-";
     }
 
-    savePrint() {
+    protected savePrint() {
         const a = document.getElementById("printDownload");
         if (!a) {
             throw new Error("#printDownload not found!");

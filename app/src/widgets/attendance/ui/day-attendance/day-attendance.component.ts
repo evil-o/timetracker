@@ -53,7 +53,7 @@ export class DayAttendanceComponent implements OnInit {
 
     private entry$!: Observable<IAttendanceEntry | undefined>;
 
-    constructor(public store: Store<ApplicationState>) {}
+    public constructor(public store: Store<ApplicationState>) {}
 
     public ngOnInit() {
         this.timeValues$

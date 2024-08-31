@@ -52,7 +52,7 @@ function correctStateTypes(
 
 @Injectable()
 export class ImportStorageEffects {
-    importFile$ = createEffect(() =>
+    public importFile$ = createEffect(() =>
         this.actions$.pipe(
             ofType(importActions.fromFile),
             map(({ fileContent }) =>
@@ -83,5 +83,5 @@ export class ImportStorageEffects {
         )
     );
 
-    constructor(private actions$: Actions) {}
+    public constructor(private actions$: Actions) {}
 }

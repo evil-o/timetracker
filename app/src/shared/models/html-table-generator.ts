@@ -53,7 +53,7 @@ export class HeaderCell extends Cell {
 }
 
 export class Row {
-    cells: Cell[] = [];
+    public cells: Cell[] = [];
 
     public appendCell() {
         const cell = new Cell();

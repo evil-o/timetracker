@@ -31,7 +31,7 @@ export class StopwatchComponent {
 
     public logClick$ = new Subject<string>();
 
-    constructor(private store: Store<ApplicationState>) {
+    public constructor(private store: Store<ApplicationState>) {
         const state$ = this.store.select(fromStopWatch.getState);
         this.isStarted$ = state$.pipe(map((v) => v.startedAt !== undefined));
         this.isRunning$ = state$.pipe(

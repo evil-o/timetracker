@@ -8,7 +8,10 @@ import { IActivityTypes } from "../models/activity-types.types";
 export class ActivityTypeIdToNamePipe implements PipeTransform {
     public ActivityTypes = ActivityTypes;
 
-    transform(activityId: string, activityTypes: IActivityTypes): string {
+    public transform(
+        activityId: string,
+        activityTypes: IActivityTypes
+    ): string {
         const type = activityTypes.activities.find(
             (activity) => activity.id === activityId
         );
