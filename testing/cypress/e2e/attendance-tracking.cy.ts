@@ -22,18 +22,21 @@ describe("The time tracker", () => {
         today.startTimeInput.should("have.class", "is-valid");
         today.endTimeInput.should("have.class", "is-valid");
         globalPage.expectOvertime("-4", "00");
+        today.expectDayOvertime("-4", "00");
 
         cy.log("change start time");
         today.startTimeInput.type("07:00");
         today.submitAttendance.click();
         today.startTimeInput.should("have.class", "is-valid");
         globalPage.expectOvertime("-3", "00");
+        today.expectDayOvertime("-3", "00");
 
         cy.log("change end time");
         today.endTimeInput.type("13:00");
         today.submitAttendance.click();
         today.endTimeInput.should("have.class", "is-valid");
         globalPage.expectOvertime("-2", "00");
+        today.expectDayOvertime("-2", "00");
     });
 
     it("tracks extra bookings", () => {

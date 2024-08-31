@@ -1,3 +1,4 @@
+export * from "./compare-day";
 export * from "./date-to-time-input-value";
 export * from "./download-data-as-file";
 export * from "./format-hours.pipe";

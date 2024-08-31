@@ -20,6 +20,14 @@ export class TodayPage {
         return cy.byTestId("submit-attendance");
     }
 
+    public get dayOvertime(): Cypress.Chainable<JQuery<HTMLElement>> {
+        return cy.byTestId("day-overtime");
+    }
+
+    public expectDayOvertime(hours: string, minutes: string): void {
+        this.dayOvertime.should("contain.text", `${hours}h ${minutes}m`);
+    }
+
     public extraBookings = {
         get accordion(): Cypress.Chainable<JQuery<HTMLElement>> {
             return cy.byTestId("extra-bookings");

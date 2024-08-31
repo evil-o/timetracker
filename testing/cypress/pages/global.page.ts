@@ -1,6 +1,6 @@
 export class GlobalPage {
     public get overtimeBadge(): Cypress.Chainable<JQuery<HTMLElement>> {
-        return cy.get("app-overtime-badge");
+        return cy.byTestId("total-overtime");
     }
 
     public expectOvertime(hours: string, minutes: string): void {
