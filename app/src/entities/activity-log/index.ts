@@ -6,5 +6,8 @@ export * from "./ui/no-activity-log-entry-present/no-activity-log-entry-present.
 
 export * from "./lib/group-activity-log-entries-by-id.pipe";
 
+export * from "./models/activity-log-entry.faker";
 export * from "./models/activity-log.actions";
+export * from "./models/activity-log.selectors";
+export * from "./models/activity-log.state";
 export * from "./models/activity-log.types";

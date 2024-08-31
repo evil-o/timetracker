@@ -14,7 +14,7 @@ import { AttendanceWidgetsModule } from "../widgets/attendance";
 import { NavigationWidgetsModule } from "../widgets/navigation";
 import { ActivitiesComponent } from "./activities/activities.component";
 import { ConfigurationComponent } from "./configuration/configuration.component";
-import { DayComponent } from "./day/day.component";
+import { DayComponent } from "./day";
 import { MainComponent } from "./layouts/main/main.component";
 import { StatisticsComponent } from "./statistics/statistics.component";
 import { WeekComponent } from "./week/week.component";

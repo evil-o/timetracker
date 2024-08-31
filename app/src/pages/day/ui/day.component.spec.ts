@@ -9,18 +9,20 @@ import {
     MockPipe,
 } from "ng-mocks";
 import { BsDatepickerDirective } from "ngx-bootstrap/datepicker";
-import { GroupActivityLogEntriesByIdPipe } from "../../entities/activity-log";
-import { createActivityLogEntry } from "../../entities/activity-log/models/activity-log-entry.faker";
 import {
     ActivityLog,
     ActivityLogEntry,
-} from "../../entities/activity-log/models/activity-log.state";
-import { ActivityTypes } from "../../entities/activity-type/models/activity-types.state";
-import { ApplicationState } from "../../entities/application";
-import { AttendanceState } from "../../entities/attendance/models/attendance.state";
-import { TimeBadgeComponent } from "../../shared/ui";
-import { QuickDayPickerComponent } from "../../shared/ui/quick-day-picker/quick-day-picker";
-import { ActivityTypeListComponent } from "../../widgets/activity-types-list";
+    createActivityLogEntry,
+    GroupActivityLogEntriesByIdPipe,
+} from "../../../entities/activity-log";
+import { ActivityTypes } from "../../../entities/activity-type";
+import { ApplicationState } from "../../../entities/application";
+import { AttendanceState } from "../../../entities/attendance";
+import {
+    QuickDayPickerComponent,
+    TimeBadgeComponent,
+} from "../../../shared/ui";
+import { ActivityTypeListComponent } from "../../../widgets/activity-types-list";
 import { DayComponent } from "./day.component";
 
 const defaultState = {

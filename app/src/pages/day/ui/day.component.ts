@@ -2,7 +2,7 @@ import { Component, ViewChild } from "@angular/core";
 
 import { Store } from "@ngrx/store";
 
-import { ApplicationState } from "../../entities/application/models/application.model";
+import { ApplicationState } from "../../../entities/application";
 
 import {
     BehaviorSubject,
@@ -13,22 +13,22 @@ import {
     timer,
     withLatestFrom,
 } from "rxjs";
-import { activityLogActions } from "../../entities/activity-log/models/activity-log.actions";
-import { fromActivityLog } from "../../entities/activity-log/models/activity-log.selectors";
 import {
+    activityLogActions,
+    fromActivityLog,
     IActivityLog,
     IActivityLogEntry,
-} from "../../entities/activity-log/models/activity-log.types";
-import { fromActivityTypes } from "../../entities/activity-type/models/activity-types.selectors";
+} from "../../../entities/activity-log";
 import {
+    fromActivityTypes,
     IActivityType,
     IActivityTypes,
-} from "../../entities/activity-type/models/activity-types.types";
-import { fromAttendance } from "../../entities/attendance/models/attendance.selectors";
+} from "../../../entities/activity-type";
+import { fromAttendance } from "../../../entities/attendance";
 import {
     ILogHoursOutput,
     LogInputComponent,
-} from "../../widgets/activity-log/ui/log-input/log-input";
+} from "../../../widgets/activity-log";
 
 @Component({
     selector: "app-day",

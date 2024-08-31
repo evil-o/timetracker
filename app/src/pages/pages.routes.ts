@@ -2,7 +2,7 @@ import { Routes } from "@angular/router";
 
 import { ActivitiesComponent } from "./activities/activities.component";
 import { ConfigurationComponent } from "./configuration/configuration.component";
-import { DayComponent } from "./day/day.component";
+import { DayComponent } from "./day/ui/day.component";
 import { StatisticsComponent } from "./statistics/statistics.component";
 import { WeekComponent } from "./week/week.component";
 import { WelcomeComponent } from "./welcome/welcome.component";
