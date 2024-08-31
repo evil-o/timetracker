@@ -2,13 +2,13 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { provideNoopAnimations } from "@angular/platform-browser/animations";
 import { StoreModule } from "@ngrx/store";
 import { AccordionModule } from "ngx-bootstrap/accordion";
+import { reducers } from "../../../../app/model/reducers";
 import {
     EditableLogEntryDescriptionComponent,
     EditableLogEntryHoursComponent,
 } from "../../../../entities/activity-log";
 import { ActivityTypeIdToNamePipe } from "../../../../entities/activity-type";
 import { metaReducers } from "../../../../entities/application/meta-reducers";
-import { reducers } from "../../../../entities/application/reducers";
 import { FormatHoursPipe } from "../../../../shared/lib";
 import { HourBadgeComponent } from "../../../../shared/ui";
 import { ActivityLogEntryComponent } from "./activity-log-entry.component";
