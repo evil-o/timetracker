@@ -12,9 +12,9 @@ import { BsDatepickerDirective } from "ngx-bootstrap/datepicker";
 import {
     ActivityLog,
     ActivityLogEntry,
-    createActivityLogEntry,
     GroupActivityLogEntriesByIdPipe,
 } from "../../../entities/activity-log";
+import { createActivityLogEntry } from "../../../entities/activity-log/models/activity-log-entry.faker";
 import { ActivityTypes } from "../../../entities/activity-type";
 import { ApplicationState } from "../../../entities/application";
 import { AttendanceState } from "../../../entities/attendance";
