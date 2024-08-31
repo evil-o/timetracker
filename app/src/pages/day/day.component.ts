@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 
 import { Store } from "@ngrx/store";
 
@@ -24,9 +24,11 @@ import {
     IActivityType,
     IActivityTypes,
 } from "../../entities/activity-type/models/activity-types.types";
-import { ActivityPickerComponent } from "../../entities/activity-type/ui";
 import { fromAttendance } from "../../entities/attendance/models/attendance.selectors";
-import { stringToDuration } from "../../shared/lib";
+import {
+    ILogHoursOutput,
+    LogInputComponent,
+} from "../../widgets/activity-log/ui/log-input/log-input";
 
 @Component({
     selector: "app-day",
@@ -47,25 +49,12 @@ export class DayComponent {
     public dateDayStart$: Observable<Date>;
     public dateDayEnd$: Observable<Date>;
 
-    @ViewChild("activityToLog")
-    protected activityToLog!: ActivityPickerComponent;
-
-    @ViewChild("hoursToLog")
-    protected hoursToLog!: ElementRef;
-
-    @ViewChild("descriptionToLog")
-    protected logDescription!: ElementRef;
-
-    @ViewChild("logHoursButton")
-    protected logHoursButton!: ElementRef;
+    @ViewChild(LogInputComponent)
+    private logInput!: LogInputComponent;
 
     protected hoursLeftToLog$ = new Observable<number | undefined>();
 
-    private hourLog$ = new Subject<{
-        hours: number;
-        activityName: string;
-        description?: string;
-    }>();
+    private hourLog$ = new Subject<ILogHoursOutput>();
 
     constructor(private store: Store<ApplicationState>) {
         this.dateDayRange$ = this.date$.pipe(
@@ -109,8 +98,7 @@ export class DayComponent {
                         description: log.description,
                     })
                 );
-                this.hoursToLog.nativeElement.value = "";
-                this.logDescription.nativeElement.value = "";
+                this.logInput.clear();
             });
 
         this.totalHours$ = this.activityLogEntries$.pipe(
@@ -175,19 +163,6 @@ export class DayComponent {
         );
     }
 
-    protected refocusOnEnter() {
-        const activity = this.activityToLog.name.trim();
-        const hours = this.hoursToLog.nativeElement.value.trim();
-        if (activity && hours) {
-            this.logHoursButton.nativeElement.click();
-            this.hoursToLog.nativeElement.focus();
-        } else if (activity) {
-            this.hoursToLog.nativeElement.focus();
-        } else if (hours) {
-            this.activityToLog.focus();
-        }
-    }
-
     protected changeEntryDescription(params: {
         entryId: string;
         newDescription: string;
@@ -200,17 +175,8 @@ export class DayComponent {
         );
     }
 
-    protected logHours(
-        activityName: string,
-        hours: string,
-        description?: string
-    ) {
-        const numHours = stringToDuration(hours);
-        if (!numHours || Number.isNaN(numHours)) {
-            // TODO show error
-            return;
-        }
-        this.hourLog$.next({ hours: numHours, activityName, description });
+    protected logHours(log: ILogHoursOutput) {
+        this.hourLog$.next(log);
     }
 
     protected dayPicked(day: Date): void {

@@ -38,53 +38,11 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-sm-9">
-        <app-activity-picker
-            #activityToLog
-            (confirm)="refocusOnEnter()"
+    <div class="col">
+        <app-log-input
             [activities]="(activities$ | async) ?? undefined"
-            placeholder="What did you do today?"
-        ></app-activity-picker>
-    </div>
-    <div class="col-sm-3">
-        <input
-            id="duration"
-            data-testid="duration"
-            #hoursToLog
-            (keyup.enter)="refocusOnEnter()"
-            type="text"
-            class="form-control me-sm-2"
-            placeholder="for how many hours?"
-        />
-    </div>
-</div>
-<div class="row mt-2">
-    <div class="col-sm-9">
-        <input
-            #descriptionToLog
-            data-testid="activity-description"
-            (keyup.enter)="refocusOnEnter()"
-            type="text"
-            class="form-control me-sm-2"
-            placeholder="Put an (optional) description here"
-        />
-    </div>
-    <div class="col-sm-3">
-        <button
-            type="button"
-            class="btn btn-primary float-end"
-            #logHoursButton
-            data-testid="log-activity-btn"
-            (click)="
-                logHours(
-                    activityToLog.name,
-                    hoursToLog.value,
-                    descriptionToLog.value
-                )
-            "
-        >
-            Log
-        </button>
+            (logHours)="logHours($event)"
+        ></app-log-input>
     </div>
 </div>
 <div class="row mt-5">
