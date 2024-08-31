@@ -1,6 +1,7 @@
-import { ApplicationState } from "../../application";
+import { createFeatureSelector } from "@ngrx/store";
+import { IActivityTypes } from "./activity-types.types";
 
-const getState = (state: ApplicationState) => state.activityTypes;
+const getState = createFeatureSelector<IActivityTypes>("activityTypes");
 
 export const fromActivityTypes = {
     getState,
