@@ -4,7 +4,7 @@ import { IActivityLogEntry } from "../../activity-log/models/activity-log.types"
 import { fromActivityTypes } from "../../activity-type/models/activity-types.selectors";
 import { fromAttendance } from "../../attendance/model/attendance.selectors";
 import { IAttendanceEntry } from "../../attendance/model/attendance.state";
-import { fromConfiguration } from "../../configuration/models/configuration.selectors";
+import { fromConfiguration } from "../../configuration/model/configuration.selectors";
 
 // TODO: move to models?
 export interface IAttendanceWithTimes extends IAttendanceEntry {

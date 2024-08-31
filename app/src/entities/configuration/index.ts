@@ -1,3 +1,3 @@
-export * from "./models/configuration.actions";
-export * from "./models/configuration.selectors";
-export * from "./models/configuration.state";
+export * from "./model/configuration.actions";
+export * from "./model/configuration.selectors";
+export * from "./model/configuration.state";
