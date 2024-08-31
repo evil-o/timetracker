@@ -2,8 +2,8 @@ import { createSelector } from "@ngrx/store";
 import { fromActivityLog } from "../../activity-log/models/activity-log.selectors";
 import { IActivityLogEntry } from "../../activity-log/models/activity-log.types";
 import { fromActivityTypes } from "../../activity-type/models/activity-types.selectors";
-import { fromAttendance } from "../../attendance/models/attendance.selectors";
-import { IAttendanceEntry } from "../../attendance/models/attendance.state";
+import { fromAttendance } from "../../attendance/model/attendance.selectors";
+import { IAttendanceEntry } from "../../attendance/model/attendance.state";
 import { fromConfiguration } from "../../configuration/models/configuration.selectors";
 
 // TODO: move to models?

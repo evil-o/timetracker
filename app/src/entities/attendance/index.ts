@@ -1,3 +1,3 @@
-export * from "./models/attendance.actions";
-export * from "./models/attendance.selectors";
-export * from "./models/attendance.state";
+export * from "./model/attendance.actions";
+export * from "./model/attendance.selectors";
+export * from "./model/attendance.state";
