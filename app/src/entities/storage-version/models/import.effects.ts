@@ -2,13 +2,15 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Action } from "@ngrx/store";
 import { map, switchMap } from "rxjs";
-import { activityLogActions } from "../../activity-log";
-import { activityTypeActions } from "../../activity-type";
-import { ApplicationState } from "../../application";
-import { attendanceActions } from "../../attendance";
+import { activityLogActions, IActivityLogStateSlice } from "../../activity-log";
+import {
+    activityTypeActions,
+    IActivityTypesStateSlice,
+} from "../../activity-type";
+import { attendanceActions, IAttendanceStateSlice } from "../../attendance";
 import { storageVersionActions } from "./storage-version.actions";
 
-function correctAttendance(state: Partial<ApplicationState>) {
+function correctAttendance(state: Partial<IAttendanceStateSlice>) {
     if (state.attendanceState) {
         for (const entry of state.attendanceState.entries) {
             entry.date = new Date(entry.date);
@@ -24,7 +26,7 @@ function correctAttendance(state: Partial<ApplicationState>) {
     }
 }
 
-function correctActivityEntries(state: Partial<ApplicationState>) {
+function correctActivityEntries(state: Partial<IActivityLogStateSlice>) {
     if (state.activityLog) {
         for (const entry of state.activityLog.entries) {
             entry.year = Number.parseInt(`${entry.year}`);
@@ -39,8 +41,10 @@ function correctActivityEntries(state: Partial<ApplicationState>) {
  * N.B.: Modifies the input! Returns it as a curtesy ;)
  */
 function correctStateTypes(
-    state: Partial<ApplicationState>
-): Partial<ApplicationState> {
+    state: IActivityLogStateSlice &
+        IAttendanceStateSlice &
+        IActivityTypesStateSlice
+): IActivityLogStateSlice & IAttendanceStateSlice & IActivityTypesStateSlice {
     correctAttendance(state);
     correctActivityEntries(state);
     return state;

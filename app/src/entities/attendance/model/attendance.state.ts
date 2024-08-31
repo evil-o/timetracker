@@ -19,6 +19,10 @@ export interface IAttendanceState {
     entries: IAttendanceEntry[];
 }
 
+export interface IAttendanceStateSlice {
+    attendanceState: IAttendanceState;
+}
+
 export class AttendanceEntry implements IAttendanceEntry {
     public start?: Date;
     public end?: Date;

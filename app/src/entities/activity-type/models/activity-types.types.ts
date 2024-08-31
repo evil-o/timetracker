@@ -13,3 +13,7 @@ export interface IActivityType {
 export interface IActivityTypes {
     activities: IActivityType[];
 }
+
+export interface IActivityTypesStateSlice {
+    activityTypes: IActivityTypes;
+}
