@@ -1,24 +1,18 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-
+import { createComponentFactory, Spectator } from "@ngneat/spectator";
 import { ActivityColorPickerComponent } from "./activity-color-picker.component";
 
-describe("ActivityColorPickerComponent", () => {
-    let component: ActivityColorPickerComponent;
-    let fixture: ComponentFixture<ActivityColorPickerComponent>;
-
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            declarations: [ActivityColorPickerComponent],
-        }).compileComponents();
+describe(ActivityColorPickerComponent.name, () => {
+    const create = createComponentFactory({
+        component: ActivityColorPickerComponent,
+        shallow: false,
     });
+    let spectator: Spectator<ActivityColorPickerComponent>;
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(ActivityColorPickerComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
+        spectator = create();
     });
 
     it("should create", () => {
-        expect(component).toBeTruthy();
+        expect(spectator.component).toBeTruthy();
     });
 });
