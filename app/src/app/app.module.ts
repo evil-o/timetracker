@@ -19,7 +19,13 @@ import { metaReducers } from "../entities/application/meta-reducers";
 import { reducers } from "../entities/application/reducers";
 import { environment } from "../environments/environment";
 import { ActivityLogFeaturesEffects } from "../features/activity-log";
-import { PagesModule } from "../pages/pages.module";
+import { ActivitiesPageModule } from "../pages/activities";
+import { ConfigurationPageModule } from "../pages/configuration";
+import { DayPageModule } from "../pages/day";
+import { LayoutsModule } from "../pages/layouts";
+import { StatisticsPageModule } from "../pages/statistics";
+import { WeekPageModule } from "../pages/week";
+import { WelcomePageModule } from "../pages/welcome";
 import { ApplicatioEffects } from "./model/application.effects";
 import { routes } from "./routes/app.routes";
 import { AppComponent } from "./ui/app.component";
@@ -27,7 +33,16 @@ import { AppComponent } from "./ui/app.component";
 @NgModule({
     declarations: [AppComponent],
     imports: [
-        PagesModule,
+        // pages
+        ActivitiesPageModule,
+        ConfigurationPageModule,
+        DayPageModule,
+        StatisticsPageModule,
+        WeekPageModule,
+        WelcomePageModule,
+        LayoutsModule,
+
+        // other imports
         BrowserModule,
         CommonModule,
         FormsModule,
