@@ -1,58 +1,56 @@
-import {
-    ComponentFixture,
-    discardPeriodicTasks,
-    fakeAsync,
-    TestBed,
-} from "@angular/core/testing";
+import { discardPeriodicTasks, fakeAsync } from "@angular/core/testing";
 
-import { APP_BASE_HREF } from "@angular/common";
-import { FormsModule } from "@angular/forms";
-import { ActivatedRoute, RouterModule } from "@angular/router";
+import { Store } from "@ngrx/store";
 
-import { Store, StoreModule } from "@ngrx/store";
-
-import { EffectsModule } from "@ngrx/effects";
-import { AccordionModule } from "ngx-bootstrap/accordion";
-import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
+import { ActivatedRoute } from "@angular/router";
+import { createComponentFactory, Spectator } from "@ngneat/spectator";
+import { provideMockStore } from "@ngrx/store/testing";
+import { MockPipes, MockProvider } from "ng-mocks";
 import { BsModalService } from "ngx-bootstrap/modal";
-import { TabsModule } from "ngx-bootstrap/tabs";
-import { TypeaheadModule } from "ngx-bootstrap/typeahead";
 import { of } from "rxjs";
-import { GroupActivityLogEntriesByIdPipe } from "../../entities/activity-log/lib/group-activity-log-entries-by-id.pipe";
+import {
+    ActivityLog,
+    GroupActivityLogEntriesByIdPipe,
+} from "../../entities/activity-log";
 import { activityLogActions } from "../../entities/activity-log/models/activity-log.actions";
-import { EditableLogEntryDescriptionComponent } from "../../entities/activity-log/ui/editable-log-entry-description/editable-log-entry-description.component";
-import { EditableLogEntryHoursComponent } from "../../entities/activity-log/ui/editable-log-entry-hours/editable-log-entry-hours.component";
-import { NoActivityLogEntryPresentComponent } from "../../entities/activity-log/ui/no-activity-log-entry-present/no-activity-log-entry-present.component";
-import { ActivityTypeIdToNamePipe } from "../../entities/activity-type/lib/activity-type-id-to-name.pipe";
-import { ActivityPickerComponent } from "../../entities/activity-type/ui";
-import { entityEffects } from "../../entities/application/effects";
+import { ActivityTypes } from "../../entities/activity-type";
 import { ApplicationState } from "../../entities/application/models/application.model";
+import { AttendanceState } from "../../entities/attendance";
 import { attendanceActions } from "../../entities/attendance/models/attendance.actions";
+import { ConfigurationState } from "../../entities/configuration";
 import { configurationActions } from "../../entities/configuration/models/configuration.actions";
-import { OvertimeBadgeComponent } from "../../features/activity-aggregation/ui/overtime-badge/overtime-badge.component";
-import { AcivityColorFeaturesModule } from "../../features/activity-color/activity-color-features.module";
-import { ActivityLogEntryComponent } from "../../features/activity-log/ui/activity-log-entry/activity-log-entry.component";
 import {
     FormatHoursPipe,
     getFirstDayOfCalendarWeek,
     valueToTime,
 } from "../../shared/lib";
-import { PrecisionPipe } from "../../shared/lib/precision.pipe";
-import { HourBadgeComponent } from "../../shared/ui/hour-badge/hour-badge.component";
-import { TimeBadgeComponent } from "../../shared/ui/time-badge/time-badge.component";
-import { ActivityLogListComponent } from "../../widgets/activity-log/ui/activity-log-list/actvity-log-list.component";
-import { TallyComponent } from "../../widgets/activity-log/ui/tally/tally.component";
-import { DayAttendanceComponent } from "../../widgets/attendance/ui/day-attendance/day-attendance.component";
-import { NavigationWidgetsModule } from "../../widgets/navigation/navigation-widgets.module";
-import { ActivitiesComponent } from "../activities/ui/activities.component";
-import { ConfigurationComponent } from "../configuration";
-import { DayComponent } from "../day/ui/day.component";
-import { WelcomeComponent } from "../welcome/welcome.component";
 import { WeekComponent } from "./week.component";
 
-describe("WeekComponent", () => {
+describe(WeekComponent.name, () => {
+    const create = createComponentFactory({
+        component: WeekComponent,
+        shallow: true,
+        providers: [
+            {
+                provide: ActivatedRoute,
+                useValue: { params: of({ year: 2018, week: 1 }) },
+            },
+            MockProvider(BsModalService),
+            ...provideMockStore<Partial<ApplicationState>>({
+                initialState: {
+                    activityTypes: new ActivityTypes(),
+                    activityLog: new ActivityLog(),
+                    attendanceState: new AttendanceState(),
+                    configuration: new ConfigurationState(),
+                },
+            }),
+        ],
+        declarations: [
+            MockPipes(FormatHoursPipe, GroupActivityLogEntriesByIdPipe),
+        ],
+    });
+    let spectator: Spectator<WeekComponent>;
     let component: WeekComponent;
-    let fixture: ComponentFixture<WeekComponent>;
     let store: Store<ApplicationState>;
 
     function setAttendance(start: string, end: string, date: Date) {
@@ -65,57 +63,9 @@ describe("WeekComponent", () => {
     }
 
     beforeEach(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                ActivitiesComponent,
-                ActivityLogEntryComponent,
-                ActivityLogListComponent,
-                ActivityPickerComponent,
-                ActivityTypeIdToNamePipe,
-                ConfigurationComponent,
-                DayComponent,
-                DayAttendanceComponent,
-                EditableLogEntryDescriptionComponent,
-                EditableLogEntryHoursComponent,
-                FormatHoursPipe,
-                GroupActivityLogEntriesByIdPipe,
-                HourBadgeComponent,
-                NoActivityLogEntryPresentComponent,
-                OvertimeBadgeComponent,
-                PrecisionPipe,
-                TallyComponent,
-                TimeBadgeComponent,
-                WeekComponent,
-                WelcomeComponent,
-            ],
-            imports: [
-                AccordionModule.forRoot(),
-                BsDatepickerModule.forRoot(),
-                FormsModule,
-                RouterModule.forRoot([]),
-                StoreModule.forRoot(),
-                EffectsModule.forRoot(entityEffects),
-                TabsModule.forRoot(),
-                TypeaheadModule.forRoot(),
-                AcivityColorFeaturesModule,
-                NavigationWidgetsModule,
-            ],
-            providers: [
-                { provide: APP_BASE_HREF, useValue: "/" },
-                { provide: BsModalService },
-                {
-                    provide: ActivatedRoute,
-                    useValue: { params: of({ year: 2018, week: 1 }) },
-                },
-            ],
-        }).compileComponents();
-    });
-
-    beforeEach(() => {
-        fixture = TestBed.createComponent(WeekComponent);
-        component = fixture.componentInstance;
-        store = TestBed.get(Store);
-        fixture.detectChanges();
+        spectator = create();
+        component = spectator.component;
+        store = spectator.inject(Store);
     });
 
     it("should create", () => {
@@ -163,7 +113,7 @@ describe("WeekComponent", () => {
         // 3 hours on day 2
         setAttendance("9:30", "12:30", weekDates[1]);
 
-        fixture.detectChanges();
+        spectator.detectChanges();
 
         component.activityLogEntries$.subscribe((entries) => {
             expect(entries.length).toBe(2);
