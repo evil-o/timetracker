@@ -1,49 +1,10 @@
 <div class="row">
     <div class="col">
         <div class="d-flex align-items-center">
-            <button
-                type="button"
-                class="btn btn-light me-2"
-                data-testid="pick-day-button"
-                (click)="datePicker.show()"
-            >
-                <i class="far fa-calendar-alt"></i>
-            </button>
-            <button
-                type="button"
-                class="btn btn-light me-2"
-                data-testid="previous-day"
-                (click)="pickPreviousDay()"
-            >
-                <i class="fa fa-chevron-left"></i>
-            </button>
-            <button
-                type="button"
-                class="btn btn-light me-2"
-                (click)="pickToday()"
-            >
-                <i class="far fa-calendar-minus"></i>
-            </button>
-            <button
-                type="button"
-                class="btn btn-light"
-                data-testid="next-day"
-                (click)="pickNextDay()"
-            >
-                <i class="fa fa-chevron-right"></i>
-            </button>
-            <input
-                #datePickerInput
-                #datePicker="bsDatepicker"
-                style="width: 0%"
-                class="invisible form-control border-0 p-0"
-                placement="bottom"
-                placeholder="Pick a date"
-                bsDatepicker
-                [bsValue]="date$.value"
-                [bsConfig]="{ containerClass: 'theme-default' }"
-                (bsValueChange)="datePicked($event)"
-            />
+            <app-quick-day-picker
+                [date]="date$ | async"
+                (datePicked)="dayPicked($event)"
+            ></app-quick-day-picker>
             <h1 class="d-inline-block ms-3" data-testid="day-heading">
                 {{
                     (date$ | async)?.toLocaleDateString("en-us", {
@@ -77,53 +38,11 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-sm-9">
-        <app-activity-picker
-            #activityToLog
-            (confirm)="refocusOnEnter()"
+    <div class="col">
+        <app-log-input
             [activities]="(activities$ | async) ?? undefined"
-            placeholder="What did you do today?"
-        ></app-activity-picker>
-    </div>
-    <div class="col-sm-3">
-        <input
-            id="duration"
-            data-testid="duration"
-            #hoursToLog
-            (keyup.enter)="refocusOnEnter()"
-            type="text"
-            class="form-control me-sm-2"
-            placeholder="for how many hours?"
-        />
-    </div>
-</div>
-<div class="row mt-2">
-    <div class="col-sm-9">
-        <input
-            #descriptionToLog
-            data-testid="activity-description"
-            (keyup.enter)="refocusOnEnter()"
-            type="text"
-            class="form-control me-sm-2"
-            placeholder="Put an (optional) description here"
-        />
-    </div>
-    <div class="col-sm-3">
-        <button
-            type="button"
-            class="btn btn-primary float-end"
-            #logHoursButton
-            data-testid="log-activity-btn"
-            (click)="
-                logHours(
-                    activityToLog.name,
-                    hoursToLog.value,
-                    descriptionToLog.value
-                )
-            "
-        >
-            Log
-        </button>
+            (logHours)="logHours($event)"
+        ></app-log-input>
     </div>
 </div>
 <div class="row mt-5">
@@ -140,6 +59,7 @@
     <div class="col-sm-2">
         <app-time-badge
             #startTimeDisplay
+            data-testid="start-time-display"
             [date]="startTime$ | async"
         ></app-time-badge>
     </div>

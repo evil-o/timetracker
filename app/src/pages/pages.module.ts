@@ -2,7 +2,6 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule } from "@angular/router";
-import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
 import { TabsModule } from "ngx-bootstrap/tabs";
 import { ActivityLogEntitiesModule } from "../entities/activity-log";
 import { ActivityTypeEntitiesModule } from "../entities/activity-type";
@@ -47,7 +46,6 @@ const pages = [
 
         // external dependencies
         BrowserModule,
-        BsDatepickerModule,
         CommonModule,
         TabsModule,
         RouterModule,

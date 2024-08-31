@@ -6,11 +6,13 @@ import { ActivityTypeEntitiesModule } from "../../entities/activity-type";
 import { ActivityLogFeaturesModule } from "../../features/activity-log";
 import { SharedModule } from "../../shared/shared.module";
 import { ActivityLogListComponent } from "./ui/activity-log-list/actvity-log-list.component";
+import { LogInputComponent } from "./ui/log-input/log-input";
 import { StopwatchComponent } from "./ui/stopwatch/stopwatch.component";
 import { TallyComponent } from "./ui/tally/tally.component";
 
 const declarations = [
     ActivityLogListComponent,
+    LogInputComponent,
     StopwatchComponent,
     TallyComponent,
 ];

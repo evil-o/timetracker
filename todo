@@ -14,6 +14,7 @@ None for now.
 -   commitizen + commit linting
 -   faker for Cypress specs
 -   add spectator + proper component mocking in tests
+-   setup github action cache
 
 ## Refactoring & Maintenance
 
