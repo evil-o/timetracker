@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { AccordionComponent } from "ngx-bootstrap/accordion";
-import { ApplicationState } from "../../../../entities/application/models/application.model";
+import { ApplicationState } from "../../../../entities/application";
 
 import { Store } from "@ngrx/store";
 import {

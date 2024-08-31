@@ -7,13 +7,13 @@ import {
 } from "@angular/core";
 
 import { Store } from "@ngrx/store";
-import { ApplicationState } from "../../../../entities/application/models/application.model";
+import { ApplicationState } from "../../../../entities/application";
 
 import { Observable } from "rxjs";
 import {
     fromApplication,
     IAttendanceWithTimes,
-} from "../../../../entities/application/models/application.selectors";
+} from "../../../../entities/application";
 import { importActions } from "../../../../entities/import";
 import { storageVersionActions } from "../../../../entities/storage-version";
 

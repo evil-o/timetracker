@@ -1,5 +1,5 @@
 import { ActivityTypesEffects } from "../../entities/activity-type";
-import { ImportStorageEffects } from "../../entities/import/model/import.effects";
+import { ImportStorageEffects } from "../../entities/import";
 import { StorageVersionEffects } from "../../entities/storage-version";
 
 // TODO: get rid of this central place for everything

@@ -1,4 +1,4 @@
-import { ApplicationState } from "../../application/models/application.model";
+import { ApplicationState } from "../../application";
 
 const getState = (state: ApplicationState) => state.stopWatch;
 

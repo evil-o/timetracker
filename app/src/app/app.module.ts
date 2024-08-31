@@ -14,7 +14,7 @@ import { BsDropdownModule } from "ngx-bootstrap/dropdown";
 import { ModalModule } from "ngx-bootstrap/modal";
 import { TabsModule } from "ngx-bootstrap/tabs";
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
-import { metaReducers } from "../entities/application/meta-reducers";
+import { metaReducers } from "../entities/application";
 import { environment } from "../environments/environment";
 import { ActivityLogFeaturesEffects } from "../features/log";
 import { ActivitiesPageModule } from "../pages/activities";

@@ -1,5 +1,5 @@
 import { createSelector } from "@ngrx/store";
-import { ApplicationState } from "../../application/models/application.model";
+import { ApplicationState } from "../../application";
 
 const getState = (state: ApplicationState) => state.configuration;
 const weeklyWorkingHours = createSelector(
