@@ -53,7 +53,7 @@ export class HeaderCell extends Cell {
 }
 
 export class Row {
-    cells: Cell[] = [];
+    public cells: Cell[] = [];
 
     public appendCell() {
         const cell = new Cell();
@@ -70,23 +70,6 @@ export class Row {
 
 export class RowCollection {
     public rows: Row[] = [];
-
-    private appendContents(
-        contents: (string | ICell)[],
-        constructor: () => Cell
-    ) {
-        const row = new Row();
-        for (const c of contents) {
-            const cell = constructor();
-            if (typeof c === "string") {
-                cell.contents = c;
-            } else {
-                cell.copyFrom(c as ICell);
-            }
-            row.cells.push(cell);
-        }
-        this.rows.push(row);
-    }
 
     public appendHeadingRow(...contents: (string | ICell)[]) {
         this.appendContents(contents, () => new HeaderCell());
@@ -125,6 +108,23 @@ export class RowCollection {
         const row = new Row();
         this.rows.push(row);
         return row;
+    }
+
+    private appendContents(
+        contents: (string | ICell)[],
+        constructor: () => Cell
+    ) {
+        const row = new Row();
+        for (const c of contents) {
+            const cell = constructor();
+            if (typeof c === "string") {
+                cell.contents = c;
+            } else {
+                cell.copyFrom(c as ICell);
+            }
+            row.cells.push(cell);
+        }
+        this.rows.push(row);
     }
 }
 

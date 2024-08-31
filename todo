@@ -9,8 +9,7 @@ None for now.
 ## Setup
 
 -   setup eslint + some basic code formatting rules
-    -   member ordering rule (public before private etc.)
-    -   No console.log
+    -   property decorators on a separate line
 -   commitizen + commit linting
 -   faker for Cypress specs
 -   setup github action cache

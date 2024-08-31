@@ -68,18 +68,22 @@ interface IWeekAttendanceStats {
 })
 export class WeekComponent {
     public activityLogEntries$: Observable<IActivityLogEntry[]>;
+
     public activityTypes$: Observable<IActivityTypes>;
 
     // log entries, filtered to only contain the ones that are in this week
     public filteredLogEntries$: Observable<IActivityLogEntry[]>;
 
     public nextWeek$: Observable<IWeekDate>;
+
     public nextWeek?: IWeekDate;
 
     public week$: Observable<IWeekDate>;
+
     public week?: IWeekDate;
 
     public previousWeek$: Observable<IWeekDate>;
+
     public previousWeek?: IWeekDate;
 
     public days$: Observable<IDayEntry[]>;
@@ -91,19 +95,22 @@ export class WeekComponent {
     public printPreviewContents?: string;
 
     public attendances$: Observable<IAttendanceWithTimes[]>;
+
     public attendanceCorrections$: Observable<IAttendanceCorrection[]>;
 
     public attendanceStats$: Observable<IWeekAttendanceStats>;
 
-    private attendances: IAttendanceWithTimes[] = [];
-    private attendanceStats!: IWeekAttendanceStats;
-
     public selectedTab: "tally" | "daily" | "attendance" = "tally";
 
     public overallAttendanceSum$: Observable<number | undefined>;
+
+    private attendances: IAttendanceWithTimes[] = [];
+
+    private attendanceStats!: IWeekAttendanceStats;
+
     private overallAttendanceSum?: number;
 
-    constructor(
+    public constructor(
         private store: Store<ApplicationState>,
         public activatedRoute: ActivatedRoute,
         private modalService: BsModalService
@@ -298,17 +305,17 @@ export class WeekComponent {
             });
     }
 
-    openModal(template: TemplateRef<unknown>) {
+    protected openModal(template: TemplateRef<unknown>) {
         this.modalRef = this.modalService.show(template);
     }
 
-    openLargeModal(template: TemplateRef<unknown>) {
+    protected openLargeModal(template: TemplateRef<unknown>) {
         this.modalRef = this.modalService.show(template, {
             class: "modal-lg",
         });
     }
 
-    refreshPrintPreviewContents(
+    protected refreshPrintPreviewContents(
         days: IDayEntry[],
         types: IActivityTypes,
         corrections: IAttendanceCorrection[]
@@ -453,22 +460,17 @@ export class WeekComponent {
         this.printPreviewContents = root.innerHTML;
     }
 
-    private attendanceTimeStr(hours?: Date) {
-        const padNumber = new PadNumberPipe();
-        return hours
-            ? hours.getHours() + ":" + padNumber.transform(hours.getMinutes())
-            : "-";
-    }
-
-    attendanceStartTimeStr(attendance: IAttendanceEntry) {
+    protected attendanceStartTimeStr(attendance: IAttendanceEntry) {
         return this.attendanceTimeStr(attendance.start);
     }
 
-    attendanceEndTimeStr(attendance: IAttendanceEntry) {
+    protected attendanceEndTimeStr(attendance: IAttendanceEntry) {
         return this.attendanceTimeStr(attendance.end);
     }
 
-    attendanceNonWorkingStr(attendance: IAttendanceWithTimes): string {
+    protected attendanceNonWorkingStr(
+        attendance: IAttendanceWithTimes
+    ): string {
         return attendance.nonWorkingHours !== undefined
             ? new FormatHoursPipe().transform(
                   attendance.nonWorkingHours,
@@ -477,7 +479,7 @@ export class WeekComponent {
             : "-";
     }
 
-    savePrint() {
+    protected savePrint() {
         const a = document.getElementById("printDownload");
         if (!a) {
             throw new Error("#printDownload not found!");
@@ -502,5 +504,12 @@ export class WeekComponent {
         a.click();
 
         this.modalRef.hide();
+    }
+
+    private attendanceTimeStr(hours?: Date) {
+        const padNumber = new PadNumberPipe();
+        return hours
+            ? hours.getHours() + ":" + padNumber.transform(hours.getMinutes())
+            : "-";
     }
 }

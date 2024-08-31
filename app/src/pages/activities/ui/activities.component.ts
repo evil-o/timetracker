@@ -16,7 +16,9 @@ import {
 })
 export class ActivitiesComponent {
     public modalRef!: BsModalRef;
+
     public activities$: Observable<IActivityType[]>;
+
     public activitiesWithoutSource!: IActivityType[];
 
     public confirmMerge$ = new Subject<{
@@ -25,9 +27,10 @@ export class ActivitiesComponent {
     }>();
 
     public mergeSource!: IActivityType;
+
     public mergeSource$ = new Subject<IActivityType | undefined>();
 
-    constructor(
+    public constructor(
         public store: Store<ApplicationState>,
         private modalService: BsModalService
     ) {
@@ -55,14 +58,14 @@ export class ActivitiesComponent {
                 const srcs = activities.filter((v) => v.id === merge.source.id);
                 const dsts = activities.filter((v) => v.id === merge.target.id);
                 if (srcs.length !== 1) {
-                    console.log(
+                    console.error(
                         "ERROR: wrong number of matching source activities found: " +
                             JSON.stringify(srcs, undefined, 2)
                     );
                     return;
                 }
                 if (dsts.length !== 1) {
-                    console.log(
+                    console.error(
                         "ERROR: wrong number of matching target activities found. " +
                             JSON.stringify(dsts, undefined, 2)
                     );
@@ -70,7 +73,6 @@ export class ActivitiesComponent {
                 }
                 const src = srcs[0];
                 const dst = dsts[0];
-                console.log("merging", src, " into ", dst);
                 this.store.dispatch(
                     activityLogActions.mergeActivities({
                         sourceActvityId: src.id,
@@ -81,12 +83,15 @@ export class ActivitiesComponent {
             });
     }
 
-    openMergeDialog(template: TemplateRef<unknown>, source: IActivityType) {
+    protected openMergeDialog(
+        template: TemplateRef<unknown>,
+        source: IActivityType
+    ) {
         this.mergeSource$.next(source);
         this.modalRef = this.modalService.show(template);
     }
 
-    hideModal() {
+    protected hideModal() {
         this.mergeSource$.next(undefined);
         this.modalRef.hide();
     }

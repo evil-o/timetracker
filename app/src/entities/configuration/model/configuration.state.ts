@@ -9,5 +9,6 @@ export interface IConfigurationStateSlice {
 
 export class ConfigurationState implements IConfigurationState {
     public workingHoursPerWeek = 40;
+
     public workingDaysPerWeek = 5;
 }

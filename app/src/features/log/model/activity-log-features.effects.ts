@@ -6,7 +6,7 @@ import { storageVersionActions } from "../../../entities/storage-version";
 
 @Injectable()
 export class ActivityLogFeaturesEffects {
-    incrementalMigrationComplete$ = createEffect(() =>
+    public incrementalMigrationComplete$ = createEffect(() =>
         this.actions$.pipe(
             ofType(storageVersionActions.incrementalMigration),
             map(() =>
@@ -17,5 +17,5 @@ export class ActivityLogFeaturesEffects {
         )
     );
 
-    constructor(private actions$: Actions) {}
+    public constructor(private actions$: Actions) {}
 }

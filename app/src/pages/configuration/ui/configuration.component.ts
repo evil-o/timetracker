@@ -21,9 +21,9 @@ export class ConfigurationComponent implements OnInit {
 
     public inputWorkingDaysPerWeek?: number;
 
-    constructor(public store: Store<ApplicationState>) {}
+    public constructor(public store: Store<ApplicationState>) {}
 
-    ngOnInit() {
+    public ngOnInit() {
         this.workingHoursPerWeek$ = this.store.select(
             fromConfiguration.weeklyWorkingHours
         );

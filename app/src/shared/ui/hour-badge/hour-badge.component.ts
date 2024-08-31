@@ -5,5 +5,5 @@ import { Component, Input } from "@angular/core";
     templateUrl: "./hour-badge.component.html",
 })
 export class HourBadgeComponent {
-    @Input() hours: number | undefined | null;
+    @Input() public hours: number | undefined | null;
 }

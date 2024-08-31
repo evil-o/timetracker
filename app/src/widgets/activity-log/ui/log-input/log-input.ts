@@ -16,10 +16,6 @@ export interface ILogHoursOutput {
     templateUrl: "./log-input.html",
 })
 export class LogInputComponent {
-    public activities = input.required<IActivityType[] | undefined>();
-
-    public logHours = output<ILogHoursOutput>();
-
     @ViewChild("activityToLog")
     private activityToLog!: ActivityPickerComponent;
 
@@ -31,6 +27,10 @@ export class LogInputComponent {
 
     @ViewChild("logHoursButton")
     private logHoursButton!: ElementRef;
+
+    public activities = input.required<IActivityType[] | undefined>();
+
+    public logHours = output<ILogHoursOutput>();
 
     public clear(): void {
         this.hoursToLog.nativeElement.value = "";

@@ -122,7 +122,7 @@ export const attendanceReducer = createReducer(
                     v.date.getDate() === day
             );
             if (!entry) {
-                console.log(
+                console.warn(
                     `Could not update correction ${id}: no entry found for provided date.`
                 );
                 return;
@@ -133,7 +133,9 @@ export const attendanceReducer = createReducer(
             ];
             const correction = entry.corrections.find((c) => c.id === id);
             if (!correction) {
-                console.log(`Could not update correction ${id}: id not found.`);
+                console.warn(
+                    `Could not update correction ${id}: id not found.`
+                );
                 return;
             }
 
@@ -152,7 +154,7 @@ export const attendanceReducer = createReducer(
                     v.date.getDate() === day
             );
             if (!entry) {
-                console.log(
+                console.warn(
                     `Could not delete correction ${id}: no entry found for provided date.`
                 );
                 return;
@@ -163,7 +165,9 @@ export const attendanceReducer = createReducer(
                 (c) => c.id === id
             );
             if (correctionIndex < 0) {
-                console.log(`Could not delete correction ${id}: id not found.`);
+                console.warn(
+                    `Could not delete correction ${id}: id not found.`
+                );
                 return;
             }
 
@@ -189,10 +193,6 @@ export const attendanceReducer = createReducer(
                 matchingEntry.corrections = entry.corrections;
             } else {
                 // add a new entry
-                console.info(
-                    "Adding attendance entry for",
-                    entry.date.toLocaleDateString()
-                );
                 draft.entries.push({ ...entry });
             }
         }

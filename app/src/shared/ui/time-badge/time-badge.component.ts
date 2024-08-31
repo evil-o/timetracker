@@ -5,7 +5,9 @@ import { Component, Input } from "@angular/core";
     templateUrl: "./time-badge.component.html",
 })
 export class TimeBadgeComponent {
-    @Input() set date(value: Date | undefined | null) {
+    public dateDisplayString = "";
+
+    @Input() public set date(value: Date | undefined | null) {
         if (value) {
             this.dateDisplayString = `${value.getHours()}:${this.zeroFill(2, value.getMinutes())}`;
         } else {
@@ -13,9 +15,7 @@ export class TimeBadgeComponent {
         }
     }
 
-    public dateDisplayString = "";
-
-    zeroFill(numDigits: number, numberToShow: number) {
+    private zeroFill(numDigits: number, numberToShow: number) {
         const str = "" + numberToShow;
         if (str.length >= numDigits) {
             return str;

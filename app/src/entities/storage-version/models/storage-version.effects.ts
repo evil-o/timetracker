@@ -16,7 +16,7 @@ type StoreModel = IStorageVersionStateSlice & Record<string, unknown>;
 
 @Injectable()
 export class StorageVersionEffects {
-    storageVersionCheck$ = createEffect(() =>
+    public storageVersionCheck$ = createEffect(() =>
         this.actions$.pipe(
             ofType(
                 storageVersionActions.checkStorageVersion,
@@ -37,7 +37,7 @@ export class StorageVersionEffects {
         )
     );
 
-    incrementalMigrationComplete$ = createEffect(() =>
+    public incrementalMigrationComplete$ = createEffect(() =>
         this.actions$.pipe(
             ofType(storageVersionActions.incrementalMigration),
             map(() =>
@@ -48,14 +48,14 @@ export class StorageVersionEffects {
         )
     );
 
-    preMigrationBackupComplete$ = createEffect(() =>
+    public preMigrationBackupComplete$ = createEffect(() =>
         this.actions$.pipe(
             ofType(storageVersionActions.preMigrationBackup),
             map(() => storageVersionActions.prepareIncrementalMigration())
         )
     );
 
-    incrementalMigrationPrepared$ = createEffect(() =>
+    public incrementalMigrationPrepared$ = createEffect(() =>
         this.actions$.pipe(
             ofType(storageVersionActions.prepareIncrementalMigration),
             withLatestFrom(this.store$),
@@ -67,7 +67,7 @@ export class StorageVersionEffects {
         )
     );
 
-    checkMigrationComplete$ = createEffect(() =>
+    public checkMigrationComplete$ = createEffect(() =>
         this.actions$.pipe(
             ofType(storageVersionActions.incrementalMigrationSuccess),
             withLatestFrom(this.store$),
@@ -83,7 +83,7 @@ export class StorageVersionEffects {
         )
     );
 
-    exportStorage$ = createEffect(() =>
+    public exportStorage$ = createEffect(() =>
         this.actions$.pipe(
             ofType(storageVersionActions.exportStorage),
             withLatestFrom(this.store$),
@@ -105,7 +105,7 @@ export class StorageVersionEffects {
         )
     );
 
-    constructor(
+    public constructor(
         private actions$: Actions,
         private store$: Store<StoreModel>
     ) {}

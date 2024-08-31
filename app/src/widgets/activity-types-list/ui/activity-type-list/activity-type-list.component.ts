@@ -13,34 +13,36 @@ import { ApplicationState } from "../../../../entities/application";
 export class ActivityTypeListComponent {
     @Output() public mergeRequest = new EventEmitter<IActivityType>();
 
-    _types?: IActivityType[];
-    @Input() set types(value: IActivityType[] | undefined | null) {
+    public sortedTypes?: IActivityType[];
+
+    public _types?: IActivityType[];
+
+    public constructor(private store: Store<ApplicationState>) {}
+
+    public get types(): IActivityType[] | undefined {
+        return this._types;
+    }
+
+    @Input() public set types(value: IActivityType[] | undefined | null) {
         this._types = value ? [...value] : undefined;
         this.sortedTypes = this._types?.sort((a, b) =>
             a.name.localeCompare(b.name)
         );
     }
-    get types(): IActivityType[] | undefined {
-        return this._types;
-    }
 
-    sortedTypes?: IActivityType[];
-
-    constructor(private store: Store<ApplicationState>) {}
-
-    setArchived(id: string, value: boolean) {
+    public setArchived(id: string, value: boolean) {
         this.store.dispatch(
             activityTypeActions.setArchived({ id, archived: value })
         );
     }
 
-    setNonWorking(id: string, value: boolean) {
+    public setNonWorking(id: string, value: boolean) {
         this.store.dispatch(
             activityTypeActions.setNonWorking({ id, isNonWorking: value })
         );
     }
 
-    setColor(activityId: string, colorId?: string) {
+    public setColor(activityId: string, colorId?: string) {
         this.store.dispatch(
             activityTypeActions.setColorId({
                 activityTypeId: activityId,

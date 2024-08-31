@@ -16,11 +16,6 @@ import { IActivityType } from "../../models/activity-types.types";
 })
 export class ActivityPickerComponent {
     @Input()
-    public set activities(activities: IActivityType[] | undefined) {
-        this.items = activities ? activities.filter((v) => !v.isArchived) : [];
-    }
-
-    @Input()
     public placeholder = "What are you doing?";
 
     @Output()
@@ -38,7 +33,16 @@ export class ActivityPickerComponent {
 
     public id = "";
 
-    selected(selection: { item?: IActivityType }) {
+    @Input()
+    public set activities(activities: IActivityType[] | undefined) {
+        this.items = activities ? activities.filter((v) => !v.isArchived) : [];
+    }
+
+    public focus() {
+        this.textInput.nativeElement.focus();
+    }
+
+    protected selected(selection: { item?: IActivityType }) {
         if (selection.item) {
             this.name = selection.item.name;
             this.id = selection.item.id;
@@ -47,9 +51,5 @@ export class ActivityPickerComponent {
             this.id = "";
         }
         this.confirm.emit();
-    }
-
-    focus() {
-        this.textInput.nativeElement.focus();
     }
 }

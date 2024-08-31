@@ -6,7 +6,7 @@ import { IActivityTypes } from "../../../entities/activity-type";
     name: "logEntryTally",
 })
 export class LogEntryTallyPipe implements PipeTransform {
-    transform(
+    public transform(
         entries: IActivityLogEntry[],
         types: IActivityTypes
     ): IGroupEntry[] {

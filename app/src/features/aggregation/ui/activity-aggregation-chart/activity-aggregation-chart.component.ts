@@ -69,32 +69,6 @@ class Aggregation {
     standalone: true,
 })
 export class ActivityAggregationChartComponent implements OnInit {
-    protected chartData?: ChartData<"doughnut">;
-    protected doughnutChartType = "doughnut" as const;
-
-    public chartOptions: ChartOptions<"doughnut"> = {
-        plugins: {
-            legend: {
-                display: false,
-            },
-        },
-        // legend: {
-        //   display: false,
-        //   labels: {
-        //     display: false
-        //   }
-        // }
-    };
-
-    @Input()
-    public set legend(display: boolean) {
-        if (!this.chartOptions.plugins?.legend) {
-            return;
-        }
-        this.chartOptions.plugins.legend.display = display;
-        // this.chartOptions.plugins.legend.labels.display = display;
-    }
-
     @Input()
     public startDate$?: Observable<Date>;
 
@@ -107,9 +81,30 @@ export class ActivityAggregationChartComponent implements OnInit {
     @Input()
     public types$?: Observable<IActivityTypes>;
 
+    public chartOptions: ChartOptions<"doughnut"> = {
+        plugins: {
+            legend: {
+                display: false,
+            },
+        },
+    };
+
     public filteredChartColors: IColorSpec[] = [];
 
-    ngOnInit() {
+    protected chartData?: ChartData<"doughnut">;
+
+    protected doughnutChartType = "doughnut" as const;
+
+    @Input()
+    public set legend(display: boolean) {
+        if (!this.chartOptions.plugins?.legend) {
+            return;
+        }
+        this.chartOptions.plugins.legend.display = display;
+        // this.chartOptions.plugins.legend.labels.display = display;
+    }
+
+    public ngOnInit() {
         if (!this.allActivities$) {
             return;
         }

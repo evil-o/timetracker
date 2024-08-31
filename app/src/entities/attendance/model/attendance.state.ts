@@ -25,10 +25,12 @@ export interface IAttendanceStateSlice {
 
 export class AttendanceEntry implements IAttendanceEntry {
     public start?: Date;
+
     public end?: Date;
+
     public corrections?: IAttendanceCorrection[];
 
-    constructor(public date: Date) {}
+    public constructor(public date: Date) {}
 
     public static equals(a: IAttendanceEntry, b: IAttendanceEntry): boolean {
         return AttendanceEntry.equalsDate(a, b.date);

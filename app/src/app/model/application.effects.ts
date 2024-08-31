@@ -8,7 +8,7 @@ import { ApplicationState } from "../../entities/application";
 
 @Injectable()
 export class ApplicatioEffects {
-    newActivityTypeLogged$ = createEffect(() =>
+    public newActivityTypeLogged$ = createEffect(() =>
         this.actions$.pipe(
             ofType(activityLogActions.fetchOrCreateIdAndLogTime),
             withLatestFrom(this.store$),
@@ -36,7 +36,7 @@ export class ApplicatioEffects {
         )
     );
 
-    createAndLogTime$ = createEffect(() =>
+    public createAndLogTime$ = createEffect(() =>
         this.actions$.pipe(
             ofType(activityTypeActions.createAndLogTime),
             map((action) =>
@@ -50,7 +50,7 @@ export class ApplicatioEffects {
         )
     );
 
-    constructor(
+    public constructor(
         private actions$: Actions,
         private store$: Store<ApplicationState>
     ) {}

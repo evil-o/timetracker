@@ -43,7 +43,7 @@ export const storageVersionReducer = createReducer(
                 }
 
                 default:
-                    console.log(
+                    console.warn(
                         'Unknown or unhandled version ("' +
                             currentVersion +
                             '") in incremental update of activity log.'

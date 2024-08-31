@@ -34,14 +34,12 @@ export class DayAttendanceComponent implements OnInit {
     protected timeInputsChaged$ = new Subject<void>();
 
     protected start$!: Observable<string>;
+
     protected end$!: Observable<string>;
 
     protected startValid$!: Observable<boolean>;
+
     protected endValid$!: Observable<boolean>;
-
-    private entries$!: Observable<IAttendanceEntry[]>;
-
-    private entry$!: Observable<IAttendanceEntry | undefined>;
 
     protected corrections$!: Observable<IAttendanceCorrection[]>;
 
@@ -51,7 +49,11 @@ export class DayAttendanceComponent implements OnInit {
 
     protected correctionsToDelete$ = new Subject<IAttendanceCorrection>();
 
-    constructor(public store: Store<ApplicationState>) {}
+    private entries$!: Observable<IAttendanceEntry[]>;
+
+    private entry$!: Observable<IAttendanceEntry | undefined>;
+
+    public constructor(public store: Store<ApplicationState>) {}
 
     public ngOnInit() {
         this.timeValues$

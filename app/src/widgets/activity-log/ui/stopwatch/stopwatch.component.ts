@@ -20,7 +20,9 @@ export class StopwatchComponent {
     public static readonly UPDATE_INTERVAL_MS = 1000;
 
     public isRunning$: Observable<boolean>;
+
     public isStarted$: Observable<boolean>;
+
     public isPaused$: Observable<boolean>;
 
     public activities$: Observable<IActivityType[]>;
@@ -29,7 +31,7 @@ export class StopwatchComponent {
 
     public logClick$ = new Subject<string>();
 
-    constructor(private store: Store<ApplicationState>) {
+    public constructor(private store: Store<ApplicationState>) {
         const state$ = this.store.select(fromStopWatch.getState);
         this.isStarted$ = state$.pipe(map((v) => v.startedAt !== undefined));
         this.isRunning$ = state$.pipe(

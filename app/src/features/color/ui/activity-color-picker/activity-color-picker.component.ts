@@ -12,6 +12,10 @@ import {
     styleUrls: ["./activity-color-picker.component.css"],
 })
 export class ActivityColorPickerComponent {
+    @Output() public colorPicked = new EventEmitter<{ colorId?: string }>();
+
+    public currentColor?: IActivityTypeColor;
+
     public colors: (IActivityTypeColor | IUndefinedActivityTypeColor)[] = [
         { id: undefined, styleClass: undefined },
         ...activityColors,
@@ -24,8 +28,4 @@ export class ActivityColorPickerComponent {
                   | undefined)
             : undefined;
     }
-
-    public currentColor?: IActivityTypeColor;
-
-    @Output() public colorPicked = new EventEmitter<{ colorId?: string }>();
 }

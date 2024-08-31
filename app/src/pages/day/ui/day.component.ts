@@ -64,7 +64,7 @@ export class DayComponent {
 
     private hourLog$ = new Subject<ILogHoursOutput>();
 
-    constructor(private store: Store<ApplicationState>) {
+    public constructor(private store: Store<ApplicationState>) {
         this.dateDayRange$ = this.date$.pipe(
             map((date) => {
                 const dayStart = new Date(date);
