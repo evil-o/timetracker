@@ -18,7 +18,7 @@ import { DayComponent } from "./day";
 import { MainComponent } from "./layouts/main/main.component";
 import { StatisticsComponent } from "./statistics";
 import { WeekComponent } from "./week";
-import { WelcomeComponent } from "./welcome/welcome.component";
+import { WelcomeComponent } from "./welcome";
 
 const pages = [
     ActivitiesComponent,

@@ -5,7 +5,7 @@ import { ConfigurationComponent } from "../../pages/configuration";
 import { DayComponent } from "../../pages/day";
 import { StatisticsComponent } from "../../pages/statistics";
 import { WeekComponent } from "../../pages/week";
-import { WelcomeComponent } from "../../pages/welcome/welcome.component";
+import { WelcomeComponent } from "../../pages/welcome";
 
 export const routes: Routes = [
     {

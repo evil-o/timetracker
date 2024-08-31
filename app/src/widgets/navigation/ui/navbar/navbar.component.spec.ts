@@ -20,14 +20,14 @@ import {
     NoActivityLogEntryPresentComponent,
 } from "../../../../entities/activity-log";
 import { ActivityPickerComponent } from "../../../../entities/activity-type";
-import { ApplicationState } from "../../../../entities/application/models/application.model";
-import { attendanceActions } from "../../../../entities/attendance/models/attendance.actions";
-import { configurationActions } from "../../../../entities/configuration/models/configuration.actions";
+import { ApplicationState } from "../../../../entities/application";
+import { attendanceActions } from "../../../../entities/attendance";
+import { configurationActions } from "../../../../entities/configuration";
 import { OvertimeBadgeComponent } from "../../../../features/activity-aggregation";
 import { AcivityColorFeaturesModule } from "../../../../features/activity-color";
 import { ActivityLogEntryComponent } from "../../../../features/activity-log";
 import { WeekComponent } from "../../../../pages/week";
-import { WelcomeComponent } from "../../../../pages/welcome/welcome.component";
+import { WelcomeComponent } from "../../../../pages/welcome";
 import {
     FormatHoursPipe,
     PadNumberPipe,
