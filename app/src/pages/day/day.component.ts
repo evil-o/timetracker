@@ -27,7 +27,6 @@ import {
 import { ActivityPickerComponent } from "../../entities/activity-type/ui";
 import { fromAttendance } from "../../entities/attendance/models/attendance.selectors";
 import { stringToDuration } from "../../shared/lib";
-import { TimeBadgeComponent } from "../../shared/ui/time-badge/time-badge.component";
 
 @Component({
     selector: "app-day",
@@ -48,28 +47,25 @@ export class DayComponent {
     public dateDayStart$: Observable<Date>;
     public dateDayEnd$: Observable<Date>;
 
-    @ViewChild("startTimeDisplay")
-    public startTimeDisplay!: TimeBadgeComponent;
-
     @ViewChild("activityToLog")
-    public activityToLog!: ActivityPickerComponent;
+    protected activityToLog!: ActivityPickerComponent;
 
     @ViewChild("hoursToLog")
-    public hoursToLog!: ElementRef;
+    protected hoursToLog!: ElementRef;
 
     @ViewChild("descriptionToLog")
-    public logDescription!: ElementRef;
+    protected logDescription!: ElementRef;
 
     @ViewChild("logHoursButton")
-    public logHoursButton!: ElementRef;
+    protected logHoursButton!: ElementRef;
 
-    public hourLog$ = new Subject<{
+    protected hoursLeftToLog$ = new Observable<number | undefined>();
+
+    private hourLog$ = new Subject<{
         hours: number;
         activityName: string;
         description?: string;
     }>();
-
-    public hoursLeftToLog$ = new Observable<number | undefined>();
 
     constructor(private store: Store<ApplicationState>) {
         this.dateDayRange$ = this.date$.pipe(
@@ -179,7 +175,7 @@ export class DayComponent {
         );
     }
 
-    refocusOnEnter() {
+    protected refocusOnEnter() {
         const activity = this.activityToLog.name.trim();
         const hours = this.hoursToLog.nativeElement.value.trim();
         if (activity && hours) {
@@ -192,7 +188,7 @@ export class DayComponent {
         }
     }
 
-    changeEntryDescription(params: {
+    protected changeEntryDescription(params: {
         entryId: string;
         newDescription: string;
     }) {
@@ -204,7 +200,11 @@ export class DayComponent {
         );
     }
 
-    logHours(activityName: string, hours: string, description?: string) {
+    protected logHours(
+        activityName: string,
+        hours: string,
+        description?: string
+    ) {
         const numHours = stringToDuration(hours);
         if (!numHours || Number.isNaN(numHours)) {
             // TODO show error
@@ -213,30 +213,7 @@ export class DayComponent {
         this.hourLog$.next({ hours: numHours, activityName, description });
     }
 
-    pickToday() {
-        this.date$.next(new Date());
-    }
-
-    pickNextDay() {
-        this.skipDays(+1);
-    }
-
-    pickPreviousDay() {
-        this.skipDays(-1);
-    }
-
-    skipDays(days: number) {
-        const current = this.date$.value;
-        this.date$.next(
-            new Date(
-                current.getFullYear(),
-                current.getMonth(),
-                current.getDate() + days
-            )
-        );
-    }
-
-    protected datePicked(value: Date): void {
-        this.date$.next(value);
+    protected dayPicked(day: Date): void {
+        this.date$.next(day);
     }
 }
