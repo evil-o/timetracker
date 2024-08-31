@@ -35,24 +35,32 @@ import {
     templateUrl: "./day.component.html",
 })
 export class DayComponent {
-    public activityLog$: Observable<IActivityLog>;
-    public activityTypes$: Observable<IActivityTypes>;
-    public activities$: Observable<IActivityType[]>;
-    public activityLogEntries$: Observable<IActivityLogEntry[]>;
-
-    public totalHours$: Observable<number>;
-    public startTime$: Observable<Date>;
-    public singInTime$: Observable<Date | undefined>;
-
-    public date$ = new BehaviorSubject<Date>(new Date());
-    public dateDayRange$: Observable<[Date, Date]>;
-    public dateDayStart$: Observable<Date>;
-    public dateDayEnd$: Observable<Date>;
-
     @ViewChild(LogInputComponent)
     private logInput!: LogInputComponent;
 
+    public startTime$: Observable<Date>;
+
+    protected activityLog$: Observable<IActivityLog>;
+
+    protected activityTypes$: Observable<IActivityTypes>;
+
+    protected activities$: Observable<IActivityType[]>;
+
+    protected activityLogEntries$: Observable<IActivityLogEntry[]>;
+
+    protected totalHours$: Observable<number>;
+
+    protected date$ = new BehaviorSubject<Date>(new Date());
+
+    protected dateDayStart$: Observable<Date>;
+
+    protected dateDayEnd$: Observable<Date>;
+
     protected hoursLeftToLog$ = new Observable<number | undefined>();
+
+    private singInTime$: Observable<Date | undefined>;
+
+    private dateDayRange$: Observable<[Date, Date]>;
 
     private hourLog$ = new Subject<ILogHoursOutput>();
 
@@ -134,6 +142,7 @@ export class DayComponent {
                 const minutes = (hoursFraction - hours) * 60.0;
                 start.setHours(start.getHours() - hours);
                 start.setMinutes(start.getMinutes() - minutes);
+                console.log("Setting start time to", start);
                 return start;
             })
         );

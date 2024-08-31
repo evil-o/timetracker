@@ -2,7 +2,12 @@ import { discardPeriodicTasks, fakeAsync, tick } from "@angular/core/testing";
 import { byTestId, createComponentFactory, Spectator } from "@ngneat/spectator";
 import { Store } from "@ngrx/store";
 import { MockStore, provideMockStore } from "@ngrx/store/testing";
-import { MockComponent, MockDirective, MockPipe } from "ng-mocks";
+import {
+    MockComponents,
+    MockDirective,
+    MockedComponent,
+    MockPipe,
+} from "ng-mocks";
 import { BsDatepickerDirective } from "ngx-bootstrap/datepicker";
 import { GroupActivityLogEntriesByIdPipe } from "../../entities/activity-log";
 import { createActivityLogEntry } from "../../entities/activity-log/models/activity-log-entry.faker";
@@ -13,6 +18,8 @@ import {
 import { ActivityTypes } from "../../entities/activity-type/models/activity-types.state";
 import { ApplicationState } from "../../entities/application";
 import { AttendanceState } from "../../entities/attendance/models/attendance.state";
+import { TimeBadgeComponent } from "../../shared/ui";
+import { QuickDayPickerComponent } from "../../shared/ui/quick-day-picker/quick-day-picker";
 import { ActivityTypeListComponent } from "../../widgets/activity-types-list";
 import { DayComponent } from "./day.component";
 
@@ -27,7 +34,11 @@ describe(DayComponent.name, () => {
         component: DayComponent,
         shallow: true,
         declarations: [
-            MockComponent(ActivityTypeListComponent),
+            MockComponents(
+                ActivityTypeListComponent,
+                QuickDayPickerComponent,
+                TimeBadgeComponent
+            ),
             MockPipe(GroupActivityLogEntriesByIdPipe),
             MockDirective(BsDatepickerDirective),
         ],
@@ -39,6 +50,9 @@ describe(DayComponent.name, () => {
     });
     let spectator: Spectator<DayComponent>;
     let component: DayComponent;
+
+    let quickDayPicker: MockedComponent<QuickDayPickerComponent>;
+    let startTimeBadge: MockedComponent<TimeBadgeComponent>;
 
     let store: MockStore<Partial<ApplicationState>>;
 
@@ -62,7 +76,16 @@ describe(DayComponent.name, () => {
             ...defaultState,
             activityLog: { entries: testEntries },
         });
-        spectator.component.date$.next(now);
+
+        quickDayPicker = spectator.query(
+            QuickDayPickerComponent
+        ) as MockedComponent<QuickDayPickerComponent>;
+        startTimeBadge = spectator.query(
+            TimeBadgeComponent
+        ) as MockedComponent<TimeBadgeComponent>;
+
+        quickDayPicker.datePicked.emit(now);
+
         spectator.detectChanges();
     });
 
@@ -87,7 +110,7 @@ describe(DayComponent.name, () => {
     it("should properly display the start time", fakeAsync(() => {
         const n = new Date();
 
-        tick();
+        console.log(startTimeBadge);
 
         component.startTime$.subscribe((value) => {
             expect(value.getHours()).toBe(n.getHours() - 6);
