@@ -1,8 +1,8 @@
 import { Routes } from "@angular/router";
 
-import { ActivitiesComponent } from "./activities/activities.component";
+import { ActivitiesComponent } from "./activities";
 import { ConfigurationComponent } from "./configuration/configuration.component";
-import { DayComponent } from "./day/ui/day.component";
+import { DayComponent } from "./day";
 import { StatisticsComponent } from "./statistics/statistics.component";
 import { WeekComponent } from "./week/week.component";
 import { WelcomeComponent } from "./welcome/welcome.component";
