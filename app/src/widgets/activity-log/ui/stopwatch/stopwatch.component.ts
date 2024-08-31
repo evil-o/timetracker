@@ -7,8 +7,10 @@ import {
     IActivityType,
 } from "../../../../entities/activity-type";
 import { ApplicationState } from "../../../../entities/application";
-import { stopWatchActions } from "../../../../entities/stop-watch/models/stop-watch.actions";
-import { fromStopWatch } from "../../../../entities/stop-watch/models/stop-watch.selectors";
+import {
+    fromStopWatch,
+    stopWatchActions,
+} from "../../../../entities/stop-watch";
 
 @Component({
     selector: "app-stopwatch",
