@@ -1,9 +1,9 @@
 import { Routes } from "@angular/router";
 
 import { ActivitiesComponent } from "../../pages/activities";
-import { ConfigurationComponent } from "../../pages/configuration/configuration.component";
+import { ConfigurationComponent } from "../../pages/configuration";
 import { DayComponent } from "../../pages/day";
-import { StatisticsComponent } from "../../pages/statistics/statistics.component";
+import { StatisticsComponent } from "../../pages/statistics";
 import { WeekComponent } from "../../pages/week/week.component";
 import { WelcomeComponent } from "../../pages/welcome/welcome.component";
 
