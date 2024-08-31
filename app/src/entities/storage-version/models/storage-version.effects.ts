@@ -3,12 +3,16 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 
 import { filter, map, withLatestFrom } from "rxjs";
+import { rehydratedStorageKeys } from "../../../shared/config";
 import { downloadDataAsFile } from "../../../shared/lib";
-import { rehydratedStorageKeys } from "../../application/meta-reducers";
-import { ApplicationState } from "../../application/models/application.model";
 import { makeTimestampedFileName } from "../lib/file-name";
 import { storageVersionActions } from "./storage-version.actions";
-import { StorageVersion } from "./storage-version.state";
+import {
+    IStorageVersionStateSlice,
+    StorageVersion,
+} from "./storage-version.state";
+
+type StoreModel = IStorageVersionStateSlice & Record<string, unknown>;
 
 @Injectable()
 export class StorageVersionEffects {
@@ -88,15 +92,8 @@ export class StorageVersionEffects {
                     "TimeTracker-Export",
                     "json"
                 );
-                const exportObject: Partial<
-                    Record<
-                        keyof ApplicationState,
-                        ApplicationState[keyof ApplicationState]
-                    >
-                > = {};
-                for (const key of Object.values(
-                    rehydratedStorageKeys
-                ) as (keyof ApplicationState)[]) {
+                const exportObject: Partial<Record<string, unknown>> = {};
+                for (const key of Object.values(rehydratedStorageKeys)) {
                     if (key in state) {
                         exportObject[key] = state[key];
                     }
@@ -110,6 +107,6 @@ export class StorageVersionEffects {
 
     constructor(
         private actions$: Actions,
-        private store$: Store<ApplicationState>
+        private store$: Store<StoreModel>
     ) {}
 }

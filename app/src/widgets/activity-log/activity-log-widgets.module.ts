@@ -3,7 +3,7 @@ import { NgModule } from "@angular/core";
 import { AccordionModule } from "ngx-bootstrap/accordion";
 import { ActivityLogEntitiesModule } from "../../entities/activity-log";
 import { ActivityTypeEntitiesModule } from "../../entities/activity-type";
-import { ActivityLogFeaturesModule } from "../../features/activity-log";
+import { LogFeaturesModule } from "../../features/log";
 import { SharedModule } from "../../shared/shared.module";
 import { ActivityLogListComponent } from "./ui/activity-log-list/actvity-log-list.component";
 import { LogInputComponent } from "./ui/log-input/log-input";
@@ -23,7 +23,7 @@ const declarations = [
     imports: [
         ActivityTypeEntitiesModule,
         ActivityLogEntitiesModule,
-        ActivityLogFeaturesModule,
+        LogFeaturesModule,
         AccordionModule,
         CommonModule,
         SharedModule,

@@ -18,6 +18,7 @@ None for now.
 
 ## Refactoring & Maintenance
 
+-   Find out why bundle size is so large
 -   Create a proper view state + input/output data flow for the day component
 -   enable router input binding
 -   Add a quick way to output a daily message
@@ -26,6 +27,7 @@ None for now.
 -   split activity entering out of day component into its own component
 -   split tabs out of week component into their own components
 -   split dialog out of acitvities component into its own component
+-   make each state have its own incremental migration action rather than listening to the one from storageVersion
 
 ## Fetures
 

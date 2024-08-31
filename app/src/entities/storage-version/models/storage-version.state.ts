@@ -13,6 +13,10 @@ export interface IStorageVersion {
     pendingIncrementalBackups: StateType[];
 }
 
+export interface IStorageVersionStateSlice {
+    storageVersion: IStorageVersion;
+}
+
 export class StorageVersion implements IStorageVersion {
     public static CURRENT_VERSION = 5;
 

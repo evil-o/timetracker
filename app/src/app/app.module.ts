@@ -14,20 +14,35 @@ import { BsDropdownModule } from "ngx-bootstrap/dropdown";
 import { ModalModule } from "ngx-bootstrap/modal";
 import { TabsModule } from "ngx-bootstrap/tabs";
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
-import { entityEffects } from "../entities/application/effects";
-import { metaReducers } from "../entities/application/meta-reducers";
-import { reducers } from "../entities/application/reducers";
 import { environment } from "../environments/environment";
-import { ActivityLogFeaturesEffects } from "../features/activity-log";
-import { PagesModule } from "../pages/pages.module";
-import { routes } from "../pages/pages.routes";
+import { ActivityLogFeaturesEffects } from "../features/log";
+import { ActivitiesPageModule } from "../pages/activities";
+import { ConfigurationPageModule } from "../pages/configuration";
+import { DayPageModule } from "../pages/day";
+import { LayoutsModule } from "../pages/layouts";
+import { StatisticsPageModule } from "../pages/statistics";
+import { WeekPageModule } from "../pages/week";
+import { WelcomePageModule } from "../pages/welcome";
 import { ApplicatioEffects } from "./model/application.effects";
+import { entityEffects } from "./model/effects";
+import { metaReducers } from "./model/meta-reducers";
+import { reducers } from "./model/reducers";
+import { routes } from "./routes/app.routes";
 import { AppComponent } from "./ui/app.component";
 
 @NgModule({
     declarations: [AppComponent],
     imports: [
-        PagesModule,
+        // pages
+        ActivitiesPageModule,
+        ConfigurationPageModule,
+        DayPageModule,
+        StatisticsPageModule,
+        WeekPageModule,
+        WelcomePageModule,
+        LayoutsModule,
+
+        // other imports
         BrowserModule,
         CommonModule,
         FormsModule,

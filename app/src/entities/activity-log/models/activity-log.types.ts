@@ -17,3 +17,7 @@ export interface IActivityLogEntry {
 export interface IActivityLog {
     entries: IActivityLogEntry[];
 }
+
+export interface IActivityLogStateSlice {
+    activityLog: IActivityLog;
+}
