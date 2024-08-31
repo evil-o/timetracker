@@ -10,7 +10,7 @@ describe("Week overview", () => {
     let dayWorkflows: DayPageWorkflows;
 
     const hoursToHMString = (hours: number, minutes: number) => {
-        while (minutes > 60) {
+        while (minutes >= 60) {
             minutes -= 60;
             hours += 1;
         }
