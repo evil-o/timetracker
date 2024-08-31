@@ -2,7 +2,7 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { NavigationWidgetsModule } from "../../widgets/navigation";
-import { MainComponent } from "./main/main.component";
+import { MainComponent } from "./ui/main.component";
 
 @NgModule({
     declarations: [MainComponent],

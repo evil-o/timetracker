@@ -1,16 +1,18 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { map, Observable } from "rxjs";
-import { activityTypeActions } from "../../../entities/activity-type/models/activity-types.actions";
-import { fromActivityTypes } from "../../../entities/activity-type/models/activity-types.selectors";
 import {
+    activityTypeActions,
+    fromActivityTypes,
     IActivityType,
     IActivityTypes,
-} from "../../../entities/activity-type/models/activity-types.types";
-import { ApplicationState } from "../../../entities/application/models/application.model";
-import { storageVersionActions } from "../../../entities/storage-version/models/storage-version.actions";
-import { fromStorageVersion } from "../../../entities/storage-version/models/storage-version.selector";
-import { IStorageVersion } from "../../../entities/storage-version/models/storage-version.state";
+} from "../../../entities/activity-type";
+import { ApplicationState } from "../../../entities/application";
+import {
+    fromStorageVersion,
+    IStorageVersion,
+    storageVersionActions,
+} from "../../../entities/storage-version";
 
 @Component({
     selector: "app-main",
