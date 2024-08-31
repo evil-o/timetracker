@@ -10,4 +10,4 @@ const components = [ActivityColorPickerComponent];
     exports: [...components],
     imports: [BsDropdownModule, CommonModule],
 })
-export class AcivityColorFeaturesModule {}
+export class ColorFeaturesModule {}

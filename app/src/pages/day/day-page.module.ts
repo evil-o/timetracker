@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { ActivityLogEntitiesModule } from "../../entities/activity-log";
-import { ActivityAggregationFeaturesModule } from "../../features/activity-aggregation";
+import { AggregationFeaturesModule } from "../../features/aggregation";
 import { SharedModule } from "../../shared/shared.module";
 import { ActivityLogWidgetsModule } from "../../widgets/activity-log";
 import { AttendanceWidgetsModule } from "../../widgets/attendance";
@@ -11,7 +11,7 @@ import { DayComponent } from "./ui/day.component";
     declarations: [DayComponent],
     exports: [DayComponent],
     imports: [
-        ActivityAggregationFeaturesModule,
+        AggregationFeaturesModule,
         ActivityLogWidgetsModule,
         ActivityLogEntitiesModule,
         AttendanceWidgetsModule,

@@ -3,7 +3,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { TabsModule } from "ngx-bootstrap/tabs";
 import { ActivityLogEntitiesModule } from "../../entities/activity-log";
-import { ActivityAggregationFeaturesModule } from "../../features/activity-aggregation";
+import { AggregationFeaturesModule } from "../../features/aggregation";
 import { SharedModule } from "../../shared/shared.module";
 import { ActivityLogWidgetsModule } from "../../widgets/activity-log";
 import { WeekComponent } from "./ui/week.component";
@@ -13,7 +13,7 @@ import { WeekComponent } from "./ui/week.component";
     exports: [WeekComponent],
     imports: [
         CommonModule,
-        ActivityAggregationFeaturesModule,
+        AggregationFeaturesModule,
         ActivityLogWidgetsModule,
         ActivityLogEntitiesModule,
         SharedModule,

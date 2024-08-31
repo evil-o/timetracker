@@ -1,4 +1,4 @@
-export * from "./activity-log-features.module";
+export * from "./log-features.module";
 
 export * from "./lib/log-entry-tally.pipe";
 

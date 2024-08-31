@@ -12,4 +12,4 @@ const components = [OvertimeBadgeComponent];
     declarations: [...components],
     exports: [...components, ...standaloneComponents],
 })
-export class ActivityAggregationFeaturesModule {}
+export class AggregationFeaturesModule {}

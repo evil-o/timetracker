@@ -18,7 +18,7 @@ import { entityEffects } from "../entities/application/effects";
 import { metaReducers } from "../entities/application/meta-reducers";
 import { reducers } from "../entities/application/reducers";
 import { environment } from "../environments/environment";
-import { ActivityLogFeaturesEffects } from "../features/activity-log";
+import { ActivityLogFeaturesEffects } from "../features/log";
 import { ActivitiesPageModule } from "../pages/activities";
 import { ConfigurationPageModule } from "../pages/configuration";
 import { DayPageModule } from "../pages/day";

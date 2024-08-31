@@ -7,7 +7,7 @@ import {
     NoActivityLogEntryPresentComponent,
 } from "../../../../entities/activity-log";
 import { ActivityTypeIdToNamePipe } from "../../../../entities/activity-type";
-import { ActivityLogEntryComponent } from "../../../../features/activity-log";
+import { ActivityLogEntryComponent } from "../../../../features/log";
 import { FormatHoursPipe } from "../../../../shared/lib";
 import { HourBadgeComponent } from "../../../../shared/ui";
 import { ActivityLogListComponent } from "./actvity-log-list.component";

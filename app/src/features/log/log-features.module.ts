@@ -21,4 +21,4 @@ const pipes = [LogEntryTallyPipe];
         CommonModule,
     ],
 })
-export class ActivityLogFeaturesModule {}
+export class LogFeaturesModule {}
