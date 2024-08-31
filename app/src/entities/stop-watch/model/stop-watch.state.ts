@@ -4,6 +4,10 @@ export interface IStopWatch {
     additionalTimeInMs: number;
 }
 
+export interface IStopWatchStateSlice {
+    stopWatch: IStopWatch;
+}
+
 export class StopWatch implements IStopWatch {
     public startedAt: Date | undefined;
 
