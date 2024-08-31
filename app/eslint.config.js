@@ -36,6 +36,7 @@ module.exports = tseslint.config(
                     argsIgnorePattern: "^_",
                 },
             ],
+            "no-console": ["warn", { allow: ["warn", "error"] }],
         },
     },
     {

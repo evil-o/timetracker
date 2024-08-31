@@ -77,7 +77,7 @@ export class ActivityLogEntryComponent {
                 activityLogActions.deleteEntry({ entryId: id })
             );
         } else {
-            console.log(
+            console.warn(
                 `Did not delete entry ${id} because it was not confirmed.`
             );
         }

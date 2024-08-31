@@ -60,7 +60,6 @@ export class ImportStorageEffects {
             ),
             switchMap((data) => {
                 const actions: Action[] = [];
-                console.log("importing", data);
                 // import states in order of dependencies
                 if (data.attendanceState) {
                     actions.push(

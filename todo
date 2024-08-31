@@ -10,7 +10,6 @@ None for now.
 
 -   setup eslint + some basic code formatting rules
     -   member ordering rule (public before private etc.)
-    -   No console.log
 -   commitizen + commit linting
 -   faker for Cypress specs
 -   setup github action cache

@@ -55,14 +55,14 @@ export class ActivitiesComponent {
                 const srcs = activities.filter((v) => v.id === merge.source.id);
                 const dsts = activities.filter((v) => v.id === merge.target.id);
                 if (srcs.length !== 1) {
-                    console.log(
+                    console.error(
                         "ERROR: wrong number of matching source activities found: " +
                             JSON.stringify(srcs, undefined, 2)
                     );
                     return;
                 }
                 if (dsts.length !== 1) {
-                    console.log(
+                    console.error(
                         "ERROR: wrong number of matching target activities found. " +
                             JSON.stringify(dsts, undefined, 2)
                     );
@@ -70,7 +70,6 @@ export class ActivitiesComponent {
                 }
                 const src = srcs[0];
                 const dst = dsts[0];
-                console.log("merging", src, " into ", dst);
                 this.store.dispatch(
                     activityLogActions.mergeActivities({
                         sourceActvityId: src.id,

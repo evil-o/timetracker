@@ -110,7 +110,7 @@ export const activityTypesReducer = createReducer(
         (_draft, { currentVersion }) => {
             switch (currentVersion) {
                 default:
-                    console.log(
+                    console.warn(
                         'Unknown or unhandled version ("' +
                             currentVersion +
                             '") in incremental update of activity types.'
