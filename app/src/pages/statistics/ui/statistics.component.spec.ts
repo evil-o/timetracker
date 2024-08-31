@@ -1,24 +1,20 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-
+import { createComponentFactory, Spectator } from "@ngneat/spectator";
+import { provideMockStore } from "@ngrx/store/testing";
 import { StatisticsComponent } from "./statistics.component";
 
-xdescribe("StatisticsComponent", () => {
-    let component: StatisticsComponent;
-    let fixture: ComponentFixture<StatisticsComponent>;
-
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            declarations: [StatisticsComponent],
-        }).compileComponents();
+describe(StatisticsComponent.name, () => {
+    const create = createComponentFactory({
+        component: StatisticsComponent,
+        shallow: true,
+        providers: [provideMockStore()],
     });
+    let spectator: Spectator<StatisticsComponent>;
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(StatisticsComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
+        spectator = create();
     });
 
     it("should create", () => {
-        expect(component).toBeTruthy();
+        expect(spectator.component).toBeTruthy();
     });
 });

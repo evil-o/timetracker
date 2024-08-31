@@ -1,34 +1,23 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-
-import { By } from "@angular/platform-browser";
-
+import { createComponentFactory, Spectator } from "@ngneat/spectator";
 import { TimeBadgeComponent } from "./time-badge.component";
-import { DebugElement } from "@angular/core";
 
-describe("TimeBadgeComponent", () => {
-    let component: TimeBadgeComponent;
-    let fixture: ComponentFixture<TimeBadgeComponent>;
+describe(TimeBadgeComponent.name, () => {
+    const create = createComponentFactory({
+        component: TimeBadgeComponent,
+        shallow: true,
+    });
+    let spectator: Spectator<TimeBadgeComponent>;
 
-    let displaySpanDebug: DebugElement;
     let displaySpan: HTMLSpanElement;
 
     beforeEach(() => {
-        TestBed.configureTestingModule({
-            declarations: [TimeBadgeComponent],
-        }).compileComponents();
-    });
+        spectator = create();
 
-    beforeEach(() => {
-        fixture = TestBed.createComponent(TimeBadgeComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-
-        displaySpanDebug = fixture.debugElement.query(By.css("span"));
-        displaySpan = displaySpanDebug.nativeElement;
+        displaySpan = spectator.query("span") as HTMLSpanElement;
     });
 
     it("should create", () => {
-        expect(component).toBeTruthy();
+        expect(spectator.component).toBeTruthy();
     });
 
     it("should properly create time strings", async () => {
@@ -38,13 +27,13 @@ describe("TimeBadgeComponent", () => {
             { h: 8, m: 28, s: "8:28" },
         ];
         for (const e of expectations) {
-            component.date = new Date(2018, 0, 22, e.h, e.m);
+            spectator.component.date = new Date(2018, 0, 22, e.h, e.m);
 
-            fixture.detectChanges();
+            spectator.detectChanges();
 
-            expect(component.dateDisplayString).toBe(e.s);
+            expect(spectator.component.dateDisplayString).toBe(e.s);
             expect(displaySpan.innerHTML).toContain(
-                component.dateDisplayString
+                spectator.component.dateDisplayString
             );
         }
     });

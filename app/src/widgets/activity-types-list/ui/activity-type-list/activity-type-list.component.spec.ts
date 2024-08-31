@@ -1,27 +1,20 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-
-import { StoreModule } from "@ngrx/store";
-import { ColorFeaturesModule } from "../../../../features/color";
+import { createComponentFactory, Spectator } from "@ngneat/spectator";
+import { provideMockStore } from "@ngrx/store/testing";
 import { ActivityTypeListComponent } from "./activity-type-list.component";
 
-describe("ActivityTypeListComponent", () => {
-    let component: ActivityTypeListComponent;
-    let fixture: ComponentFixture<ActivityTypeListComponent>;
-
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            declarations: [ActivityTypeListComponent],
-            imports: [StoreModule.forRoot(), ColorFeaturesModule],
-        }).compileComponents();
+describe(ActivityTypeListComponent.name, () => {
+    const create = createComponentFactory({
+        component: ActivityTypeListComponent,
+        shallow: true,
+        providers: [provideMockStore()],
     });
+    let spectator: Spectator<ActivityTypeListComponent>;
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(ActivityTypeListComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
+        spectator = create();
     });
 
     it("should create", () => {
-        expect(component).toBeTruthy();
+        expect(spectator.component).toBeTruthy();
     });
 });

@@ -1,31 +1,21 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-
-import { provideNoopAnimations } from "@angular/platform-browser/animations";
-import { StoreModule } from "@ngrx/store";
-import { AccordionModule } from "ngx-bootstrap/accordion";
+import { createComponentFactory, Spectator } from "@ngneat/spectator";
+import { provideMockStore } from "@ngrx/store/testing";
 import { Subject } from "rxjs";
 import { DayAttendanceComponent } from "./day-attendance.component";
 
-describe("DayAttendanceComponent", () => {
-    let component: DayAttendanceComponent;
-    let fixture: ComponentFixture<DayAttendanceComponent>;
-
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            declarations: [DayAttendanceComponent],
-            imports: [AccordionModule.forRoot(), StoreModule.forRoot()],
-            providers: [provideNoopAnimations()],
-        }).compileComponents();
+describe(DayAttendanceComponent.name, () => {
+    const create = createComponentFactory({
+        component: DayAttendanceComponent,
+        shallow: true,
+        providers: [provideMockStore()],
     });
+    let spectator: Spectator<DayAttendanceComponent>;
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(DayAttendanceComponent);
-        component = fixture.componentInstance;
-        component.date$ = new Subject<Date>();
-        fixture.detectChanges();
+        spectator = create({ props: { date$: new Subject<Date>() } });
     });
 
     it("should create", () => {
-        expect(component).toBeTruthy();
+        expect(spectator.component).toBeTruthy();
     });
 });
