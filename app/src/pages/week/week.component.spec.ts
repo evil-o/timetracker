@@ -45,7 +45,7 @@ import { TallyComponent } from "../../widgets/activity-log/ui/tally/tally.compon
 import { DayAttendanceComponent } from "../../widgets/attendance/ui/day-attendance/day-attendance.component";
 import { NavigationWidgetsModule } from "../../widgets/navigation/navigation-widgets.module";
 import { ActivitiesComponent } from "../activities/ui/activities.component";
-import { ConfigurationComponent } from "../configuration/configuration.component";
+import { ConfigurationComponent } from "../configuration";
 import { DayComponent } from "../day/ui/day.component";
 import { WelcomeComponent } from "../welcome/welcome.component";
 import { WeekComponent } from "./week.component";

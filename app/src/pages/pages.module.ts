@@ -13,7 +13,7 @@ import { ActivityTypesListWidgetsModule } from "../widgets/activity-types-list";
 import { AttendanceWidgetsModule } from "../widgets/attendance";
 import { NavigationWidgetsModule } from "../widgets/navigation";
 import { ActivitiesComponent } from "./activities";
-import { ConfigurationComponent } from "./configuration/configuration.component";
+import { ConfigurationComponent } from "./configuration";
 import { DayComponent } from "./day";
 import { MainComponent } from "./layouts/main/main.component";
 import { StatisticsComponent } from "./statistics/statistics.component";
