@@ -18,6 +18,7 @@ None for now.
 
 ## Refactoring & Maintenance
 
+-   Find out why bundle size is so large
 -   Create a proper view state + input/output data flow for the day component
 -   enable router input binding
 -   Add a quick way to output a daily message
