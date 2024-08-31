@@ -1,10 +1,8 @@
-import { ActivitiesPage } from "../pages/activities.page";
 import { GlobalPage } from "../pages/global.page";
 import { TodayPage } from "../pages/today.page.cy";
 
 describe("The Time Tracker's import and export", () => {
     let today: TodayPage;
-    let activities: ActivitiesPage;
     let globalPage: GlobalPage;
 
     before(() => {
@@ -14,7 +12,6 @@ describe("The Time Tracker's import and export", () => {
     beforeEach(() => {
         today = new TodayPage();
         globalPage = new GlobalPage();
-        activities = new ActivitiesPage();
         today.navigateFromHome();
     });
 

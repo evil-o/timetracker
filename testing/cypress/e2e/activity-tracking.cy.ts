@@ -1,12 +1,8 @@
-import { ActivitiesPage } from "../pages/activities.page";
-import { GlobalPage } from "../pages/global.page";
 import { TodayPage } from "../pages/today.page.cy";
 import { DayPageWorkflows } from "../support/today.workflows";
 
 describe("Activity tracking", () => {
     let today: TodayPage;
-    let activities: ActivitiesPage;
-    let globalPage: GlobalPage;
     let dayWorkflows: DayPageWorkflows;
 
     function expandLogEntry(
@@ -18,8 +14,6 @@ describe("Activity tracking", () => {
 
     beforeEach(() => {
         today = new TodayPage();
-        globalPage = new GlobalPage();
-        activities = new ActivitiesPage();
         dayWorkflows = new DayPageWorkflows(today);
         today.navigateFromHome();
     });

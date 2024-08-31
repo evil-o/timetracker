@@ -54,7 +54,7 @@ function getLastDownloadFilePath(): Cypress.Chainable<string> {
             if (results === undefined) {
                 throw new Error(`Last download not found.`);
             }
-            return cy.wrap<string>((results as any[])[0]);
+            return cy.wrap<string>((results as string[])[0]);
         });
 }
 
