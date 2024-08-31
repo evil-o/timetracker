@@ -1,50 +1,51 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-
-import { APP_BASE_HREF } from "@angular/common";
-
-import { FormsModule } from "@angular/forms";
-import { RouterModule } from "@angular/router";
 import { NavbarComponent } from "./navbar.component";
 
-import { Store, StoreModule } from "@ngrx/store";
-
-import { NO_ERRORS_SCHEMA } from "@angular/core";
-import { AccordionModule } from "ngx-bootstrap/accordion";
-import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
-import { TabsModule } from "ngx-bootstrap/tabs";
-import { TypeaheadModule } from "ngx-bootstrap/typeahead";
+import { createComponentFactory, Spectator } from "@ngneat/spectator";
+import { Store } from "@ngrx/store";
+import { MockStore, provideMockStore } from "@ngrx/store/testing";
 import {
-    EditableLogEntryDescriptionComponent,
-    EditableLogEntryHoursComponent,
-    GroupActivityLogEntriesByIdPipe,
-    NoActivityLogEntryPresentComponent,
+    ActivityLog,
+    IActivityLogStateSlice,
 } from "../../../../entities/activity-log";
-import { ActivityPickerComponent } from "../../../../entities/activity-type";
-import { ApplicationState } from "../../../../entities/application";
-import { attendanceActions } from "../../../../entities/attendance";
-import { configurationActions } from "../../../../entities/configuration";
-import { OvertimeBadgeComponent } from "../../../../features/aggregation";
-import { ColorFeaturesModule } from "../../../../features/color";
-import { ActivityLogEntryComponent } from "../../../../features/log";
-import { WeekComponent } from "../../../../pages/week";
-import { WelcomeComponent } from "../../../../pages/welcome";
 import {
-    FormatHoursPipe,
-    PadNumberPipe,
-    PrecisionPipe,
-    valueToTime,
-} from "../../../../shared/lib";
-import { HourBadgeComponent, TimeBadgeComponent } from "../../../../shared/ui";
+    ActivityTypes,
+    IActivityTypesStateSlice,
+} from "../../../../entities/activity-type";
 import {
-    ActivityLogListComponent,
-    TallyComponent,
-} from "../../../activity-log";
-import { DayAttendanceComponent } from "../../../attendance";
+    attendanceActions,
+    AttendanceState,
+    IAttendanceStateSlice,
+} from "../../../../entities/attendance";
+import {
+    configurationActions,
+    ConfigurationState,
+    IConfigurationStateSlice,
+} from "../../../../entities/configuration";
+import { valueToTime } from "../../../../shared/lib";
 
-xdescribe("NavbarComponent", () => {
+type StateSlices = IAttendanceStateSlice &
+    IActivityLogStateSlice &
+    IActivityTypesStateSlice &
+    IConfigurationStateSlice;
+
+describe(NavbarComponent.name, () => {
+    const create = createComponentFactory({
+        component: NavbarComponent,
+        shallow: true,
+        providers: [
+            provideMockStore<StateSlices>({
+                initialState: {
+                    attendanceState: new AttendanceState(),
+                    activityLog: new ActivityLog(),
+                    activityTypes: new ActivityTypes(),
+                    configuration: new ConfigurationState(),
+                },
+            }),
+        ],
+    });
+    let spectator: Spectator<NavbarComponent>;
     let component: NavbarComponent;
-    let fixture: ComponentFixture<NavbarComponent>;
-    let store: Store<ApplicationState>;
+    let store: MockStore<StateSlices>;
 
     function setAttendance(start: string, end: string, date: Date) {
         store.dispatch(
@@ -56,54 +57,16 @@ xdescribe("NavbarComponent", () => {
     }
 
     beforeEach(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                ActivityLogEntryComponent,
-                ActivityLogListComponent,
-                ActivityPickerComponent,
-                DayAttendanceComponent,
-                EditableLogEntryDescriptionComponent,
-                EditableLogEntryHoursComponent,
-                FormatHoursPipe,
-                GroupActivityLogEntriesByIdPipe,
-                HourBadgeComponent,
-                NavbarComponent,
-                NoActivityLogEntryPresentComponent,
-                OvertimeBadgeComponent,
-                PadNumberPipe,
-                PrecisionPipe,
-                TallyComponent,
-                TimeBadgeComponent,
-                WeekComponent,
-                WelcomeComponent,
-            ],
-            imports: [
-                AccordionModule.forRoot(),
-                BsDatepickerModule.forRoot(),
-                FormsModule,
-                StoreModule.forRoot(),
-                TabsModule.forRoot(),
-                TypeaheadModule.forRoot(),
-                RouterModule.forRoot([]),
-                ColorFeaturesModule,
-            ],
-            providers: [{ provide: APP_BASE_HREF, useValue: "/" }],
-            schemas: [NO_ERRORS_SCHEMA],
-        }).compileComponents();
-    });
-
-    beforeEach(() => {
-        fixture = TestBed.createComponent(NavbarComponent);
-        component = fixture.componentInstance;
-        store = TestBed.get(Store);
-        fixture.detectChanges();
+        spectator = create();
+        component = spectator.component;
+        store = spectator.inject(Store) as unknown as MockStore<StateSlices>;
     });
 
     it("should create", () => {
         expect(component).toBeTruthy();
     });
 
-    it("should correctly display overall overtime for 40h work week", () => {
+    xit("should correctly display overall overtime for 40h work week", () => {
         store.dispatch(
             configurationActions.setWeeklyWorkHours({ newWeeklyHours: 40 })
         );
@@ -124,7 +87,7 @@ xdescribe("NavbarComponent", () => {
         });
     });
 
-    it("should correctly display overall overtime for 16h work week", () => {
+    xit("should correctly display overall overtime for 16h work week", () => {
         store.dispatch(
             configurationActions.setWeeklyWorkHours({ newWeeklyHours: 16 })
         );
