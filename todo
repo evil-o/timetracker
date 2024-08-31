@@ -10,7 +10,6 @@ None for now.
 
 -   setup eslint + some basic code formatting rules
     -   member ordering rule (public before private etc.)
-    -   No "only" in Cypress
     -   No console.log
 -   commitizen + commit linting
 -   faker for Cypress specs
@@ -38,7 +37,3 @@ None for now.
 ## Bugs
 
 -   Various subscriptions are not canceled
-
-## Fixes
-
--   Angular warning: "Polyfill for "@angular/localize/init" was added automatically."
