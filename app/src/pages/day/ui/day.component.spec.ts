@@ -54,7 +54,6 @@ describe(DayComponent.name, () => {
     let component: DayComponent;
 
     let quickDayPicker: MockedComponent<QuickDayPickerComponent>;
-    let startTimeBadge: MockedComponent<TimeBadgeComponent>;
 
     let store: MockStore<Partial<ApplicationState>>;
 
@@ -82,9 +81,6 @@ describe(DayComponent.name, () => {
         quickDayPicker = spectator.query(
             QuickDayPickerComponent
         ) as MockedComponent<QuickDayPickerComponent>;
-        startTimeBadge = spectator.query(
-            TimeBadgeComponent
-        ) as MockedComponent<TimeBadgeComponent>;
 
         quickDayPicker.datePicked.emit(now);
 
