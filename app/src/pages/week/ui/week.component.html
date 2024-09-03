@@ -21,6 +21,7 @@
 
 <a id="printDownload" style="display: none"></a>
 
+<!-- TODO: move week navigation to its own component-->
 <nav aria-label="Week navigation">
     <ul class="nav">
         <li class="nav-item ms-auto">
@@ -28,11 +29,11 @@
                 <li class="page-item">
                     <a
                         class="page-link"
-                        [routerLink]="[
-                            '/week',
-                            this.week!.year - 1,
-                            this.week!.week,
-                        ]"
+                        [routerLink]="['/week']"
+                        [queryParams]="{
+                            year: this.week!.year - 1,
+                            week: this.week!.week,
+                        }"
                         aria-label="Previous year"
                     >
                         <span aria-hidden="true">&laquo;</span>
@@ -42,11 +43,11 @@
                 <li class="page-item">
                     <a
                         class="page-link"
-                        [routerLink]="[
-                            '/week',
-                            this.previousWeek!.year,
-                            this.previousWeek!.week,
-                        ]"
+                        [routerLink]="['/week']"
+                        [queryParams]="{
+                            year: this.previousWeek!.year,
+                            week: this.previousWeek!.week,
+                        }"
                         aria-label="Previous week"
                     >
                         <span aria-hidden="true">&lsaquo;</span>
@@ -61,11 +62,11 @@
                 <li class="page-item">
                     <a
                         class="page-link"
-                        [routerLink]="[
-                            '/week',
-                            this.nextWeek!.year,
-                            this.nextWeek!.week,
-                        ]"
+                        [routerLink]="['/week']"
+                        [queryParams]="{
+                            year: this.nextWeek!.year,
+                            week: this.nextWeek!.week,
+                        }"
                         aria-label="Next week"
                     >
                         <span aria-hidden="true">&rsaquo;</span>
@@ -75,11 +76,11 @@
                 <li class="page-item">
                     <a
                         class="page-link"
-                        [routerLink]="[
-                            '/week',
-                            this.week!.year + 1,
-                            this.week!.week,
-                        ]"
+                        [routerLink]="['/week']"
+                        [queryParams]="{
+                            year: this.week!.year + 1,
+                            week: this.week!.week,
+                        }"
                         aria-label="Next year"
                     >
                         <span aria-hidden="true">&raquo;</span>

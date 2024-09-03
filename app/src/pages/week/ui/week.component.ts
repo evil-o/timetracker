@@ -37,40 +37,40 @@ import { IDayEntry, IWeekDate, makeTimeSheet } from "../../../widgets/week";
     templateUrl: "./week.component.html",
 })
 export class WeekComponent {
-    public activityLogEntries$: Observable<IActivityLogEntry[]>;
+    protected activityLogEntries$: Observable<IActivityLogEntry[]>;
 
-    public activityTypes$: Observable<IActivityTypes>;
+    protected activityTypes$: Observable<IActivityTypes>;
 
     // log entries, filtered to only contain the ones that are in this week
-    public filteredLogEntries$: Observable<IActivityLogEntry[]>;
+    protected filteredLogEntries$: Observable<IActivityLogEntry[]>;
 
-    public nextWeek$: Observable<IWeekDate>;
+    protected nextWeek$: Observable<IWeekDate>;
 
-    public nextWeek?: IWeekDate;
+    protected nextWeek?: IWeekDate;
 
-    public week$: Observable<IWeekDate>;
+    protected week$: Observable<IWeekDate>;
 
-    public week?: IWeekDate;
+    protected week?: IWeekDate;
 
-    public previousWeek$: Observable<IWeekDate>;
+    protected previousWeek$: Observable<IWeekDate>;
 
-    public previousWeek?: IWeekDate;
+    protected previousWeek?: IWeekDate;
 
-    public days$: Observable<IDayEntry[]>;
+    protected days$: Observable<IDayEntry[]>;
 
-    public loggedSum$: Observable<number>;
+    protected loggedSum$: Observable<number>;
 
-    public modalRef!: BsModalRef;
+    protected modalRef!: BsModalRef;
 
-    public printPreviewContents?: string;
+    protected printPreviewContents?: string;
 
-    public attendances$: Observable<IAttendanceWithTimes[]>;
+    protected attendances$: Observable<IAttendanceWithTimes[]>;
 
-    public attendanceCorrections$: Observable<IAttendanceCorrection[]>;
+    protected attendanceCorrections$: Observable<IAttendanceCorrection[]>;
 
-    public attendanceStats$: Observable<IWeekAttendanceStats>;
+    protected attendanceStats$: Observable<IWeekAttendanceStats>;
 
-    public selectedTab: "tally" | "daily" | "attendance" = "tally";
+    protected selectedTab: "tally" | "daily" | "attendance" = "tally";
 
     private attendances: IAttendanceWithTimes[] = [];
 
@@ -79,7 +79,7 @@ export class WeekComponent {
         public activatedRoute: ActivatedRoute,
         private modalService: BsModalService
     ) {
-        this.week$ = this.activatedRoute.params.pipe(
+        this.week$ = this.activatedRoute.queryParams.pipe(
             map((parameters) => {
                 let year = Number(parameters["year"]);
                 let week = Number(parameters["week"]);
