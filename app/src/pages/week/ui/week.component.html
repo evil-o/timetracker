@@ -1,15 +1,5 @@
 <ng-template #printPreview>
-    <div class="modal-header">
-        <h4 class="modal-title pull-left">Print preview...</h4>
-        <button
-            type="button"
-            class="close pull-end"
-            aria-label="Close"
-            (click)="modalRef.hide()"
-        >
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
+    <app-modal-header>Print preview...</app-modal-header>
     <div
         class="modal-body"
         [innerHTML]="printPreviewContents"

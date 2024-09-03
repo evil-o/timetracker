@@ -1,13 +1,7 @@
 <ng-template #mergeActivitiesDialog>
-    <div class="modal-header">
-        <h4 class="modal-title pull-left">Modal</h4>
-        <button
-            type="button"
-            class="btn-close pull-end"
-            aria-label="Close"
-            (click)="hideModal()"
-        ></button>
-    </div>
+    <app-modal-header (onDismiss)="hideModal()"
+        >Merge activities</app-modal-header
+    >
     <div class="modal-body">
         <p>You are about to move all activites from:</p>
         <div>{{ mergeSource ? mergeSource.name : "not set" }}</div>
