@@ -6,6 +6,7 @@ import { ActivityLogEntitiesModule } from "../../entities/activity-log";
 import { AggregationFeaturesModule } from "../../features/aggregation";
 import { SharedModule } from "../../shared/shared.module";
 import { ActivityLogWidgetsModule } from "../../widgets/activity-log";
+import { AttendanceWidgetsModule } from "../../widgets/attendance/attendance-widgets.module";
 import { WeekComponent } from "./ui/week.component";
 
 @NgModule({
@@ -19,6 +20,7 @@ import { WeekComponent } from "./ui/week.component";
         SharedModule,
         TabsModule,
         RouterModule,
+        AttendanceWidgetsModule,
     ],
 })
 export class WeekPageModule {}

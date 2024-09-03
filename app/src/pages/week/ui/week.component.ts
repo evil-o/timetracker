@@ -28,16 +28,14 @@ import {
     fromApplication,
     IAttendanceWithTimes,
 } from "../../../entities/application";
-import {
-    IAttendanceCorrection,
-    IAttendanceEntry,
-} from "../../../entities/attendance";
+import { IAttendanceCorrection } from "../../../entities/attendance";
 import {
     FormatHoursPipe,
     getFirstDayOfCalendarWeek,
-    PadNumberPipe,
 } from "../../../shared/lib";
+import { dateHoursMinutesToString } from "../../../shared/lib/time-string";
 import { HtmlTableGenerator } from "../../../shared/models";
+import { IWeekAttendanceStats } from "../../../widgets/attendance";
 
 interface IDayEntry {
     dayOfTheWeek: number;
@@ -52,14 +50,6 @@ interface IDayEntry {
 interface IWeekDate {
     year: number;
     week: number;
-}
-
-interface IWeekAttendanceStats {
-    totalHours: number;
-
-    totalNonWorkingHours: number;
-
-    totalOvertime: number;
 }
 
 @Component({
@@ -408,8 +398,8 @@ export class WeekComponent {
             hrPipe.transform(hours, "{+h}:{m}");
         for (const attendance of this.attendances) {
             const day = `${dayNames[attendance.date.getDay()]}`;
-            const startTime = this.attendanceStartTimeStr(attendance);
-            const endTime = this.attendanceEndTimeStr(attendance);
+            const startTime = dateHoursMinutesToString(attendance.start);
+            const endTime = dateHoursMinutesToString(attendance.end);
             const nonWorking = this.attendanceNonWorkingStr(attendance);
             const overtime = `${pmHours(attendance.overtime)}`;
             attendanceTable.body.appendRow(
@@ -460,14 +450,6 @@ export class WeekComponent {
         this.printPreviewContents = root.innerHTML;
     }
 
-    protected attendanceStartTimeStr(attendance: IAttendanceEntry) {
-        return this.attendanceTimeStr(attendance.start);
-    }
-
-    protected attendanceEndTimeStr(attendance: IAttendanceEntry) {
-        return this.attendanceTimeStr(attendance.end);
-    }
-
     protected attendanceNonWorkingStr(
         attendance: IAttendanceWithTimes
     ): string {
@@ -504,12 +486,5 @@ export class WeekComponent {
         a.click();
 
         this.modalRef.hide();
-    }
-
-    private attendanceTimeStr(hours?: Date) {
-        const padNumber = new PadNumberPipe();
-        return hours
-            ? hours.getHours() + ":" + padNumber.transform(hours.getMinutes())
-            : "-";
     }
 }

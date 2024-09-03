@@ -1,0 +1,60 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th class="text-right">Start time</th>
+            <th class="text-right">End time</th>
+            <th class="text-right">Hours total</th>
+            <th class="text-right">Non-working hours</th>
+            <th class="text-right">Overtime</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr
+            *ngFor="let attendance of attendances()"
+            data-testid="attendance-row"
+        >
+            <th scope="row">
+                {{ attendance.date.getDate() }}. {{ attendance.date.getMonth() +
+                1 }}.
+            </th>
+            <td class="text-right">{{ attendanceStartTimeStr(attendance) }}</td>
+            <td class="text-right">{{ attendanceEndTimeStr(attendance) }}</td>
+            <td class="text-right">{{ attendance.hours | formatHours }}</td>
+            <td class="text-right">
+                {{ attendance.nonWorkingHours | formatHours }}
+            </td>
+            <td class="text-right">
+                <app-overtime-badge
+                    class="me-1"
+                    [hours]="attendance.overtime"
+                ></app-overtime-badge>
+            </td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <th scope="row" colspan="3">Sum totals</th>
+            <td class="text-right">
+                <b>{{ attendanceStats()?.totalHours | formatHours }}</b>
+            </td>
+            <td class="text-right">
+                <b
+                    >{{ attendanceStats()?.totalNonWorkingHours | formatHours
+                    }}</b
+                >
+            </td>
+            <td class="text-right">
+                <b>
+                    <app-overtime-badge
+                        data-testid="sum-total-overtime"
+                        class="me-1"
+                        [hours]="
+                            attendanceStats()?.totalOvertime
+                        "
+                    ></app-overtime-badge>
+                </b>
+            </td>
+        </tr>
+    </tfoot>
+</table>
