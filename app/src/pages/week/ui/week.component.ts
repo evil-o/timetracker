@@ -72,13 +72,7 @@ export class WeekComponent {
 
     public selectedTab: "tally" | "daily" | "attendance" = "tally";
 
-    public overallAttendanceSum$: Observable<number | undefined>;
-
     private attendances: IAttendanceWithTimes[] = [];
-
-    private attendanceStats!: IWeekAttendanceStats;
-
-    private overallAttendanceSum?: number;
 
     public constructor(
         private store: Store<ApplicationState>,
@@ -209,13 +203,6 @@ export class WeekComponent {
             map((v) => v.reduce((prev, curr) => prev + curr, 0))
         );
 
-        this.overallAttendanceSum$ = this.store.select(
-            fromApplication.overtimeSum
-        );
-        this.overallAttendanceSum$.subscribe(
-            (sum) => (this.overallAttendanceSum = sum)
-        );
-
         this.attendances$ = combineLatest([
             this.store.select(fromApplication.attendanceEntriesWithOvertime),
             this.week$,
@@ -268,9 +255,8 @@ export class WeekComponent {
             this.attendanceCorrections$,
         ])
             .pipe(withLatestFrom(this.activityTypes$))
-            .subscribe(([[attendances, stats, days, corrections], types]) => {
+            .subscribe(([[attendances, _stats, days, corrections], types]) => {
                 this.attendances = attendances;
-                this.attendanceStats = stats;
                 this.refreshPrintPreviewContents(days, types, corrections);
             });
     }
