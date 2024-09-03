@@ -22,7 +22,7 @@ describe(WeekComponent.name, () => {
         providers: [
             {
                 provide: ActivatedRoute,
-                useValue: { params: of({ year: 2018, week: 1 }) },
+                useValue: { queryParams: of({ year: 2018, week: 1 }) },
             },
             MockProvider(BsModalService),
             ...provideMockStore<Partial<ApplicationState>>({
