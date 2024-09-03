@@ -21,7 +21,6 @@ None for now.
 -   Add a quick way to output a daily message
 -   Custom 404 page to better solve the redirects (use a query parameter, let the app understand it and reroute)
 -   Unify ngx bootstrap vs. @ng-bootstrap use
--   split tabs out of week component into their own components
 -   split dialog out of acitvities component into its own component
 -   make each state have its own incremental migration action rather than listening to the one from storageVersion
 

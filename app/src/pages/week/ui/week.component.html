@@ -1,15 +1,5 @@
 <ng-template #printPreview>
-    <div class="modal-header">
-        <h4 class="modal-title pull-left">Print preview...</h4>
-        <button
-            type="button"
-            class="close pull-end"
-            aria-label="Close"
-            (click)="modalRef.hide()"
-        >
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
+    <app-modal-header>Print preview...</app-modal-header>
     <div
         class="modal-body"
         [innerHTML]="printPreviewContents"
@@ -110,10 +100,6 @@
     </ul>
 </nav>
 
-<!--div>
-  Filtered: {{(filteredLogEntries$ | async)?.length || '-'}} / {{(activityLogEntries$ | async)?.length || '-'}}
-</div-->
-
 <tabset>
     <tab
         heading="Weekly tally"
@@ -187,73 +173,10 @@
     >
         <div class="row mt-2">
             <div class="col">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th class="text-right">Start time</th>
-                            <th class="text-right">End time</th>
-                            <th class="text-right">Hours total</th>
-                            <th class="text-right">Non-working hours</th>
-                            <th class="text-right">Overtime</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let attendance of attendances$ | async">
-                            <th scope="row">
-                                {{ attendance.date.getDate() }}.
-                                {{ attendance.date.getMonth() + 1 }}.
-                            </th>
-                            <td class="text-right">
-                                {{ attendanceStartTimeStr(attendance) }}
-                            </td>
-                            <td class="text-right">
-                                {{ attendanceEndTimeStr(attendance) }}
-                            </td>
-                            <td class="text-right">
-                                {{ attendance.hours | formatHours }}
-                            </td>
-                            <td class="text-right">
-                                {{ attendance.nonWorkingHours | formatHours }}
-                            </td>
-                            <td class="text-right">
-                                <app-overtime-badge
-                                    class="me-1"
-                                    [hours]="attendance.overtime"
-                                ></app-overtime-badge>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th scope="row" colspan="3">Sum totals</th>
-                            <td class="text-right">
-                                <b>{{
-                                    (attendanceStats$ | async)?.totalHours
-                                        | formatHours
-                                }}</b>
-                            </td>
-                            <td class="text-right">
-                                <b>{{
-                                    (attendanceStats$ | async)
-                                        ?.totalNonWorkingHours | formatHours
-                                }}</b>
-                            </td>
-                            <td class="text-right">
-                                <b>
-                                    <app-overtime-badge
-                                        data-testid="sum-total-overtime"
-                                        class="me-1"
-                                        [hours]="
-                                            (attendanceStats$ | async)
-                                                ?.totalOvertime
-                                        "
-                                    ></app-overtime-badge>
-                                </b>
-                            </td>
-                        </tr>
-                    </tfoot>
-                </table>
+                <app-attendance-list
+                    [attendances]="attendances$ | async"
+                    [attendanceStats]="attendanceStats$ | async"
+                ></app-attendance-list>
             </div>
         </div>
     </tab>

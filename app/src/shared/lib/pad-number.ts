@@ -1,4 +1,4 @@
-export function padNumber(num: number, minLength = 2, padding = "0") {
+export function padNumber(num: number, minLength = 2, padding = "0"): string {
     let numStr = `${num}`;
     const diff = minLength - numStr.length;
     if (diff > 0) {
