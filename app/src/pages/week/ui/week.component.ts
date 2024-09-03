@@ -1,5 +1,5 @@
 import { Component, TemplateRef } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 import { Store } from "@ngrx/store";
 
@@ -37,55 +37,42 @@ import { IDayEntry, IWeekDate, makeTimeSheet } from "../../../widgets/week";
     templateUrl: "./week.component.html",
 })
 export class WeekComponent {
-    public activityLogEntries$: Observable<IActivityLogEntry[]>;
+    protected activityLogEntries$: Observable<IActivityLogEntry[]>;
 
-    public activityTypes$: Observable<IActivityTypes>;
+    protected activityTypes$: Observable<IActivityTypes>;
 
     // log entries, filtered to only contain the ones that are in this week
-    public filteredLogEntries$: Observable<IActivityLogEntry[]>;
+    protected filteredLogEntries$: Observable<IActivityLogEntry[]>;
 
-    public nextWeek$: Observable<IWeekDate>;
+    protected week$: Observable<IWeekDate>;
 
-    public nextWeek?: IWeekDate;
+    protected week?: IWeekDate;
 
-    public week$: Observable<IWeekDate>;
+    protected days$: Observable<IDayEntry[]>;
 
-    public week?: IWeekDate;
+    protected loggedSum$: Observable<number>;
 
-    public previousWeek$: Observable<IWeekDate>;
+    protected modalRef!: BsModalRef;
 
-    public previousWeek?: IWeekDate;
+    protected printPreviewContents?: string;
 
-    public days$: Observable<IDayEntry[]>;
+    protected attendances$: Observable<IAttendanceWithTimes[]>;
 
-    public loggedSum$: Observable<number>;
+    protected attendanceCorrections$: Observable<IAttendanceCorrection[]>;
 
-    public modalRef!: BsModalRef;
+    protected attendanceStats$: Observable<IWeekAttendanceStats>;
 
-    public printPreviewContents?: string;
-
-    public attendances$: Observable<IAttendanceWithTimes[]>;
-
-    public attendanceCorrections$: Observable<IAttendanceCorrection[]>;
-
-    public attendanceStats$: Observable<IWeekAttendanceStats>;
-
-    public selectedTab: "tally" | "daily" | "attendance" = "tally";
-
-    public overallAttendanceSum$: Observable<number | undefined>;
+    protected selectedTab: "tally" | "daily" | "attendance" = "tally";
 
     private attendances: IAttendanceWithTimes[] = [];
 
-    private attendanceStats!: IWeekAttendanceStats;
-
-    private overallAttendanceSum?: number;
-
     public constructor(
         private store: Store<ApplicationState>,
-        public activatedRoute: ActivatedRoute,
+        private activatedRoute: ActivatedRoute,
+        private router: Router,
         private modalService: BsModalService
     ) {
-        this.week$ = this.activatedRoute.params.pipe(
+        this.week$ = this.activatedRoute.queryParams.pipe(
             map((parameters) => {
                 let year = Number(parameters["year"]);
                 let week = Number(parameters["week"]);
@@ -104,40 +91,6 @@ export class WeekComponent {
         this.activityLogEntries$ = this.store.select(
             fromActivityLog.activityLogEntries
         );
-
-        this.previousWeek$ = this.week$.pipe(
-            map((week) => {
-                let previousWeek = week.week - 1;
-                let previousWeekYear = week.year;
-                if (previousWeek < 1) {
-                    previousWeek = 52;
-                    previousWeekYear -= 1;
-                }
-
-                return { year: previousWeekYear, week: previousWeek };
-            })
-        );
-
-        this.previousWeek$.subscribe((value) => {
-            this.previousWeek = value;
-        });
-
-        this.nextWeek$ = this.week$.pipe(
-            map((week) => {
-                let nextWeek = week.week + 1;
-                let nextWeekYear = week.year;
-                if (nextWeek > 52) {
-                    nextWeek = 1;
-                    nextWeekYear += 1;
-                }
-
-                return { year: nextWeekYear, week: nextWeek };
-            })
-        );
-
-        this.nextWeek$.subscribe((value) => {
-            this.nextWeek = value;
-        });
 
         this.filteredLogEntries$ = combineLatest([
             this.week$,
@@ -209,13 +162,6 @@ export class WeekComponent {
             map((v) => v.reduce((prev, curr) => prev + curr, 0))
         );
 
-        this.overallAttendanceSum$ = this.store.select(
-            fromApplication.overtimeSum
-        );
-        this.overallAttendanceSum$.subscribe(
-            (sum) => (this.overallAttendanceSum = sum)
-        );
-
         this.attendances$ = combineLatest([
             this.store.select(fromApplication.attendanceEntriesWithOvertime),
             this.week$,
@@ -268,11 +214,16 @@ export class WeekComponent {
             this.attendanceCorrections$,
         ])
             .pipe(withLatestFrom(this.activityTypes$))
-            .subscribe(([[attendances, stats, days, corrections], types]) => {
+            .subscribe(([[attendances, _stats, days, corrections], types]) => {
                 this.attendances = attendances;
-                this.attendanceStats = stats;
                 this.refreshPrintPreviewContents(days, types, corrections);
             });
+    }
+
+    protected weekSelected(week: IWeekDate): void {
+        this.router.navigate(["/week"], {
+            queryParams: { year: week.year, week: week.week },
+        });
     }
 
     protected openModal(template: TemplateRef<unknown>) {

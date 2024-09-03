@@ -17,10 +17,6 @@ export const routes: Routes = [
         component: DayComponent,
     },
     {
-        path: "week/:year/:week",
-        component: WeekComponent,
-    },
-    {
         path: "week",
         component: WeekComponent,
     },

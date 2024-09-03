@@ -1,0 +1,41 @@
+<div class="d-flex btn-group">
+    <button
+        class="btn btn-outline-primary"
+        (click)="selectPreviousYear()"
+        (keypress.enter)="selectPreviousYear()"
+        aria-label="Previous year"
+    >
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Previous year</span>
+    </button>
+    <button
+        class="btn btn-outline-primary"
+        (click)="selectPreviousWeek()"
+        (keypress.enter)="selectPreviousWeek()"
+        aria-label="Previous week"
+    >
+        <span aria-hidden="true">&lsaquo;</span>
+        <span class="sr-only">Previous week</span>
+    </button>
+    <button class="btn btn-secondary" disabled aria-label="Next week">
+        {{ selectedWeek()?.year }}, Week {{ selectedWeek()?.week }}
+    </button>
+    <button
+        class="btn btn-outline-primary"
+        (click)="selectNextWeek()"
+        (keypress.enter)="selectNextWeek()"
+        aria-label="Next week"
+    >
+        <span aria-hidden="true">&rsaquo;</span>
+        <span class="sr-only">Next week</span>
+    </button>
+    <button
+        class="btn btn-outline-primary"
+        (click)="selectNextYear()"
+        (keypress.enter)="selectNextYear()"
+        aria-label="Next year"
+    >
+        <span aria-hidden="true">&raquo;</span>
+        <span class="sr-only">Next year</span>
+    </button>
+</div>
