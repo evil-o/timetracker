@@ -1,5 +1,5 @@
 import { Component, TemplateRef } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 import { Store } from "@ngrx/store";
 
@@ -44,17 +44,9 @@ export class WeekComponent {
     // log entries, filtered to only contain the ones that are in this week
     protected filteredLogEntries$: Observable<IActivityLogEntry[]>;
 
-    protected nextWeek$: Observable<IWeekDate>;
-
-    protected nextWeek?: IWeekDate;
-
     protected week$: Observable<IWeekDate>;
 
     protected week?: IWeekDate;
-
-    protected previousWeek$: Observable<IWeekDate>;
-
-    protected previousWeek?: IWeekDate;
 
     protected days$: Observable<IDayEntry[]>;
 
@@ -76,7 +68,8 @@ export class WeekComponent {
 
     public constructor(
         private store: Store<ApplicationState>,
-        public activatedRoute: ActivatedRoute,
+        private activatedRoute: ActivatedRoute,
+        private router: Router,
         private modalService: BsModalService
     ) {
         this.week$ = this.activatedRoute.queryParams.pipe(
@@ -98,40 +91,6 @@ export class WeekComponent {
         this.activityLogEntries$ = this.store.select(
             fromActivityLog.activityLogEntries
         );
-
-        this.previousWeek$ = this.week$.pipe(
-            map((week) => {
-                let previousWeek = week.week - 1;
-                let previousWeekYear = week.year;
-                if (previousWeek < 1) {
-                    previousWeek = 52;
-                    previousWeekYear -= 1;
-                }
-
-                return { year: previousWeekYear, week: previousWeek };
-            })
-        );
-
-        this.previousWeek$.subscribe((value) => {
-            this.previousWeek = value;
-        });
-
-        this.nextWeek$ = this.week$.pipe(
-            map((week) => {
-                let nextWeek = week.week + 1;
-                let nextWeekYear = week.year;
-                if (nextWeek > 52) {
-                    nextWeek = 1;
-                    nextWeekYear += 1;
-                }
-
-                return { year: nextWeekYear, week: nextWeek };
-            })
-        );
-
-        this.nextWeek$.subscribe((value) => {
-            this.nextWeek = value;
-        });
 
         this.filteredLogEntries$ = combineLatest([
             this.week$,
@@ -259,6 +218,12 @@ export class WeekComponent {
                 this.attendances = attendances;
                 this.refreshPrintPreviewContents(days, types, corrections);
             });
+    }
+
+    protected weekSelected(week: IWeekDate): void {
+        this.router.navigate(["/week"], {
+            queryParams: { year: week.year, week: week.week },
+        });
     }
 
     protected openModal(template: TemplateRef<unknown>) {
