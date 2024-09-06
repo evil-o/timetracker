@@ -1,6 +1,7 @@
 export * from "./compare-day";
 export * from "./date-to-time-input-value";
 export * from "./download-data-as-file";
+export * from "./format-hours";
 export * from "./format-hours.pipe";
 export * from "./get-first-day-of-calendar-week";
 export * from "./pad-number";

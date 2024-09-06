@@ -12,6 +12,7 @@ import {
     IActivityTypes,
     IColorSpec,
 } from "../../../../entities/activity-type";
+import { formatHours } from "../../../../shared/lib";
 
 export interface IAggregationData {
     hours: number;
@@ -86,6 +87,11 @@ export class ActivityAggregationChartComponent implements OnInit {
             legend: {
                 display: false,
             },
+            tooltip: {
+                callbacks: {
+                    label: (item) => formatHours(item.raw as number),
+                },
+            },
         },
     };
 
@@ -101,7 +107,6 @@ export class ActivityAggregationChartComponent implements OnInit {
             return;
         }
         this.chartOptions.plugins.legend.display = display;
-        // this.chartOptions.plugins.legend.labels.display = display;
     }
 
     public ngOnInit() {
