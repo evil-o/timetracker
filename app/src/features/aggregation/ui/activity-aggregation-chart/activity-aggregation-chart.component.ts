@@ -162,9 +162,7 @@ export class ActivityAggregationChartComponent implements OnInit {
         );
 
         aggregation$.subscribe((aggregation) => {
-            const hours = aggregation.values.map(
-                (h) => Math.round(h * 10) / 10
-            );
+            const hours = aggregation.values;
             setTimeout(() => {
                 this.chartData = {
                     datasets: [
