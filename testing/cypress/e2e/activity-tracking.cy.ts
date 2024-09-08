@@ -8,8 +8,7 @@ describe("Activity tracking", () => {
     function expandLogEntry(
         activityType: string = DayPageWorkflows.defaultActivityType
     ): void {
-        cy.log("expand log entry");
-        today.actvityLogList.entries.contains(activityType).click();
+        today.expandLogEntryByType(activityType);
     }
 
     beforeEach(() => {

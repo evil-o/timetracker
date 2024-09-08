@@ -8,6 +8,11 @@ export class TodayPage {
         cy.byTestId("today").click();
     }
 
+    public expandLogEntryByType(activityType: string): void {
+        cy.log("expand log entry");
+        this.actvityLogList.entries.contains(activityType).click();
+    }
+
     public get startTimeInput(): Cypress.Chainable<JQuery<HTMLElement>> {
         return cy.byTestId("day-start");
     }
