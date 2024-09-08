@@ -117,4 +117,32 @@ describe("Activity tracking", () => {
         today.actvityLogList.confirmDeleteLogEntryButton.click();
         today.actvityLogList.noEntriesIndicator.should("exist");
     });
+
+    it("can be used via keyboard", () => {
+        const hours = "3";
+        const minutes = "45";
+        const activityType = "keyboard";
+        const activityDesc = "keyboard control test";
+
+        cy.log("add base activity");
+        dayWorkflows.enterLogEntry(activityType, activityDesc, hours, "00");
+
+        cy.log(
+            "enter first characters of activity type, select autocomplete with enter"
+        );
+        today.addActivity.activityInput.click();
+        today.addActivity.activityInput.should("be.focused");
+        cy.focused().clear().type(activityType.slice(0, 1));
+
+        cy.log("enter -> expect to be in minutes input");
+        cy.focused().type("{enter}");
+        today.addActivity.activityDudation.should("be.focused");
+        cy.focused().type(`:${minutes}`);
+
+        cy.log("enter -> expect submit");
+        cy.focused().type("{enter}");
+
+        expandLogEntry(activityType);
+        dayWorkflows.expectEntryTime(activityType, hours, minutes);
+    });
 });
