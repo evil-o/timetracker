@@ -1,0 +1,10 @@
+@for (token of this.parsedDescription(); track $index) {
+    @if (token.type === TokenType.Text) {
+        <span data-testid="text-token">{{ token.toString() }}</span>
+    }
+    @if (token.type === TokenType.Tag) {
+        <span class="badge text-bg-secondary" data-testid="tag-token">{{
+            TAG_CHARACTER + token.toString()
+        }}</span>
+    }
+}
