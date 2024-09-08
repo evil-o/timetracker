@@ -23,6 +23,7 @@ None for now.
 -   Unify ngx bootstrap vs. @ng-bootstrap use
 -   split dialog out of acitvities component into its own component
 -   make each state have its own incremental migration action rather than listening to the one from storageVersion
+-   Transition to standalone?
 
 ## Fetures
 
