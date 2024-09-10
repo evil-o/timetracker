@@ -40,7 +40,8 @@ describe("Activity tracking", () => {
 
     it("changes the description of a log entry", () => {
         const activityTypeDescriptionBefore = "e2e test activity before";
-        const activityTypeDescriptionAfter = "e2e test activity after";
+        const activityTypeDescriptionAfter1 = "e2e test activity after 1";
+        const activityTypeDescriptionAfter2 = "e2e test activity after 2";
 
         dayWorkflows.enterLogEntry(
             DayPageWorkflows.defaultActivityType,
@@ -49,25 +50,46 @@ describe("Activity tracking", () => {
 
         expandLogEntry();
 
-        const enterNewDescription = () => {
+        const enterNewDescription = (
+            oldDescription: string,
+            newDescription: string
+        ) => {
             today.actvityLogList.entryDescriptions
-                .contains(activityTypeDescriptionBefore)
+                .contains(oldDescription)
                 .dblclick();
             today.actvityLogList.logEntryDescriptionInput
                 .clear()
-                .type(activityTypeDescriptionAfter);
+                .type(newDescription);
         };
 
         cy.log("cancel and expect no change");
-        enterNewDescription();
+        enterNewDescription(
+            activityTypeDescriptionBefore,
+            activityTypeDescriptionAfter1
+        );
         today.actvityLogList.cancelDescriptionChange.click();
 
-        cy.log("confirm and expect change");
-        enterNewDescription();
+        cy.log("confirm and expect change via button click");
+        enterNewDescription(
+            activityTypeDescriptionBefore,
+            activityTypeDescriptionAfter1
+        );
         today.actvityLogList.confirmDescriptionChange.click();
 
         today.actvityLogList.entryDescriptions
-            .contains(activityTypeDescriptionAfter)
+            .contains(activityTypeDescriptionAfter1)
+            .should("exist");
+
+        cy.log("confirm and expect change via keyboard (enter)");
+        expandLogEntry();
+        enterNewDescription(
+            activityTypeDescriptionAfter1,
+            activityTypeDescriptionAfter2
+        );
+        cy.focused().type("{enter}");
+
+        today.actvityLogList.entryDescriptions
+            .contains(activityTypeDescriptionAfter2)
             .should("exist");
     });
 
