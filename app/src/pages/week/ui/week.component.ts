@@ -66,6 +66,8 @@ export class WeekComponent {
 
     private attendances: IAttendanceWithTimes[] = [];
 
+    private overallAttendanceSum$: Observable<number | undefined>;
+
     public constructor(
         private store: Store<ApplicationState>,
         private activatedRoute: ActivatedRoute,
@@ -207,17 +209,39 @@ export class WeekComponent {
             })
         );
 
+        this.overallAttendanceSum$ = this.store.select(
+            fromApplication.overtimeSum
+        );
+
         combineLatest([
             this.attendances$,
             this.attendanceStats$,
             this.days$,
             this.attendanceCorrections$,
+            this.overallAttendanceSum$,
         ])
             .pipe(withLatestFrom(this.activityTypes$))
-            .subscribe(([[attendances, _stats, days, corrections], types]) => {
-                this.attendances = attendances;
-                this.refreshPrintPreviewContents(days, types, corrections);
-            });
+            .subscribe(
+                ([
+                    [
+                        attendances,
+                        stats,
+                        days,
+                        corrections,
+                        overallAttendanceSum,
+                    ],
+                    types,
+                ]) => {
+                    this.attendances = attendances;
+                    this.refreshPrintPreviewContents(
+                        days,
+                        types,
+                        corrections,
+                        stats,
+                        overallAttendanceSum
+                    );
+                }
+            );
     }
 
     protected weekSelected(week: IWeekDate): void {
@@ -239,17 +263,21 @@ export class WeekComponent {
     protected refreshPrintPreviewContents(
         days: IDayEntry[],
         types: IActivityTypes,
-        corrections: IAttendanceCorrection[]
+        corrections: IAttendanceCorrection[],
+        attendanceStats: IWeekAttendanceStats,
+        overallAttendanceSum: number | undefined
     ) {
-        const rootv2 = makeTimeSheet(
+        const root = makeTimeSheet(
             this.week!,
             days,
             types,
             corrections,
-            this.attendances
+            this.attendances,
+            attendanceStats,
+            overallAttendanceSum
         );
 
-        this.printPreviewContents = rootv2.innerHTML;
+        this.printPreviewContents = root.innerHTML;
     }
 
     protected savePrint() {
