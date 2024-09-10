@@ -1,46 +1,42 @@
-<form class="inline-form">
-    <div
-        *ngIf="!editing"
-        (dblclick)="setEditing(true)"
-        class="input-group noselect"
-    >
-        <div *ngIf="!entry.description" class="text text-muted text-italic">
-            (No description. Double-click to set.)
-        </div>
-        <app-entry-description
-            *ngIf="entry.description"
-            [description]="entry.description"
-        ></app-entry-description>
+<div
+    *ngIf="!editing"
+    (dblclick)="setEditing(true)"
+    class="input-group noselect"
+>
+    <div *ngIf="!entry.description" class="text text-muted text-italic">
+        (No description. Double-click to set.)
     </div>
-    <div *ngIf="editing" class="input-group">
-        <input
-            type="text"
-            #descriptionInput
-            data-testid="log-entry-description-input"
-            class="form-control"
-            placeholder="Enter a description"
-            [value]="entry.description || ''"
-        />
-        <div class="input-group-append">
-            <button
-                data-testid="confirm-description-change"
-                class="btn btn-outline-primary"
-                type="button"
-                (click)="
-                    emitChangeDescription(descriptionInput.value);
-                    setEditing(false)
-                "
-            >
-                <i class="fa fa-check"></i>
-            </button>
-            <button
-                data-testid="cancel-description-change"
-                class="btn btn-outline-secondary"
-                type="button"
-                (click)="setEditing(false)"
-            >
-                <i class="fa fa-ban"></i>
-            </button>
-        </div>
+    <app-entry-description
+        *ngIf="entry.description"
+        [description]="entry.description"
+    ></app-entry-description>
+</div>
+<div *ngIf="editing" class="input-group">
+    <input
+        type="text"
+        #descriptionInput
+        data-testid="log-entry-description-input"
+        class="form-control"
+        placeholder="Enter a description"
+        [value]="entry.description || ''"
+        (keyup.enter)="submitDescription(descriptionInput.value)"
+    />
+    <div class="input-group-append">
+        <button
+            data-testid="confirm-description-change"
+            class="btn btn-outline-primary"
+            type="button"
+            (click)="submitDescription(descriptionInput.value)"
+        >
+            <i class="fa fa-check"></i>
+        </button>
+        <button
+            data-testid="cancel-description-change"
+            class="btn btn-outline-secondary"
+            type="button"
+            (click)="setEditing(false)"
+        >
+            <i class="fa fa-ban"></i>
+        </button>
     </div>
-</form>
+</div>

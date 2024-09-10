@@ -35,7 +35,12 @@ export class EditableLogEntryDescriptionComponent {
         }
     }
 
-    public emitChangeDescription(newDescription: string) {
+    protected submitDescription(newDescription: string): void {
+        this.emitChangeDescription(newDescription);
+        this.setEditing(false);
+    }
+
+    private emitChangeDescription(newDescription: string) {
         this.changeEntryDescription.emit({
             entryId: this.entry.id,
             newDescription: newDescription,
