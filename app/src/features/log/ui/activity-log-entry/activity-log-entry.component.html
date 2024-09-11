@@ -11,19 +11,21 @@
         data-testid="activity-log-descriptions"
         *ngFor="let entry of group.entries"
     >
-        <div class="col-8 d-flex align-items-center">
+        <div class="col-9 d-flex align-items-center">
             <app-editable-log-entry-description
+                class="d-block flex-grow-1"
                 [entry]="entry"
                 (changeEntryDescription)="changeEntryDescription($event)"
             ></app-editable-log-entry-description>
         </div>
         <div class="col-2 d-flex align-items-center">
             <app-editable-log-entry-hours
+                class="d-block flex-grow-1"
                 [entry]="entry"
                 (changeEntryHours)="changeEntryHours($event)"
             ></app-editable-log-entry-hours>
         </div>
-        <div class="col-2 d-flex align-items-center">
+        <div class="col-1 d-flex align-items-center">
             <button
                 type="button"
                 [class.d-none]="confirmDelete === entry.id"
