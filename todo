@@ -16,6 +16,7 @@ None for now.
 
 ## Refactoring & Maintenance
 
+-   Unify editable-log-entry-description and hours with dependency inversion
 -   Create a proper view state + input/output data flow for the day component
 -   enable router input binding
 -   Add a quick way to output a daily message
