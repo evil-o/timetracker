@@ -1,43 +1,9 @@
-<div
-    *ngIf="!editing"
-    (dblclick)="setEditing(true)"
-    data-testid="hours-input-group"
-    class="input-group noselect"
+<app-editable-item
+    [textValue]="(entry.hours | formatHours: '{h}:{m}') || ''"
+    (submit)="emitChangeHours($event)"
 >
     <div *ngIf="!entry.hours" class="text text-muted text-italic">&mdash;</div>
     <div *ngIf="entry.hours">
         {{ entry.hours | formatHours }}
     </div>
-</div>
-<div *ngIf="editing" class="input-group">
-    <input
-        type="text"
-        #hoursInput
-        id="hoursInput"
-        data-testid="log-entry-duration-input"
-        class="form-control"
-        placeholder="#hours"
-        [value]="(entry.hours | formatHours: '{h}:{m}') || ''"
-        (keyup.enter)="submit()"
-        (keyup.escape)="cancel()"
-    />
-    <div class="input-group-append">
-        <button
-            data-testid="confirm-duration-change"
-            class="btn btn-outline-primary"
-            type="button"
-            (click)="submit()"
-        >
-            <i class="fa fa-check"></i>
-        </button>
-        <button
-            data-testid="cancel-duration-change"
-            class="btn btn-outline-secondary"
-            id="submitButton"
-            type="button"
-            (click)="cancel()"
-        >
-            <i class="fa fa-ban"></i>
-        </button>
-    </div>
-</div>
+</app-editable-item>

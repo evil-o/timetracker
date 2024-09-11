@@ -1,7 +1,6 @@
-<div
-    *ngIf="!editing"
-    (dblclick)="setEditing(true)"
-    class="input-group noselect"
+<app-editable-item
+    [textValue]="entry.description || ''"
+    (submit)="submitDescription($event)"
 >
     <div *ngIf="!entry.description" class="text text-muted text-italic">
         (No description. Double-click to set.)
@@ -10,33 +9,4 @@
         *ngIf="entry.description"
         [description]="entry.description"
     ></app-entry-description>
-</div>
-<div *ngIf="editing" class="input-group">
-    <input
-        type="text"
-        #descriptionInput
-        data-testid="log-entry-description-input"
-        class="form-control"
-        placeholder="Enter a description"
-        [value]="entry.description || ''"
-        (keyup.enter)="submitDescription(descriptionInput.value)"
-    />
-    <div class="input-group-append">
-        <button
-            data-testid="confirm-description-change"
-            class="btn btn-outline-primary"
-            type="button"
-            (click)="submitDescription(descriptionInput.value)"
-        >
-            <i class="fa fa-check"></i>
-        </button>
-        <button
-            data-testid="cancel-description-change"
-            class="btn btn-outline-secondary"
-            type="button"
-            (click)="setEditing(false)"
-        >
-            <i class="fa fa-ban"></i>
-        </button>
-    </div>
-</div>
+</app-editable-item>

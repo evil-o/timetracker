@@ -1,129 +1,85 @@
-import { fakeAsync, tick } from "@angular/core/testing";
-import { byTestId, createComponentFactory, Spectator } from "@ngneat/spectator";
-import { MockPipe } from "ng-mocks";
+import { createComponentFactory, Spectator } from "@ngneat/spectator";
+import { MockComponents, MockedComponent, MockPipe } from "ng-mocks";
 import { FormatHoursPipe } from "../../../../shared/lib";
+import { EditableItemComponent } from "../../../../shared/ui";
 import { createActivityLogEntry } from "../../models/activity-log-entry.faker";
+import { ActivityLogEntry } from "../../models/activity-log.state";
 import { EditableLogEntryHoursComponent } from "./editable-log-entry-hours.component";
 
 describe(EditableLogEntryHoursComponent.name, () => {
     const create = createComponentFactory({
         component: EditableLogEntryHoursComponent,
         shallow: true,
-        declarations: [MockPipe(FormatHoursPipe)],
+        declarations: [
+            MockPipe(FormatHoursPipe),
+            MockComponents(EditableItemComponent),
+        ],
     });
 
     let spectator: Spectator<EditableLogEntryHoursComponent>;
-    let entry;
-    let editGroup: HTMLElement;
-
-    function startEditing(): void {
-        spectator.dispatchMouseEvent(editGroup, "dblclick");
-    }
+    let entry: ActivityLogEntry;
+    let editableItem: MockedComponent<EditableItemComponent>;
 
     beforeEach(() => {
         entry = createActivityLogEntry();
         spectator = create({ props: { entry } });
+        editableItem = spectator.query(
+            EditableItemComponent
+        ) as MockedComponent<EditableItemComponent>;
 
-        editGroup = spectator.query(
-            byTestId("hours-input-group")
-        ) as HTMLElement;
+        spyOn(spectator.component.changeEntryHours, "emit");
     });
 
     it("should create", () => {
         expect(spectator.component).toBeTruthy();
     });
 
-    it("should reject invalid strings", fakeAsync(() => {
-        startEditing();
+    it("should reject invalid strings", () => {
+        for (const invalidEntry of [
+            "not a number",
+            "not: a number",
+            "not: 0",
+            "1: not a number either",
+        ]) {
+            editableItem.submit.emit(invalidEntry);
+            expect(spectator.component.changeEntryHours.emit)
+                .withContext(invalidEntry)
+                .not.toHaveBeenCalled();
+        }
+    });
 
-        spyOn(spectator.component.changeEntryHours, "emit");
-        spectator.component.emitChangeHours("not a number");
-        tick();
+    it('should send hours for "," decimal separator', () => {
+        editableItem.submit.emit("1,25");
         expect(
             spectator.component.changeEntryHours.emit
-        ).not.toHaveBeenCalled();
+        ).toHaveBeenCalledOnceWith({ entryId: entry.id, newHours: 1.25 });
+    });
 
-        spectator.component.emitChangeHours("not: a number");
-        tick();
+    it('should send hours for "." decimal separator', () => {
+        editableItem.submit.emit("1.25");
         expect(
             spectator.component.changeEntryHours.emit
-        ).not.toHaveBeenCalled();
+        ).toHaveBeenCalledOnceWith({ entryId: entry.id, newHours: 1.25 });
+    });
 
-        spectator.component.emitChangeHours("not: 0");
-        tick();
+    it('should send hours for strings starting with "."', () => {
+        editableItem.submit.emit(".25");
         expect(
             spectator.component.changeEntryHours.emit
-        ).not.toHaveBeenCalled();
+        ).toHaveBeenCalledOnceWith({ entryId: entry.id, newHours: 0.25 });
+    });
 
-        spectator.component.emitChangeHours("1: not a number either");
-        tick();
+    it('should support "h:m" input format', () => {
+        editableItem.submit.emit("0:15");
         expect(
             spectator.component.changeEntryHours.emit
-        ).not.toHaveBeenCalled();
-    }));
+        ).toHaveBeenCalledOnceWith({ entryId: entry.id, newHours: 0.25 });
+    });
 
-    it('should send hours for "," decimal separator', fakeAsync(() => {
-        startEditing();
-
-        spyOn(spectator.component.changeEntryHours, "emit");
-        spectator.component.changeEntryHours.subscribe((v) => {
-            expect(v.newHours).toBe(1.25);
-        });
-
-        spectator.component.emitChangeHours("1,25");
-        tick();
-        expect(spectator.component.changeEntryHours.emit).toHaveBeenCalled();
-    }));
-
-    it('should send hours for "." decimal separator', fakeAsync(() => {
-        startEditing();
-
-        spyOn(spectator.component.changeEntryHours, "emit");
-        spectator.component.changeEntryHours.subscribe((v) => {
-            expect(v.newHours).toBe(1.25);
-        });
-
-        spectator.component.emitChangeHours("1.25");
-        tick();
-        expect(spectator.component.changeEntryHours.emit).toHaveBeenCalled();
-    }));
-
-    it('should send hours for strings starting with "."', fakeAsync(() => {
-        startEditing();
-
-        spyOn(spectator.component.changeEntryHours, "emit");
-        spectator.component.changeEntryHours.subscribe((v) => {
-            expect(v.newHours).toBe(0.25);
-        });
-
-        spectator.component.emitChangeHours(".25");
-        tick();
-        expect(spectator.component.changeEntryHours.emit).toHaveBeenCalled();
-    }));
-
-    it('should support "h:m" input format', fakeAsync(() => {
-        startEditing();
-
-        spyOn(spectator.component.changeEntryHours, "emit");
-        spectator.component.changeEntryHours.subscribe((v) => {
-            expect(v.newHours).toBe(0.25);
-        });
-
-        spectator.component.emitChangeHours("0:15");
-        tick();
-        expect(spectator.component.changeEntryHours.emit).toHaveBeenCalled();
-    }));
-
-    it('should support ":m" input format', fakeAsync(() => {
-        startEditing();
-
-        spyOn(spectator.component.changeEntryHours, "emit");
-        spectator.component.changeEntryHours.subscribe((v) => {
-            expect(v.newHours).toBe(0.5);
-        });
-
-        spectator.component.emitChangeHours(":30");
-        tick();
-        expect(spectator.component.changeEntryHours.emit).toHaveBeenCalled();
-    }));
+    it('should support ":m" input format', () => {
+        editableItem.submit.emit(":30");
+        expect(
+            spectator.component.changeEntryHours.emit
+        ).toHaveBeenCalledOnceWith({ entryId: entry.id, newHours: 0.5 });
+    });
 });
