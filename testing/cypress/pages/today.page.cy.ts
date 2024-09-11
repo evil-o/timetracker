@@ -97,15 +97,21 @@ export class TodayPage {
         },
 
         get logEntryDescriptionInput(): Cypress.Chainable<JQuery<HTMLElement>> {
-            return cy.byTestId("log-entry-description-input");
+            return cy
+                .get("app-editable-log-entry-description")
+                .findByTestId("item-input");
         },
 
         get confirmDescriptionChange(): Cypress.Chainable<JQuery<HTMLElement>> {
-            return cy.byTestId("confirm-description-change");
+            return cy
+                .get("app-editable-log-entry-description")
+                .findByTestId("confirm-item-change");
         },
 
         get cancelDescriptionChange(): Cypress.Chainable<JQuery<HTMLElement>> {
-            return cy.byTestId("cancel-description-change");
+            return cy
+                .get("app-editable-log-entry-description")
+                .findByTestId("cancel-item-change");
         },
 
         get entryDurations(): Cypress.Chainable<JQuery<HTMLElement>> {
@@ -115,15 +121,21 @@ export class TodayPage {
         },
 
         get logEntryDurationInput(): Cypress.Chainable<JQuery<HTMLElement>> {
-            return cy.byTestId("log-entry-duration-input");
+            return cy
+                .get("app-editable-log-entry-hours")
+                .findByTestId("item-input");
         },
 
         get confirmDurationChange(): Cypress.Chainable<JQuery<HTMLElement>> {
-            return cy.byTestId("confirm-duration-change");
+            return cy
+                .get("app-editable-log-entry-hours")
+                .findByTestId("confirm-item-change");
         },
 
         get cancelDurationChange(): Cypress.Chainable<JQuery<HTMLElement>> {
-            return cy.byTestId("cancel-duration-change");
+            return cy
+                .get("app-editable-log-entry-hours")
+                .findByTestId("cancel-item-change");
         },
 
         get deleteLogEntryButton(): Cypress.Chainable<JQuery<HTMLElement>> {
