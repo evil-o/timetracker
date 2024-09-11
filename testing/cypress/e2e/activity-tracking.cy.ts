@@ -1,5 +1,5 @@
 import { TodayPage } from "../pages/today.page.cy";
-import { DayPageWorkflows } from "../support/today.workflows";
+import { DayPageWorkflows, HourString } from "../support/today.workflows";
 
 describe("Activity tracking", () => {
     let today: TodayPage;
@@ -95,9 +95,10 @@ describe("Activity tracking", () => {
 
     it("changes the time of a log entry", () => {
         const newHours = "1";
-        const newMinutes = "23";
+        const newMinutesMouse = "23";
+        const newMinutesKeyboard = "34";
 
-        const enterNewHours = () => {
+        const enterNewHours = (newMinutes: HourString) => {
             today.actvityLogList.entryDurations.first().dblclick();
             today.actvityLogList.logEntryDurationInput
                 .clear()
@@ -109,17 +110,29 @@ describe("Activity tracking", () => {
         expandLogEntry();
 
         cy.log("change duration and cancel");
-        enterNewHours();
+        enterNewHours(newMinutesMouse);
         today.actvityLogList.cancelDurationChange.click();
 
-        cy.log("change duration and confirm");
-        enterNewHours();
+        cy.log("change duration and confirm via mouse");
+        enterNewHours(newMinutesMouse);
         today.actvityLogList.confirmDurationChange.click();
 
         dayWorkflows.expectEntryTime(
             DayPageWorkflows.defaultActivityType,
             newHours,
-            newMinutes
+            newMinutesMouse
+        );
+
+        cy.log("change duration and confirm via keyboard");
+        expandLogEntry();
+
+        enterNewHours(newMinutesKeyboard);
+        cy.focused().type("{enter}");
+
+        dayWorkflows.expectEntryTime(
+            DayPageWorkflows.defaultActivityType,
+            newHours,
+            newMinutesKeyboard
         );
     });
 
