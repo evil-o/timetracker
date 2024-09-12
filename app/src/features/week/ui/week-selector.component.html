@@ -19,6 +19,10 @@
     </button>
     <button class="btn btn-secondary" disabled aria-label="Next week">
         {{ selectedWeek()?.year }}, Week {{ selectedWeek()?.week }}
+        &mdash;
+        {{ startDate() | date: "shortDate" }}
+        &dash;
+        {{ endDate() | date: "shortDate" }}
     </button>
     <button
         class="btn btn-outline-primary"

@@ -4,6 +4,7 @@ export * from "./download-data-as-file";
 export * from "./format-hours";
 export * from "./format-hours.pipe";
 export * from "./get-first-day-of-calendar-week";
+export * from "./get-last-day-of-calendar-week";
 export * from "./pad-number";
 export * from "./pad-number.pipe";
 export * from "./precision.pipe";
