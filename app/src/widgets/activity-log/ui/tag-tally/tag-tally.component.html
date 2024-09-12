@@ -1,0 +1,40 @@
+<div class="container-fluid mb-4">
+    @if (tallies() && activityTypes()) {
+        @for (f of flattenedTallies(); track $index) {
+            <div class="row mt-4">
+                <div class="col">
+                    <h4>
+                        {{ f.tag }}
+                        <app-hour-badge
+                            [hours]="f.tally.totalHoursForThisTag"
+                        ></app-hour-badge>
+                    </h4>
+                </div>
+            </div>
+            @for (entry of f.tally.logs; track $index) {
+                <div class="row">
+                    <div class="col">
+                        <!-- TOOD: replace by common component, but that needs more refactoring -->
+                        <span data-testid="activity-type">{{
+                            activityTypeIdToName(entry.actvitiyId)
+                        }}</span>
+                        /
+                        <span data-testid="description">
+                            <app-entry-description
+                                [description]="entry.description ?? ''"
+                            ></app-entry-description>
+                        </span>
+                        &mdash;
+                        <span>
+                            <app-hour-badge
+                                [hours]="entry.hours"
+                            ></app-hour-badge>
+                        </span>
+                    </div>
+                </div>
+            }
+        }
+    } @else {
+        <div>Missing data.</div>
+    }
+</div>
