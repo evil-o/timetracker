@@ -68,6 +68,27 @@
         </div>
     </tab>
     <tab
+        heading="Week by tag"
+        [active]="selectedTab === 'by-tag'"
+        (select)="selectedTab = 'by-tag'"
+    >
+        <div class="row mt-2">
+            <div class="col">
+                <div class="card w-100">
+                    <div class="card-header text-right">
+                        Activities in the selected week, by tag
+                    </div>
+                    <div class="card-body">
+                        <app-tag-tally
+                            [tallies]="tagTallies$ | async"
+                            [activityTypes]="activityTypes$ | async"
+                        ></app-tag-tally>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </tab>
+    <tab
         heading="Daily details"
         [active]="selectedTab === 'daily'"
         (select)="selectedTab = 'daily'"

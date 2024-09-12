@@ -8,12 +8,14 @@ import { SharedModule } from "../../shared/shared.module";
 import { ActivityLogListComponent } from "./ui/activity-log-list/actvity-log-list.component";
 import { LogInputComponent } from "./ui/log-input/log-input";
 import { StopwatchComponent } from "./ui/stopwatch/stopwatch.component";
+import { TagTallyComponent } from "./ui/tag-tally/tag-tally.component";
 import { TallyComponent } from "./ui/tally/tally.component";
 
 const declarations = [
     ActivityLogListComponent,
     LogInputComponent,
     StopwatchComponent,
+    TagTallyComponent,
     TallyComponent,
 ];
 

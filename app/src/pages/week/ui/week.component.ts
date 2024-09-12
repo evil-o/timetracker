@@ -29,8 +29,10 @@ import {
 } from "../../../entities/application";
 import { IAttendanceCorrection } from "../../../entities/attendance";
 import { getFirstDayOfCalendarWeek } from "../../../shared/lib";
+import { TagTallies } from "../../../widgets/activity-log";
 import { IWeekAttendanceStats } from "../../../widgets/attendance";
 import { IDayEntry, IWeekDate, makeTimeSheet } from "../../../widgets/week";
+import { aggregateTagTallies } from "../lib/aggregate-tag-tallies";
 
 @Component({
     selector: "app-week",
@@ -41,8 +43,11 @@ export class WeekComponent {
 
     protected activityTypes$: Observable<IActivityTypes>;
 
-    // log entries, filtered to only contain the ones that are in this week
+    /** log entries, filtered to only contain the ones that are in this week */
     protected filteredLogEntries$: Observable<IActivityLogEntry[]>;
+
+    /** log entries, filtered to only contain the ones that are in this week */
+    protected tagTallies$: Observable<TagTallies>;
 
     protected week$: Observable<IWeekDate>;
 
@@ -62,7 +67,8 @@ export class WeekComponent {
 
     protected attendanceStats$: Observable<IWeekAttendanceStats>;
 
-    protected selectedTab: "tally" | "daily" | "attendance" = "tally";
+    protected selectedTab: "tally" | "daily" | "attendance" | "by-tag" =
+        "tally";
 
     private attendances: IAttendanceWithTimes[] = [];
 
@@ -107,6 +113,10 @@ export class WeekComponent {
                     );
                 });
             })
+        );
+
+        this.tagTallies$ = this.filteredLogEntries$.pipe(
+            map(aggregateTagTallies)
         );
 
         this.days$ = this.filteredLogEntries$.pipe(

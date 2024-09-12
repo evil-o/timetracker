@@ -1,4 +1,8 @@
-import { Component, input, output } from "@angular/core";
+import { Component, computed, input, output, Signal } from "@angular/core";
+import {
+    getFirstDayOfCalendarWeek,
+    getLastDayOfCalendarWeek,
+} from "../../../shared/lib";
 import { IWeekDate } from "../../../widgets/week";
 
 @Component({
@@ -9,6 +13,22 @@ export class WeekSelectorComponent {
     public selectedWeek = input<IWeekDate>();
 
     public weekSelected = output<IWeekDate>();
+
+    protected startDate: Signal<Date | undefined> = computed(() => {
+        const selectedWeek = this.selectedWeek();
+        if (!selectedWeek) {
+            return undefined;
+        }
+        return getFirstDayOfCalendarWeek(selectedWeek.year, selectedWeek.week);
+    });
+
+    protected endDate: Signal<Date | undefined> = computed(() => {
+        const selectedWeek = this.selectedWeek();
+        if (!selectedWeek) {
+            return undefined;
+        }
+        return getLastDayOfCalendarWeek(selectedWeek.year, selectedWeek.week);
+    });
 
     protected selectPreviousYear(): void {
         this.changeYear(-1);
