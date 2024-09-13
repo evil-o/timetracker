@@ -29,7 +29,7 @@ export class TagTallyComponent {
         const flattened: IFlattenedTally[] = [];
 
         if (tallies) {
-            for (const tag of Object.keys(tallies)) {
+            for (const tag of Object.keys(tallies).sort()) {
                 flattened.push({ tag, tally: tallies[tag] });
             }
         }
