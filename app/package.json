@@ -45,7 +45,7 @@
         "@angular/cli": "18.2.9",
         "@angular/compiler-cli": "18.2.1",
         "@angular/language-service": "18.2.8",
-        "@faker-js/faker": "9.0.3",
+        "@faker-js/faker": "9.1.0",
         "@ngneat/spectator": "19.0.0",
         "@types/color-convert": "2.0.4",
         "@types/jasmine": "5.1.4",
