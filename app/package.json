@@ -28,7 +28,7 @@
         "@ngrx/store": "18.0.2",
         "@ngrx/store-devtools": "18.0.2",
         "bootstrap": "5.3.3",
-        "chart.js": "4.4.4",
+        "chart.js": "4.4.6",
         "color-convert": "2.0.1",
         "core-js": "3.38.1",
         "current-week-number": "1.0.7",
