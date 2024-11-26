@@ -6,12 +6,12 @@ import { BsModalService } from "ngx-bootstrap/modal";
     templateUrl: "./modal-header.component.html",
 })
 export class ModalHeaderComponent {
-    public onDismiss = output<void>();
+    public dismissed = output<void>();
 
     public constructor(private modalService: BsModalService) {}
 
     public dismiss(): void {
-        this.onDismiss.emit();
+        this.dismissed.emit();
         this.modalService.hide();
     }
 }
