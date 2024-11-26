@@ -13,6 +13,7 @@ import {
 @Component({
     selector: "app-activities",
     templateUrl: "./activities.component.html",
+    standalone: false,
 })
 export class ActivitiesComponent {
     public modalRef!: BsModalRef;

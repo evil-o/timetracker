@@ -18,6 +18,7 @@ interface IFlattenedTally {
     selector: "app-tag-tally",
     templateUrl: "./tag-tally.component.html",
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false,
 })
 export class TagTallyComponent {
     public tallies = input.required<TagTallies | Nullish>();

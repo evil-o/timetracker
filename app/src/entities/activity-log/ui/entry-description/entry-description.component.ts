@@ -5,6 +5,7 @@ import { TokenType } from "../../models/description/token-type";
 @Component({
     selector: "app-entry-description",
     templateUrl: "./entry-description.component.html",
+    standalone: false,
 })
 export class EntryDescriptionComponent {
     public description = input.required<string>();

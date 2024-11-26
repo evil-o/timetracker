@@ -15,6 +15,7 @@ import {
 @Component({
     selector: "app-stopwatch",
     templateUrl: "./stopwatch.component.html",
+    standalone: false,
 })
 export class StopwatchComponent {
     public static readonly UPDATE_INTERVAL_MS = 1000;

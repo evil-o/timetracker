@@ -3,6 +3,7 @@ import { Component, input, output } from "@angular/core";
 @Component({
     selector: "app-quick-day-picker",
     templateUrl: "./quick-day-picker.html",
+    standalone: false,
 })
 export class QuickDayPickerComponent {
     public date = input.required<Date | null>();
