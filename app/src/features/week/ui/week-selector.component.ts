@@ -8,6 +8,7 @@ import { IWeekDate } from "../../../widgets/week";
 @Component({
     selector: "app-week-selector",
     templateUrl: "./week-selector.component.html",
+    standalone: false,
 })
 export class WeekSelectorComponent {
     public selectedWeek = input<IWeekDate>();

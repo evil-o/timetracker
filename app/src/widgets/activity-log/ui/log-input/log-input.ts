@@ -14,6 +14,7 @@ export interface ILogHoursOutput {
 @Component({
     selector: "app-log-input",
     templateUrl: "./log-input.html",
+    standalone: false,
 })
 export class LogInputComponent {
     @ViewChild("activityToLog")

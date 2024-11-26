@@ -33,6 +33,7 @@ import {
 @Component({
     selector: "app-day",
     templateUrl: "./day.component.html",
+    standalone: false,
 })
 export class DayComponent {
     @ViewChild(LogInputComponent)

@@ -15,6 +15,7 @@ interface IGroupEntry {
 @Component({
     selector: "app-actvity-log-list",
     templateUrl: "./actvity-log-list.component.html",
+    standalone: false,
 })
 export class ActivityLogListComponent implements OnInit {
     @Input()

@@ -36,6 +36,7 @@ module.exports = tseslint.config(
                     argsIgnorePattern: "^_",
                 },
             ],
+            "@angular-eslint/prefer-standalone": ["off"],
             "@typescript-eslint/member-ordering": ["warn"],
             "@typescript-eslint/explicit-member-accessibility": ["warn"],
             "no-console": ["warn", { allow: ["warn", "error"] }],

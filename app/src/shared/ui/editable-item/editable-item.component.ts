@@ -6,6 +6,7 @@ import { Component, ElementRef, input, output, ViewChild } from "@angular/core";
 @Component({
     selector: "app-editable-item",
     templateUrl: "./editable-item.component.html",
+    standalone: false,
 })
 export class EditableItemComponent {
     @ViewChild("itemInput")

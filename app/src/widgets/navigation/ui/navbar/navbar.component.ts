@@ -20,6 +20,7 @@ import { storageVersionActions } from "../../../../entities/storage-version";
 @Component({
     selector: "app-navbar",
     templateUrl: "./navbar.component.html",
+    standalone: false,
 })
 export class NavbarComponent {
     @Output()

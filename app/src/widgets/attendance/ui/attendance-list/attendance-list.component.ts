@@ -7,6 +7,7 @@ import { IWeekAttendanceStats } from "../../model/week-attendance-stats";
 @Component({
     selector: "app-attendance-list",
     templateUrl: "./attendance-list.component.html",
+    standalone: false,
 })
 export class AttendanceListComponent {
     public attendances = input.required<

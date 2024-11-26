@@ -105,14 +105,26 @@ describe(DayComponent.name, () => {
         discardPeriodicTasks();
     }));
 
-    it("should properly display the start time", fakeAsync(() => {
-        const n = new Date();
+    it("should properly display the start time (flaky?)", fakeAsync(() => {
+        // TODO: this test is probably flaky sometimes, if the timing is just right
+        const now = new Date();
+
+        const entrySum = testEntries
+            .map((e) => e.hours)
+            .reduce((prev, cur) => prev + cur, 0);
+        const hours = Math.floor(entrySum);
+        const minutes = (entrySum - hours) * 60.0;
+        const expectedDate = new Date(now);
+        expectedDate.setHours(now.getHours() - hours);
+        expectedDate.setMinutes(now.getMinutes() - minutes);
 
         component.startTime$.subscribe((value) => {
-            expect(value.getHours()).toBe(n.getHours() - 6);
-            expect(value.getMinutes()).toBe(
-                Math.floor(n.getMinutes() + 60 - 15)
-            );
+            expect(value.getHours())
+                .withContext("hours")
+                .toBe(expectedDate.getHours());
+            expect(value.getMinutes())
+                .withContext("minutes")
+                .toBe(expectedDate.getMinutes());
         });
 
         discardPeriodicTasks();

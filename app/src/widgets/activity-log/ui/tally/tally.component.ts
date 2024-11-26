@@ -5,6 +5,7 @@ import { IActivityTypes } from "../../../../entities/activity-type";
 @Component({
     selector: "app-tally",
     templateUrl: "./tally.component.html",
+    standalone: false,
 })
 export class TallyComponent {
     @Input()

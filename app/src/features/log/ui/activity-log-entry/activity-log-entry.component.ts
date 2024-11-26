@@ -16,6 +16,7 @@ import {
     selector: "app-activity-log-entry",
     templateUrl: "./activity-log-entry.component.html",
     providers: [AccordionComponent],
+    standalone: false,
 })
 export class ActivityLogEntryComponent {
     public customColorClass = "";

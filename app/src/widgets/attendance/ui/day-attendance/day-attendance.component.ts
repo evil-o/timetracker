@@ -22,6 +22,7 @@ import {
 @Component({
     selector: "app-day-attendance",
     templateUrl: "./day-attendance.component.html",
+    standalone: false,
 })
 export class DayAttendanceComponent implements OnInit {
     @Input()

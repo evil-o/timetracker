@@ -3,6 +3,7 @@ import { Component, Input } from "@angular/core";
 @Component({
     selector: "app-time-badge",
     templateUrl: "./time-badge.component.html",
+    standalone: false,
 })
 export class TimeBadgeComponent {
     public dateDisplayString = "";
