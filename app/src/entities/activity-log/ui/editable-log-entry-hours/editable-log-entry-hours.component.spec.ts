@@ -41,7 +41,7 @@ describe(EditableLogEntryHoursComponent.name, () => {
             "not: 0",
             "1: not a number either",
         ]) {
-            editableItem.submit.emit(invalidEntry);
+            editableItem.submitItem.emit(invalidEntry);
             expect(spectator.component.changeEntryHours.emit)
                 .withContext(invalidEntry)
                 .not.toHaveBeenCalled();
@@ -49,35 +49,35 @@ describe(EditableLogEntryHoursComponent.name, () => {
     });
 
     it('should send hours for "," decimal separator', () => {
-        editableItem.submit.emit("1,25");
+        editableItem.submitItem.emit("1,25");
         expect(
             spectator.component.changeEntryHours.emit
         ).toHaveBeenCalledOnceWith({ entryId: entry.id, newHours: 1.25 });
     });
 
     it('should send hours for "." decimal separator', () => {
-        editableItem.submit.emit("1.25");
+        editableItem.submitItem.emit("1.25");
         expect(
             spectator.component.changeEntryHours.emit
         ).toHaveBeenCalledOnceWith({ entryId: entry.id, newHours: 1.25 });
     });
 
     it('should send hours for strings starting with "."', () => {
-        editableItem.submit.emit(".25");
+        editableItem.submitItem.emit(".25");
         expect(
             spectator.component.changeEntryHours.emit
         ).toHaveBeenCalledOnceWith({ entryId: entry.id, newHours: 0.25 });
     });
 
     it('should support "h:m" input format', () => {
-        editableItem.submit.emit("0:15");
+        editableItem.submitItem.emit("0:15");
         expect(
             spectator.component.changeEntryHours.emit
         ).toHaveBeenCalledOnceWith({ entryId: entry.id, newHours: 0.25 });
     });
 
     it('should support ":m" input format', () => {
-        editableItem.submit.emit(":30");
+        editableItem.submitItem.emit(":30");
         expect(
             spectator.component.changeEntryHours.emit
         ).toHaveBeenCalledOnceWith({ entryId: entry.id, newHours: 0.5 });

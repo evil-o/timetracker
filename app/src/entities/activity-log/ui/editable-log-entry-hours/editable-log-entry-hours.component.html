@@ -1,6 +1,6 @@
 <app-editable-item
     [textValue]="(entry.hours | formatHours: '{h}:{m}') || ''"
-    (submit)="emitChangeHours($event)"
+    (submitItem)="emitChangeHours($event)"
 >
     <div *ngIf="!entry.hours" class="text text-muted text-italic">&mdash;</div>
     <div *ngIf="entry.hours">

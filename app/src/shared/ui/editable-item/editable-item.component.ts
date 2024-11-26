@@ -13,12 +13,12 @@ export class EditableItemComponent {
 
     public textValue = input.required<string>();
 
-    public submit = output<string>();
+    public submitItem = output<string>();
 
     protected editing = false;
 
     protected onSubmit() {
-        this.submit.emit(this.itemInput.nativeElement.value);
+        this.submitItem.emit(this.itemInput.nativeElement.value);
         this.setEditing(false);
     }
 
