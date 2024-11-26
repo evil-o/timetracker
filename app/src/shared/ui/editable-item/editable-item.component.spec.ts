@@ -77,7 +77,7 @@ describe(EditableItemComponent.name, () => {
     it("submits and leaves editing mode on confirm click", () => {
         enterEditMode();
 
-        spyOn(spectator.component.submit, "emit");
+        spyOn(spectator.component.submitItem, "emit");
 
         const mockValue = faker.word.sample(3);
         spectator.typeInElement(mockValue, itemInput);
@@ -85,7 +85,7 @@ describe(EditableItemComponent.name, () => {
         reQuery();
         expect(view).toBeTruthy();
         expect(itemInput).toBeFalsy();
-        expect(spectator.component.submit.emit).toHaveBeenCalledOnceWith(
+        expect(spectator.component.submitItem.emit).toHaveBeenCalledOnceWith(
             mockValue
         );
     });
@@ -93,7 +93,7 @@ describe(EditableItemComponent.name, () => {
     it("submits and leaves editing mode on enter", () => {
         enterEditMode();
 
-        spyOn(spectator.component.submit, "emit");
+        spyOn(spectator.component.submitItem, "emit");
 
         const mockValue = faker.word.sample(3);
         spectator.typeInElement(mockValue, itemInput);
@@ -101,7 +101,7 @@ describe(EditableItemComponent.name, () => {
         reQuery();
         expect(view).toBeTruthy();
         expect(itemInput).toBeFalsy();
-        expect(spectator.component.submit.emit).toHaveBeenCalledOnceWith(
+        expect(spectator.component.submitItem.emit).toHaveBeenCalledOnceWith(
             mockValue
         );
     });

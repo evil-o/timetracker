@@ -1,6 +1,6 @@
 <app-editable-item
     [textValue]="entry.description || ''"
-    (submit)="submitDescription($event)"
+    (submitItem)="submitDescription($event)"
 >
     <div *ngIf="!entry.description" class="text text-muted text-italic">
         (No description. Double-click to set.)
