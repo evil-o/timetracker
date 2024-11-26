@@ -66,8 +66,7 @@ class Aggregation {
 @Component({
     selector: "app-activity-aggregation-chart",
     templateUrl: "./activity-aggregation-chart.component.html",
-    imports: [BaseChartDirective, CommonModule],
-    standalone: true,
+    imports: [BaseChartDirective, CommonModule]
 })
 export class ActivityAggregationChartComponent implements OnInit {
     @Input()
