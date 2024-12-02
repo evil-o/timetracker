@@ -14,7 +14,7 @@
         "generate:colors": "ts-node generate-colors.ts"
     },
     "dependencies": {
-        "@angular/animations": "18.2.1",
+        "@angular/animations": "19.0.1",
         "@angular/cdk": "18.2.13",
         "@angular/common": "18.2.1",
         "@angular/compiler": "18.2.1",
