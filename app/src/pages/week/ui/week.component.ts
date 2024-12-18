@@ -37,6 +37,7 @@ import { aggregateTagTallies } from "../lib/aggregate-tag-tallies";
 @Component({
     selector: "app-week",
     templateUrl: "./week.component.html",
+    standalone: false,
 })
 export class WeekComponent {
     protected activityLogEntries$: Observable<IActivityLogEntry[]>;

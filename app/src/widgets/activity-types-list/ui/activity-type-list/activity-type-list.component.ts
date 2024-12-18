@@ -9,6 +9,7 @@ import { ApplicationState } from "../../../../entities/application";
 @Component({
     selector: "app-activity-type-list",
     templateUrl: "./activity-type-list.component.html",
+    standalone: false,
 })
 export class ActivityTypeListComponent {
     @Output() public mergeRequest = new EventEmitter<IActivityType>();

@@ -3,6 +3,7 @@ import { formatHours } from "./format-hours";
 
 @Pipe({
     name: "formatHours",
+    standalone: false,
 })
 export class FormatHoursPipe implements PipeTransform {
     public transform(

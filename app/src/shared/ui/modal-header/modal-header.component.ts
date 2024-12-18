@@ -4,6 +4,7 @@ import { BsModalService } from "ngx-bootstrap/modal";
 @Component({
     selector: "app-modal-header",
     templateUrl: "./modal-header.component.html",
+    standalone: false,
 })
 export class ModalHeaderComponent {
     public dismissed = output<void>();

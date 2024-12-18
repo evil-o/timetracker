@@ -10,6 +10,7 @@ import {
     selector: "app-activity-color-picker",
     templateUrl: "./activity-color-picker.component.html",
     styleUrls: ["./activity-color-picker.component.css"],
+    standalone: false,
 })
 export class ActivityColorPickerComponent {
     @Output() public colorPicked = new EventEmitter<{ colorId?: string }>();

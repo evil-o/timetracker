@@ -4,6 +4,7 @@ import { IActivityTypes } from "../models/activity-types.types";
 
 @Pipe({
     name: "activityTypeIdToName",
+    standalone: false,
 })
 export class ActivityTypeIdToNamePipe implements PipeTransform {
     public ActivityTypes = ActivityTypes;

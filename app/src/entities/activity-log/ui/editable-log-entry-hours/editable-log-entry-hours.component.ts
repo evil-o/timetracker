@@ -5,6 +5,7 @@ import { ActivityLogEntry } from "../../models/activity-log.state";
 @Component({
     selector: "app-editable-log-entry-hours",
     templateUrl: "./editable-log-entry-hours.component.html",
+    standalone: false,
 })
 export class EditableLogEntryHoursComponent {
     @Input()

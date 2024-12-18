@@ -13,6 +13,7 @@ import { IActivityType } from "../../models/activity-types.types";
 @Component({
     selector: "app-activity-picker",
     templateUrl: "./activity-picker.component.html",
+    standalone: false,
 })
 export class ActivityPickerComponent {
     @Input()

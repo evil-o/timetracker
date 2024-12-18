@@ -10,6 +10,7 @@ export interface IGroupEntry {
 
 @Pipe({
     name: "groupActivityLogEntriesById",
+    standalone: false,
 })
 export class GroupActivityLogEntriesByIdPipe implements PipeTransform {
     public transform(
