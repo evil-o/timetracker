@@ -10,7 +10,7 @@
     },
     "devDependencies": {
         "@faker-js/faker": "9.3.0",
-        "cypress": "13.16.1",
+        "cypress": "13.17.0",
         "cypress-delete-downloads-folder": "0.0.6",
         "eslint-plugin-mocha": "10.5.0",
         "typescript": "5.7.2",
