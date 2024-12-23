@@ -17,6 +17,7 @@ import {
 @Component({
     selector: "app-main",
     templateUrl: "./main.component.html",
+    standalone: false,
 })
 export class MainComponent implements OnInit {
     public activities$!: Observable<IActivityType[]>;

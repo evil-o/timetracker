@@ -18,6 +18,7 @@ import { ActivityPickerComponent } from "./activity-picker.component";
     template: `<app-activity-picker
         [activities$]="activities$"
     ></app-activity-picker>`,
+    standalone: false,
 })
 class TestHostActivityPickerComponent {
     @ViewChild(ActivityPickerComponent)

@@ -4,6 +4,7 @@ import { IActivityTypes } from "../../../entities/activity-type";
 
 @Pipe({
     name: "logEntryTally",
+    standalone: false,
 })
 export class LogEntryTallyPipe implements PipeTransform {
     public transform(

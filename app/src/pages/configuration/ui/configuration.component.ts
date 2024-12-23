@@ -11,6 +11,7 @@ import {
 @Component({
     selector: "app-configuration",
     templateUrl: "./configuration.component.html",
+    standalone: false,
 })
 export class ConfigurationComponent implements OnInit {
     public workingHoursPerWeek$!: Observable<number>;

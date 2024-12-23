@@ -4,6 +4,7 @@ import { ActivityLogEntry } from "../../models/activity-log.state";
 @Component({
     selector: "app-editable-log-entry-description",
     templateUrl: "./editable-log-entry-description.component.html",
+    standalone: false,
 })
 export class EditableLogEntryDescriptionComponent {
     @Input({ required: true })
