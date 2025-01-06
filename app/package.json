@@ -50,7 +50,7 @@
         "@types/color-convert": "2.0.4",
         "@types/jasmine": "5.1.5",
         "@types/jasminewd2": "2.0.13",
-        "@types/node": "22.10.2",
+        "@types/node": "22.10.5",
         "@types/uuid": "10.0.0",
         "angular-eslint": "19.0.2",
         "eslint": "9.17.0",
