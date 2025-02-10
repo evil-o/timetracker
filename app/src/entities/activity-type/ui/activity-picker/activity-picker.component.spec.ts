@@ -1,38 +1,30 @@
-import { Component, ViewChild } from "@angular/core";
-import {
-    ComponentFixture,
-    discardPeriodicTasks,
-    fakeAsync,
-    tick,
-} from "@angular/core/testing";
+import { discardPeriodicTasks, fakeAsync, tick } from "@angular/core/testing";
 
 import { By } from "@angular/platform-browser";
 import { createComponentFactory, Spectator } from "@ngneat/spectator";
 import { TypeaheadDirective } from "ngx-bootstrap/typeahead";
-import { of } from "rxjs";
-import { IActivityType } from "../../models/activity-types.types";
 import { ActivityPickerComponent } from "./activity-picker.component";
 
-@Component({
-    selector: `app-test-host-activity-picker-component`,
-    template: `<app-activity-picker
-        [activities$]="activities$"
-    ></app-activity-picker>`,
-    standalone: false,
-})
-class TestHostActivityPickerComponent {
-    @ViewChild(ActivityPickerComponent)
-    public activityPicker!: ActivityPickerComponent;
+// @Component({
+//     selector: `app-test-host-activity-picker-component`,
+//     template: `<app-activity-picker
+//         [activities$]="activities$"
+//     ></app-activity-picker>`,
+//     standalone: false,
+// })
+// class TestHostActivityPickerComponent {
+//     @ViewChild(ActivityPickerComponent)
+//     public activityPicker!: ActivityPickerComponent;
 
-    public activities$;
+//     public activities$;
 
-    public constructor() {
-        this.activities$ = of([
-            { id: "test1", name: "test", isNonWorking: false },
-            { id: "test2", name: "anothertest", isNonWorking: false },
-        ] as IActivityType[]);
-    }
-}
+//     public constructor() {
+//         this.activities$ = of([
+//             { id: "test1", name: "test", isNonWorking: false },
+//             { id: "test2", name: "anothertest", isNonWorking: false },
+//         ] as IActivityType[]);
+//     }
+// }
 
 describe(ActivityPickerComponent.name, () => {
     const create = createComponentFactory({
@@ -41,7 +33,6 @@ describe(ActivityPickerComponent.name, () => {
     });
     let spectator: Spectator<ActivityPickerComponent>;
     let component: ActivityPickerComponent;
-    let fixture: ComponentFixture<TestHostActivityPickerComponent>;
 
     beforeEach(() => {
         spectator = create();
@@ -53,14 +44,14 @@ describe(ActivityPickerComponent.name, () => {
     });
 
     xit("should properly confirm on enter with partial text", fakeAsync(() => {
-        const typeaheadElement = fixture.debugElement.query(
+        const typeaheadElement = spectator.fixture.debugElement.query(
             By.directive(TypeaheadDirective)
         );
         expect(typeaheadElement).toBeDefined();
         const typeahead = typeaheadElement.injector.get(TypeaheadDirective);
         expect(typeahead).toBeDefined();
 
-        const textInput = fixture.debugElement.query(By.css("input"));
+        const textInput = spectator.fixture.debugElement.query(By.css("input"));
         expect(textInput).toBeDefined("text input not found");
         textInput.nativeElement.value = "t";
         textInput.nativeElement.dispatchEvent(new Event("input"));
@@ -77,7 +68,7 @@ describe(ActivityPickerComponent.name, () => {
         // pressing enter should not trigger the normal emit
         expect(component.confirm.emit).not.toHaveBeenCalled();
 
-        fixture.detectChanges();
+        spectator.fixture.detectChanges();
 
         /* TODO behavior is as expected, but the test fails...
     typeahead.typeaheadOnSelect.emit();
@@ -92,14 +83,14 @@ describe(ActivityPickerComponent.name, () => {
     }));
 
     xit("should properly confirm on enter with full text", fakeAsync(() => {
-        const typeaheadElement = fixture.debugElement.query(
+        const typeaheadElement = spectator.fixture.debugElement.query(
             By.directive(TypeaheadDirective)
         );
         expect(typeaheadElement).toBeDefined();
         const typeahead = typeaheadElement.injector.get(TypeaheadDirective);
         expect(typeahead).toBeDefined();
 
-        const textInput = fixture.debugElement.query(By.css("input"));
+        const textInput = spectator.fixture.debugElement.query(By.css("input"));
         expect(textInput).toBeDefined("text input not found");
         textInput.nativeElement.value = "anothertest";
         textInput.nativeElement.dispatchEvent(new Event("input"));
@@ -120,7 +111,7 @@ describe(ActivityPickerComponent.name, () => {
             new KeyboardEvent("keydown", { key: "enter" })
         );
 
-        fixture.detectChanges();
+        spectator.fixture.detectChanges();
         tick();
 
         // pressing enter should not trigger the normal emit
