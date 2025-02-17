@@ -42,7 +42,7 @@
     },
     "devDependencies": {
         "@angular-devkit/build-angular": "19.1.6",
-        "@angular/cli": "19.1.4",
+        "@angular/cli": "19.1.7",
         "@angular/compiler-cli": "19.1.4",
         "@angular/language-service": "19.0.5",
         "@faker-js/faker": "9.4.0",
