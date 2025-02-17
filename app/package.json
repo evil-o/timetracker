@@ -26,7 +26,7 @@
         "@ng-bootstrap/ng-bootstrap": "18.0.0",
         "@ngrx/effects": "19.0.1",
         "@ngrx/store": "19.0.1",
-        "@ngrx/store-devtools": "19.0.0",
+        "@ngrx/store-devtools": "19.0.1",
         "bootstrap": "5.3.3",
         "chart.js": "4.4.7",
         "color-convert": "2.0.1",
