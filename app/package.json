@@ -29,7 +29,7 @@
         "@ngrx/store-devtools": "19.0.1",
         "bootstrap": "5.3.3",
         "chart.js": "4.4.7",
-        "color-convert": "2.0.1",
+        "color-convert": "3.0.1",
         "core-js": "3.40.0",
         "current-week-number": "1.0.7",
         "immer": "10.1.1",
