@@ -43,7 +43,7 @@
     "devDependencies": {
         "@angular-devkit/build-angular": "19.2.1",
         "@angular/cli": "19.1.7",
-        "@angular/compiler-cli": "19.1.4",
+        "@angular/compiler-cli": "19.2.1",
         "@angular/language-service": "19.2.0",
         "@faker-js/faker": "9.5.0",
         "@ngneat/spectator": "19.4.1",
