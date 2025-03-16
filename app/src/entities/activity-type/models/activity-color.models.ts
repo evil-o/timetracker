@@ -1,4 +1,4 @@
-import * as convert from "color-convert";
+import convert from "color-convert";
 import { IActivityTypeColor, INamedColor } from "./activity-color.types";
 
 // defined base colors in RGB
