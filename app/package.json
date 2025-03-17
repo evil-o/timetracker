@@ -30,7 +30,7 @@
         "bootstrap": "5.3.3",
         "chart.js": "4.4.8",
         "color-convert": "3.0.1",
-        "core-js": "3.40.0",
+        "core-js": "3.41.0",
         "current-week-number": "1.0.7",
         "immer": "10.1.1",
         "ng2-charts": "8.0.0",
