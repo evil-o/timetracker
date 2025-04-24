@@ -97,7 +97,12 @@ export class ActivityLogEntryComponent {
             );
             if (type && type.colorId) {
                 const color = this.colors.find((c) => c.id === type.colorId);
-                this.customColorClass = color!.styleClass;
+                if (!color) {
+                    console.warn(`Color not found for type`, type);
+                    this.customColorClass = "";
+                } else {
+                    this.customColorClass = color!.styleClass;
+                }
             } else {
                 this.customColorClass = "";
             }
