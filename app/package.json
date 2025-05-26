@@ -52,7 +52,7 @@
         "@types/jasminewd2": "2.0.13",
         "@types/node": "22.15.3",
         "@types/uuid": "10.0.0",
-        "angular-eslint": "19.3.0",
+        "angular-eslint": "19.5.0",
         "eslint": "9.27.0",
         "jasmine-core": "5.7.0",
         "jasmine-spec-reporter": "7.0.0",
