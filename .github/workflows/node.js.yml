@@ -33,8 +33,7 @@ jobs:
 
             - name: Setup app
               working-directory: ./app
-              # forcing while upstream peer deps are being fixed for Angular 19
-              run: npm ci --force
+              run: npm ci
 
             - name: Setup Cypress
               working-directory: ./testing
