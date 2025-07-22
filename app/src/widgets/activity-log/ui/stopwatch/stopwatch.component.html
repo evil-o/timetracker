@@ -1,67 +1,64 @@
 <div class="d-flex align-items-center">
-  <div
-    class="navbar-text"
-    [class.text-success]="this.isRunning$ | async"
-    [class.text-info]="this.isPaused$ | async"
+    <div
+        class="navbar-text"
+        [class.text-success]="this.isRunning$ | async"
+        [class.text-info]="this.isPaused$ | async"
     >
-    <i class="fa fa-stopwatch me-2"></i>
-  </div>
-  @if (timeElapsedHours$ | async; as timeElapsed) {
-    <span
-      class="navbar-text me-3"
-      data-testid="time-elapsed"
-      >
-      {{ timeElapsed | formatHours: "{h}:{m}" }}
-    </span>
-  } @else {
-    <span data-testid="time-elapsed" class="navbar-text me-3"> --:-- </span>
-  }
-  <button
-    type="button"
-    class="btn btn-outline-success me-1"
-    [disabled]="this.isRunning$ | async"
-    (click)="start()"
-    title="Start stop watch"
-    data-testid="start-stopwatch"
+        <i class="fa fa-stopwatch me-2"></i>
+    </div>
+    @if (timeElapsedHours$ | async; as timeElapsed) {
+        <span class="navbar-text me-3" data-testid="time-elapsed">
+            {{ timeElapsed | formatHours: "{h}:{m}" }}
+        </span>
+    } @else {
+        <span data-testid="time-elapsed" class="navbar-text me-3"> --:-- </span>
+    }
+    <button
+        type="button"
+        class="btn btn-outline-success me-1"
+        [disabled]="this.isRunning$ | async"
+        (click)="start()"
+        title="Start stop watch"
+        data-testid="start-stopwatch"
     >
-    <i class="fa fa-play"></i>
-  </button>
-  <button
-    type="button"
-    class="btn btn-outline-secondary me-2"
-    [disabled]="(this.isRunning$ | async) === false"
-    (click)="pause()"
-    title="Pause stop watch. Resume by clicking the start icon."
-    data-testid="pause-stopwatch"
+        <i class="fa fa-play"></i>
+    </button>
+    <button
+        type="button"
+        class="btn btn-outline-secondary me-2"
+        [disabled]="(this.isRunning$ | async) === false"
+        (click)="pause()"
+        title="Pause stop watch. Resume by clicking the start icon."
+        data-testid="pause-stopwatch"
     >
-    <i class="fa fa-pause"></i>
-  </button>
-  <button
-    type="button"
-    class="btn btn-outline-danger ms-2 me-2"
+        <i class="fa fa-pause"></i>
+    </button>
+    <button
+        type="button"
+        class="btn btn-outline-danger ms-2 me-2"
         [disabled]="
             (this.isStarted$ | async) === false &&
             (this.isPaused$ | async) === false
         "
-    title="Reset stop watch to zero."
-    data-testid="reset-stopwatch"
-    (click)="reset()"
+        title="Reset stop watch to zero."
+        data-testid="reset-stopwatch"
+        (click)="reset()"
     >
-    <i class="fa fa-stop"></i>
-  </button>
-  <app-activity-picker
-    #picker
-    class="navbar-text me-sm-2"
-    data-testid="pick-stopwatch-activity"
-    placeholder="Log elapsed time as..."
-    [activities]="(this.activities$ | async) ?? undefined"
-  ></app-activity-picker>
-  <button
-    type="button"
-    data-testid="stopwatch-log"
-    class="btn btn-outline-success"
-    (click)="logClick$.next(picker.name)"
+        <i class="fa fa-stop"></i>
+    </button>
+    <app-activity-picker
+        #picker
+        class="navbar-text me-sm-2"
+        data-testid="pick-stopwatch-activity"
+        placeholder="Log elapsed time as..."
+        [activities]="(this.activities$ | async) ?? undefined"
+    ></app-activity-picker>
+    <button
+        type="button"
+        data-testid="stopwatch-log"
+        class="btn btn-outline-success"
+        (click)="logClick$.next(picker.name)"
     >
-    Log
-  </button>
+        Log
+    </button>
 </div>

@@ -1,13 +1,12 @@
 @if (chartData?.datasets?.length) {
-  <canvas
-    baseChart
-    width="1"
-    height="1"
-    [type]="doughnutChartType"
-    [data]="chartData"
-    [options]="chartOptions"
-  ></canvas>
+    <canvas
+        baseChart
+        width="1"
+        height="1"
+        [type]="doughnutChartType"
+        [data]="chartData"
+        [options]="chartOptions"
+    ></canvas>
 } @else {
-  <div class="h-100 text-center align-middle">No data</div>
+    <div class="h-100 text-center align-middle">No data</div>
 }
-
