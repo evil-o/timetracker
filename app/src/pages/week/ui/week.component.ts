@@ -7,7 +7,6 @@ import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 
 import { ApplicationState } from "../../../entities/application";
 
-import currentWeekNumber from "current-week-number";
 import {
     BehaviorSubject,
     combineLatest,
@@ -28,7 +27,7 @@ import {
     IAttendanceWithTimes,
 } from "../../../entities/application";
 import { IAttendanceCorrection } from "../../../entities/attendance";
-import { getFirstDayOfCalendarWeek } from "../../../shared/lib";
+import { getFirstDayOfCalendarWeek, getWeek } from "../../../shared/lib";
 import { TagTallies } from "../../../widgets/activity-log";
 import { IWeekAttendanceStats } from "../../../widgets/attendance";
 import { IDayEntry, IWeekDate, makeTimeSheet } from "../../../widgets/week";
@@ -88,7 +87,7 @@ export class WeekComponent {
                 if (Number.isNaN(year) || Number.isNaN(week)) {
                     const today = new Date();
                     year = today.getFullYear();
-                    week = currentWeekNumber(today);
+                    week = getWeek(today);
                 }
                 return { year, week };
             })
@@ -109,8 +108,7 @@ export class WeekComponent {
                 return entries.filter((entry) => {
                     const date = new Date(entry.year, entry.month, entry.day);
                     return (
-                        entry.year === week.year &&
-                        currentWeekNumber(date) === week.week
+                        entry.year === week.year && getWeek(date) === week.week
                     );
                 });
             })
@@ -181,7 +179,7 @@ export class WeekComponent {
         ]).pipe(
             map(([entries, week]) =>
                 entries.filter((e) => {
-                    const entryWeek = currentWeekNumber(e.date);
+                    const entryWeek = getWeek(e.date);
                     return (
                         e.date.getFullYear() === week.year &&
                         entryWeek === week.week
