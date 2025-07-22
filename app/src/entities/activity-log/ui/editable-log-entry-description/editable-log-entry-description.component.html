@@ -1,12 +1,15 @@
 <app-editable-item
-    [textValue]="entry.description || ''"
-    (submitItem)="submitDescription($event)"
->
-    <div *ngIf="!entry.description" class="text text-muted text-italic">
-        (No description. Double-click to set.)
+  [textValue]="entry.description || ''"
+  (submitItem)="submitDescription($event)"
+  >
+  @if (!entry.description) {
+    <div class="text text-muted text-italic">
+      (No description. Double-click to set.)
     </div>
+  }
+  @if (entry.description) {
     <app-entry-description
-        *ngIf="entry.description"
-        [description]="entry.description"
+      [description]="entry.description"
     ></app-entry-description>
+  }
 </app-editable-item>

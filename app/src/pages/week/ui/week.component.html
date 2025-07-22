@@ -1,140 +1,142 @@
 <ng-template #printPreview>
-    <app-modal-header>Print preview...</app-modal-header>
-    <div
-        class="modal-body"
-        [innerHTML]="printPreviewContents"
-        style="max-height: 500pt; overflow-y: scroll"
-    ></div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-primary" (click)="savePrint()">
-            Save
-        </button>
-        <button
-            type="button"
-            class="btn btn-secondary"
-            (click)="modalRef.hide()"
-        >
-            Cancel
-        </button>
-    </div>
+  <app-modal-header>Print preview...</app-modal-header>
+  <div
+    class="modal-body"
+    [innerHTML]="printPreviewContents"
+    style="max-height: 500pt; overflow-y: scroll"
+  ></div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="savePrint()">
+      Save
+    </button>
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="modalRef.hide()"
+      >
+      Cancel
+    </button>
+  </div>
 </ng-template>
 
 <a id="printDownload" style="display: none"></a>
 
 <div aria-label="Week navigation" class="d-flex justify-content-between">
-    <div><!-- empty stretcher --></div>
-    <app-week-selector
-        [selectedWeek]="this.week"
-        (weekSelected)="weekSelected($event)"
-    ></app-week-selector>
-    <button
-        type="button"
-        class="btn btn-secondary"
-        (click)="openLargeModal(printPreview)"
+  <div><!-- empty stretcher --></div>
+  <app-week-selector
+    [selectedWeek]="this.week"
+    (weekSelected)="weekSelected($event)"
+  ></app-week-selector>
+  <button
+    type="button"
+    class="btn btn-secondary"
+    (click)="openLargeModal(printPreview)"
     >
-        <i class="fa fa-print"></i>
-    </button>
+    <i class="fa fa-print"></i>
+  </button>
 </div>
 
 <tabset>
-    <tab
-        heading="Weekly tally"
-        [active]="selectedTab === 'tally'"
-        (select)="selectedTab = 'tally'"
+  <tab
+    heading="Weekly tally"
+    [active]="selectedTab === 'tally'"
+    (select)="selectedTab = 'tally'"
     >
-        <div class="row mt-2">
-            <div class="col">
-                <div class="card w-100">
-                    <div class="card-header text-right">
-                        Total:
-                        <app-hour-badge
-                            data-testid="total-week-hours"
-                            class="me-2"
-                            [hours]="loggedSum$ | async"
-                        ></app-hour-badge>
-                    </div>
-                    <div class="card-body">
-                        <app-tally
+    <div class="row mt-2">
+      <div class="col">
+        <div class="card w-100">
+          <div class="card-header text-right">
+            Total:
+            <app-hour-badge
+              data-testid="total-week-hours"
+              class="me-2"
+              [hours]="loggedSum$ | async"
+            ></app-hour-badge>
+          </div>
+          <div class="card-body">
+            <app-tally
                             [entries]="
                                 (filteredLogEntries$ | async) ?? undefined
                             "
                             [activityTypes]="
                                 (activityTypes$ | async) ?? undefined
                             "
-                        ></app-tally>
-                    </div>
-                </div>
-            </div>
+            ></app-tally>
+          </div>
         </div>
-    </tab>
-    <tab
-        heading="Week by tag"
-        [active]="selectedTab === 'by-tag'"
-        (select)="selectedTab = 'by-tag'"
+      </div>
+    </div>
+  </tab>
+  <tab
+    heading="Week by tag"
+    [active]="selectedTab === 'by-tag'"
+    (select)="selectedTab = 'by-tag'"
     >
-        <div class="row mt-2">
-            <div class="col">
-                <div class="card w-100">
-                    <div class="card-header text-right">
-                        Activities in the selected week, by tag
-                    </div>
-                    <div class="card-body">
-                        <app-tag-tally
-                            [tallies]="tagTallies$ | async"
-                            [activityTypes]="activityTypes$ | async"
-                        ></app-tag-tally>
-                    </div>
-                </div>
-            </div>
+    <div class="row mt-2">
+      <div class="col">
+        <div class="card w-100">
+          <div class="card-header text-right">
+            Activities in the selected week, by tag
+          </div>
+          <div class="card-body">
+            <app-tag-tally
+              [tallies]="tagTallies$ | async"
+              [activityTypes]="activityTypes$ | async"
+            ></app-tag-tally>
+          </div>
         </div>
-    </tab>
-    <tab
-        heading="Daily details"
-        [active]="selectedTab === 'daily'"
-        (select)="selectedTab = 'daily'"
+      </div>
+    </div>
+  </tab>
+  <tab
+    heading="Daily details"
+    [active]="selectedTab === 'daily'"
+    (select)="selectedTab = 'daily'"
     >
-        <div class="row mt-2" *ngFor="let day of days$ | async">
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-1 text-right">
-                                <span class="text-sm text-muted"
-                                    >{{ day.date.getMonth() + 1 }}/{{
-                                        day.date.getDate()
-                                    }}</span
-                                >
-                            </div>
-                            <div class="col-sm-2 pl-0">
-                                <h5 class="card-title">
-                                    {{ day.name }}
-                                </h5>
-                            </div>
-                        </div>
-                        <app-actvity-log-list
-                            class="mt-2"
+    @for (day of days$ | async; track day) {
+      <div class="row mt-2">
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-1 text-right">
+                  <span class="text-sm text-muted"
+                    >{{ day.date.getMonth() + 1 }}/{{
+                    day.date.getDate()
+                    }}</span
+                    >
+                  </div>
+                  <div class="col-sm-2 pl-0">
+                    <h5 class="card-title">
+                      {{ day.name }}
+                    </h5>
+                  </div>
+                </div>
+                <app-actvity-log-list
+                  class="mt-2"
                             [groups$]="
                                 day.entries$ | groupActivityLogEntriesById
                             "
-                            [activityTypes$]="activityTypes$"
-                        ></app-actvity-log-list>
-                    </div>
-                </div>
+                  [activityTypes$]="activityTypes$"
+                ></app-actvity-log-list>
+              </div>
             </div>
+          </div>
         </div>
+      }
     </tab>
     <tab
-        heading="Attendance"
-        [active]="selectedTab === 'attendance'"
-        (select)="selectedTab = 'attendance'"
-    >
-        <div class="row mt-2">
-            <div class="col">
-                <app-attendance-list
-                    [attendances]="attendances$ | async"
-                    [attendanceStats]="attendanceStats$ | async"
-                ></app-attendance-list>
-            </div>
+      heading="Attendance"
+      [active]="selectedTab === 'attendance'"
+      (select)="selectedTab = 'attendance'"
+      >
+      <div class="row mt-2">
+        <div class="col">
+          <app-attendance-list
+            [attendances]="attendances$ | async"
+            [attendanceStats]="attendanceStats$ | async"
+          ></app-attendance-list>
         </div>
+      </div>
     </tab>
-</tabset>
+  </tabset>
