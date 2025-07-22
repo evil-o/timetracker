@@ -1,13 +1,13 @@
 <app-editable-item
-  [textValue]="(entry.hours | formatHours: '{h}:{m}') || ''"
-  (submitItem)="emitChangeHours($event)"
-  >
-  @if (!entry.hours) {
-    <div class="text text-muted text-italic">&mdash;</div>
-  }
-  @if (entry.hours) {
-    <div>
-      {{ entry.hours | formatHours }}
-    </div>
-  }
+    [textValue]="(entry.hours | formatHours: '{h}:{m}') || ''"
+    (submitItem)="emitChangeHours($event)"
+>
+    @if (!entry.hours) {
+        <div class="text text-muted text-italic">&mdash;</div>
+    }
+    @if (entry.hours) {
+        <div>
+            {{ entry.hours | formatHours }}
+        </div>
+    }
 </app-editable-item>

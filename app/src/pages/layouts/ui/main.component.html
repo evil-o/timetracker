@@ -1,17 +1,17 @@
 @if (storageUpdateComplete$ | async) {
-  <app-navbar (createActivityEvent)="createActivityType($event)"></app-navbar>
-  <div class="container mt-5">
-    <router-outlet></router-outlet>
-  </div>
+    <app-navbar (createActivityEvent)="createActivityType($event)"></app-navbar>
+    <div class="container mt-5">
+        <router-outlet></router-outlet>
+    </div>
 }
 
 @if ((storageUpdateComplete$ | async) !== true) {
-  <div class="container h-100 mt-5">
-    <div class="row h-100 align-center">
-      <div class="col text-center">
-        Hi, we're getting your data up to speed with our latest changes.
-        Please stand by.
-      </div>
+    <div class="container h-100 mt-5">
+        <div class="row h-100 align-center">
+            <div class="col text-center">
+                Hi, we're getting your data up to speed with our latest changes.
+                Please stand by.
+            </div>
+        </div>
     </div>
-  </div>
 }

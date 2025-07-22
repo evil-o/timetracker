@@ -1,12 +1,10 @@
-@if (
-  !entries || entries.length <= 0 || !activityTypes) {
-  <app-no-activity-log-entry-present
-  ></app-no-activity-log-entry-present>
+@if (!entries || entries.length <= 0 || !activityTypes) {
+    <app-no-activity-log-entry-present></app-no-activity-log-entry-present>
 } @else {
-  @for (tally of entries! | logEntryTally: activityTypes!; track tally) {
-    <app-activity-log-entry
-      [activityTypes]="activityTypes!"
-      [group]="tally"
-    ></app-activity-log-entry>
-  }
+    @for (tally of entries! | logEntryTally: activityTypes!; track tally) {
+        <app-activity-log-entry
+            [activityTypes]="activityTypes!"
+            [group]="tally"
+        ></app-activity-log-entry>
+    }
 }
