@@ -1,9 +1,13 @@
 <app-editable-item
-    [textValue]="(entry.hours | formatHours: '{h}:{m}') || ''"
-    (submitItem)="emitChangeHours($event)"
->
-    <div *ngIf="!entry.hours" class="text text-muted text-italic">&mdash;</div>
-    <div *ngIf="entry.hours">
-        {{ entry.hours | formatHours }}
+  [textValue]="(entry.hours | formatHours: '{h}:{m}') || ''"
+  (submitItem)="emitChangeHours($event)"
+  >
+  @if (!entry.hours) {
+    <div class="text text-muted text-italic">&mdash;</div>
+  }
+  @if (entry.hours) {
+    <div>
+      {{ entry.hours | formatHours }}
     </div>
+  }
 </app-editable-item>

@@ -1,4 +1,4 @@
-import { CommonModule } from "@angular/common";
+
 import { Component, Input, OnInit } from "@angular/core";
 import { ChartData, ChartOptions } from "chart.js";
 import { BaseChartDirective } from "ng2-charts";
@@ -66,7 +66,7 @@ class Aggregation {
 @Component({
     selector: "app-activity-aggregation-chart",
     templateUrl: "./activity-aggregation-chart.component.html",
-    imports: [BaseChartDirective, CommonModule],
+    imports: [BaseChartDirective],
 })
 export class ActivityAggregationChartComponent implements OnInit {
     @Input()
