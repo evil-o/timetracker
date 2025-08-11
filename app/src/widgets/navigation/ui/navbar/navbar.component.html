@@ -17,18 +17,19 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto">
-                <li
-                    class="nav-item"
-                    routerLinkActive="active"
-                    *ngFor="let entry of entries"
-                    [attr.data-testid]="entry.id"
-                >
-                    <a class="nav-link" [routerLink]="entry.link">
-                        <i class="far fa-{{ entry.icon }}"></i>
-                        {{ entry.label }}
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
+                @for (entry of entries; track entry) {
+                    <li
+                        class="nav-item"
+                        routerLinkActive="active"
+                        [attr.data-testid]="entry.id"
+                    >
+                        <a class="nav-link" [routerLink]="entry.link">
+                            <i class="far fa-{{ entry.icon }}"></i>
+                            {{ entry.label }}
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                }
             </ul>
             <!-- <div class="form-inline mx-auto"> -->
             <form class="d-flex mx-3">

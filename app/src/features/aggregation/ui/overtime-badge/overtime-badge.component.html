@@ -1,12 +1,12 @@
-<span *ngIf="hours === undefined">-</span>
-<span *ngIf="hours && (hours | precision: 2) > 0" class="badge bg-success"
-    >+{{ hours | formatHours: format }}</span
->
-<span
-    *ngIf="hours && (hours | precision: 2) === 0"
-    class="badge bg-secondary"
-    >{{ hours | formatHours: format }}</span
->
-<span *ngIf="hours && (hours | precision: 2) < 0" class="badge bg-danger">{{
-    hours | formatHours: format
-}}</span>
+@if (hours === undefined) {
+    <span>-</span>
+}
+@if (hours && (hours | precision: 2) > 0) {
+    <span class="badge bg-success">+{{ hours | formatHours: format }}</span>
+}
+@if (hours && (hours | precision: 2) === 0) {
+    <span class="badge bg-secondary">{{ hours | formatHours: format }}</span>
+}
+@if (hours && (hours | precision: 2) < 0) {
+    <span class="badge bg-danger">{{ hours | formatHours: format }}</span>
+}

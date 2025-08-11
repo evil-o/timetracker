@@ -1,61 +1,65 @@
-<accordion-group class="my-1" [panelClass]="customColorClass" *ngIf="group">
-    <div accordion-heading class="clearfix">
-        {{ group.activityId | activityTypeIdToName: activityTypes }}
-        <app-hour-badge
-            [hours]="group.cumulativeHours"
-            class="float-end pull-end"
-        ></app-hour-badge>
-    </div>
-    <div
-        class="row my-1"
-        data-testid="activity-log-descriptions"
-        *ngFor="let entry of group.entries"
-    >
-        <div class="col-9 d-flex align-items-center">
-            <app-editable-log-entry-description
-                class="d-block flex-grow-1"
-                [entry]="entry"
-                (changeEntryDescription)="changeEntryDescription($event)"
-            ></app-editable-log-entry-description>
+@if (group) {
+    <accordion-group class="my-1" [panelClass]="customColorClass">
+        <div accordion-heading class="clearfix">
+            {{ group.activityId | activityTypeIdToName: activityTypes }}
+            <app-hour-badge
+                [hours]="group.cumulativeHours"
+                class="float-end pull-end"
+            ></app-hour-badge>
         </div>
-        <div class="col-2 d-flex align-items-center">
-            <app-editable-log-entry-hours
-                class="d-block flex-grow-1"
-                [entry]="entry"
-                (changeEntryHours)="changeEntryHours($event)"
-            ></app-editable-log-entry-hours>
-        </div>
-        <div class="col-1 d-flex align-items-center">
-            <button
-                type="button"
-                [class.d-none]="confirmDelete === entry.id"
-                class="btn btn-danger"
-                data-testid="delete-activity-log-entry"
-                (click)="confirmDelete = entry.id"
-            >
-                <i class="far fa-trash-alt"></i>
-            </button>
-            <button
-                type="button"
-                [class.d-none]="confirmDelete !== entry.id"
-                class="btn btn-success"
-                data-testid="delete-activity-log-entry-cancel"
-                (click)="confirmDelete = undefined"
-            >
-                <i class="fa fa-times"></i>
-            </button>
-            <button
-                type="button"
-                [class.invisible]="confirmDelete !== entry.id"
-                class="btn btn-danger"
-                data-testid="delete-activity-log-entry-confirm"
-                (click)="deleteEntry(entry.id)"
-            >
-                <i class="fa fa-check"></i>
-            </button>
-        </div>
-    </div>
-</accordion-group>
-<accordion-group class="container-fluid my-1" *ngIf="!group">
-    <div accordion-heading class="clearfix">No entires.</div>
-</accordion-group>
+        @for (entry of group.entries; track entry) {
+            <div class="row my-1" data-testid="activity-log-descriptions">
+                <div class="col-9 d-flex align-items-center">
+                    <app-editable-log-entry-description
+                        class="d-block flex-grow-1"
+                        [entry]="entry"
+                        (changeEntryDescription)="
+                            changeEntryDescription($event)
+                        "
+                    ></app-editable-log-entry-description>
+                </div>
+                <div class="col-2 d-flex align-items-center">
+                    <app-editable-log-entry-hours
+                        class="d-block flex-grow-1"
+                        [entry]="entry"
+                        (changeEntryHours)="changeEntryHours($event)"
+                    ></app-editable-log-entry-hours>
+                </div>
+                <div class="col-1 d-flex align-items-center">
+                    <button
+                        type="button"
+                        [class.d-none]="confirmDelete === entry.id"
+                        class="btn btn-danger"
+                        data-testid="delete-activity-log-entry"
+                        (click)="confirmDelete = entry.id"
+                    >
+                        <i class="far fa-trash-alt"></i>
+                    </button>
+                    <button
+                        type="button"
+                        [class.d-none]="confirmDelete !== entry.id"
+                        class="btn btn-success"
+                        data-testid="delete-activity-log-entry-cancel"
+                        (click)="confirmDelete = undefined"
+                    >
+                        <i class="fa fa-times"></i>
+                    </button>
+                    <button
+                        type="button"
+                        [class.invisible]="confirmDelete !== entry.id"
+                        class="btn btn-danger"
+                        data-testid="delete-activity-log-entry-confirm"
+                        (click)="deleteEntry(entry.id)"
+                    >
+                        <i class="fa fa-check"></i>
+                    </button>
+                </div>
+            </div>
+        }
+    </accordion-group>
+}
+@if (!group) {
+    <accordion-group class="container-fluid my-1">
+        <div accordion-heading class="clearfix">No entires.</div>
+    </accordion-group>
+}
