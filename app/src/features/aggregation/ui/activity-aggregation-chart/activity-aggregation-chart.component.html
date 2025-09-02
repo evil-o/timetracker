@@ -1,13 +1,12 @@
-<canvas
-    *ngIf="chartData?.datasets?.length; else noData"
-    baseChart
-    width="1"
-    height="1"
-    [type]="doughnutChartType"
-    [data]="chartData"
-    [options]="chartOptions"
-></canvas>
-
-<ng-template #noData>
+@if (chartData?.datasets?.length) {
+    <canvas
+        baseChart
+        width="1"
+        height="1"
+        [type]="doughnutChartType"
+        [data]="chartData"
+        [options]="chartOptions"
+    ></canvas>
+} @else {
     <div class="h-100 text-center align-middle">No data</div>
-</ng-template>
+}

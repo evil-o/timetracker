@@ -6,16 +6,13 @@
     >
         <i class="fa fa-stopwatch me-2"></i>
     </div>
-    <span
-        class="navbar-text me-3"
-        data-testid="time-elapsed"
-        *ngIf="timeElapsedHours$ | async as timeElapsed; else notRunning"
-    >
-        {{ timeElapsed | formatHours: "{h}:{m}" }}
-    </span>
-    <ng-template #notRunning>
+    @if (timeElapsedHours$ | async; as timeElapsed) {
+        <span class="navbar-text me-3" data-testid="time-elapsed">
+            {{ timeElapsed | formatHours: "{h}:{m}" }}
+        </span>
+    } @else {
         <span data-testid="time-elapsed" class="navbar-text me-3"> --:-- </span>
-    </ng-template>
+    }
     <button
         type="button"
         class="btn btn-outline-success me-1"

@@ -84,55 +84,54 @@
     </div>
     <accordion>
         <accordion-group heading="Extra bookings" data-testid="extra-bookings">
-            <div
-                class="row mb-2"
-                *ngFor="let correction of corrections$ | async"
-            >
-                <div class="form-group col-5">
-                    <input
-                        type="text"
-                        data-testid="extra-booking-description"
-                        #desc
-                        class="form-control"
-                        placeholder="Enter correction description here"
-                        [value]="correction.description"
-                    />
+            @for (correction of corrections$ | async; track correction) {
+                <div class="row mb-2">
+                    <div class="form-group col-5">
+                        <input
+                            type="text"
+                            data-testid="extra-booking-description"
+                            #desc
+                            class="form-control"
+                            placeholder="Enter correction description here"
+                            [value]="correction.description"
+                        />
+                    </div>
+                    <div class="form-group col-3">
+                        <input
+                            type="text"
+                            data-testid="extra-booking-hours"
+                            #hours
+                            class="form-control"
+                            placeholder="Enter +/- hours here"
+                            [value]="correction.hours | formatHours: '{h}:{m}'"
+                        />
+                    </div>
+                    <div class="form-group col-4">
+                        <button
+                            class="btn btn-secondary me-1"
+                            type="button"
+                            data-testid="confirm-update-correction"
+                            (click)="
+                                updateCorrection(
+                                    correction.id,
+                                    desc.value,
+                                    hours.value
+                                )
+                            "
+                        >
+                            <i class="fa fa-check"></i>
+                        </button>
+                        <button
+                            class="btn btn-danger"
+                            type="button"
+                            data-testid="cancel-update-correction"
+                            (click)="correctionsToDelete$.next(correction)"
+                        >
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>
                 </div>
-                <div class="form-group col-3">
-                    <input
-                        type="text"
-                        data-testid="extra-booking-hours"
-                        #hours
-                        class="form-control"
-                        placeholder="Enter +/- hours here"
-                        [value]="correction.hours | formatHours: '{h}:{m}'"
-                    />
-                </div>
-                <div class="form-group col-4">
-                    <button
-                        class="btn btn-secondary me-1"
-                        type="button"
-                        data-testid="confirm-update-correction"
-                        (click)="
-                            updateCorrection(
-                                correction.id,
-                                desc.value,
-                                hours.value
-                            )
-                        "
-                    >
-                        <i class="fa fa-check"></i>
-                    </button>
-                    <button
-                        class="btn btn-danger"
-                        type="button"
-                        data-testid="cancel-update-correction"
-                        (click)="correctionsToDelete$.next(correction)"
-                    >
-                        <i class="fa fa-trash"></i>
-                    </button>
-                </div>
-            </div>
+            }
             <div class="row mt-1">
                 <div class="col">
                     <button

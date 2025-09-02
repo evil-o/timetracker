@@ -1,36 +1,39 @@
-<div
-    *ngIf="!editing"
-    (dblclick)="setEditing(true)"
-    data-testid="item-readonly-mode"
-    class="noselect"
->
-    <ng-content><!-- read-only view --></ng-content>
-</div>
-<div *ngIf="editing" class="input-group">
-    <input
-        type="text"
-        #itemInput
-        data-testid="item-input"
-        class="form-control"
-        placeholder="#hours"
-        [value]="textValue()"
-        (keyup.enter)="onSubmit()"
-        (keyup.escape)="onCancel()"
-    />
-    <button
-        data-testid="confirm-item-change"
-        class="btn btn-outline-primary"
-        type="button"
-        (click)="onSubmit()"
+@if (!editing) {
+    <div
+        (dblclick)="setEditing(true)"
+        data-testid="item-readonly-mode"
+        class="noselect"
     >
-        <i class="fa fa-check"></i>
-    </button>
-    <button
-        data-testid="cancel-item-change"
-        class="btn btn-outline-secondary"
-        type="button"
-        (click)="onCancel()"
-    >
-        <i class="fa fa-ban"></i>
-    </button>
-</div>
+        <ng-content><!-- read-only view --></ng-content>
+    </div>
+}
+@if (editing) {
+    <div class="input-group">
+        <input
+            type="text"
+            #itemInput
+            data-testid="item-input"
+            class="form-control"
+            placeholder="#hours"
+            [value]="textValue()"
+            (keyup.enter)="onSubmit()"
+            (keyup.escape)="onCancel()"
+        />
+        <button
+            data-testid="confirm-item-change"
+            class="btn btn-outline-primary"
+            type="button"
+            (click)="onSubmit()"
+        >
+            <i class="fa fa-check"></i>
+        </button>
+        <button
+            data-testid="cancel-item-change"
+            class="btn btn-outline-secondary"
+            type="button"
+            (click)="onCancel()"
+        >
+            <i class="fa fa-ban"></i>
+        </button>
+    </div>
+}

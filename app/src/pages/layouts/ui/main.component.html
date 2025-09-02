@@ -1,12 +1,11 @@
-<ng-template [ngIf]="storageUpdateComplete$ | async">
+@if (storageUpdateComplete$ | async) {
     <app-navbar (createActivityEvent)="createActivityType($event)"></app-navbar>
-
     <div class="container mt-5">
         <router-outlet></router-outlet>
     </div>
-</ng-template>
+}
 
-<ng-template [ngIf]="(storageUpdateComplete$ | async) !== true">
+@if ((storageUpdateComplete$ | async) !== true) {
     <div class="container h-100 mt-5">
         <div class="row h-100 align-center">
             <div class="col text-center">
@@ -15,4 +14,4 @@
             </div>
         </div>
     </div>
-</ng-template>
+}

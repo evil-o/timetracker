@@ -10,27 +10,30 @@
         </tr>
     </thead>
     <tbody>
-        <tr
-            *ngFor="let attendance of attendances()"
-            data-testid="attendance-row"
-        >
-            <th scope="row">
-                {{ attendance.date.getDate() }}.
-                {{ attendance.date.getMonth() + 1 }}.
-            </th>
-            <td class="text-right">{{ attendanceStartTimeStr(attendance) }}</td>
-            <td class="text-right">{{ attendanceEndTimeStr(attendance) }}</td>
-            <td class="text-right">{{ attendance.hours | formatHours }}</td>
-            <td class="text-right">
-                {{ attendance.nonWorkingHours | formatHours }}
-            </td>
-            <td class="text-right">
-                <app-overtime-badge
-                    class="me-1"
-                    [hours]="attendance.overtime"
-                ></app-overtime-badge>
-            </td>
-        </tr>
+        @for (attendance of attendances(); track attendance) {
+            <tr data-testid="attendance-row">
+                <th scope="row">
+                    {{ attendance.date.getDate() }}.
+                    {{ attendance.date.getMonth() + 1 }}.
+                </th>
+                <td class="text-right">
+                    {{ attendanceStartTimeStr(attendance) }}
+                </td>
+                <td class="text-right">
+                    {{ attendanceEndTimeStr(attendance) }}
+                </td>
+                <td class="text-right">{{ attendance.hours | formatHours }}</td>
+                <td class="text-right">
+                    {{ attendance.nonWorkingHours | formatHours }}
+                </td>
+                <td class="text-right">
+                    <app-overtime-badge
+                        class="me-1"
+                        [hours]="attendance.overtime"
+                    ></app-overtime-badge>
+                </td>
+            </tr>
+        }
     </tbody>
     <tfoot>
         <tr>

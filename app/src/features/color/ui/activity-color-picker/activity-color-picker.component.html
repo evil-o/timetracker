@@ -15,19 +15,22 @@
         <span class="caret"></span>
     </button>
     <ul *dropdownMenu class="dropdown-menu" role="menu">
-        <li role="menuitem" *ngFor="let color of colors">
-            <a
-                class="dropdown-item"
-                href="javascript:void(0);"
-                (click)="colorPicked.emit({ colorId: color.id })"
-            >
-                <span
-                    [class]="
-                        'colorbox p-0 me-1 ' + (color?.styleClass || 'bg-white')
-                    "
-                ></span>
-                {{ color?.id || "none" }}
-            </a>
-        </li>
+        @for (color of colors; track color) {
+            <li role="menuitem">
+                <a
+                    class="dropdown-item"
+                    href="javascript:void(0);"
+                    (click)="colorPicked.emit({ colorId: color.id })"
+                >
+                    <span
+                        [class]="
+                            'colorbox p-0 me-1 ' +
+                            (color?.styleClass || 'bg-white')
+                        "
+                    ></span>
+                    {{ color?.id || "none" }}
+                </a>
+            </li>
+        }
     </ul>
 </div>

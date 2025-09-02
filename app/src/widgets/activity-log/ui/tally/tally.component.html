@@ -1,13 +1,10 @@
-<app-no-activity-log-entry-present
-    *ngIf="
-        !entries || entries.length <= 0 || !activityTypes;
-        else entriesPresent
-    "
-></app-no-activity-log-entry-present>
-<ng-template #entriesPresent>
-    <app-activity-log-entry
-        *ngFor="let tally of entries! | logEntryTally: activityTypes!"
-        [activityTypes]="activityTypes!"
-        [group]="tally"
-    ></app-activity-log-entry>
-</ng-template>
+@if (!entries || entries.length <= 0 || !activityTypes) {
+    <app-no-activity-log-entry-present></app-no-activity-log-entry-present>
+} @else {
+    @for (tally of entries! | logEntryTally: activityTypes!; track tally) {
+        <app-activity-log-entry
+            [activityTypes]="activityTypes!"
+            [group]="tally"
+        ></app-activity-log-entry>
+    }
+}

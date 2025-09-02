@@ -93,35 +93,37 @@
         [active]="selectedTab === 'daily'"
         (select)="selectedTab = 'daily'"
     >
-        <div class="row mt-2" *ngFor="let day of days$ | async">
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-1 text-right">
-                                <span class="text-sm text-muted"
-                                    >{{ day.date.getMonth() + 1 }}/{{
-                                        day.date.getDate()
-                                    }}</span
-                                >
+        @for (day of days$ | async; track day) {
+            <div class="row mt-2">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-1 text-right">
+                                    <span class="text-sm text-muted"
+                                        >{{ day.date.getMonth() + 1 }}/{{
+                                            day.date.getDate()
+                                        }}</span
+                                    >
+                                </div>
+                                <div class="col-sm-2 pl-0">
+                                    <h5 class="card-title">
+                                        {{ day.name }}
+                                    </h5>
+                                </div>
                             </div>
-                            <div class="col-sm-2 pl-0">
-                                <h5 class="card-title">
-                                    {{ day.name }}
-                                </h5>
-                            </div>
+                            <app-actvity-log-list
+                                class="mt-2"
+                                [groups$]="
+                                    day.entries$ | groupActivityLogEntriesById
+                                "
+                                [activityTypes$]="activityTypes$"
+                            ></app-actvity-log-list>
                         </div>
-                        <app-actvity-log-list
-                            class="mt-2"
-                            [groups$]="
-                                day.entries$ | groupActivityLogEntriesById
-                            "
-                            [activityTypes$]="activityTypes$"
-                        ></app-actvity-log-list>
                     </div>
                 </div>
             </div>
-        </div>
+        }
     </tab>
     <tab
         heading="Attendance"

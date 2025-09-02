@@ -1,4 +1,3 @@
-import { CommonModule } from "@angular/common";
 import { Component, Input, OnInit } from "@angular/core";
 import { ChartData, ChartOptions } from "chart.js";
 import { BaseChartDirective } from "ng2-charts";
@@ -48,7 +47,10 @@ class Aggregation {
             }
         }
 
-        const sortBasis = colorIds.map((value, index) => ({ value, index }));
+        const sortBasis = colorIds
+            .map((value, index) => ({ value, index }))
+            // need to filter due to some datasets being corrupted from a bad ngrx localstore update
+            .filter(({ value }) => typeof value === "string");
         const sortedIndices = sortBasis
             .sort((a, b) => a.value.localeCompare(b.value))
             .map((sorted) => sorted.index);
@@ -66,7 +68,7 @@ class Aggregation {
 @Component({
     selector: "app-activity-aggregation-chart",
     templateUrl: "./activity-aggregation-chart.component.html",
-    imports: [BaseChartDirective, CommonModule],
+    imports: [BaseChartDirective],
 })
 export class ActivityAggregationChartComponent implements OnInit {
     @Input()
