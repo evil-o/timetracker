@@ -3,12 +3,18 @@
         data-testid="activity-input"
         #textInput
         [(ngModel)]="name"
-        [typeahead]="items"
+        [ngbTypeahead]="typeahead$"
+        [resultTemplate]="rt"
+        [inputFormatter]="typeaheadFormatter"
         [placeholder]="placeholder"
-        (typeaheadOnSelect)="selected($event)"
+        (selectItem)="selected($event)"
         typeaheadOptionField="name"
         class="form-control"
         name="activityPickerInput"
         autocomplete="off"
     />
 </form>
+
+<ng-template #rt let-r="result" let-t="term">
+    <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
+</ng-template>

@@ -1,8 +1,6 @@
-import { discardPeriodicTasks, fakeAsync, tick } from "@angular/core/testing";
+import { fakeAsync } from "@angular/core/testing";
 
-import { By } from "@angular/platform-browser";
 import { createComponentFactory, Spectator } from "@ngneat/spectator";
-import { TypeaheadDirective } from "ngx-bootstrap/typeahead";
 import { ActivityPickerComponent } from "./activity-picker.component";
 
 // @Component({
@@ -44,32 +42,26 @@ describe(ActivityPickerComponent.name, () => {
     });
 
     xit("should properly confirm on enter with partial text", fakeAsync(() => {
-        const typeaheadElement = spectator.fixture.debugElement.query(
-            By.directive(TypeaheadDirective)
-        );
-        expect(typeaheadElement).toBeDefined();
-        const typeahead = typeaheadElement.injector.get(TypeaheadDirective);
-        expect(typeahead).toBeDefined();
-
-        const textInput = spectator.fixture.debugElement.query(By.css("input"));
-        expect(textInput).toBeDefined("text input not found");
-        textInput.nativeElement.value = "t";
-        textInput.nativeElement.dispatchEvent(new Event("input"));
-
-        tick();
-
-        expect(typeahead.matches).toBeDefined("typeahead has no matches");
-        expect(typeahead.matches.length).toBeGreaterThan(0);
-
-        spyOn(component.confirm, "emit");
-        textInput.nativeElement.dispatchEvent(
-            new KeyboardEvent("keyup", { key: "enter" })
-        );
-        // pressing enter should not trigger the normal emit
-        expect(component.confirm.emit).not.toHaveBeenCalled();
-
-        spectator.fixture.detectChanges();
-
+        // const typeaheadElement = spectator.fixture.debugElement.query(
+        //     By.directive(TypeaheadDirective)
+        // );
+        // expect(typeaheadElement).toBeDefined();
+        // const typeahead = typeaheadElement.injector.get(TypeaheadDirective);
+        // expect(typeahead).toBeDefined();
+        // const textInput = spectator.fixture.debugElement.query(By.css("input"));
+        // expect(textInput).toBeDefined("text input not found");
+        // textInput.nativeElement.value = "t";
+        // textInput.nativeElement.dispatchEvent(new Event("input"));
+        // tick();
+        // expect(typeahead.matches).toBeDefined("typeahead has no matches");
+        // expect(typeahead.matches.length).toBeGreaterThan(0);
+        // spyOn(component.confirm, "emit");
+        // textInput.nativeElement.dispatchEvent(
+        //     new KeyboardEvent("keyup", { key: "enter" })
+        // );
+        // // pressing enter should not trigger the normal emit
+        // expect(component.confirm.emit).not.toHaveBeenCalled();
+        // spectator.fixture.detectChanges();
         /* TODO behavior is as expected, but the test fails...
     typeahead.typeaheadOnSelect.emit();
 
@@ -78,47 +70,37 @@ describe(ActivityPickerComponent.name, () => {
     expect(component.activityPicker.confirm.emit).toHaveBeenCalled();
     expect(component.activityPicker.name).toBe('test');
     */
-
-        discardPeriodicTasks();
+        // discardPeriodicTasks();
     }));
 
     xit("should properly confirm on enter with full text", fakeAsync(() => {
-        const typeaheadElement = spectator.fixture.debugElement.query(
-            By.directive(TypeaheadDirective)
-        );
-        expect(typeaheadElement).toBeDefined();
-        const typeahead = typeaheadElement.injector.get(TypeaheadDirective);
-        expect(typeahead).toBeDefined();
-
-        const textInput = spectator.fixture.debugElement.query(By.css("input"));
-        expect(textInput).toBeDefined("text input not found");
-        textInput.nativeElement.value = "anothertest";
-        textInput.nativeElement.dispatchEvent(new Event("input"));
-
-        tick();
-
-        typeahead.hide();
-
-        tick();
-
-        expect(typeahead.matches.length).toEqual(
-            1,
-            "typeahead should have exactly one match"
-        );
-
-        spyOn(component.confirm, "emit");
-        textInput.nativeElement.dispatchEvent(
-            new KeyboardEvent("keydown", { key: "enter" })
-        );
-
-        spectator.fixture.detectChanges();
-        tick();
-
+        // const typeaheadElement = spectator.fixture.debugElement.query(
+        //     By.directive(TypeaheadDirective)
+        // );
+        // expect(typeaheadElement).toBeDefined();
+        // const typeahead = typeaheadElement.injector.get(TypeaheadDirective);
+        // expect(typeahead).toBeDefined();
+        // const textInput = spectator.fixture.debugElement.query(By.css("input"));
+        // expect(textInput).toBeDefined("text input not found");
+        // textInput.nativeElement.value = "anothertest";
+        // textInput.nativeElement.dispatchEvent(new Event("input"));
+        // tick();
+        // typeahead.hide();
+        // tick();
+        // expect(typeahead.matches.length).toEqual(
+        //     1,
+        //     "typeahead should have exactly one match"
+        // );
+        // spyOn(component.confirm, "emit");
+        // textInput.nativeElement.dispatchEvent(
+        //     new KeyboardEvent("keydown", { key: "enter" })
+        // );
+        // spectator.fixture.detectChanges();
+        // tick();
         // pressing enter should not trigger the normal emit
         /* TODO behavior is as expected, but the test fails...
     expect(component.activityPicker.confirm.emit).toHaveBeenCalled();
     */
-
-        discardPeriodicTasks();
+        // discardPeriodicTasks();
     }));
 });

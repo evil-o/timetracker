@@ -13,7 +13,6 @@ import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
 import { BsDropdownModule } from "ngx-bootstrap/dropdown";
 import { ModalModule } from "ngx-bootstrap/modal";
 import { TabsModule } from "ngx-bootstrap/tabs";
-import { TypeaheadModule } from "ngx-bootstrap/typeahead";
 import { environment } from "../environments/environment";
 import { ActivityLogFeaturesEffects } from "../features/log";
 import { ActivitiesPageModule } from "../pages/activities";
@@ -51,7 +50,6 @@ import { AppComponent } from "./ui/app.component";
         BsDropdownModule.forRoot(),
         BsDatepickerModule.forRoot(),
         TabsModule.forRoot(),
-        TypeaheadModule.forRoot(),
         StoreModule.forRoot(reducers, { metaReducers }),
         !environment.production
             ? StoreDevtoolsModule.instrument({

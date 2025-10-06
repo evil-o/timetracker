@@ -7,7 +7,14 @@ import {
     ViewChild,
 } from "@angular/core";
 
-import { TypeaheadDirective } from "ngx-bootstrap/typeahead";
+import { NgbTypeaheadSelectItemEvent } from "@ng-bootstrap/ng-bootstrap";
+import {
+    debounceTime,
+    distinctUntilChanged,
+    map,
+    Observable,
+    OperatorFunction,
+} from "rxjs";
 import { IActivityType } from "../../models/activity-types.types";
 
 @Component({
@@ -25,9 +32,6 @@ export class ActivityPickerComponent {
     @ViewChild("textInput")
     public textInput!: ElementRef;
 
-    @ViewChild(TypeaheadDirective)
-    public typeahead!: TypeaheadDirective;
-
     public items: IActivityType[] = [];
 
     public name = "";
@@ -43,7 +47,28 @@ export class ActivityPickerComponent {
         this.textInput.nativeElement.focus();
     }
 
-    protected selected(selection: { item?: IActivityType }) {
+    protected typeahead$: OperatorFunction<string, readonly IActivityType[]> = (
+        text$: Observable<string>
+    ) =>
+        text$.pipe(
+            debounceTime(200),
+            distinctUntilChanged(),
+            map((term) =>
+                this.items
+                    .filter(
+                        (item) =>
+                            item.name.length > 0 &&
+                            item.name
+                                .toLowerCase()
+                                .indexOf(term.toLowerCase()) > -1
+                    )
+                    .slice(0, 10)
+            )
+        );
+
+    protected typeaheadFormatter = (activity: IActivityType) => activity.name;
+
+    protected selected(selection: NgbTypeaheadSelectItemEvent<IActivityType>) {
         if (selection.item) {
             this.name = selection.item.name;
             this.id = selection.item.id;
