@@ -46,3 +46,4 @@ fontawesome-free-*/
 
 # Cypress
 testing/cypress/downloads/*
+data-faker/data.json
