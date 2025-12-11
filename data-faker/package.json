@@ -1,0 +1,22 @@
+{
+    "name": "timetracker-data-faker",
+    "version": "0.1.0",
+    "author": {
+        "name": "Oliver Lomp"
+    },
+    "license": "UNLICENSED",
+    "private": true,
+    "scripts": {
+        "start": "ts-node generate.ts"
+    },
+    "devDependencies": {
+        "ts-node": "10.9.2",
+        "@faker-js/faker": "10.1.0"
+    },
+    "prettier": {
+        "trailingComma": "es5",
+        "tabWidth": 4,
+        "semi": true,
+        "singleQuote": false
+    }
+}
