@@ -22,6 +22,22 @@ export class ActivitiesPage {
         ): Cypress.Chainable<JQuery<HTMLElement>> {
             return cy.get(`li[role="menuitem"]`).contains(colorName);
         },
+
+        expectProps(
+            name: string,
+            nonWorking: boolean,
+            archived: boolean
+        ): void {
+            cy.get("app-activity-type-list")
+                .find("tr")
+                .contains(name)
+                .parents("tr")
+                .findByTestId("non-working-cb")
+                .should(nonWorking ? "be.checked" : "not.be.checked")
+                .parents("tr")
+                .findByTestId("archived-cb")
+                .should(archived ? "be.checked" : "not.be.checked");
+        },
     };
 
     public mergeActivitiesModal = {

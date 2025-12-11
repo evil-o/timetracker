@@ -4,8 +4,8 @@
     "license": "UNLICENSED",
     "private": true,
     "scripts": {
-        "cy:open": "cypress open",
-        "cy:ci": "cypress run",
+        "cy:open": "TZ=Europe/Berlin cypress open",
+        "cy:ci": "TZ=Europe/Berlin cypress run",
         "lint": "eslint"
     },
     "devDependencies": {

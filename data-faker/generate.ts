@@ -106,7 +106,7 @@ function generateActivityLogEntry(
 function main(): void {
     let data: Data = {
         attendanceState: {
-            entries: faker.helpers.multiple(generateEntry, { count: 500 }),
+            entries: faker.helpers.multiple(generateEntry, { count: 100 }),
         },
         activityTypes: {
             activities: faker.helpers.multiple(generateActivityType, {
@@ -120,7 +120,7 @@ function main(): void {
 
     data.activityLog.entries = faker.helpers.multiple(
         () => generateActivityLogEntry(data.activityTypes.activities),
-        { count: 1000 }
+        { count: 500 }
     );
     writeFileSync("data.json", JSON.stringify(data, undefined, 4));
 }
