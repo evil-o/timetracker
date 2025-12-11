@@ -6,7 +6,7 @@
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
-        "build": "ng build --aot --base-href=",
+        "build": "ng build --aot --configuration production --base-href=",
         "test": "ng test",
         "test:ci": "ng test --no-watch",
         "lint": "ng lint",

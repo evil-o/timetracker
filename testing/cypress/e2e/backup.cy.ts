@@ -53,7 +53,7 @@ describe("The Time Tracker's import and export", () => {
         cy.log("Clear data");
         cy.clearLocalStorage();
         cy.reload();
-        globalPage.overtimeBadge.should("not.exist");
+        globalPage.overtimeBadge.should("not.be.visible");
 
         cy.log("Re-Import data");
 
