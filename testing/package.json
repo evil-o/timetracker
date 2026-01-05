@@ -9,7 +9,7 @@
         "lint": "eslint"
     },
     "devDependencies": {
-        "@faker-js/faker": "10.1.0",
+        "@faker-js/faker": "10.2.0",
         "cypress": "15.8.1",
         "cypress-delete-downloads-folder": "0.0.6",
         "eslint-plugin-mocha": "10.5.0",
