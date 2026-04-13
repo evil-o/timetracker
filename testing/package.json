@@ -13,7 +13,7 @@
         "cypress": "15.13.1",
         "cypress-delete-downloads-folder": "0.0.6",
         "eslint-plugin-mocha": "10.5.0",
-        "typescript": "5.9.3",
+        "typescript": "6.0.2",
         "typescript-eslint": "8.58.1"
     }
 }
