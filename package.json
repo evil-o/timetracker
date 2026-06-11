@@ -18,7 +18,7 @@
         "prettier:check": "prettier --check ."
     },
     "dependencies": {
-        "start-server-and-test": "2.0.5"
+        "start-server-and-test": "2.1.5"
     },
     "devDependencies": {
         "prettier": "3.3.3"
